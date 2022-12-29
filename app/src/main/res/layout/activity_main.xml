@@ -80,7 +80,7 @@
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:ems="10"
-            android:inputType="textPersonName"
+            android:inputType="text"
             android:background="@drawable/textbox"
             android:textColorHint="@color/disable_grey"
             android:text="de" />

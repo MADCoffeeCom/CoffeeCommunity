@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">CoffeeCom</string>
+
+    <!--==========================HOME PAGE==========================-->
+    <string name="home_title">Find the best coffee for you</string>
+    <string name="current_location">your current location is</string>
+
+    <!--==========================WALLET===========================-->
+    <string name="balance">Coffee Balance</string>
 </resources>
