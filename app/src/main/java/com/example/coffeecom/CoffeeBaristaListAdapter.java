@@ -1,5 +1,6 @@
 package com.example.coffeecom;
 
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -88,6 +89,9 @@ public class CoffeeBaristaListAdapter extends RecyclerView.Adapter<CoffeeBarista
             @Override
             public void onClick(View view) {
                 //go to details coffee view
+                Provider.setCurrentCoffee(Provider.getCurrentBarista().getSellingCoffee().get(position));
+                Intent intent = new Intent(holder.itemView.getContext(), CoffeeDetailsActivity.class);
+                holder.itemView.getContext().startActivity(intent);
             }
         });
 

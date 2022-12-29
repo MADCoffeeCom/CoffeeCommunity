@@ -60,8 +60,8 @@ public class BaristaCardAdapter extends RecyclerView.Adapter<BaristaCardAdapter.
         holder.baristaSmallCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Provider.setCurrentBarista(baristas.get(position));
                 //input code to open details coffee page
+                Provider.setCurrentBarista(baristas.get(position));
                 Intent intent = new Intent(holder.itemView.getContext(), BaristaListActivity.class);
                 holder.itemView.getContext().startActivity(intent);
             }

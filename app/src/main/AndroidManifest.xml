@@ -13,6 +13,13 @@
         android:theme="@style/Theme.CoffeeCom"
         tools:targetApi="31">
         <activity
+            android:name=".CoffeeDetailsActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".BaristaListActivity"
             android:exported="false">
             <meta-data

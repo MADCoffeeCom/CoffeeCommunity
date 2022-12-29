@@ -12,6 +12,7 @@ public class Provider{
     private static ArrayList<BaristaModel> baristas = new ArrayList<>();
     private static ArrayList<String> coffeeType = new ArrayList<>();
     private static BaristaModel currentBarista;
+    private static CoffeeModel currentCoffee;
 
 //    @Override
 //    protected void onCreate(Bundle savedInstanceState) {
@@ -62,5 +63,13 @@ public class Provider{
 
     public static void setCurrentBarista(BaristaModel newBarista) {
         currentBarista = newBarista;
+    }
+
+    public static CoffeeModel getCurrentCoffee() {
+        return currentCoffee;
+    }
+
+    public static void setCurrentCoffee(CoffeeModel currentCoffee) {
+        Provider.currentCoffee = currentCoffee;
     }
 }

@@ -69,4 +69,10 @@
         <item name="android:inputType">textAutoComplete|textMultiLine</item>
     </style>
 
+<!--    ==================================RatingBar================================-->
+
+    <style name="RatingBar" parent="Theme.AppCompat">
+        <item name="colorControlNormal">@color/disable_grey</item>
+        <item name="colorControlActivated">#FFD666</item>
+    </style>
 </resources>
