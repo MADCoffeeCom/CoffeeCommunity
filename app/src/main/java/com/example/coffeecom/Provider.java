@@ -9,8 +9,9 @@ import java.util.ArrayList;
 
 public class Provider{
 
-    static ArrayList<BaristaModel> baristas = new ArrayList<>();
-    static ArrayList<String> coffeeType = new ArrayList<>();
+    private static ArrayList<BaristaModel> baristas = new ArrayList<>();
+    private static ArrayList<String> coffeeType = new ArrayList<>();
+    private static BaristaModel currentBarista;
 
 //    @Override
 //    protected void onCreate(Bundle savedInstanceState) {
@@ -53,5 +54,13 @@ public class Provider{
 
     public static ArrayList<String> getCoffeeType(){
         return coffeeType;
+    }
+
+    public static BaristaModel getCurrentBarista() {
+        return currentBarista;
+    }
+
+    public static void setCurrentBarista(BaristaModel newBarista) {
+        currentBarista = newBarista;
     }
 }

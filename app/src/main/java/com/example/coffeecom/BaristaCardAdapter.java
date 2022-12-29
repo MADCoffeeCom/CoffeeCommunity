@@ -1,5 +1,6 @@
 package com.example.coffeecom;
 
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,11 +15,12 @@ import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
 
-public class BaristaAdapter extends RecyclerView.Adapter<BaristaAdapter.ViewHolder>{
+public class BaristaCardAdapter extends RecyclerView.Adapter<BaristaCardAdapter.ViewHolder>{
 
     ArrayList<BaristaModel> baristas;
 
-    public BaristaAdapter(ArrayList<BaristaModel> baristas) {
+
+    public BaristaCardAdapter(ArrayList<BaristaModel> baristas) {
         this.baristas = baristas;
     }
 
@@ -39,13 +41,13 @@ public class BaristaAdapter extends RecyclerView.Adapter<BaristaAdapter.ViewHold
 
     @NonNull
     @Override
-    public BaristaAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public BaristaCardAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View inflate = LayoutInflater.from(parent.getContext()).inflate(R.layout.viewholder_barista_small, parent, false);
         return new ViewHolder(inflate);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull BaristaAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull BaristaCardAdapter.ViewHolder holder, int position) {
 
         //barista pic
         int drawableResourceId = holder.itemView.getContext().getResources().getIdentifier(baristas.get(position).getBaristaPic(), "drawable", holder.itemView.getContext().getPackageName());
@@ -58,14 +60,17 @@ public class BaristaAdapter extends RecyclerView.Adapter<BaristaAdapter.ViewHold
         holder.baristaSmallCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Provider.setCurrentBarista(baristas.get(position));
                 //input code to open details coffee page
+                Intent intent = new Intent(holder.itemView.getContext(), BaristaListActivity.class);
+                holder.itemView.getContext().startActivity(intent);
             }
         });
     }
 
     @Override
     public int getItemCount() {
-        return Provider.baristas.size();
+        return Provider.getBaristas().size();
     }
 
 

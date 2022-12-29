@@ -97,7 +97,7 @@
                 android:text="Coffee" />
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/coffeeListRecyclerView"
+                android:id="@+id/coffeeListInBaristaRecyclerView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingLeft="16dp"

@@ -56,7 +56,7 @@ public class HomeActivity extends AppCompatActivity {
 
     private void recyclerViewCoffeeType() {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
-        recyclerViewCoffeeTypeList = findViewById(R.id.coffeeListRecyclerView);
+        recyclerViewCoffeeTypeList = findViewById(R.id.coffeeListInBaristaRecyclerView);
         recyclerViewCoffeeTypeList.setLayoutManager(linearLayoutManager);
 
 //        coffeeTypeAdapter = new CoffeeTypeAdapter(Provider.getCoffeeType());
@@ -69,7 +69,7 @@ public class HomeActivity extends AppCompatActivity {
         recyclerViewBaristaList = findViewById(R.id.baristaRecyclerView);
         recyclerViewBaristaList.setLayoutManager(linearLayoutManager);
 
-        baristaAdapter = new BaristaAdapter(Provider.getBaristas());
+        baristaAdapter = new BaristaCardAdapter(Provider.getBaristas());
         recyclerViewBaristaList.setAdapter(baristaAdapter);
     }
 }

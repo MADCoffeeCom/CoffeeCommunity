@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/coffeeBaristaListHoriCard"
+    android:layout_width="match_parent"
+    android:layout_height="132dp"
+    android:layout_marginStart="24dp"
+    android:layout_marginEnd="24dp"
+    android:layout_marginBottom="24dp"
+    android:background="@drawable/linear_gray_background">
+
+
+    <ImageView
+        android:id="@+id/coffeeListPic"
+        android:layout_width="80dp"
+        android:layout_height="112dp"
+        android:layout_marginStart="8dp"
+        android:background="@drawable/round_outline"
+        android:clipToOutline="true"
+        android:scaleType="centerCrop"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/coffee1" />
+
+    <TextView
+        android:id="@+id/titleTextHoriCard"
+        style="@style/c1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:text="title"
+        app:layout_constraintStart_toEndOf="@+id/coffeeListPic"
+        app:layout_constraintTop_toTopOf="@+id/coffeeListPic" />
+
+    <TextView
+        android:id="@+id/descTextHoriCard"
+        style="@style/c2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:text="desc"
+        app:layout_constraintStart_toStartOf="@+id/titleTextHoriCard"
+        app:layout_constraintTop_toBottomOf="@+id/titleTextHoriCard" />
+
+    <TextView
+        android:id="@+id/textView11"
+        style="@style/c2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="RM"
+        app:layout_constraintBottom_toBottomOf="@+id/coffeeListPic"
+        app:layout_constraintStart_toStartOf="@+id/descTextHoriCard" />
+
+    <TextView
+        android:id="@+id/coffeePricePerItemText"
+        style="@style/c2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="0.00"
+        app:layout_constraintBottom_toBottomOf="@+id/textView11"
+        app:layout_constraintStart_toEndOf="@+id/textView11"
+        app:layout_constraintTop_toTopOf="@+id/textView11" />
+
+    <TextView
+        android:id="@+id/baristaLocationText"
+        style="@style/c2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:text="Location"
+        android:textSize="8dp"
+        app:layout_constraintBottom_toBottomOf="@+id/titleTextHoriCard"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/titleTextHoriCard" />
+
+    <ImageButton
+        android:id="@+id/addToCartBtn"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:background="@color/transparent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@drawable/ic_plus" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

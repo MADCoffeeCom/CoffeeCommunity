@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".BaristaListActivity">
+
+    <ImageView
+        android:id="@+id/baristaListPic"
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        android:background="@drawable/round_outline"
+        android:clipToOutline="true"
+        android:scaleType="centerCrop"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/barista1" />
+
+    <ImageButton
+        android:id="@+id/baristaListBackBtn"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="24dp"
+        android:background="@color/transparent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_back" />
+
+    <TextView
+        android:id="@+id/baristaListName"
+        style="@style/h1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="barista name"
+        app:layout_constraintBottom_toBottomOf="@+id/baristaListBackBtn"
+        app:layout_constraintStart_toEndOf="@+id/baristaListBackBtn"
+        app:layout_constraintTop_toTopOf="@+id/baristaListBackBtn" />
+
+    <ImageButton
+        android:id="@+id/baristaListChatBtn"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="24dp"
+        android:background="@color/transparent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_chat" />
+
+    <TextView
+        android:id="@+id/baristaListDesc"
+        style="@style/c1"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="24dp"
+        android:gravity="bottom"
+        android:inputType="textMultiLine"
+        android:text="barista desc"
+        app:layout_constraintBottom_toBottomOf="@+id/baristaListPic"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/baristaListLocation"
+        style="@style/c2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        app:layout_constraintStart_toStartOf="@+id/baristaListDesc"
+        app:layout_constraintTop_toBottomOf="@+id/baristaListName" />
+
+    <EditText
+        android:id="@+id/TbSearch"
+        style="@style/defaultTextBox"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="24dp"
+        android:background="@drawable/textbox"
+        android:drawableLeft="@drawable/ic_search"
+        android:ems="10"
+        android:hint="Search for coffee/barista..."
+        android:inputType="text"
+        android:textColorHint="@color/disable_grey"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/baristaListPic" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/coffeeListInBaristaRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/TbSearch" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
