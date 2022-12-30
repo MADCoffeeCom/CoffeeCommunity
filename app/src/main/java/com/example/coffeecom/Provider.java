@@ -2,16 +2,22 @@ package com.example.coffeecom;
 
 import com.example.coffeecom.model.BaristaModel;
 import com.example.coffeecom.model.CoffeeModel;
+import com.example.coffeecom.model.ProfileModel;
+import com.example.coffeecom.model.TransactionModel;
 
 import java.util.ArrayList;
 
 public class Provider{
+
 
     private static ArrayList<CoffeeModel> coffees = new ArrayList<>();
     private static ArrayList<BaristaModel> baristas = new ArrayList<>();
     private static String currentCoffeeType;
     private static BaristaModel currentBarista;
     private static CoffeeModel currentCoffee;
+    private static ProfileModel user;
+
+    private static ArrayList<TransactionModel> transactions = new ArrayList<>();
 
     public static void addBaristas(BaristaModel newBaristas) {
         //need to insert code to update new baristas in sql here
@@ -34,7 +40,7 @@ public class Provider{
         Provider.baristas = baristas;
     }
 
-    public static String getCurrentcoffeeType() {
+    public static String getCurrentCoffeeType() {
         return currentCoffeeType;
     }
 
@@ -56,5 +62,17 @@ public class Provider{
 
     public static void setCurrentCoffee(CoffeeModel currentCoffee) {
         Provider.currentCoffee = currentCoffee;
+    }
+
+    public static ProfileModel getUser() {
+        return user;
+    }
+
+    public static ArrayList<TransactionModel> getTransactions() {
+        return transactions;
+    }
+
+    public static void setTransactions(ArrayList<TransactionModel> transactions) {
+        Provider.transactions = transactions;
     }
 }

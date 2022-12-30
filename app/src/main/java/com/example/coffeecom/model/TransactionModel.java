@@ -1,13 +1,13 @@
 package com.example.coffeecom.model;
 
 public class TransactionModel {
-    private int senderId;
-    private int receiverId;
+    private String senderId;
+    private String receiverId;
     private double totalPayment;
     private String paymentType; //Tng, Bank transfer or coffee wallet
     private String transactionDetails; //Top up or Payment
 
-    public TransactionModel(int senderId, int receiverId, double totalPayment, String paymentType, String transactionDetails) {
+    public TransactionModel(String senderId, String receiverId, double totalPayment, String paymentType, String transactionDetails) {
         this.senderId = senderId;
         this.receiverId = receiverId;
         this.totalPayment = totalPayment;
@@ -15,19 +15,19 @@ public class TransactionModel {
         this.transactionDetails = transactionDetails;
     }
 
-    public int getSenderId() {
+    public String getSenderId() {
         return senderId;
     }
 
-    public void setSenderId(int senderId) {
+    public void setSenderId(String senderId) {
         this.senderId = senderId;
     }
 
-    public int getReceiverId() {
+    public String getReceiverId() {
         return receiverId;
     }
 
-    public void setReceiverId(int receiverId) {
+    public void setReceiverId(String receiverId) {
         this.receiverId = receiverId;
     }
 

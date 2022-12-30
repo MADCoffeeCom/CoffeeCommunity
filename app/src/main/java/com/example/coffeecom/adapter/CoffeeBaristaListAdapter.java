@@ -16,18 +16,21 @@ import com.example.coffeecom.activity.CoffeeDetailsActivity;
 import com.example.coffeecom.Provider;
 import com.example.coffeecom.R;
 import com.example.coffeecom.model.BaristaModel;
+import com.example.coffeecom.model.CoffeeModel;
 
 import java.util.ArrayList;
 
 public class CoffeeBaristaListAdapter extends RecyclerView.Adapter<CoffeeBaristaListAdapter.ViewHolder>{
 
-    ArrayList<BaristaModel> baristas;
+    ArrayList<CoffeeModel> coffeesWithType;
+    ArrayList<BaristaModel> baristaWithCoffee;
     BaristaModel currentBarista;
-    char mode; //b for barista or c for coffee view
+    char mode; //b for in barista or c for in coffee view
 
 
-    public CoffeeBaristaListAdapter(ArrayList<BaristaModel> baristas, char mode) {
-        this.baristas = baristas;
+    public CoffeeBaristaListAdapter(ArrayList<CoffeeModel> coffeesWithType, ArrayList<BaristaModel> baristaWithCoffee, char mode) {
+        this.coffeesWithType = coffeesWithType;
+        this.baristaWithCoffee = baristaWithCoffee;
         this.mode = mode;
     }
 
@@ -37,7 +40,6 @@ public class CoffeeBaristaListAdapter extends RecyclerView.Adapter<CoffeeBarista
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{
-
         ImageView coffeeListPic, addToCartBtn;
         TextView cardTitle, coffeeDesc, coffeePricePerItemText, baristaLocationText;
         ConstraintLayout coffeeCardListHorizontal;
@@ -67,6 +69,8 @@ public class CoffeeBaristaListAdapter extends RecyclerView.Adapter<CoffeeBarista
 
         if (mode == 'b'){
             onBindWhenBaristaView(holder, position);
+        }else{
+            onBindWhenCoffeeView(holder, position);
         }
 //        if (baristas.get(position).getSellingCoffee().contains(Provider))
 //
@@ -75,11 +79,38 @@ public class CoffeeBaristaListAdapter extends RecyclerView.Adapter<CoffeeBarista
 //        Glide.with(holder.itemView.getContext()).load(drawableResourceId).into(holder.coffeeListPic);
     }
 
+    private void onBindWhenCoffeeView(ViewHolder holder, int position) {
+        holder.cardTitle.setText(baristaWithCoffee.get(position).getUserName());
+        holder.coffeeDesc.setText(coffeesWithType.get(position).getCoffeeDesc());
+        holder.coffeePricePerItemText.setText(String.valueOf(coffeesWithType.get(position).getCoffeePrice()));
+        holder.baristaLocationText.setText(baristaWithCoffee.get(position).getUserTaman());
+
+        holder.addToCartBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //straight add to cart & make toast
+            }
+        });
+
+        holder.coffeeCardListHorizontal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //go to details coffee view
+                Provider.setCurrentCoffee(coffeesWithType.get(position));
+                Intent intent = new Intent(holder.itemView.getContext(), CoffeeDetailsActivity.class);
+                holder.itemView.getContext().startActivity(intent);
+            }
+        });
+
+        //coffee pic
+        int drawableResourceId = holder.itemView.getContext().getResources().getIdentifier(Provider.getCurrentBarista().getSellingCoffee().get(position).getCoffeePic(), "drawable", holder.itemView.getContext().getPackageName());
+        Glide.with(holder.itemView.getContext()).load(drawableResourceId).into(holder.coffeeListPic);
+    }
+
     private void onBindWhenBaristaView(@NonNull CoffeeBaristaListAdapter.ViewHolder holder, int position) {
         holder.cardTitle.setText(Provider.getCurrentBarista().getSellingCoffee().get(position).getCoffeeTitle());
         holder.coffeeDesc.setText(Provider.getCurrentBarista().getSellingCoffee().get(position).getCoffeeDesc());
         holder.coffeePricePerItemText.setText(String.valueOf(Provider.getCurrentBarista().getSellingCoffee().get(position).getCoffeePrice()));
-        holder.coffeeDesc.setText(Provider.getCurrentBarista().getSellingCoffee().get(position).getCoffeeDesc());
         holder.baristaLocationText.setText(Provider.getCurrentBarista().getUserTaman());
 
         holder.addToCartBtn.setOnClickListener(new View.OnClickListener() {
@@ -109,7 +140,7 @@ public class CoffeeBaristaListAdapter extends RecyclerView.Adapter<CoffeeBarista
         if (mode == 'b'){
             return Provider.getCurrentBarista().getSellingCoffee().size();
         }else{
-            return baristas.size();
+            return coffeesWithType.size();
         }
     }
 

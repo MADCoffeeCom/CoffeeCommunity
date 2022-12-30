@@ -21,9 +21,9 @@ public class ProfileModel {
     ArrayList<OrderModel> brewedHistory = new ArrayList<>();
     ArrayList<PostModel> postedPost = new ArrayList<>();
     ArrayList<BankCardModel> bankCard = new ArrayList<>();
-    ArrayList<TransactionModel> transactionHistories = new ArrayList<>();
+//    ArrayList<TransactionModel> transactionHistories = new ArrayList<>();
 
-    public ProfileModel(String userPic, String userId, String username, String email, String password, String userRole, String userStreetNo, String userTaman, int userPostalCode, String userState, int walletPin, double walletBalance, ArrayList<OrderModel> orderedHistory, ArrayList<OrderModel> brewedHistory, ArrayList<PostModel> postedPost, ArrayList<BankCardModel> bankCard, ArrayList<TransactionModel> transactionHistories) {
+    public ProfileModel(String userPic, String userId, String username, String email, String password, String userRole, String userStreetNo, String userTaman, int userPostalCode, String userState, int walletPin, double walletBalance, ArrayList<OrderModel> orderedHistory, ArrayList<OrderModel> brewedHistory, ArrayList<PostModel> postedPost, ArrayList<BankCardModel> bankCard) {
         this.userPic = userPic;
         this.userId = userId;
         this.userName = username;
@@ -40,7 +40,6 @@ public class ProfileModel {
         this.brewedHistory = brewedHistory;
         this.postedPost = postedPost;
         this.bankCard = bankCard;
-        this.transactionHistories = transactionHistories;
     }
 
     public ProfileModel(String username, String email, String password, String userRole) {
@@ -178,11 +177,7 @@ public class ProfileModel {
         this.bankCard = bankCard;
     }
 
-    public ArrayList<TransactionModel> getTransactionHistories() {
-        return transactionHistories;
-    }
-
-    public void setTransactionHistories(ArrayList<TransactionModel> transactionHistories) {
-        this.transactionHistories = transactionHistories;
+    public void addBankCard(BankCardModel card) {
+        bankCard.add(card);
     }
 }

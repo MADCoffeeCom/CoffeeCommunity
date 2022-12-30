@@ -5,12 +5,14 @@ public class BankCardModel {
     private String bankHolderName;
     private int cardCvv;
     private int cardExpiryDate;
+    private String bankName;
 
-    public BankCardModel(int bankCardNo, String bankHolderName, int cardCvv, int cardExpiryDate) {
+    public BankCardModel(int bankCardNo, String bankHolderName, int cardCvv, int cardExpiryDate, String bankName) {
         this.bankCardNo = bankCardNo;
         this.bankHolderName = bankHolderName;
         this.cardCvv = cardCvv;
         this.cardExpiryDate = cardExpiryDate;
+        this.bankName = bankName;
     }
 
     public int getBankCardNo() {
@@ -43,5 +45,13 @@ public class BankCardModel {
 
     public void setCardExpiryDate(int cardExpiryDate) {
         this.cardExpiryDate = cardExpiryDate;
+    }
+
+    public String getBankName() {
+        return bankName;
+    }
+
+    public void setBankName(String bankName) {
+        this.bankName = bankName;
     }
 }

@@ -48,10 +48,10 @@ public class BaristaListActivity extends AppCompatActivity {
             }
         });
 
-        recyclerViewCoffeeType();
+        recyclerViewCoffee();
     }
 
-    private void recyclerViewCoffeeType() {
+    private void recyclerViewCoffee() {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         baristaListRecyclerView = findViewById(R.id.coffeeListInBaristaRecyclerView);
         baristaListRecyclerView.setLayoutManager(linearLayoutManager);
