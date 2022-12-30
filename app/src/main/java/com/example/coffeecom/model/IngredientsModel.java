@@ -1,4 +1,4 @@
-package com.example.coffeecom;
+package com.example.coffeecom.model;
 
 public class IngredientsModel {
 

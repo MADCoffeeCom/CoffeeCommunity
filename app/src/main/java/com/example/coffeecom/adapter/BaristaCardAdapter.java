@@ -1,4 +1,4 @@
-package com.example.coffeecom;
+package com.example.coffeecom.adapter;
 
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -12,6 +12,10 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.coffeecom.activity.BaristaListActivity;
+import com.example.coffeecom.Provider;
+import com.example.coffeecom.R;
+import com.example.coffeecom.model.BaristaModel;
 
 import java.util.ArrayList;
 
@@ -49,19 +53,19 @@ public class BaristaCardAdapter extends RecyclerView.Adapter<BaristaCardAdapter.
     @Override
     public void onBindViewHolder(@NonNull BaristaCardAdapter.ViewHolder holder, int position) {
 
-        //barista pic
-        int drawableResourceId = holder.itemView.getContext().getResources().getIdentifier(baristas.get(position).getBaristaPic(), "drawable", holder.itemView.getContext().getPackageName());
+        //barista pic but nid to update to sql code
+        int drawableResourceId = holder.itemView.getContext().getResources().getIdentifier(baristas.get(position).getUserPic(), "drawable", holder.itemView.getContext().getPackageName());
         Glide.with(holder.itemView.getContext()).load(drawableResourceId).into(holder.baristaPic);
 
-        holder.baristaCardName.setText(baristas.get(position).getBaristaName());
-        holder.baristaLocation.setText(baristas.get(position).getBaristaTaman());
+        holder.baristaCardName.setText(baristas.get(position).getUserName());
+        holder.baristaLocation.setText(baristas.get(position).getUserTaman());
         holder.baristaDistance.setText("Not do gok");
 
         holder.baristaSmallCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 //input code to open details coffee page
-                Provider.setCurrentBarista(baristas.get(position));
+                Provider.setCurrentBarista(baristas.get(holder.getAdapterPosition()));
                 Intent intent = new Intent(holder.itemView.getContext(), BaristaListActivity.class);
                 holder.itemView.getContext().startActivity(intent);
             }

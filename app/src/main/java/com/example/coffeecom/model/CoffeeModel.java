@@ -1,4 +1,4 @@
-package com.example.coffeecom;
+package com.example.coffeecom.model;
 
 import java.util.ArrayList;
 
@@ -7,8 +7,9 @@ public class CoffeeModel {
     private String coffeeTitle, coffeeDesc, coffeeType;
     private double coffeePrice;
     private ArrayList<IngredientsModel> ingredients;
+    private String userId;
 
-    public CoffeeModel(String coffeePic, String coffeeTitle, String coffeeDesc, String coffeeType, double coffeePrice, ArrayList<IngredientsModel> ingredients) {
+    public CoffeeModel(String userId, String coffeePic, String coffeeTitle, String coffeeDesc, String coffeeType, double coffeePrice, ArrayList<IngredientsModel> ingredients) {
         this.coffeePic = coffeePic;
         this.coffeeTitle = coffeeTitle;
         this.coffeeDesc = coffeeDesc;

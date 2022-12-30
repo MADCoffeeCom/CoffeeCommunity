@@ -1,8 +1,10 @@
-package com.example.coffeecom;
+package com.example.coffeecom.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+import com.example.coffeecom.R;
 
 public class CoffeeListActivity extends AppCompatActivity {
 

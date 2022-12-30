@@ -1,60 +1,45 @@
 package com.example.coffeecom;
 
-import android.os.Bundle;
-import android.util.Log;
-
-import androidx.appcompat.app.AppCompatActivity;
+import com.example.coffeecom.model.BaristaModel;
+import com.example.coffeecom.model.CoffeeModel;
 
 import java.util.ArrayList;
 
 public class Provider{
 
+    private static ArrayList<CoffeeModel> coffees = new ArrayList<>();
     private static ArrayList<BaristaModel> baristas = new ArrayList<>();
-    private static ArrayList<String> coffeeType = new ArrayList<>();
+    private static String currentCoffeeType;
     private static BaristaModel currentBarista;
     private static CoffeeModel currentCoffee;
 
-//    @Override
-//    protected void onCreate(Bundle savedInstanceState) {
-//        super.onCreate(savedInstanceState);
-//        updateCoffeeType();
-//
-//    }
+    public static void addBaristas(BaristaModel newBaristas) {
+        //need to insert code to update new baristas in sql here
+        baristas.add(newBaristas);
+    }
+
+    public static ArrayList<CoffeeModel> getCoffees() {
+        return coffees;
+    }
+
+    public static void setCoffees(ArrayList<CoffeeModel> coffees) {
+        Provider.coffees = coffees;
+    }
 
     public static ArrayList<BaristaModel> getBaristas() {
         return baristas;
     }
 
-    public static void addBaristas(BaristaModel newBaristas) {
-        baristas.add(newBaristas);
+    public static void setBaristas(ArrayList<BaristaModel> baristas) {
+        Provider.baristas = baristas;
     }
 
-    public static ArrayList<CoffeeModel> getCoffees(String coffeeType){
-        ArrayList<CoffeeModel> coffeeSearched = new ArrayList<>();
-
-        for (int i = 0; i < baristas.size(); i++) {
-            for (int j = 0; j < baristas.get(i).getSellingCoffee().size(); j++) {
-                if (baristas.get(i).getSellingCoffee().get(j).getCoffeeType().equals(coffeeType)){
-                    coffeeSearched.add(baristas.get(i).getSellingCoffee().get(j));
-                }
-            }
-        }
-
-        return coffeeSearched;
+    public static String getCurrentcoffeeType() {
+        return currentCoffeeType;
     }
 
-    public static void updateCoffeeType(){
-        for (int i = 0; i < baristas.size(); i++) {
-            for (int j = 0; j < baristas.get(i).getSellingCoffee().size(); j++) {
-                if (coffeeType.contains(baristas.get(i).getSellingCoffee().get(j).getCoffeeType())){
-                    coffeeType.add(baristas.get(i).getSellingCoffee().get(j).getCoffeeType());
-                }
-            }
-        }
-    }
-
-    public static ArrayList<String> getCoffeeType(){
-        return coffeeType;
+    public static void setCurrentcoffeeType(String currentcoffeeType) {
+        Provider.currentCoffeeType = currentcoffeeType;
     }
 
     public static BaristaModel getCurrentBarista() {

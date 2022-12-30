@@ -1,4 +1,4 @@
-package com.example.coffeecom;
+package com.example.coffeecom.adapter;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,14 +11,18 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.coffeecom.R;
+import com.example.coffeecom.model.CoffeeModel;
 
 import java.util.ArrayList;
 
 public class CoffeeTypeAdapter extends RecyclerView.Adapter<CoffeeTypeAdapter.ViewHolder> {
 
     ArrayList<String> coffeeType;
+    ArrayList<String> coffeePic;
 
-    public CoffeeTypeAdapter(ArrayList<String> coffeeType) {
+    public CoffeeTypeAdapter(ArrayList<String> coffeeType, ArrayList<String> coffeePic) {
+        this.coffeePic = coffeePic;
         this.coffeeType = coffeeType;
     }
 
@@ -48,7 +52,9 @@ public class CoffeeTypeAdapter extends RecyclerView.Adapter<CoffeeTypeAdapter.Vi
         holder.coffeeTitle.setText(coffeeType.get(position));
 
         //code to insert picture
-        String picUrl = "coffee1";
+        String picUrl = coffeePic.get(position);
+        //dummy code below
+        picUrl = "coffee1";
         int drawableResourceId = holder.itemView.getContext().getResources().getIdentifier(picUrl, "drawable", holder.itemView.getContext().getPackageName());
         Glide.with(holder.itemView.getContext()).load(drawableResourceId).into(holder.coffeePic);
 

@@ -1,17 +1,19 @@
-package com.example.coffeecom;
+package com.example.coffeecom.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import org.w3c.dom.Text;
+import com.example.coffeecom.Provider;
+import com.example.coffeecom.R;
+import com.example.coffeecom.adapter.IngredientsAdapter;
+import com.example.coffeecom.adapter.RatingBarAdapter;
 
 public class CoffeeDetailsActivity extends AppCompatActivity {
 
@@ -37,8 +39,8 @@ public class CoffeeDetailsActivity extends AppCompatActivity {
         initializeView();
 
         coffeeDetailsNameText.setText(Provider.getCurrentCoffee().getCoffeeTitle());
-        baristaNameCoffeeDetailsText.setText(Provider.getCurrentBarista().getBaristaName());
-        baristaLocationCoffeeDetailsText.setText(Provider.getCurrentBarista().getBaristaTaman());
+        baristaNameCoffeeDetailsText.setText(Provider.getCurrentBarista().getUserName());
+        baristaLocationCoffeeDetailsText.setText(Provider.getCurrentBarista().getUserTaman());
         coffeeDescCoffeeDetailsText.setText(Provider.getCurrentCoffee().getCoffeeDesc());
         coffeeDetailsNameText.setText(Provider.getCurrentCoffee().getCoffeeTitle());
 
@@ -72,7 +74,6 @@ public class CoffeeDetailsActivity extends AppCompatActivity {
     }
 
     public void initializeView() {
-
         coffeeDetailsNameText = findViewById(R.id.coffeeDetailsNameText);
         baristaNameCoffeeDetailsText = findViewById(R.id.baristaNameCoffeeDetailsText);
         baristaLocationCoffeeDetailsText = findViewById(R.id.baristaLocationCoffeeDetailsText);

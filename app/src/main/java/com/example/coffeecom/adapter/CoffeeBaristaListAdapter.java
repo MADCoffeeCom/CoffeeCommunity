@@ -1,4 +1,4 @@
-package com.example.coffeecom;
+package com.example.coffeecom.adapter;
 
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -12,6 +12,10 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.coffeecom.activity.CoffeeDetailsActivity;
+import com.example.coffeecom.Provider;
+import com.example.coffeecom.R;
+import com.example.coffeecom.model.BaristaModel;
 
 import java.util.ArrayList;
 
@@ -76,7 +80,7 @@ public class CoffeeBaristaListAdapter extends RecyclerView.Adapter<CoffeeBarista
         holder.coffeeDesc.setText(Provider.getCurrentBarista().getSellingCoffee().get(position).getCoffeeDesc());
         holder.coffeePricePerItemText.setText(String.valueOf(Provider.getCurrentBarista().getSellingCoffee().get(position).getCoffeePrice()));
         holder.coffeeDesc.setText(Provider.getCurrentBarista().getSellingCoffee().get(position).getCoffeeDesc());
-        holder.baristaLocationText.setText(Provider.getCurrentBarista().getBaristaTaman());
+        holder.baristaLocationText.setText(Provider.getCurrentBarista().getUserTaman());
 
         holder.addToCartBtn.setOnClickListener(new View.OnClickListener() {
             @Override

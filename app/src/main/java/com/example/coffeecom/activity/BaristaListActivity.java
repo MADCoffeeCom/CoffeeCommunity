@@ -1,4 +1,4 @@
-package com.example.coffeecom;
+package com.example.coffeecom.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -10,6 +10,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.example.coffeecom.Provider;
+import com.example.coffeecom.R;
+import com.example.coffeecom.adapter.CoffeeBaristaListAdapter;
 
 public class BaristaListActivity extends AppCompatActivity {
 
@@ -30,11 +33,12 @@ public class BaristaListActivity extends AppCompatActivity {
         baristaListChatBtn = findViewById(R.id.baristaListChatBtn);
         baristaListPic = findViewById(R.id.baristaListPic);
 
-        baristaListName.setText(Provider.getCurrentBarista().getBaristaName());
-        baristaListLocation.setText(Provider.getCurrentBarista().getBaristaTaman());
+        baristaListName.setText(Provider.getCurrentBarista().getUserName());
+        baristaListLocation.setText(Provider.getCurrentBarista().getUserTaman());
         baristaListDesc.setText(Provider.getCurrentBarista().getBaristaDesc());
 
-        int drawableResourceId = this.getResources().getIdentifier(Provider.getCurrentBarista().getBaristaPic(), "drawable", this.getPackageName());
+        //also need insert sql code here
+        int drawableResourceId = this.getResources().getIdentifier(Provider.getCurrentBarista().getUserPic(), "drawable", this.getPackageName());
         Glide.with(this).load(drawableResourceId).into(baristaListPic);
 
         baristaListChatBtn.setOnClickListener(new View.OnClickListener() {

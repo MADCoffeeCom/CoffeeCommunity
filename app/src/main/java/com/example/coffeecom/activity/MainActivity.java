@@ -1,10 +1,12 @@
-package com.example.coffeecom;
+package com.example.coffeecom.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+
+import com.example.coffeecom.R;
 
 import java.util.ArrayList;
 
