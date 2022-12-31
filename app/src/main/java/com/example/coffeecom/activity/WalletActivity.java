@@ -75,9 +75,11 @@ public class WalletActivity extends AppCompatActivity {
         topUpWalletBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                    Log.d(String.valueOf(topUpAmountTextBox.getText()), "bruhbruh: ");
+//                Log.d(String.valueOf(topUpAmountTextBox.getText()), "bruhbruh: ");
                 if (!String.valueOf(topUpAmountTextBox.getText()).isEmpty()){
-                    startActivity(new Intent(WalletActivity.this, WalletPinActivity.class));
+                    Intent intent = new Intent(WalletActivity.this, WalletPinActivity.class);
+                    intent.putExtra("amount", String.valueOf(topUpAmountTextBox.getText()));
+                    startActivity(intent);
                 }else{
                     errorWalletText.setVisibility(View.VISIBLE);
                 }
