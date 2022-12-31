@@ -20,6 +20,13 @@
         <item name="strokeWidth">3dp</item>
     </style>
 
+    <style name="thirdBtn" parent="@style/button">
+        <item name="backgroundTint">@color/grey</item>
+        <item name="background">@color/grey</item>
+        <item name="strokeColor">@color/grey_30</item>
+        <item name="strokeWidth">3dp</item>
+    </style>
+
     <style name="smallPrimaryBtn" parent="primaryBtn">
         <item name="android:layout_width">120dp</item>
         <item name="android:textSize">14dp</item>
@@ -54,8 +61,21 @@
         <item name="fontFamily">@font/poppins_light</item>
         <item name="android:textSize">12dp</item>
     </style>
-    
-<!--    ==============================================TextBox==================================-->
+
+    <style name="c3">
+        <item name="android:textColor">@color/white</item>
+        <item name="fontFamily">@font/poppins_light</item>
+        <item name="android:textSize">8dp</item>
+    </style>
+
+    <style name="c4">
+        <item name="android:textColor">@color/white</item>
+        <item name="fontFamily">@font/poppins_light</item>
+        <item name="android:textSize">6dp</item>
+    </style>
+
+
+    <!--    ==============================================TextBox==================================-->
     <style name="defaultTextBox">
         <item name="android:textColor">@color/white</item>
         <item name="fontFamily">@font/poppins_regular</item>
