@@ -48,9 +48,13 @@ public class BankCardAdapter extends RecyclerView.Adapter<BankCardAdapter.ViewHo
     }
 
     @Override
-    public int getItemCount() {
-        return Provider.getUser().getBankCard().size();
-    }
+    public int getItemCount(){
+        try {
+            return Provider.getUser().getBankCard().size();
 
+        }catch(NullPointerException e) {
+            return 0;
+        }
+    }
 
 }

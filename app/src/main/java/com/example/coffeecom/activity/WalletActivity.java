@@ -6,8 +6,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.example.coffeecom.Provider;
@@ -21,6 +23,8 @@ public class WalletActivity extends AppCompatActivity {
     Button transactionBtn, topUpWalletBtn;
     Button topUp5Btn, topUp10Btn, topUp20Btn, topUp30Btn, topUp50Btn, topUp100Btn;
     TextView topUpAmountTextBox;
+    TextView errorWalletText, noBankCardErrorText;
+    ImageButton backBtn;
 
     RecyclerView bankCardRecyclerView;
     RecyclerView.Adapter bankCardRecyclerViewAdapter;
@@ -31,6 +35,9 @@ public class WalletActivity extends AppCompatActivity {
         setContentView(R.layout.activity_wallet);
 
         walletAmountText = findViewById(R.id.walletAmountText);
+        errorWalletText = findViewById(R.id.errorWalletText);
+        noBankCardErrorText = findViewById(R.id.noBankCardErrorText);
+        backBtn = findViewById(R.id.backBtn);
         transactionBtn = findViewById(R.id.transactionBtn);
         topUpWalletBtn = findViewById(R.id.topUpWalletBtn);
         topUp5Btn = findViewById(R.id.topUp5Btn);
@@ -40,6 +47,14 @@ public class WalletActivity extends AppCompatActivity {
         topUp50Btn = findViewById(R.id.topUp50Btn);
         topUp100Btn = findViewById(R.id.topUp100Btn);
         topUpAmountTextBox = findViewById(R.id.topUpAmountTextBox);
+        topUpAmountTextBox.setText("");
+
+        backBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
 
         try {
             walletAmountText.setText(String.format("%.2f", Provider.getUser().getWalletBalance()));
@@ -52,7 +67,7 @@ public class WalletActivity extends AppCompatActivity {
         transactionBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                startActivity(new Intent(this, TransactionActivity.class));
+                startActivity(new Intent(WalletActivity.this, TransactionActivity.class));
             }
         });
         recyclerViewBankCard();
@@ -60,7 +75,12 @@ public class WalletActivity extends AppCompatActivity {
         topUpWalletBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                startActivity(this, new StatusActivity("Top Up Successful", "Top up Successfully!", "", new Intent(this, WalletActivity.class)));
+                    Log.d(String.valueOf(topUpAmountTextBox.getText()), "bruhbruh: ");
+                if (!String.valueOf(topUpAmountTextBox.getText()).isEmpty()){
+                    startActivity(new Intent(WalletActivity.this, WalletPinActivity.class));
+                }else{
+                    errorWalletText.setVisibility(View.VISIBLE);
+                }
             }
         });
     }
@@ -100,11 +120,18 @@ public class WalletActivity extends AppCompatActivity {
     }
 
     private void recyclerViewBankCard() {
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
-        bankCardRecyclerView = findViewById(R.id.bankCardRecyclerView);
-        bankCardRecyclerView.setLayoutManager(linearLayoutManager);
+        try{
+            Provider.getUser().getBankCard();
+            LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+            bankCardRecyclerView = findViewById(R.id.bankCardRecyclerView);
+            bankCardRecyclerView.setLayoutManager(linearLayoutManager);
 
-        bankCardRecyclerViewAdapter = new BankCardAdapter();
-        bankCardRecyclerView.setAdapter(bankCardRecyclerViewAdapter);
+            bankCardRecyclerViewAdapter = new BankCardAdapter();
+            bankCardRecyclerView.setAdapter(bankCardRecyclerViewAdapter);
+
+        }catch(NullPointerException e){
+            noBankCardErrorText.setVisibility(View.VISIBLE);
+        }
+
     }
 }

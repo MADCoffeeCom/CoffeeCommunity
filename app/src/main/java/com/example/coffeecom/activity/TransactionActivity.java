@@ -5,6 +5,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.example.coffeecom.Provider;
@@ -16,9 +18,12 @@ import java.util.ArrayList;
 
 public class TransactionActivity extends AppCompatActivity {
 
-    TextView walletAmountText2;
+    TextView walletAmountText2, noTransactionErrorText;
     RecyclerView transactionRecyclerView;
     RecyclerView.Adapter transactionRecyclerViewAdapter;
+    ImageButton backBtn;
+
+    ArrayList<TransactionModel> transactions = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,22 +31,32 @@ public class TransactionActivity extends AppCompatActivity {
         setContentView(R.layout.activity_transaction);
 
         walletAmountText2 = findViewById(R.id.walletAmountText2);
-        recyclerViewTransactions();
-    }
+        noTransactionErrorText = findViewById(R.id.noTransactionErrorText);
 
-    private void recyclerViewTransactions() {
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
-        transactionRecyclerView = findViewById(R.id.transactionRecyclerView);
-        transactionRecyclerView.setLayoutManager(linearLayoutManager);
+        backBtn = findViewById(R.id.backBtn);
+        backBtn.setOnClickListener(view -> finish());
 
-        ArrayList<TransactionModel> transactions = new ArrayList<>();
         for (int i = 0; i < Provider.getTransactions().size(); i++) {
             if(Provider.getUser().getUserId().equals(Provider.getTransactions().get(i).getReceiverId()) || Provider.getUser().getUserId().equals(Provider.getTransactions().get(i).getSenderId())){
                 transactions.add(Provider.getTransactions().get(i));
             }
         }
 
-        transactionRecyclerViewAdapter = new TransactionAdapter(transactions);
-        transactionRecyclerView.setAdapter(transactionRecyclerViewAdapter);
+        recyclerViewTransactions();
+    }
+
+    private void recyclerViewTransactions() {
+
+        if(transactions.isEmpty()){
+            noTransactionErrorText.setVisibility(View.VISIBLE);
+
+        }else{
+            LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+            transactionRecyclerView = findViewById(R.id.transactionRecyclerView);
+            transactionRecyclerView.setLayoutManager(linearLayoutManager);
+
+            transactionRecyclerViewAdapter = new TransactionAdapter(transactions);
+            transactionRecyclerView.setAdapter(transactionRecyclerViewAdapter);
+        }
     }
 }

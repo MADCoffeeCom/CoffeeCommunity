@@ -75,4 +75,48 @@ public class Provider{
     public static void setTransactions(ArrayList<TransactionModel> transactions) {
         Provider.transactions = transactions;
     }
+
+//    ===================StatusActivity Punya=========================
+    private static String statusTitle, statusHeading1, statusHeading2, statusBtnText;
+    private static Class<?> redirectedCls;
+
+    public static String getStatusTitle() {
+        return statusTitle;
+    }
+
+    public static void setStatusTitle(String statusTitle) {
+        Provider.statusTitle = statusTitle;
+    }
+
+    public static String getStatusHeading1() {
+        return statusHeading1;
+    }
+
+    public static void setStatusHeading1(String statusHeading1) {
+        Provider.statusHeading1 = statusHeading1;
+    }
+
+    public static String getStatusHeading2() {
+        return statusHeading2;
+    }
+
+    public static void setStatusHeading2(String statusHeading2) {
+        Provider.statusHeading2 = statusHeading2;
+    }
+
+    public static Class getRedirectedCls() {
+        return redirectedCls;
+    }
+
+    public static void setRedirectedCls(Class bruh) {
+        redirectedCls = bruh;
+    }
+
+    public static String getStatusBtnText() {
+        return statusBtnText;
+    }
+
+    public static void setStatusBtnText(String statusBtnText) {
+        Provider.statusBtnText = statusBtnText;
+    }
 }
