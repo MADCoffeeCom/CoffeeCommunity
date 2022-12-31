@@ -42,8 +42,8 @@ public class WalletPinActivity extends AppCompatActivity {
             public void onClick(View view) {
 
                 if(Provider.getUser().getWalletPin() == Double.parseDouble((String) pinNumberTextBox.getText())){
-
-                    Provider.getUser().setWalletBalance(Provider.getUser().getWalletBalance() + Double.parseDouble((String) pinNumberTextBox.getText()));
+                    Bundle bundle = getIntent().getExtras();
+                    Provider.getUser().setWalletBalance(Provider.getUser().getWalletBalance() + Integer.parseInt(bundle.getString("amount")));
 
                     Provider.setStatusTitle("Top Up Successful");
                     Provider.setStatusHeading1("Top Up Successfully!");

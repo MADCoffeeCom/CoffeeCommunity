@@ -78,14 +78,13 @@
                 android:inputType="text"
                 android:textColorHint="@color/disable_grey" />
 
-            <include
-                android:id="@+id/include"
-                layout="@layout/coffee_wallet"
+            <androidx.fragment.app.FragmentContainerView
+                android:id="@+id/fragmentContainerView2"
+                android:name="com.example.coffeecom.fragment.CoffeeWalletFragment"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="24dp"
-                android:layout_marginEnd="24dp"
-                android:layout_marginTop="40dp" />
+                android:layout_marginTop="40dp"/>
+
 
             <TextView
                 android:id="@+id/textView7"
