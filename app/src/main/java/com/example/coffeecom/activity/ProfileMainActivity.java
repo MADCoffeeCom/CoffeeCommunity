@@ -64,7 +64,7 @@ public class ProfileMainActivity extends AppCompatActivity {
 
         btnEditProfile = findViewById(R.id.imageButtonProfileEdit);
 
-        btnTopUp = findViewById(R.id.button2);
+//        btnTopUp = findViewById(R.id.button2);
         btnTerms = findViewById(R.id.btnProfile1);
         btnPrivacy = findViewById(R.id.btnProfile2);
         btnBankCard = findViewById(R.id.btnProfile3);
