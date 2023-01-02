@@ -12,6 +12,7 @@ public class OrderModel {
     private String baristaId;
     private String userId;
     private ArrayList<CoffeeModel> orderedCoffee;
+    private String orderStatus; //pending, accepted, declined
 
     public OrderModel(String orderId, Date orderStartTime, double orderTotalPrice, String baristaId, String userId, ArrayList<CoffeeModel> orderedCoffee) {
         this.orderId = orderId;
@@ -76,5 +77,13 @@ public class OrderModel {
 
     public void setOrderedCoffee(ArrayList<CoffeeModel> orderedCoffee) {
         this.orderedCoffee = orderedCoffee;
+    }
+
+    public String getOrderStatus() {
+        return orderStatus;
+    }
+
+    public void setOrderStatus(String orderStatus) {
+        this.orderStatus = orderStatus;
     }
 }
