@@ -4,13 +4,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
-import android.os.Bundle;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -64,7 +62,7 @@ public class ProfileMainActivity extends AppCompatActivity {
 
         btnEditProfile = findViewById(R.id.imageButtonProfileEdit);
 
-        btnTopUp = findViewById(R.id.button2);
+//        btnTopUp = findViewById(R.id.button2);
         btnTerms = findViewById(R.id.btnProfile1);
         btnPrivacy = findViewById(R.id.btnProfile2);
         btnBankCard = findViewById(R.id.btnProfile3);

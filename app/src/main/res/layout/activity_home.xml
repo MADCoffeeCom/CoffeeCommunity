@@ -45,23 +45,13 @@
                     app:srcCompat="@drawable/ic_cart" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <TextView
-                android:id="@+id/textView6"
-                style="@style/c1"
-                android:layout_width="wrap_content"
+            <androidx.fragment.app.FragmentContainerView
+                android:id="@+id/fragmentContainerView3"
+                android:name="com.example.coffeecom.fragment.LocationFragment"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="24dp"
-                android:layout_marginTop="8dp"
-                android:text="@string/current_location" />
-
-            <TextView
-                android:id="@+id/locationID"
-                style="@style/c1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="24dp"
-                android:alpha="0.6"
-                android:text="Taman Gembira" />
+                android:layout_marginBottom="16dp"
+                android:layout_marginTop="16dp"/>
 
             <EditText
                 android:id="@+id/TbSearch"
