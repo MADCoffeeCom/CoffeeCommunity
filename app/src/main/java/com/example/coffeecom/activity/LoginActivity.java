@@ -52,18 +52,25 @@ public class LoginActivity extends AppCompatActivity {
                         String[] field = new String[2];
                         field[0] = "username";
                         field[1] = "password";
+                        Log.d(String.valueOf(username.getText()), "validateLogin: step 1");
 
                         //Creating array for data
                         String[] data = new String[2];
                         data[0] = username.getText().toString();
                         data[1] = passwordTextView.getText().toString();
 
-                        PutData putData = new PutData("http://192.168.100.11/coffeeCommunity_DatabaseConnector/login.php", "POST", field, data);
+                        PutData putData = new PutData("http://192.168.56.1/CoffeeCommunity/login.php", "POST", field, data);
                         if (putData.startPut()) {
+                            Log.d(String.valueOf(username.getText()), "validateLogin: step 2");
+
                             if (putData.onComplete()) {
                                 String result = putData.getResult();
+                                Log.d(String.valueOf(username.getText()), "validateLogin: step 3");
+
                                 if (result.equals("Login Success")){
-                                    Intent intent = new Intent(getApplicationContext(),MainActivity.class);
+                                    Log.d(String.valueOf(username.getText()), "validateLogin: step 4");
+
+                                    Intent intent = new Intent(getApplicationContext(),HomeActivity.class);
                                     startActivity(intent);
                                     finish();
                                 }else{
@@ -90,9 +97,9 @@ public class LoginActivity extends AppCompatActivity {
 
 
 
-        if (username.getText().toString().equals("abang") && passwordTextView.getText().toString().equals("abang")){
-            Toast.makeText(this, "LOGIN SUCCESSFUL", Toast.LENGTH_SHORT).show();
-        }else Toast.makeText(this,"LOGIN FAILED", Toast.LENGTH_SHORT).show();
+//        if (username.getText().toString().equals("abang") && passwordTextView.getText().toString().equals("abang")){
+//            Toast.makeText(this, "LOGIN SUCCESSFUL", Toast.LENGTH_SHORT).show();
+//        }else Toast.makeText(this,"LOGIN FAILED", Toast.LENGTH_SHORT).show();
 //        Intent intent = new Intent(this, LoginActivity.class);
 //        startActivity(intent);
     }
