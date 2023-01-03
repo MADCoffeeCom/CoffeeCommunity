@@ -28,18 +28,16 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-//still lack of top up function
 //lack of edit profile button function
 //lack onclick to each history page
 //lack general button onclick
 
 public class ProfileMainActivity extends AppCompatActivity {
 
-    private TextView txtProfileName, txtProfileType, txtWalletBalance;
+    private TextView txtProfileName, txtProfileType;
     private ImageView imgBarista;
     private RecyclerView orderListRV, brewListRV, postListRV;
     private ImageButton btnEditProfile;
-    private Button btnTopUp;
     private ConstraintLayout btnTerms, btnPrivacy, btnBankCard, btnHelpDesk, btnFeedback, btnLogOut;
 
     //data source for recycle view
@@ -60,11 +58,9 @@ public class ProfileMainActivity extends AppCompatActivity {
 
         txtProfileName = findViewById(R.id.textViewProfileName);
         txtProfileType = findViewById(R.id.textViewProfileType);
-        txtWalletBalance = findViewById(R.id.balanceAmount);
 
         btnEditProfile = findViewById(R.id.imageButtonProfileEdit);
 
-        btnTopUp = findViewById(R.id.button2);
         btnTerms = findViewById(R.id.btnProfile1);
         btnPrivacy = findViewById(R.id.btnProfile2);
         btnBankCard = findViewById(R.id.btnProfile3);

@@ -50,9 +50,9 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-            <include
-                android:id="@+id/include"
-                layout="@layout/coffee_wallet"
+            <androidx.fragment.app.FragmentContainerView
+                android:id="@+id/fragmentContainerView2"
+                android:name="com.example.coffeecom.fragment.CoffeeWalletFragment"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="24dp"
