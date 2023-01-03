@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activity.StatusActivity">
+    tools:context=".activity.LocateLocationActivity">
 
     <ImageButton
         android:id="@+id/backBtn"
@@ -17,56 +17,55 @@
         app:srcCompat="@drawable/ic_back" />
 
     <TextView
-        android:id="@+id/statusText"
+        android:id="@+id/titleLocationText"
         style="@style/h1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
-        android:text="Transaction"
+        android:text="Location"
         app:layout_constraintStart_toEndOf="@+id/backBtn"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageView
-        android:id="@+id/imageView3"
-        android:layout_width="wrap_content"
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/fragmentContainerView4"
+        android:name="com.example.coffeecom.fragment.LocationFragment"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="80dp"
+        android:layout_marginBottom="16dp"
+        android:layout_marginTop="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/statusText"
-        app:srcCompat="@drawable/beans" />
+        app:layout_constraintTop_toBottomOf="@+id/titleLocationText"
+        />
 
-    <TextView
-        android:id="@+id/statusHeading1Text"
-        style="@style/c1"
-        android:layout_width="300dp"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="TextView"
-        android:inputType="textMultiLine"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView3" />
 
-    <TextView
-        android:id="@+id/statusHeading2Text"
-        android:layout_width="300dp"
-        android:layout_height="wrap_content"
-        android:text="TextView"
-        android:inputType="textMultiLine"
-        android:gravity="center"
+    <EditText
+        android:id="@+id/TbSearch"
+        style="@style/defaultTextBox"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginLeft="24dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginRight="24dp"
+        android:background="@drawable/textbox"
+        android:drawableLeft="@drawable/ic_search"
+        android:ems="10"
+        android:hint="Search for coffee/barista..."
+        android:inputType="text"
+        android:textColorHint="@color/disable_grey"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/statusHeading1Text" />
+        app:layout_constraintTop_toBottomOf="@+id/fragmentContainerView4" />
 
     <Button
-        android:id="@+id/statusBtn"
+        android:id="@+id/relocateBtn"
         style="@style/primaryBtn"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="40dp"
-        android:text="Back"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginTop="600dp"
+        android:text="Submit"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
