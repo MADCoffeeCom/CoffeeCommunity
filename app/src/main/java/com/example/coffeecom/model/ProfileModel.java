@@ -21,6 +21,8 @@ public class ProfileModel {
     ArrayList<OrderModel> brewedHistory = new ArrayList<>();
     ArrayList<PostModel> postedPost = new ArrayList<>();
     ArrayList<BankCardModel> bankCard = new ArrayList<>();
+    ArrayList<CoffeeModel> sellingCoffee = new ArrayList<>();
+    ArrayList<OrderModel> pendingOrder = new ArrayList<>();
 //    ArrayList<TransactionModel> transactionHistories = new ArrayList<>();
 
     public ProfileModel(String userPic, String userId, String username, String email, String password, String userRole, String userStreetNo, String userTaman, int userPostalCode, String userState, int walletPin, double walletBalance, ArrayList<OrderModel> orderedHistory, ArrayList<OrderModel> brewedHistory, ArrayList<PostModel> postedPost, ArrayList<BankCardModel> bankCard) {
@@ -179,5 +181,21 @@ public class ProfileModel {
 
     public void addBankCard(BankCardModel card) {
         bankCard.add(card);
+    }
+
+    public ArrayList<CoffeeModel> getSellingCoffee() {
+        return sellingCoffee;
+    }
+
+    public void setSellingCoffee(ArrayList<CoffeeModel> sellingCoffee) {
+        this.sellingCoffee = sellingCoffee;
+    }
+
+    public ArrayList<OrderModel> getPendingOrder() {
+        return pendingOrder;
+    }
+
+    public void setPendingOrder(ArrayList<OrderModel> pendingOrder) {
+        this.pendingOrder = pendingOrder;
     }
 }
