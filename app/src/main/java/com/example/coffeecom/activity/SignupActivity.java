@@ -66,7 +66,7 @@ public class SignupActivity extends AppCompatActivity {
                 data[2] = passwordTextView.getText().toString();
                 data[3] = email.getText().toString();
 
-                PutData putData = new PutData("http://127.0.0.1:3306/CoffeeCommunity/signup.php", "POST", field, data);
+                PutData putData = new PutData("http://192.168.56.1/CoffeeCommunityPHP/signup.php", "POST", field, data);
                 if (putData.startPut()) {
                     if (putData.onComplete()) {
                         String result = putData.getResult();

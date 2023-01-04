@@ -1,5 +1,7 @@
 package com.example.coffeecom;
 
+import android.util.Log;
+
 import com.example.coffeecom.model.BaristaModel;
 import com.example.coffeecom.model.CoffeeModel;
 import com.example.coffeecom.model.ProfileModel;
@@ -13,31 +15,30 @@ public class Provider{
     private static ArrayList<CoffeeModel> coffees = new ArrayList<>();
     private static ArrayList<BaristaModel> baristas = new ArrayList<>();
     private static String currentCoffeeType;
-    private static BaristaModel currentBarista;
-    private static CoffeeModel currentCoffee;
+    private static String currentBaristaId;
+    private static String currentCoffeeId;
     private static ProfileModel user;
 
     private static ArrayList<TransactionModel> transactions = new ArrayList<>();
-
-    public static void addBaristas(BaristaModel newBaristas) {
-        //need to insert code to update new baristas in sql here
-        baristas.add(newBaristas);
-    }
 
     public static ArrayList<CoffeeModel> getCoffees() {
         return coffees;
     }
 
-    public static void setCoffees(ArrayList<CoffeeModel> coffees) {
-        Provider.coffees = coffees;
+    public static void addCoffee(CoffeeModel coffee) {
+        Provider.coffees.add(coffee);
+        Log.i("Provider: ", "Successfully adds coffee!");
     }
 
     public static ArrayList<BaristaModel> getBaristas() {
         return baristas;
     }
 
-    public static void setBaristas(ArrayList<BaristaModel> baristas) {
-        Provider.baristas = baristas;
+
+    public static void addBarista(BaristaModel barista) {
+        Provider.baristas.add(barista);
+        Log.i("Provider: ", "Successfully adds barista!");
+
     }
 
     public static String getCurrentCoffeeType() {
@@ -48,24 +49,28 @@ public class Provider{
         Provider.currentCoffeeType = currentcoffeeType;
     }
 
-    public static BaristaModel getCurrentBarista() {
-        return currentBarista;
+    public static String getCurrentBaristaId() {
+        return currentBaristaId;
     }
 
-    public static void setCurrentBarista(BaristaModel newBarista) {
-        currentBarista = newBarista;
+    public static void setCurrentBaristaId(String newBarista) {
+        currentBaristaId = newBarista;
     }
 
-    public static CoffeeModel getCurrentCoffee() {
-        return currentCoffee;
+    public static String getCurrentCoffeeId() {
+        return currentCoffeeId;
     }
 
-    public static void setCurrentCoffee(CoffeeModel currentCoffee) {
-        Provider.currentCoffee = currentCoffee;
+    public static void setCurrentCoffeeId(String currentCoffeeId) {
+        Provider.currentCoffeeId = currentCoffeeId;
     }
 
     public static ProfileModel getUser() {
         return user;
+    }
+
+    public static void setUser(ProfileModel user) {
+        Provider.user = user;
     }
 
     public static ArrayList<TransactionModel> getTransactions() {
@@ -76,7 +81,8 @@ public class Provider{
         Provider.transactions = transactions;
     }
 
-//    ===================StatusActivity Punya=========================
+
+    //    ===================StatusActivity Punya=========================
     private static String statusTitle, statusHeading1, statusHeading2, statusBtnText;
     private static Class<?> redirectedCls;
 
@@ -103,6 +109,8 @@ public class Provider{
     public static void setStatusHeading2(String statusHeading2) {
         Provider.statusHeading2 = statusHeading2;
     }
+
+//    =======================StatusClass end==================================
 
     public static Class getRedirectedCls() {
         return redirectedCls;
