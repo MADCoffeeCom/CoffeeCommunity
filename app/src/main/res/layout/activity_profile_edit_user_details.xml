@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".activity.ProfileEditPostsActivity">
+
+    <ImageButton
+        android:id="@+id/imgEditPostBack"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="24dp"
+        android:background="@color/transparent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_back" />
+
+    <TextView
+        android:id="@+id/textViewProfile6"
+        style="@style/h1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="Edit Profile"
+        app:layout_constraintStart_toEndOf="@+id/imgEditPostBack"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/imgEditProfileUserPic"
+        android:layout_width="182dp"
+        android:layout_height="187dp"
+        android:layout_marginTop="20dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/barista1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewProfile6" />
+
+    <TextView
+        android:id="@+id/textViewProfile7"
+        style="@style/c1"
+        android:textStyle="bold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="24dp"
+        android:layout_marginTop="24dp"
+        android:text="Name"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imgEditProfileUserPic" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="49dp"
+        android:layout_marginLeft="24dp"
+        android:id="@+id/editTextProfileName"
+        android:layout_marginRight="24dp"
+        android:text="\tPlease enter your full name"
+        android:background="@drawable/linear_gray_background"
+        android:textColor="@color/white_60"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.333"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewProfile7" />
+
+    <TextView
+        android:id="@+id/textViewProfile8"
+        style="@style/c1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="24dp"
+        android:layout_marginTop="8dp"
+        android:text="Email Address"
+        android:textStyle="bold"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextProfileName" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="49dp"
+        android:layout_marginLeft="24dp"
+        android:id="@+id/editTextProfileEmail"
+        android:layout_marginRight="24dp"
+        android:background="@drawable/linear_gray_background"
+        android:text="\tPlease enter your email address"
+        android:inputType="textEmailAddress"
+        android:textColor="@color/white_60"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewProfile8" />
+
+    <TextView
+        android:id="@+id/textViewProfile9"
+        style="@style/c1"
+        android:textStyle="bold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="24dp"
+        android:layout_marginTop="8dp"
+
+        android:text="Password"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextProfileEmail" />
+
+    <EditText
+        android:id="@+id/editTextProfilePassword"
+        android:layout_width="match_parent"
+        android:layout_height="49dp"
+        android:layout_marginLeft="24dp"
+        android:layout_marginRight="24dp"
+        android:background="@drawable/linear_gray_background"
+        android:inputType="textPassword"
+        android:text="   Password"
+        android:textColor="@color/white_60"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.333"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewProfile9" />
+
+    <Button
+        android:layout_width="155dp"
+        android:layout_height="54dp"
+        android:layout_marginBottom="60dp"
+        android:id="@+id/btnProfileUpdate"
+        android:text="Update"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
