@@ -19,6 +19,7 @@ public class Provider{
     private static String currentCoffeeId;
     private static ProfileModel user;
 
+
     private static ArrayList<TransactionModel> transactions = new ArrayList<>();
 
     public static ArrayList<CoffeeModel> getCoffees() {

@@ -25,7 +25,7 @@ public class LocationFragment extends Fragment {
     private TextView currentLocationText;
     private ConstraintLayout locationFragment;
 
-    String currentLocation = Provider.getUser().getUserLocation();
+    String currentLocation = "";
 
     public LocationFragment() {
         // Required empty public constructor
@@ -34,6 +34,7 @@ public class LocationFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+//        currentLocation = Provider.getUser().getUserLocation();
     }
 
     @Override
