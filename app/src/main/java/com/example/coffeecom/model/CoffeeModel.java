@@ -9,16 +9,12 @@ public class CoffeeModel {
     private double coffeePrice;
     private String ingredients;
     private String baristaId;
-//    private String baristaUsername;
-//    private String baristaTaman;
-//    private String baristaLocation;
-    private ArrayList<BaristaRatingModel> rating;
 
     public CoffeeModel(String coffeeId) {
         this.coffeeId = coffeeId;
     }
 
-    public CoffeeModel(String coffeeId, String coffeePic, String coffeeTitle, String coffeeDesc, String coffeeType, double coffeePrice, String ingredients, String baristaId) {
+    public CoffeeModel(String coffeeId, String coffeeTitle, String coffeePic, String coffeeDesc, String coffeeType, double coffeePrice, String ingredients, String baristaId) {
         this.coffeeId = coffeeId;
         this.coffeePic = coffeePic;
         this.coffeeTitle = coffeeTitle;
@@ -27,12 +23,9 @@ public class CoffeeModel {
         this.coffeePrice = coffeePrice;
         this.ingredients = ingredients;
         this.baristaId = baristaId;
-//        this.baristaUsername = baristaUsername;
-//        this.baristaTaman = baristaTaman;
-//        this.baristaLocation = baristaLocation;
     }
 
-    public CoffeeModel(String coffeeId, String coffeePic, String coffeeTitle, String coffeeDesc, double coffeePrice) {
+    public CoffeeModel(String coffeeId, String coffeeTitle, String coffeePic, String coffeeDesc, double coffeePrice) {
         this.coffeeId = coffeeId;
         this.coffeePic = coffeePic;
         this.coffeeTitle = coffeeTitle;
@@ -86,14 +79,6 @@ public class CoffeeModel {
 
     public void setIngredients(String ingredients) {
         this.ingredients = ingredients;
-    }
-
-    public ArrayList<BaristaRatingModel> getRating() {
-        return rating;
-    }
-
-    public void setRating(ArrayList<BaristaRatingModel> rating) {
-        this.rating = rating;
     }
 
     public String getBaristaId() {

@@ -37,7 +37,10 @@ public class HomeActivityFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
+        Provider.getBaristas().clear();
+        Provider.getCoffees().clear();
+        coffeeTypeA.clear();
+        coffeePicA.clear();
 
         View view = inflater.inflate(R.layout.activity_home,container,false);
 
@@ -126,7 +129,14 @@ public class HomeActivityFragment extends Fragment {
 //                            String baristaTaman = strDetails[9];
 //                            String baristaLocation = strDetails[10];
 
+                            Log.i("coffeeTitle", coffeeTitle);
+                            Log.i("coffeePicUrl", coffeePicUrl);
+
+
                             CoffeeModel coffee = new CoffeeModel(coffeeId, coffeeTitle, coffeePicUrl, coffeeDesc, coffeeType, coffeePrice, ingredients, baristaId);
+                            Log.i("in model coffeeTitle", coffee.getCoffeeTitle());
+                            Log.i("in model coffeePicUrl", coffee.getCoffeePic());
+
                             Provider.addCoffee(coffee);
                             Log.i("Home Add new coffee", coffee.getCoffeeId() + " added!");
 

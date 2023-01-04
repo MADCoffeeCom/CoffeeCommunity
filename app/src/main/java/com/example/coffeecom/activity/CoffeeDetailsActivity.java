@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -50,22 +51,24 @@ public class CoffeeDetailsActivity extends AppCompatActivity {
         for (int i = 0; i < Provider.getBaristas().size(); i++) {
             if(Provider.getBaristas().get(i).getBaristaId().equals(Provider.getCurrentBaristaId())){
                 currentBaristaIndex = i;
-                for (int j = 0; j < Provider.getBaristas().get(i).getSellingCoffee().size(); j++) {
-                    if(Provider.getBaristas().get(i).getSellingCoffee().get(j).getCoffeeId().equals(Provider.getCurrentCoffeeId())){
-                        currentCoffeeIndex = j;
-                        break;
-                    }
-                }
+            }
+        }
+        for (int j = 0; j < Provider.getCoffees().size(); j++) {
+            if(Provider.getCoffees().get(j).getCoffeeId().equals(Provider.getCurrentCoffeeId())){
+                currentCoffeeIndex = j;
+                break;
             }
         }
 
         currentBarista = Provider.getBaristas().get(currentBaristaIndex);
-        currentCoffee = Provider.getBaristas().get(currentBaristaIndex).getSellingCoffee().get(currentCoffeeIndex);
+        currentCoffee = Provider.getCoffees().get(currentCoffeeIndex);
 
         coffeeDetailsNameText.setText(currentCoffee.getCoffeeTitle());
         baristaNameCoffeeDetailsText.setText(toTitleCase(currentBarista.getUserName()));
         baristaLocationCoffeeDetailsText.setText(currentBarista.getUserTaman());
         coffeeDescCoffeeDetailsText.setText(currentCoffee.getCoffeeDesc());
+
+        Log.i("Coffee Details - Ingredients", currentCoffee.getIngredients());
         ingredientText.setText(currentCoffee.getIngredients());
 
         totalPriceCoffeeDetailsText.setText(String.format("%.2f", (currentCoffee.getCoffeePrice() * noOfOrder )));

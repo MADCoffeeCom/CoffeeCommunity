@@ -39,15 +39,16 @@ public class Provider{
     public static void addBarista(BaristaModel barista) {
         Provider.baristas.add(barista);
         Log.i("Provider: ", "Successfully adds barista!");
-
     }
 
     public static String getCurrentCoffeeType() {
         return currentCoffeeType;
     }
 
-    public static void setCurrentcoffeeType(String currentcoffeeType) {
-        Provider.currentCoffeeType = currentcoffeeType;
+    public static void setCurrentCoffeeType(String coffeeType) {
+        currentCoffeeType = coffeeType;
+        Log.i("Provider: ", "Current Coffee Type " + currentCoffeeType);
+
     }
 
     public static String getCurrentBaristaId() {
