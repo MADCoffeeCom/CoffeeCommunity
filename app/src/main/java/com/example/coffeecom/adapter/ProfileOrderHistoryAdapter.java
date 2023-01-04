@@ -5,8 +5,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -76,16 +78,19 @@ public class ProfileOrderHistoryAdapter extends RecyclerView.Adapter<ProfileOrde
         int drawableResourceId = holder.itemView.getContext().getResources().getIdentifier(myOrderList[position].getOrderHistoryImage(),"drawable",holder.itemView.getContext().getPackageName());
         Glide.with(holder.itemView.getContext()).load(drawableResourceId).into(holder.orderImage);
 
-//        holder.orderHistoryCard.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Toast.makeText(view.getContext(), "HMMM STILL DOING", Toast.LENGTH_SHORT).show();
-//                //input code to open details coffee order page
-//                //havent complete
-////                Intent intent = new Intent(holder.itemView.getContext(), BaristaListActivity.class);
-////                holder.itemView.getContext().startActivity(intent);
-//            }
-//        });
+        holder.orderHistoryCard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(view.getContext(), "HMMM STILL DOING", Toast.LENGTH_SHORT).show();
+
+                AppCompatActivity activity = (AppCompatActivity) view.getContext();
+
+                //the page havent done yet
+//                AddBankCardFragment addBankCard = new AddBankCardFragment();
+//                activity.getSupportFragmentManager().beginTransaction().replace(R.id.containerMainPage,addBankCard).addToBackStack(null).commit();
+
+            }
+        });
     }
 
     @Override

@@ -4,6 +4,7 @@ import static com.example.coffeecom.helper.ToTitleCase.toTitleCase;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +12,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -74,22 +76,24 @@ public class CoffeeDetailsFragment extends Fragment {
         for (int i = 0; i < Provider.getBaristas().size(); i++) {
             if(Provider.getBaristas().get(i).getBaristaId().equals(Provider.getCurrentBaristaId())){
                 currentBaristaIndex = i;
-                for (int j = 0; j < Provider.getBaristas().get(i).getSellingCoffee().size(); j++) {
-                    if(Provider.getBaristas().get(i).getSellingCoffee().get(j).getCoffeeId().equals(Provider.getCurrentCoffeeId())){
-                        currentCoffeeIndex = j;
-                        break;
-                    }
-                }
+            }
+        }
+        for (int j = 0; j < Provider.getCoffees().size(); j++) {
+            if(Provider.getCoffees().get(j).getCoffeeId().equals(Provider.getCurrentCoffeeId())){
+                currentCoffeeIndex = j;
+                break;
             }
         }
 
         currentBarista = Provider.getBaristas().get(currentBaristaIndex);
-        currentCoffee = Provider.getBaristas().get(currentBaristaIndex).getSellingCoffee().get(currentCoffeeIndex);
+        currentCoffee = Provider.getCoffees().get(currentCoffeeIndex);
 
         coffeeDetailsNameText.setText(currentCoffee.getCoffeeTitle());
         baristaNameCoffeeDetailsText.setText(toTitleCase(currentBarista.getUserName()));
         baristaLocationCoffeeDetailsText.setText(currentBarista.getUserTaman());
         coffeeDescCoffeeDetailsText.setText(currentCoffee.getCoffeeDesc());
+
+        Log.i("Coffee Details - Ingredients", currentCoffee.getIngredients());
         ingredientText.setText(currentCoffee.getIngredients());
 
         totalPriceCoffeeDetailsText.setText(String.format("%.2f", (currentCoffee.getCoffeePrice() * noOfOrder )));
@@ -118,10 +122,12 @@ public class CoffeeDetailsFragment extends Fragment {
         coffeeDetailsBackBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(view.getContext(),CoffeeListFragment.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(intent);
-                getActivity().finish();;
+                //set the previous button fragment
+                AppCompatActivity activity = (AppCompatActivity) view.getContext();
+
+                CoffeeListFragment coffeeList = new CoffeeListFragment();
+                activity.getSupportFragmentManager().beginTransaction().replace(R.id.containerMainPage,coffeeList).addToBackStack(null).commit();
+
             }
         });
 

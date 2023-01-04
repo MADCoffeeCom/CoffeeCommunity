@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.coffeecom.R;
 import com.example.coffeecom.model.ProfileEditPostsModel;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 
@@ -41,15 +42,14 @@ public class ProfileEditPostsAdapter extends RecyclerView.Adapter<ProfileEditPos
     public class ViewHolder extends RecyclerView.ViewHolder{
 
         public ImageView imagePosted;
-//        public FloatingActionButton btnDeletePicture;
+        public FloatingActionButton btnDeletePicture;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
             this.imagePosted = itemView.findViewById(R.id.imgPostImages);
-//            this.btnDeletePicture = itemView.findViewById(R.id.btnDeleteImage);
+            this.btnDeletePicture = itemView.findViewById(R.id.btnDeleteImage);
 
-//            itemView.setOnClickListener((View.OnClickListener) this);
         }
 
     }
@@ -71,6 +71,13 @@ public class ProfileEditPostsAdapter extends RecyclerView.Adapter<ProfileEditPos
         Glide.with(context)
                 .load(integerArrayList.get(position))
                 .into(holder.imagePosted);
+
+        holder.btnDeletePicture.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //to add the delete function
+            }
+        });
 
     }
 

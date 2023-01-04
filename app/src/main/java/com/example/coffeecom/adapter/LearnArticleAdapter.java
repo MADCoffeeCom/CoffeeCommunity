@@ -1,5 +1,6 @@
 package com.example.coffeecom.adapter;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -27,6 +28,7 @@ public class LearnArticleAdapter extends RecyclerView.Adapter<LearnArticleAdapte
 
     ArrayList<ArticleModel> articles;
     Context context;
+
 
     public LearnArticleAdapter(ArrayList<ArticleModel> articles, Context context) {
         this.context = context;
@@ -56,7 +58,7 @@ public class LearnArticleAdapter extends RecyclerView.Adapter<LearnArticleAdapte
 
     //fill in the xml file with necessary information
     @Override
-    public void onBindViewHolder(@NonNull LearnArticleAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull LearnArticleAdapter.ViewHolder holder, @SuppressLint("RecyclerView") int position) {
         holder.articleTitle.setText(articles.get(position).getArticleTitle());
 
         //code to insert picture
@@ -69,7 +71,8 @@ public class LearnArticleAdapter extends RecyclerView.Adapter<LearnArticleAdapte
             public void onClick(View view) {
                 //input code here to open learn article details page
                 Provider.setCurrentArticleId(articles.get(position).getArticleId());
-                ((AppCompatActivity)context).getSupportFragmentManager().beginTransaction().replace(R.id.containerMainPage,new LearnDetailsFragment()).commit();
+                LearnDetailsFragment learnDetails = new LearnDetailsFragment();
+                ((AppCompatActivity)context).getSupportFragmentManager().beginTransaction().replace(R.id.containerMainPage,learnDetails).commit();
             }
         });
 

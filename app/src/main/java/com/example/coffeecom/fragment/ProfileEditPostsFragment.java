@@ -26,7 +26,6 @@ public class ProfileEditPostsFragment extends Fragment {
     private RecyclerView imagePostRV;
     private EditText captionEdit;
     private ImageButton btnBack, btnAddPicture;
-    private FloatingActionButton btnDeletePicture;
     private Button btnUpdatePost, btnDeletePost;
 
     private ArrayList<Integer> myImageArrayList;
@@ -44,7 +43,6 @@ public class ProfileEditPostsFragment extends Fragment {
         captionEdit = view.findViewById(R.id.editTextCaption);
         btnBack = view.findViewById(R.id.imgEditPostBack);
         btnAddPicture = view.findViewById(R.id.imgEditPostButtonAddPicture);
-        btnDeletePicture = view.findViewById(R.id.btnDeleteImage);
         btnUpdatePost = view.findViewById(R.id.btnUpdatePost);
         btnDeletePost = view.findViewById(R.id.btnDeletePost);
 

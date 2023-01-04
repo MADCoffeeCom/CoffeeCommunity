@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import com.bumptech.glide.Glide;
@@ -152,11 +153,10 @@ public class LearnDetailsFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 // Create an Intent to go back to the previous activity
-                Intent intent = new Intent(view.getContext(), LearnActivityFragment.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(intent);
-                getActivity().finish();
 
+                AppCompatActivity activity = (AppCompatActivity) view.getContext();
+                LearnActivityFragment learnHome = new LearnActivityFragment();
+                activity.getSupportFragmentManager().beginTransaction().replace(R.id.containerMainPage,learnHome).addToBackStack(null).commit();
             }
         });
     }
@@ -189,7 +189,7 @@ public class LearnDetailsFragment extends Fragment {
                 data[1] = number;
                 data[2] = articleId;
 
-                PutData putData = new PutData("http://192.168.56.1/CoffeeCommunityPHP/updatevote.php", "POST", field, data);
+                PutData putData = new PutData("http://10.167.58.200/CoffeeCommunityPHP/updatevote.php", "POST", field, data);
                 if (putData.startPut()) {
                     if (putData.onComplete()) {
                         String result = putData.getResult();

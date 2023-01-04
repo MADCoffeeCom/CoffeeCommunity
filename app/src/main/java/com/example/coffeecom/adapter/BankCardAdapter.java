@@ -1,19 +1,18 @@
 package com.example.coffeecom.adapter;
 
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.coffeecom.Provider;
 import com.example.coffeecom.R;
-import com.example.coffeecom.activity.AddBankCardActivity;
-import com.example.coffeecom.activity.CoffeeDetailsActivity;
+import com.example.coffeecom.fragment.AddBankCardFragment;
 
 public class BankCardAdapter extends RecyclerView.Adapter<BankCardAdapter.ViewHolder>{
 
@@ -41,8 +40,9 @@ public class BankCardAdapter extends RecyclerView.Adapter<BankCardAdapter.ViewHo
         holder.bankCardCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(holder.itemView.getContext(), AddBankCardActivity.class);
-                holder.itemView.getContext().startActivity(intent);
+                AppCompatActivity activity = (AppCompatActivity) view.getContext();
+                AddBankCardFragment addBankCard = new AddBankCardFragment();
+                activity.getSupportFragmentManager().beginTransaction().replace(R.id.containerMainPage,addBankCard).addToBackStack(null).commit();
             }
         });
     }

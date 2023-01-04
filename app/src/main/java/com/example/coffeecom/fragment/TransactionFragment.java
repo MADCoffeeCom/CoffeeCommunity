@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -43,7 +44,9 @@ public class TransactionFragment extends Fragment {
         backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                getActivity().finish();
+                AppCompatActivity activity = (AppCompatActivity) v.getContext();
+                WalletFragment walletFragment = new WalletFragment();
+                activity.getSupportFragmentManager().beginTransaction().replace(R.id.containerMainPage,walletFragment).addToBackStack(null).commit();
             }
         });
 

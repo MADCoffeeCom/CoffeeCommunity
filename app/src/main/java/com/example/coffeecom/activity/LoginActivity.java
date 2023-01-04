@@ -14,11 +14,8 @@ import android.widget.Toast;
 
 import com.example.coffeecom.Provider;
 import com.example.coffeecom.R;
-import com.example.coffeecom.fragment.BottomNavigationActivity;
 import com.example.coffeecom.model.ProfileModel;
 import com.vishnusivadas.advanced_httpurlconnection.PutData;
-
-import org.w3c.dom.Text;
 
 public class LoginActivity extends AppCompatActivity {
 

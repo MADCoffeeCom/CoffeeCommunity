@@ -1,13 +1,18 @@
-package com.example.coffeecom.fragment;
+package com.example.coffeecom.activity;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.icu.text.Transliterator;
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.MenuItem;
 
 import com.example.coffeecom.R;
+import com.example.coffeecom.fragment.HomeActivityFragment;
+import com.example.coffeecom.fragment.LearnActivityFragment;
+import com.example.coffeecom.fragment.NewBaristaFragment;
 import com.example.coffeecom.fragment.ProfileMainFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
@@ -47,25 +52,33 @@ public class BottomNavigationActivity extends AppCompatActivity {
                 {
                     case R.id.nvBuyCoffeeHome:
                         getSupportFragmentManager().beginTransaction().replace(R.id.containerMainPage,homeMain).commit();
-//                        btmNavBar.setSelectedItemId(R.id.nvBuyCoffeeHome);
-                    break;
+                        item.setChecked(true);
+                        break;
+
                     case R.id.nvBaristaHome:
                         getSupportFragmentManager().beginTransaction().replace(R.id.containerMainPage,baristaMain).commit();
-//                        btmNavBar.setSelectedItemId(R.id.nvBuyCoffeeHome);
+                        item.setChecked(true);
+                        break;
 
                     case R.id.nvLearnHome:
                         getSupportFragmentManager().beginTransaction().replace(R.id.containerMainPage,learnMain).commit();
-//                        btmNavBar.setSelectedItemId(R.id.nvLearnHome);
-                    break;
+                        item.setChecked(true);
+                        break;
+
                     case R.id.nvProfileHome:
                         getSupportFragmentManager().beginTransaction().replace(R.id.containerMainPage,profileMain).commit();
-//                        btmNavBar.setSelectedItemId(R.id.nvProfileHome);
-                    break;
+                        item.setChecked(true);
+                        break;
 
-            }
+                }
+
                 return false;
             }
+
+
         });
+
+
 
     }
 }

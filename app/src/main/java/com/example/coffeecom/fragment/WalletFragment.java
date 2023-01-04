@@ -1,6 +1,5 @@
 package com.example.coffeecom.fragment;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,15 +8,13 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.coffeecom.Provider;
 import com.example.coffeecom.R;
-import com.example.coffeecom.activity.TransactionActivity;
-import com.example.coffeecom.activity.WalletActivity;
-import com.example.coffeecom.activity.WalletPinActivity;
 import com.example.coffeecom.adapter.BankCardAdapter;
 
 
@@ -75,7 +72,9 @@ public class WalletFragment extends Fragment {
         transactionBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(getContext(), TransactionActivity.class));
+                AppCompatActivity activity = (AppCompatActivity) view.getContext();
+                TransactionFragment transactionFragment = new TransactionFragment();
+                activity.getSupportFragmentManager().beginTransaction().replace(R.id.containerMainPage,transactionFragment).addToBackStack(null).commit();
             }
         });
         recyclerViewBankCard();
@@ -85,9 +84,18 @@ public class WalletFragment extends Fragment {
             public void onClick(View view) {
 //                Log.d(String.valueOf(topUpAmountTextBox.getText()), "bruhbruh: ");
                 if (!String.valueOf(topUpAmountTextBox.getText()).isEmpty()){
-                    Intent intent = new Intent(getContext(), WalletPinActivity.class);
-                    intent.putExtra("amount", String.valueOf(topUpAmountTextBox.getText()));
-                    startActivity(intent);
+                    AppCompatActivity activity = (AppCompatActivity) view.getContext();
+                    WalletPinFragment walletPinFragment = new WalletPinFragment();
+                    activity.getSupportFragmentManager().beginTransaction().replace(R.id.containerMainPage,walletPinFragment).addToBackStack(null).commit();
+
+                    Bundle bundle = new Bundle();
+                    bundle.putString("amount", String.valueOf(topUpAmountTextBox.getText()));
+                    walletPinFragment.setArguments(bundle);
+                    //please check if this is correct
+
+//                    Intent intent = new Intent(getContext(), WalletPinActivity.class);
+//                    intent.putExtra("amount", String.valueOf(topUpAmountTextBox.getText()));
+//                    startActivity(intent);
                 }else{
                     errorWalletText.setVisibility(View.VISIBLE);
                 }

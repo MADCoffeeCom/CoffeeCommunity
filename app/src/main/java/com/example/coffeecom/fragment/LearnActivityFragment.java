@@ -50,7 +50,7 @@ public class LearnActivityFragment extends Fragment {
         handler.post(new Runnable() {
             @Override
             public void run() {
-                FetchData fetchData = new FetchData("http://192.168.56.1/CoffeeCommunityPHP/article.php");
+                FetchData fetchData = new FetchData("http://10.167.58.200/CoffeeCommunityPHP/article.php");
                 if (fetchData.startFetch()) {
                     if (fetchData.onComplete()) {
                         String result = fetchData.getResult();

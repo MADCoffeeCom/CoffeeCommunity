@@ -2,7 +2,6 @@ package com.example.coffeecom.adapter;
 
 import static com.example.coffeecom.helper.ToTitleCase.toTitleCase;
 
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,13 +9,14 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.example.coffeecom.activity.CoffeeDetailsActivity;
 import com.example.coffeecom.Provider;
 import com.example.coffeecom.R;
+import com.example.coffeecom.fragment.CoffeeDetailsFragment;
 import com.example.coffeecom.model.BaristaModel;
 import com.example.coffeecom.model.CoffeeModel;
 
@@ -99,8 +99,12 @@ public class CoffeeBaristaListAdapter extends RecyclerView.Adapter<CoffeeBarista
             public void onClick(View view) {
                 //go to details coffee view
                 Provider.setCurrentCoffeeId(coffees.get(position).getCoffeeId());
-                Intent intent = new Intent(holder.itemView.getContext(), CoffeeDetailsActivity.class);
-                holder.itemView.getContext().startActivity(intent);
+                AppCompatActivity activity = (AppCompatActivity) view.getContext();
+                CoffeeDetailsFragment coffeeDetails = new CoffeeDetailsFragment();
+                activity.getSupportFragmentManager().beginTransaction().replace(R.id.containerMainPage,coffeeDetails).addToBackStack(null).commit();
+                //need to set different location
+//                Intent intent = new Intent(holder.itemView.getContext(), CoffeeDetailsActivity.class);
+//                holder.itemView.getContext().startActivity(intent);
             }
         });
 
@@ -127,8 +131,11 @@ public class CoffeeBaristaListAdapter extends RecyclerView.Adapter<CoffeeBarista
             public void onClick(View view) {
                 //go to details coffee view
 //                Provider.setCurrentCoffeeId(currentBarista.getSellingCoffee().get(position).getCoffeeId());
-                Intent intent = new Intent(holder.itemView.getContext(), CoffeeDetailsActivity.class);
-                holder.itemView.getContext().startActivity(intent);
+                AppCompatActivity activity = (AppCompatActivity) view.getContext();
+                CoffeeDetailsFragment coffeeDetailsFragment = new CoffeeDetailsFragment();
+                activity.getSupportFragmentManager().beginTransaction().replace(R.id.containerMainPage,coffeeDetailsFragment).addToBackStack(null).commit();
+//                Intent intent = new Intent(holder.itemView.getContext(), CoffeeDetailsActivity.class);
+//                holder.itemView.getContext().startActivity(intent);
             }
         });
 

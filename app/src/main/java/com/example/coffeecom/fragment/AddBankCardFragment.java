@@ -37,8 +37,6 @@ public class AddBankCardFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-
-
         View view = inflater.inflate(R.layout.activity_add_bank_card,container,false);
 
         addCardBtn.setOnClickListener(new View.OnClickListener() {

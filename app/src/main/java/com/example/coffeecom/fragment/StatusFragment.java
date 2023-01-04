@@ -1,6 +1,5 @@
 package com.example.coffeecom.fragment;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,11 +7,11 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import com.example.coffeecom.Provider;
 import com.example.coffeecom.R;
-import com.example.coffeecom.activity.StatusActivity;
 
 
 public class StatusFragment extends Fragment {
@@ -40,7 +39,12 @@ public class StatusFragment extends Fragment {
             @Override
             public void onClick(View view) {
 //                finish();
-                startActivity(new Intent(getContext(), Provider.getRedirectedCls().getClass()));
+                //what fragment should i redirect this to ?
+//                startActivity(new Intent(getContext(), Provider.getRedirectedCls().getClass()));
+
+                AppCompatActivity activity = (AppCompatActivity) view.getContext();
+                WalletFragment walletFragment = new WalletFragment();
+                activity.getSupportFragmentManager().beginTransaction().replace(R.id.containerMainPage,walletFragment).addToBackStack(null).commit();
             }
         });
 
