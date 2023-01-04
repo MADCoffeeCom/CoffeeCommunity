@@ -18,6 +18,15 @@ public class Provider{
     private static String currentBaristaId;
     private static String currentCoffeeId;
     private static ProfileModel user;
+    private static String ipAddress = "10.167.58.200";
+
+    public static String getIpAddress() {
+        return ipAddress;
+    }
+
+    public static void setIpAddress(String ipAddress) {
+        Provider.ipAddress = ipAddress;
+    }
 
 
     private static ArrayList<TransactionModel> transactions = new ArrayList<>();
@@ -25,6 +34,8 @@ public class Provider{
     public static ArrayList<CoffeeModel> getCoffees() {
         return coffees;
     }
+
+
 
     public static void addCoffee(CoffeeModel coffee) {
         Provider.coffees.add(coffee);

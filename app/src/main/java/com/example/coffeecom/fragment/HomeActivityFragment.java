@@ -58,7 +58,8 @@ public class HomeActivityFragment extends Fragment {
         handler.post(new Runnable() {
             @Override
             public void run() {
-                FetchData fetchData = new FetchData("http://192.168.56.1/CoffeeCommunityPHP/profile.php");
+                FetchData fetchData = new FetchData("http://10.167.58.200/CoffeeCommunityPHP/profile.php");
+
                 if (fetchData.startFetch()) {
                     if (fetchData.onComplete()) {
                         String result = fetchData.getResult();
@@ -105,7 +106,8 @@ public class HomeActivityFragment extends Fragment {
         handler.post(new Runnable() {
             @Override
             public void run() {
-                FetchData fetchData = new FetchData("http://192.168.56.1/CoffeeCommunityPHP/coffee.php");
+                FetchData fetchData = new FetchData("http://10.167.58.200/CoffeeCommunityPHP/coffee.php");
+
                 if (fetchData.startFetch()) {
                     if (fetchData.onComplete()) {
                         String result = fetchData.getResult();
@@ -148,7 +150,8 @@ public class HomeActivityFragment extends Fragment {
         handler.post(new Runnable() {
             @Override
             public void run() {
-                FetchData fetchData = new FetchData("http://192.168.56.1/CoffeeCommunityPHP/barista.php");
+                FetchData fetchData = new FetchData("http://10.167.58.200/CoffeeCommunityPHP/barista.php");
+
                 if (fetchData.startFetch()) {
                     if (fetchData.onComplete()) {
                         String result = fetchData.getResult();
