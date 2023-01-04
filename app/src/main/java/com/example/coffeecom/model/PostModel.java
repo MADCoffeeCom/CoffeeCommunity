@@ -3,7 +3,7 @@ package com.example.coffeecom.model;
 public class PostModel {
     private int postId;
     private int upVote, downVote;
-    private String senderId, senderName, postDesc, postPic;
+    private String senderId, senderName, postDesc, postPic, postDateTime, postTitle;
 
     public PostModel(int postId, int upVote, int downVote, String senderId, String senderName, String postDesc, String postPic) {
         this.postId = postId;
@@ -22,6 +22,32 @@ public class PostModel {
         this.senderName = senderName;
         this.postDesc = postDesc;
         this.postPic = postPic;
+    }
+
+
+    //for profile page summary
+    public PostModel(String postDateTime, String postPic, String postTitle, int upVote, int downVote){
+        this.postDateTime = postDateTime;
+        this.postPic = postPic;
+        this.postTitle = postTitle;
+        this.upVote = upVote;
+        this.downVote = downVote;
+    }
+
+    public String getPostDateTime() {
+        return postDateTime;
+    }
+
+    public void setPostDateTime(String postDateTime) {
+        this.postDateTime = postDateTime;
+    }
+
+    public String getPostTitle() {
+        return postTitle;
+    }
+
+    public void setPostTitle(String postTitle) {
+        this.postTitle = postTitle;
     }
 
     public int getPostId() {

@@ -13,6 +13,7 @@ public class OrderModel {
     private String userId;
     private ArrayList<CoffeeModel> orderedCoffee;
     private String orderStatus; //pending, accepted, declined
+    private String orderHistoryDateTime, orderHistoryImage, orderHistoryTotalItems;
 
     public OrderModel(String orderId, Date orderStartTime, double orderTotalPrice, String baristaId, String userId, ArrayList<CoffeeModel> orderedCoffee) {
         this.orderId = orderId;
@@ -21,6 +22,38 @@ public class OrderModel {
         this.baristaId = baristaId;
         this.userId = userId;
         this.orderedCoffee = orderedCoffee;
+    }
+
+    //this is for Order History in Profile Page
+    public OrderModel(String orderHistoryDateTime, String orderHistoryImage, double orderTotalPrice, String orderHistoryTotalItems) {
+        this.orderHistoryDateTime = orderHistoryDateTime;
+        this.orderHistoryImage = orderHistoryImage;
+        this.orderTotalPrice = orderTotalPrice;
+        this.orderHistoryTotalItems = orderHistoryTotalItems;
+    }
+
+    public String getOrderHistoryDateTime() {
+        return orderHistoryDateTime;
+    }
+
+    public void setOrderHistoryDateTime(String orderHistoryDateTime) {
+        this.orderHistoryDateTime = orderHistoryDateTime;
+    }
+
+    public String getOrderHistoryImage() {
+        return orderHistoryImage;
+    }
+
+    public void setOrderHistoryImage(String orderHistoryImage) {
+        this.orderHistoryImage = orderHistoryImage;
+    }
+
+    public String getOrderHistoryTotalItems() {
+        return orderHistoryTotalItems;
+    }
+
+    public void setOrderHistoryTotalItems(String orderHistoryTotalItems) {
+        this.orderHistoryTotalItems = orderHistoryTotalItems;
     }
 
     public String getOrderId() {
