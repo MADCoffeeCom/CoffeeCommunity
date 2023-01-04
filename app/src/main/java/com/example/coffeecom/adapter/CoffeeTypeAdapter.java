@@ -1,5 +1,7 @@
 package com.example.coffeecom.adapter;
 
+import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,7 +13,10 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.coffeecom.Provider;
 import com.example.coffeecom.R;
+import com.example.coffeecom.activity.BaristaListActivity;
+import com.example.coffeecom.activity.CoffeeListActivity;
 import com.example.coffeecom.model.CoffeeModel;
 
 import java.util.ArrayList;
@@ -62,6 +67,10 @@ public class CoffeeTypeAdapter extends RecyclerView.Adapter<CoffeeTypeAdapter.Vi
             @Override
             public void onClick(View view) {
                 //input code here to open details coffee page
+                Log.i("Coffeetype in adapter", coffeeType.get(position));
+                Provider.setCurrentCoffeeType(coffeeType.get(position));
+                Intent intent = new Intent(holder.itemView.getContext(), CoffeeListActivity.class);
+                holder.itemView.getContext().startActivity(intent);
 
             }
         });

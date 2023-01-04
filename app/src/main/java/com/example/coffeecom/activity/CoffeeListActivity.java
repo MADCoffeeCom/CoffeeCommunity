@@ -5,6 +5,10 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.widget.ImageButton;
+import android.widget.TextView;
 
 import com.example.coffeecom.Provider;
 import com.example.coffeecom.R;
@@ -20,11 +24,24 @@ public class CoffeeListActivity extends AppCompatActivity {
     private RecyclerView.Adapter coffeeListInBaristaAdapter;
     ArrayList<CoffeeModel> coffeesWithType = new ArrayList<>();
     ArrayList<BaristaModel> baristaWithCoffee = new ArrayList<>();
+    TextView coffeeTypeText;
+    ImageButton backBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_coffee_list);
+        backBtn = findViewById(R.id.backBtn);
+        coffeeTypeText = findViewById(R.id.coffeeTypeText);
+
+        coffeeTypeText.setText(Provider.getCurrentCoffeeType());
+        backBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+
+        });
 
         getCoffeeTogetherWithBaristas();
         recyclerViewCoffee();
@@ -41,16 +58,15 @@ public class CoffeeListActivity extends AppCompatActivity {
 
     private void getCoffeeTogetherWithBaristas(){
         String currentCoffeeType = Provider.getCurrentCoffeeType();
-
         for (int i = 0; i < Provider.getCoffees().size(); i++) {
-            if (Provider.getCoffees().get(i).getCoffeeType().equals(currentCoffeeType)){
+            if (!Provider.getCoffees().get(i).getCoffeeType().equals(currentCoffeeType)){
                 coffeesWithType.add(Provider.getCoffees().get(i));
             }
         }
 
         for (int i = 0; i < coffeesWithType.size(); i++) {
             for (int j = 0; j < Provider.getBaristas().size(); j++) {
-                if (coffeesWithType.get(i).getBaristaId().equals(Provider.getBaristas().get(j).getUserId())){
+                if (!coffeesWithType.get(i).getBaristaId().equals(Provider.getBaristas().get(j).getUserId())){
                     baristaWithCoffee.add(Provider.getBaristas().get(j));
                 }
             }

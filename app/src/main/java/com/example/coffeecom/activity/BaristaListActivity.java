@@ -20,8 +20,9 @@ import com.example.coffeecom.Provider;
 import com.example.coffeecom.R;
 import com.example.coffeecom.adapter.CoffeeBaristaListAdapter;
 import com.example.coffeecom.model.CoffeeModel;
-import com.vishnusivadas.advanced_httpurlconnection.FetchData;
 import com.vishnusivadas.advanced_httpurlconnection.PutData;
+
+import java.util.ArrayList;
 
 public class BaristaListActivity extends AppCompatActivity {
 
@@ -51,6 +52,8 @@ public class BaristaListActivity extends AppCompatActivity {
                 currentBaristaIndex = i;
             }
         }
+
+
 
         baristaListName.setText(toTitleCase(Provider.getBaristas().get(currentBaristaIndex).getUserName()));
         baristaListLocation.setText(Provider.getBaristas().get(currentBaristaIndex).getUserTaman());
@@ -92,40 +95,41 @@ public class BaristaListActivity extends AppCompatActivity {
                 String[] data = new String[1];
                 data[0] = Provider.getBaristas().get(currentBaristaIndex).getBaristaId();
 
-                PutData putData = new PutData("http://192.168.56.1/CoffeeCommunityPHP/coffeeinbarista.php", "POST", field, data);
+                PutData putData = new PutData("http://192.168.56.1/CoffeeCommunityPHP/coffeesoldbybarista.php", "POST", field, data);
 
 //                FetchData fetchData = new FetchData("http://192.168.56.1/CoffeeCommunityPHP/coffeeinbarista.php");
                 if (putData.startPut()) {
                     if (putData.onComplete()) {
                         String result = putData.getResult();
                         String[] resultSplitted = result.split("split");
-//                            Log.i("BaristaList - Add Selling Coffee", String.valueOf(resultSplitted[0]));
-
                         for (String str: resultSplitted) {
-                            String[] baristaDetails = str.split(" - ");
-                            String coffeeId = baristaDetails[0];
-                            String coffeePic = baristaDetails[1];
-                            String coffeeTitle = baristaDetails[2];
-                            String coffeeDesc = baristaDetails[3];
-                            double coffeePrice = Double.parseDouble(baristaDetails[4]);
-
-                            CoffeeModel coffee = new CoffeeModel(coffeeId, coffeePic, coffeeTitle, coffeeDesc, coffeePrice);
-                            Provider.getBaristas().get(currentBaristaIndex).addSellingCoffee(coffee);
+                            String coffeeId = str;
+                            Provider.getBaristas().get(currentBaristaIndex).addSellingCoffeeId(coffeeId);
                             Log.i("BaristaList - Add Selling Coffee", " success");
                         }
                     }
-                    recyclerViewCoffee();
+                    //Query for coffee sold by barista and pass into recyclerview
+
+                    ArrayList<CoffeeModel> sellingCoffee = new ArrayList<>();
+                    for (int i = 0; i < Provider.getCoffees().size(); i++) {
+                        for (int j = 0; j < Provider.getBaristas().get(currentBaristaIndex).getSellingCoffeeId().size(); j++) {
+                            if (Provider.getCoffees().get(i).getCoffeeId().equals(Provider.getBaristas().get(currentBaristaIndex).getSellingCoffeeId().get(j))) {
+                                sellingCoffee.add(Provider.getCoffees().get(i));
+                            }
+                        }
+                    }
+                    recyclerViewCoffee(sellingCoffee);
                 }
             }
         });
     }
 
-    private void recyclerViewCoffee() {
+    private void recyclerViewCoffee(ArrayList<CoffeeModel> sellingCoffee) {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         baristaListRecyclerView = findViewById(R.id.coffeeListInBaristaRecyclerView);
         baristaListRecyclerView.setLayoutManager(linearLayoutManager);
 
-        coffeeListInBaristaAdapter = new CoffeeBaristaListAdapter(Provider.getBaristas().get(currentBaristaIndex), 'b');
+        coffeeListInBaristaAdapter = new CoffeeBaristaListAdapter(Provider.getBaristas().get(currentBaristaIndex), sellingCoffee,'b');
         baristaListRecyclerView.setAdapter(coffeeListInBaristaAdapter);
     }
 }

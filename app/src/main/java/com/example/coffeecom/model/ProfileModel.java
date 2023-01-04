@@ -23,11 +23,11 @@ public class ProfileModel {
     private String walletPin;
     private double walletBalance;
 
+    private ArrayList<String> sellingCoffeeId = new ArrayList<>();
     private ArrayList<OrderModel> orderedHistory = new ArrayList<>();
     private ArrayList<OrderModel> brewedHistory = new ArrayList<>();
     private ArrayList<PostModel> postedPost = new ArrayList<>();
     private ArrayList<BankCardModel> bankCard = new ArrayList<>();
-    private ArrayList<CoffeeModel> sellingCoffee = new ArrayList<>();
     private ArrayList<OrderModel> pendingOrder = new ArrayList<>();
 
 
@@ -38,13 +38,13 @@ public class ProfileModel {
     public ProfileModel() {
     }
 
-    public ProfileModel(String baristaId, String userPic, String userStreetNo, String userTaman, int userPostalCode, ArrayList<CoffeeModel> sellingCoffee) {
+    public ProfileModel(String baristaId, String userPic, String userStreetNo, String userTaman, int userPostalCode, ArrayList<String> sellingCoffee) {
         this.baristaId = baristaId;
         this.userStreetNo = userStreetNo;
         this.userPic = userPic;
         this.userTaman = userTaman;
         this.userPostalCode = userPostalCode;
-        this.sellingCoffee = sellingCoffee;
+        this.sellingCoffeeId = sellingCoffee;
     }
 
     public void setUserDetails(String userPic, String userId, String username, String email, String userRole, String userStreetNo, String userTaman, int userPostalCode, String userState, String walletId, String walletPin, double walletBalance) {
@@ -195,12 +195,12 @@ public class ProfileModel {
         bankCard.add(card);
     }
 
-    public ArrayList<CoffeeModel> getSellingCoffee() {
-        return sellingCoffee;
+    public ArrayList<String> getSellingCoffeeId() {
+        return sellingCoffeeId;
     }
 
-    public void addSellingCoffee(CoffeeModel coffee) {
-        sellingCoffee.add(coffee);
+    public void addSellingCoffeeId(String coffee) {
+        sellingCoffeeId.add(coffee);
     }
 
     public ArrayList<OrderModel> getPendingOrder() {
