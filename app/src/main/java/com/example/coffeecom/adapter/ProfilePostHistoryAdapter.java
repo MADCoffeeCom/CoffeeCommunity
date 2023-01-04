@@ -10,7 +10,8 @@ import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.coffeecom.model.ProfilePostHistoryModel;
+import com.bumptech.glide.Glide;
+import com.example.coffeecom.model.PostModel;
 import com.example.coffeecom.R;
 
 public class ProfilePostHistoryAdapter extends RecyclerView.Adapter<ProfilePostHistoryAdapter.ViewHolder> {
@@ -18,9 +19,9 @@ public class ProfilePostHistoryAdapter extends RecyclerView.Adapter<ProfilePostH
     // 1 - Data Source
     // Currently use dummy data
 
-    private ProfilePostHistoryModel[] myPostList;
+    private PostModel[] myPostList;
 
-    public ProfilePostHistoryAdapter (ProfilePostHistoryModel[] myPostList){
+    public ProfilePostHistoryAdapter (PostModel[] myPostList){
         this.myPostList = myPostList;
     }
 
@@ -41,7 +42,7 @@ public class ProfilePostHistoryAdapter extends RecyclerView.Adapter<ProfilePostH
             this.postTitle = itemView.findViewById(R.id.txtPostHistoryTitle);
             this.postLikes = itemView.findViewById(R.id.txtPostTotalLikes);
             this.postDislikes = itemView.findViewById(R.id.txtPostTotalDislikes);
-            this.postComments = itemView.findViewById(R.id.txtPostTotalComments);
+//            this.postComments = itemView.findViewById(R.id.txtPostTotalComments);
 
 //            itemView.setOnClickListener((View.OnClickListener) this);
         }
@@ -62,13 +63,15 @@ public class ProfilePostHistoryAdapter extends RecyclerView.Adapter<ProfilePostH
     @Override
     public void onBindViewHolder(@NonNull ProfilePostHistoryAdapter.ViewHolder holder, int position) {
 
-        final ProfilePostHistoryModel myPostListData = myPostList[position];
+        final PostModel myPostListData = myPostList[position];
         holder.postDateTime.setText((CharSequence) myPostList[position].getPostDateTime());
         holder.postTitle.setText(myPostList[position].getPostTitle());
-        holder.postLikes.setText(String.valueOf(myPostList[position].getPostTotalLikes()));
-        holder.postDislikes.setText(String.valueOf(myPostList[position].getPostTotalDislikes()));
-        holder.postComments.setText(String.valueOf(myPostList[position].getPostTotalComments()));
-        holder.postImage.setImageResource(myPostList[position].getPostImage());
+        holder.postLikes.setText(String.valueOf(myPostList[position].getUpVote()));
+        holder.postDislikes.setText(String.valueOf(myPostList[position].getDownVote()));
+//        holder.postComments.setText(String.valueOf(myPostList[position].getPostTotalComments()));
+//        holder.postImage.setImageResource(myPostList[position].getPostPic());
+        int drawableResourceId = holder.itemView.getContext().getResources().getIdentifier(myPostList[position].getPostPic(),"drawable",holder.itemView.getContext().getPackageName());
+        Glide.with(holder.itemView.getContext()).load(drawableResourceId).into(holder.postImage);
 
 //        holder.postHistoryCard.setOnClickListener(new View.OnClickListener() {
 //            @Override

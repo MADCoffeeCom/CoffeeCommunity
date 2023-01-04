@@ -10,17 +10,20 @@ import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.coffeecom.model.ProfileOrderHistoryModel;
+import com.bumptech.glide.Glide;
+import com.example.coffeecom.model.OrderModel;
 import com.example.coffeecom.R;
+
+import java.text.DecimalFormat;
 
 public class ProfileOrderHistoryAdapter extends RecyclerView.Adapter<ProfileOrderHistoryAdapter.ViewHolder> {
 
     // 1 - Data Source
     // Currently use dummy data
 
-    private ProfileOrderHistoryModel[] myOrderList;
+    private OrderModel[] myOrderList;
 
-    public ProfileOrderHistoryAdapter(ProfileOrderHistoryModel[] myOrderList){
+    public ProfileOrderHistoryAdapter(OrderModel[] myOrderList){
         this.myOrderList = myOrderList;
     }
 
@@ -61,11 +64,17 @@ public class ProfileOrderHistoryAdapter extends RecyclerView.Adapter<ProfileOrde
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
-        final ProfileOrderHistoryModel myOrderListData = myOrderList[position];
-        holder.orderTotalPrice.setText(myOrderList[position].getOrderHistoryTotalPrice());
-        holder.orderAmount.setText(myOrderList[position].getOrderHistoryAmount());
+        final OrderModel myOrderListData = myOrderList[position];
+
+        //To format the double decimal, to prevent the 00 to be eaten
+        DecimalFormat df = new DecimalFormat(".00");
+
+        holder.orderTotalPrice.setText("RM"+ df.format(myOrderList[position].getOrderTotalPrice()));
+        holder.orderAmount.setText(myOrderList[position].getOrderHistoryTotalItems());
         holder.orderDateTime.setText(myOrderList[position].getOrderHistoryDateTime());
-        holder.orderImage.setImageResource(myOrderList[position].getOrderHistoryImage());
+
+        int drawableResourceId = holder.itemView.getContext().getResources().getIdentifier(myOrderList[position].getOrderHistoryImage(),"drawable",holder.itemView.getContext().getPackageName());
+        Glide.with(holder.itemView.getContext()).load(drawableResourceId).into(holder.orderImage);
 
 //        holder.orderHistoryCard.setOnClickListener(new View.OnClickListener() {
 //            @Override

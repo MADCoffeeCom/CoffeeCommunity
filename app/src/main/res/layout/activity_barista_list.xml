@@ -19,7 +19,7 @@
         app:srcCompat="@drawable/barista1" />
 
     <ImageButton
-        android:id="@+id/baristaListBackBtn"
+        android:id="@+id/backBtn"
         android:layout_width="48dp"
         android:layout_height="48dp"
         android:layout_marginTop="24dp"
@@ -34,9 +34,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="barista name"
-        app:layout_constraintBottom_toBottomOf="@+id/baristaListBackBtn"
-        app:layout_constraintStart_toEndOf="@+id/baristaListBackBtn"
-        app:layout_constraintTop_toTopOf="@+id/baristaListBackBtn" />
+        app:layout_constraintBottom_toBottomOf="@+id/backBtn"
+        app:layout_constraintStart_toEndOf="@+id/backBtn"
+        app:layout_constraintTop_toTopOf="@+id/backBtn" />
 
     <ImageButton
         android:id="@+id/baristaListChatBtn"

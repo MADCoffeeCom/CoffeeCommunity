@@ -4,22 +4,29 @@ import java.util.ArrayList;
 
 public class BaristaModel extends ProfileModel{
 
-    private String baristaId;
     private String baristaDesc;
+    private int yearsOfExperience;
     private ArrayList<BaristaRatingModel> ratings;
-    private ArrayList<CoffeeModel> sellingCoffee;
 
-    public BaristaModel(String username, String email, String password, String userRole, String baristaId,String baristaDesc, ArrayList<BaristaRatingModel> ratings, ArrayList<CoffeeModel> sellingCoffee) {
-        super(username, email, password, userRole);
-        this.baristaId = baristaId;
+
+    public BaristaModel(String userPic, String userStreetNo, String userTaman, int userPostalCode, ArrayList<CoffeeModel> sellingCoffee, String baristaId, String baristaDesc, int yearsOfExperience, ArrayList<BaristaRatingModel> ratings) {
+        super(baristaId, userPic, userStreetNo, userTaman, userPostalCode, sellingCoffee);
+        this.yearsOfExperience = yearsOfExperience;
         this.baristaDesc = baristaDesc;
         this.ratings = ratings;
-        this.sellingCoffee = sellingCoffee;
     }
 
-    public String getBaristaId() {
-        return baristaId;
+    public BaristaModel(String baristaId, String pic, String userName, String baristaDesc, String userTaman, String userLocation) {
+        super(baristaId, pic, userName, userTaman, userLocation);
+        this.baristaDesc = baristaDesc;
     }
+
+
+
+    public BaristaModel(String userId) {
+        super(userId);
+    }
+
 
     public String getBaristaDesc() {
         return baristaDesc;
@@ -37,25 +44,13 @@ public class BaristaModel extends ProfileModel{
         this.ratings = ratings;
     }
 
-    public ArrayList<CoffeeModel> getSellingCoffee() {
-        return sellingCoffee;
+
+    public int getYearsOfExperience() {
+        return yearsOfExperience;
     }
 
-    public void setSellingCoffee(ArrayList<CoffeeModel> sellingCoffee) {
-        this.sellingCoffee = sellingCoffee;
+    public void setYearsOfExperience(int yearsOfExperience) {
+        this.yearsOfExperience = yearsOfExperience;
     }
 
-    public void setBaristaId(String baristaId) {
-        this.baristaId = baristaId;
-    }
-
-    @Override
-    public String toString() {
-        return "BaristaModel{" +
-                "baristaId='" + baristaId + '\'' +
-                ", baristaDesc='" + baristaDesc + '\'' +
-                ", ratings=" + ratings +
-                ", sellingCoffee=" + sellingCoffee +
-                '}';
-    }
 }

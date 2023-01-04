@@ -12,6 +12,8 @@ import com.example.coffeecom.R;
 import com.example.coffeecom.model.BankCardModel;
 import com.google.android.material.badge.BadgeUtils;
 
+import java.util.Scanner;
+
 public class AddBankCardActivity extends AppCompatActivity {
 
     TextView cardNumberTextBox, nameOnCardTextBox, ccvTextBox, expiryDateTextBox, bankNameText;

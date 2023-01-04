@@ -10,17 +10,20 @@ import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.coffeecom.model.ProfileBrewHistoryModel;
+import com.bumptech.glide.Glide;
+import com.example.coffeecom.model.OrderModel;
 import com.example.coffeecom.R;
+
+import java.text.DecimalFormat;
 
 public class ProfileBrewHistoryAdapter extends RecyclerView.Adapter<ProfileBrewHistoryAdapter.ViewHolder> {
 
     // 1 - Data Source
     // Currently use dummy data
 
-    private ProfileBrewHistoryModel[] myBrewList;
+    private OrderModel[] myBrewList;
 
-    public ProfileBrewHistoryAdapter(ProfileBrewHistoryModel[] myBrewList){
+    public ProfileBrewHistoryAdapter(OrderModel[] myBrewList){
         this.myBrewList = myBrewList;
     }
 
@@ -61,11 +64,17 @@ public class ProfileBrewHistoryAdapter extends RecyclerView.Adapter<ProfileBrewH
     @Override
     public void onBindViewHolder(@NonNull ProfileBrewHistoryAdapter.ViewHolder holder, int position) {
 
-        final ProfileBrewHistoryModel myOrderListData = myBrewList[position];
-        holder.brewTotalPrice.setText(myBrewList[position].getBrewHistoryTotalPrice());
-        holder.brewAmount.setText(myBrewList[position].getBrewHistoryAmount());
-        holder.brewDateTime.setText((CharSequence) myBrewList[position].getBrewHistoryDateTime());
-        holder.brewImage.setImageResource(myBrewList[position].getBrewHistoryImage());
+        final OrderModel myBrewListData = myBrewList[position];
+
+        //To format the double decimal, to prevent the 00 to be eaten
+        DecimalFormat df = new DecimalFormat(".00");
+
+        holder.brewTotalPrice.setText("RM"+ df.format(myBrewList[position].getOrderTotalPrice()));
+        holder.brewAmount.setText(myBrewList[position].getOrderHistoryTotalItems());
+        holder.brewDateTime.setText((CharSequence) myBrewList[position].getOrderHistoryDateTime());
+
+        int drawableResourceId = holder.itemView.getContext().getResources().getIdentifier(myBrewList[position].getOrderHistoryImage(),"drawable",holder.itemView.getContext().getPackageName());
+        Glide.with(holder.itemView.getContext()).load(drawableResourceId).into(holder.brewImage);
 
 //        holder.brewHistoryCard.setOnClickListener(new View.OnClickListener() {
 //            @Override

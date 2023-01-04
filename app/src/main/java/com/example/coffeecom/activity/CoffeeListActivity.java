@@ -50,7 +50,7 @@ public class CoffeeListActivity extends AppCompatActivity {
 
         for (int i = 0; i < coffeesWithType.size(); i++) {
             for (int j = 0; j < Provider.getBaristas().size(); j++) {
-                if (coffeesWithType.get(i).getUserId().equals(Provider.getBaristas().get(j).getUserId())){
+                if (coffeesWithType.get(i).getBaristaId().equals(Provider.getBaristas().get(j).getUserId())){
                     baristaWithCoffee.add(Provider.getBaristas().get(j));
                 }
             }

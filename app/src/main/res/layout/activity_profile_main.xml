@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".activity.ProfileMainActivity"
+    tools:context=".fragment.ProfileMainFragment"
     android:background="#0C1015"
     android:layout_height="match_parent">
 
@@ -50,11 +50,11 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-            <include
-                android:id="@+id/include"
-                layout="@layout/coffee_wallet"
+            <androidx.fragment.app.FragmentContainerView
+                android:id="@+id/fragmentContainerView2"
+                android:name="com.example.coffeecom.fragment.CoffeeWalletFragment"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="56dp"
                 android:layout_marginStart="24dp"
                 android:layout_marginTop="5dp"
                 android:layout_marginEnd="24dp" />

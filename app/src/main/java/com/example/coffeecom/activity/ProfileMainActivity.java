@@ -4,7 +4,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -13,10 +12,9 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.coffeecom.model.ProfileBrewHistoryModel;
-import com.example.coffeecom.model.ProfileOrderHistoryModel;
+import com.example.coffeecom.model.OrderModel;
+import com.example.coffeecom.model.PostModel;
 import com.example.coffeecom.adapter.ProfilePostHistoryAdapter;
-import com.example.coffeecom.model.ProfilePostHistoryModel;
 import com.example.coffeecom.R;
 import com.example.coffeecom.adapter.ProfileBrewHistoryAdapter;
 import com.example.coffeecom.adapter.ProfileOrderHistoryAdapter;
@@ -26,25 +24,22 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-//still lack of top up function
 //lack of edit profile button function
 //lack onclick to each history page
 //lack general button onclick
 
 public class ProfileMainActivity extends AppCompatActivity {
 
-    private TextView txtProfileName, txtProfileType, txtWalletBalance;
+    private TextView txtProfileName, txtProfileType;
     private ImageView imgBarista;
     private RecyclerView orderListRV, brewListRV, postListRV;
     private ImageButton btnEditProfile;
-    private Button btnTopUp;
     private ConstraintLayout btnTerms, btnPrivacy, btnBankCard, btnHelpDesk, btnFeedback, btnLogOut;
 
     //data source for recycle view
     //maybe after this retrieve from SQL, currently just dummy
-    ProfileOrderHistoryModel[] myOrderHistoryList;
-    ProfileBrewHistoryModel[] myBrewHistoryList;
-    ProfilePostHistoryModel[] myPostHistoryList;
+    OrderModel[] myOrderHistoryList, myBrewHistoryList;
+    PostModel[] myPostHistoryList;
 
     //Adapter
     ProfileOrderHistoryAdapter orderAdapter;
@@ -58,11 +53,9 @@ public class ProfileMainActivity extends AppCompatActivity {
 
         txtProfileName = findViewById(R.id.textViewProfileName);
         txtProfileType = findViewById(R.id.textViewProfileType);
-        txtWalletBalance = findViewById(R.id.balanceAmount);
 
         btnEditProfile = findViewById(R.id.imageButtonProfileEdit);
 
-//        btnTopUp = findViewById(R.id.button2);
         btnTerms = findViewById(R.id.btnProfile1);
         btnPrivacy = findViewById(R.id.btnProfile2);
         btnBankCard = findViewById(R.id.btnProfile3);
@@ -89,25 +82,25 @@ public class ProfileMainActivity extends AppCompatActivity {
         String strDate = dateFormat.format(date);
 
         //dummydata to test all recycle view
-        myOrderHistoryList = new ProfileOrderHistoryModel[]{
-                new ProfileOrderHistoryModel(strDate,R.drawable.barista1,"RM25.00","(2 items)"),
-                new ProfileOrderHistoryModel(strDate,R.drawable.barista1,"RM23.00","(4 items)"),
-                new ProfileOrderHistoryModel(strDate,R.drawable.barista1,"RM12.54","(7 items)"),
-                new ProfileOrderHistoryModel(strDate,R.drawable.barista1,"RM212.24","(1 item)")
+        myOrderHistoryList = new OrderModel[]{
+                new OrderModel(strDate,"coffee1",25.00,"(2 items)"),
+                new OrderModel(strDate,"beans",21.00,"(4 items)"),
+                new OrderModel(strDate,"barista1",12.54,"(7 items)"),
+                new OrderModel(strDate,"barista2",13.59,"(1 item)")
         };
 
-        myBrewHistoryList = new ProfileBrewHistoryModel[]{
-                new ProfileBrewHistoryModel(strDate,R.drawable.barista1,"RM25.00","(2 items)"),
-                new ProfileBrewHistoryModel(strDate,R.drawable.barista1,"RM23.00","(4 items)"),
-                new ProfileBrewHistoryModel(strDate,R.drawable.barista1,"RM12.54","(7 items)"),
-                new ProfileBrewHistoryModel(strDate,R.drawable.barista1,"RM212.24","(1 item)")
+        myBrewHistoryList = new OrderModel[]{
+                new OrderModel(strDate,"barista2",2.00,"(2 items)"),
+                new OrderModel(strDate,"beans",300.00,"(4 items)"),
+                new OrderModel(strDate,"barista1",140.54,"(7 items)"),
+                new OrderModel(strDate,"barista2",13.59,"(1 item)")
         };
 
-        myPostHistoryList = new ProfilePostHistoryModel[]{
-                new ProfilePostHistoryModel(strDate,R.drawable.barista1,"Jason So Handsome",12,0,2),
-                new ProfilePostHistoryModel(strDate,R.drawable.barista1,"KY So Handsome",10,0,2),
-                new ProfilePostHistoryModel(strDate,R.drawable.barista1,"GM So Handsome",0,15,2),
-                new ProfilePostHistoryModel(strDate,R.drawable.barista1,"YY So Handsome",5,7,2),
+        myPostHistoryList = new PostModel[]{
+                new PostModel(strDate,"coffee1","Jason So Handsome",12,0),
+                new PostModel(strDate,"beans","KY So Handsome",10,0),
+                new PostModel(strDate,"barista1","GM So Handsome",0,15),
+                new PostModel(strDate,"barista2","YY So Handsome",5,7),
 
         };
 
@@ -125,6 +118,8 @@ public class ProfileMainActivity extends AppCompatActivity {
         orderListRV.setAdapter(orderAdapter);
         brewListRV.setAdapter(brewAdapter);
         postListRV.setAdapter(postAdapter);
+
+
 
     }
 }

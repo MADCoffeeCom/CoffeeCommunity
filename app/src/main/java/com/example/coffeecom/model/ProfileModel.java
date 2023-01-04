@@ -4,9 +4,12 @@ import java.util.ArrayList;
 
 public class ProfileModel {
 
-    private String userPic;
     private String userId;
-    private String userName, email, password;
+    private String baristaId;
+    private String adminId;
+
+    private String userPic;
+    private String userName, email;
     private String userRole;
 
     private String userStreetNo;
@@ -14,41 +17,58 @@ public class ProfileModel {
     private int userPostalCode;
     private String userState;
 
-    private int walletPin;
+    private String userLocation;
+
+    private String walletId;
+    private String walletPin;
     private double walletBalance;
 
-    ArrayList<OrderModel> orderedHistory = new ArrayList<>();
-    ArrayList<OrderModel> brewedHistory = new ArrayList<>();
-    ArrayList<PostModel> postedPost = new ArrayList<>();
-    ArrayList<BankCardModel> bankCard = new ArrayList<>();
-    ArrayList<CoffeeModel> sellingCoffee = new ArrayList<>();
-    ArrayList<OrderModel> pendingOrder = new ArrayList<>();
-//    ArrayList<TransactionModel> transactionHistories = new ArrayList<>();
+    private ArrayList<OrderModel> orderedHistory = new ArrayList<>();
+    private ArrayList<OrderModel> brewedHistory = new ArrayList<>();
+    private ArrayList<PostModel> postedPost = new ArrayList<>();
+    private ArrayList<BankCardModel> bankCard = new ArrayList<>();
+    private ArrayList<CoffeeModel> sellingCoffee = new ArrayList<>();
+    private ArrayList<OrderModel> pendingOrder = new ArrayList<>();
 
-    public ProfileModel(String userPic, String userId, String username, String email, String password, String userRole, String userStreetNo, String userTaman, int userPostalCode, String userState, int walletPin, double walletBalance, ArrayList<OrderModel> orderedHistory, ArrayList<OrderModel> brewedHistory, ArrayList<PostModel> postedPost, ArrayList<BankCardModel> bankCard) {
+
+    public ProfileModel(String a) {
+        this.userId = a;
+    }
+
+    public ProfileModel() {
+    }
+
+    public ProfileModel(String baristaId, String userPic, String userStreetNo, String userTaman, int userPostalCode, ArrayList<CoffeeModel> sellingCoffee) {
+        this.baristaId = baristaId;
+        this.userStreetNo = userStreetNo;
+        this.userPic = userPic;
+        this.userTaman = userTaman;
+        this.userPostalCode = userPostalCode;
+        this.sellingCoffee = sellingCoffee;
+    }
+
+    public void setUserDetails(String userPic, String userId, String username, String email, String userRole, String userStreetNo, String userTaman, int userPostalCode, String userState, String walletId, String walletPin, double walletBalance) {
         this.userPic = userPic;
         this.userId = userId;
         this.userName = username;
         this.email = email;
-        this.password = password;
         this.userRole = userRole;
         this.userStreetNo = userStreetNo;
         this.userTaman = userTaman;
         this.userPostalCode = userPostalCode;
         this.userState = userState;
         this.walletPin = walletPin;
+        this.walletId = walletId;
         this.walletBalance = walletBalance;
-        this.orderedHistory = orderedHistory;
-        this.brewedHistory = brewedHistory;
-        this.postedPost = postedPost;
-        this.bankCard = bankCard;
     }
 
-    public ProfileModel(String username, String email, String password, String userRole) {
-        this.userName = username;
-        this.email = email;
-        this.password = password;
-        this.userRole = userRole;
+    //for barista use
+    public ProfileModel(String baristaId, String userPic, String userName, String userTaman, String userLocation) {
+        this.baristaId = baristaId;
+        this.userPic = userPic;
+        this.userName = userName;
+        this.userTaman = userTaman;
+        this.userLocation = userLocation;
     }
 
     public String getUserPic() {
@@ -81,14 +101,6 @@ public class ProfileModel {
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 
     public String getUserRole() {
@@ -131,11 +143,11 @@ public class ProfileModel {
         this.userState = userState;
     }
 
-    public int getWalletPin() {
+    public String getWalletPin() {
         return walletPin;
     }
 
-    public void setWalletPin(int walletPin) {
+    public void setWalletPin(String walletPin) {
         this.walletPin = walletPin;
     }
 
@@ -187,8 +199,8 @@ public class ProfileModel {
         return sellingCoffee;
     }
 
-    public void setSellingCoffee(ArrayList<CoffeeModel> sellingCoffee) {
-        this.sellingCoffee = sellingCoffee;
+    public void addSellingCoffee(CoffeeModel coffee) {
+        sellingCoffee.add(coffee);
     }
 
     public ArrayList<OrderModel> getPendingOrder() {
@@ -197,5 +209,37 @@ public class ProfileModel {
 
     public void setPendingOrder(ArrayList<OrderModel> pendingOrder) {
         this.pendingOrder = pendingOrder;
+    }
+
+    public String getBaristaId() {
+        return baristaId;
+    }
+
+    public void setBaristaId(String baristaId) {
+        this.baristaId = baristaId;
+    }
+
+    public String getAdminId() {
+        return adminId;
+    }
+
+    public void setAdminId(String adminId) {
+        this.adminId = adminId;
+    }
+
+    public String getWalletId() {
+        return walletId;
+    }
+
+    public void setWalletId(String walletId) {
+        this.walletId = walletId;
+    }
+
+    public String getUserLocation() {
+        return userLocation;
+    }
+
+    public void setUserLocation(String userLocation) {
+        this.userLocation = userLocation;
     }
 }
