@@ -12,7 +12,9 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.coffeecom.Provider;
 import com.example.coffeecom.R;
+import com.example.coffeecom.model.ProfileModel;
 import com.vishnusivadas.advanced_httpurlconnection.PutData;
 
 import org.w3c.dom.Text;
@@ -52,24 +54,21 @@ public class LoginActivity extends AppCompatActivity {
                         String[] field = new String[2];
                         field[0] = "username";
                         field[1] = "password";
-                        Log.d(String.valueOf(username.getText()), "validateLogin: step 1");
 
                         //Creating array for data
                         String[] data = new String[2];
                         data[0] = username.getText().toString();
                         data[1] = passwordTextView.getText().toString();
 
-                        PutData putData = new PutData("http://192.168.56.1/CoffeeCommunity/login.php", "POST", field, data);
+                        PutData putData = new PutData("http://192.168.56.1/CoffeeCommunityPHP/login.php", "POST", field, data);
                         if (putData.startPut()) {
-                            Log.d(String.valueOf(username.getText()), "validateLogin: step 2");
 
                             if (putData.onComplete()) {
                                 String result = putData.getResult();
-                                Log.d(String.valueOf(username.getText()), "validateLogin: step 3");
+                                String[] splittedresult = result.split(" - ");
 
-                                if (result.equals("Login Success")){
-                                    Log.d(String.valueOf(username.getText()), "validateLogin: step 4");
-
+                                if (splittedresult[0].equals("Login Success")){
+                                    Provider.setUser(new ProfileModel(splittedresult[1]));
                                     Intent intent = new Intent(getApplicationContext(),HomeActivity.class);
                                     startActivity(intent);
                                     finish();

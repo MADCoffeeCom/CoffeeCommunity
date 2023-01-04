@@ -41,7 +41,7 @@ public class WalletPinActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                if(Provider.getUser().getWalletPin() == Double.parseDouble((String) pinNumberTextBox.getText())){
+                if(Integer.parseInt(Provider.getUser().getWalletPin()) == Integer.parseInt((String) pinNumberTextBox.getText())){
                     Bundle bundle = getIntent().getExtras();
                     Provider.getUser().setWalletBalance(Provider.getUser().getWalletBalance() + Integer.parseInt(bundle.getString("amount")));
 

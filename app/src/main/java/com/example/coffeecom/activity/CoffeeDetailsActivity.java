@@ -1,5 +1,7 @@
 package com.example.coffeecom.activity;
 
+import static com.example.coffeecom.helper.ToTitleCase.toTitleCase;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -12,24 +14,31 @@ import android.widget.TextView;
 
 import com.example.coffeecom.Provider;
 import com.example.coffeecom.R;
-import com.example.coffeecom.adapter.IngredientsAdapter;
 import com.example.coffeecom.adapter.RatingBarAdapter;
+import com.example.coffeecom.model.BaristaModel;
+import com.example.coffeecom.model.CoffeeModel;
 
 public class CoffeeDetailsActivity extends AppCompatActivity {
 
     private ImageView coffeeDetailsBackBtn;
-    private TextView coffeeDetailsNameText, baristaNameCoffeeDetailsText, baristaLocationCoffeeDetailsText;
+    private TextView coffeeDetailsNameText, baristaNameCoffeeDetailsText, baristaLocationCoffeeDetailsText, ingredientText;
     private TextView coffeeDescCoffeeDetailsText;
     private TextView noRatingText;
 
-    RecyclerView ratingRecyclerView, ingredientsRecyclerView;
-    RecyclerView.Adapter ratingAdapter, ingredientsAdapter;
+    RecyclerView ratingRecyclerView;
+    RecyclerView.Adapter ratingAdapter;
 
     private TextView totalPriceCoffeeDetailsText, noOfCoffeeOrderedText;
     private ImageView plusBtnCoffeeDetails, minusBtnCoffeeDetails;
     private Button addToCartBtnCoffeeDetails;
 
     int noOfOrder = 1;
+
+    int currentBaristaIndex = 0;
+    int currentCoffeeIndex = 0;
+
+    BaristaModel currentBarista;
+    CoffeeModel currentCoffee;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,13 +47,28 @@ public class CoffeeDetailsActivity extends AppCompatActivity {
 
         initializeView();
 
-        coffeeDetailsNameText.setText(Provider.getCurrentCoffee().getCoffeeTitle());
-        baristaNameCoffeeDetailsText.setText(Provider.getCurrentBarista().getUserName());
-        baristaLocationCoffeeDetailsText.setText(Provider.getCurrentBarista().getUserTaman());
-        coffeeDescCoffeeDetailsText.setText(Provider.getCurrentCoffee().getCoffeeDesc());
-        coffeeDetailsNameText.setText(Provider.getCurrentCoffee().getCoffeeTitle());
+        for (int i = 0; i < Provider.getBaristas().size(); i++) {
+            if(Provider.getBaristas().get(i).getBaristaId().equals(Provider.getCurrentBaristaId())){
+                currentBaristaIndex = i;
+                for (int j = 0; j < Provider.getBaristas().get(i).getSellingCoffee().size(); j++) {
+                    if(Provider.getBaristas().get(i).getSellingCoffee().get(j).getCoffeeId().equals(Provider.getCurrentCoffeeId())){
+                        currentCoffeeIndex = j;
+                        break;
+                    }
+                }
+            }
+        }
 
-        totalPriceCoffeeDetailsText.setText(String.format("%.2f", (Provider.getCurrentCoffee().getCoffeePrice() * noOfOrder )));
+        currentBarista = Provider.getBaristas().get(currentBaristaIndex);
+        currentCoffee = Provider.getBaristas().get(currentBaristaIndex).getSellingCoffee().get(currentCoffeeIndex);
+
+        coffeeDetailsNameText.setText(currentCoffee.getCoffeeTitle());
+        baristaNameCoffeeDetailsText.setText(toTitleCase(currentBarista.getUserName()));
+        baristaLocationCoffeeDetailsText.setText(currentBarista.getUserTaman());
+        coffeeDescCoffeeDetailsText.setText(currentCoffee.getCoffeeDesc());
+        ingredientText.setText(currentCoffee.getIngredients());
+
+        totalPriceCoffeeDetailsText.setText(String.format("%.2f", (currentCoffee.getCoffeePrice() * noOfOrder )));
         noOfCoffeeOrderedText.setText(String.valueOf(noOfOrder));
 
         plusBtnCoffeeDetails.setOnClickListener(new View.OnClickListener() {
@@ -52,7 +76,7 @@ public class CoffeeDetailsActivity extends AppCompatActivity {
             public void onClick(View view) {
                 noOfOrder++;
                 noOfCoffeeOrderedText.setText(String.valueOf(noOfOrder));
-                totalPriceCoffeeDetailsText.setText(String.format("%.2f", (Provider.getCurrentCoffee().getCoffeePrice() * noOfOrder )));
+                totalPriceCoffeeDetailsText.setText(String.format("%.2f", (currentCoffee.getCoffeePrice() * noOfOrder )));
             }
         });
 
@@ -62,14 +86,19 @@ public class CoffeeDetailsActivity extends AppCompatActivity {
                 if(noOfOrder > 1) {
                     noOfOrder--;
                     noOfCoffeeOrderedText.setText(String.valueOf(noOfOrder));
-                    totalPriceCoffeeDetailsText.setText(String.format("%.2f", (Provider.getCurrentCoffee().getCoffeePrice() * noOfOrder )));
+                    totalPriceCoffeeDetailsText.setText(String.format("%.2f", (currentCoffee.getCoffeePrice() * noOfOrder )));
                 }
             }
         });
 
+        coffeeDetailsBackBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
+
         recyclerViewRating();
-        recyclerViewIngredients();
-//        Log.d(Provider.getCurrentBarista().getRatings().toString(), "why so buggy");
 
     }
 
@@ -79,9 +108,9 @@ public class CoffeeDetailsActivity extends AppCompatActivity {
         baristaLocationCoffeeDetailsText = findViewById(R.id.baristaLocationCoffeeDetailsText);
         coffeeDescCoffeeDetailsText = findViewById(R.id.coffeeDescCoffeeDetailsText);
         noRatingText = findViewById(R.id.noRatingText);
+        ingredientText = findViewById(R.id.ingredientText);
 
         ratingRecyclerView = findViewById(R.id.ratingRecyclerView);
-        ingredientsRecyclerView = findViewById(R.id.ingredientsRecyclerView);
 
         totalPriceCoffeeDetailsText = findViewById(R.id.totalPriceCoffeeDetailsText);
         noOfCoffeeOrderedText = findViewById(R.id.noOfCoffeeOrderedText);
@@ -93,24 +122,16 @@ public class CoffeeDetailsActivity extends AppCompatActivity {
     }
 
     private void recyclerViewRating() {
-        if (Provider.getCurrentBarista().getRatings() == null) {
+        if (currentBarista.getRatings() == null) {
             noRatingText.setVisibility(View.VISIBLE);
         }else{
             LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
             ratingRecyclerView = findViewById(R.id.ratingRecyclerView);
             ratingRecyclerView.setLayoutManager(linearLayoutManager);
 
-            ratingAdapter = new RatingBarAdapter(Provider.getCurrentBarista().getRatings());
+            ratingAdapter = new RatingBarAdapter(currentBarista.getRatings());
             ratingRecyclerView.setAdapter(ratingAdapter);
         }
     }
 
-    private void recyclerViewIngredients() {
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
-        ingredientsRecyclerView = findViewById(R.id.ingredientsRecyclerView);
-        ingredientsRecyclerView.setLayoutManager(linearLayoutManager);
-
-        ingredientsAdapter = new IngredientsAdapter(Provider.getCurrentCoffee().getIngredients());
-        ingredientsRecyclerView.setAdapter(ingredientsAdapter);
-    }
 }

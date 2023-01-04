@@ -1,5 +1,8 @@
 package com.example.coffeecom.adapter;
 
+import static com.example.coffeecom.helper.CoordinateToDistance.coordinateToDistance;
+import static com.example.coffeecom.helper.ToTitleCase.toTitleCase;
+
 import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -57,15 +60,15 @@ public class BaristaCardAdapter extends RecyclerView.Adapter<BaristaCardAdapter.
         int drawableResourceId = holder.itemView.getContext().getResources().getIdentifier(baristas.get(position).getUserPic(), "drawable", holder.itemView.getContext().getPackageName());
         Glide.with(holder.itemView.getContext()).load(drawableResourceId).into(holder.baristaPic);
 
-        holder.baristaCardName.setText(baristas.get(position).getUserName());
-        holder.baristaLocation.setText(baristas.get(position).getUserTaman());
-        holder.baristaDistance.setText("Not do gok");
+        holder.baristaCardName.setText(toTitleCase(baristas.get(position).getUserName()));
+        holder.baristaLocation.setText(toTitleCase(baristas.get(position).getUserTaman()));
+        holder.baristaDistance.setText(coordinateToDistance(baristas.get(position).getUserLocation()));
 
         holder.baristaSmallCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 //input code to open details coffee page
-                Provider.setCurrentBarista(baristas.get(holder.getAdapterPosition()));
+                Provider.setCurrentBaristaId(baristas.get(holder.getAdapterPosition()).getBaristaId());
                 Intent intent = new Intent(holder.itemView.getContext(), BaristaListActivity.class);
                 holder.itemView.getContext().startActivity(intent);
             }

@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import com.example.coffeecom.Provider;
 import com.example.coffeecom.R;
 import com.example.coffeecom.activity.LocateLocationActivity;
 
@@ -24,7 +25,7 @@ public class LocationFragment extends Fragment {
     private TextView currentLocationText;
     private ConstraintLayout locationFragment;
 
-    String currentLocation = "";
+    String currentLocation = Provider.getUser().getUserLocation();
 
     public LocationFragment() {
         // Required empty public constructor
@@ -33,12 +34,10 @@ public class LocationFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_location, container, false);
     }
 
