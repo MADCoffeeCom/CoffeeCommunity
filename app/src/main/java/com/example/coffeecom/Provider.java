@@ -2,6 +2,7 @@ package com.example.coffeecom;
 
 import android.util.Log;
 
+import com.example.coffeecom.model.ArticleModel;
 import com.example.coffeecom.model.BaristaModel;
 import com.example.coffeecom.model.CoffeeModel;
 import com.example.coffeecom.model.ProfileModel;
@@ -14,9 +15,11 @@ public class Provider{
 
     private static ArrayList<CoffeeModel> coffees = new ArrayList<>();
     private static ArrayList<BaristaModel> baristas = new ArrayList<>();
+    private static ArrayList<ArticleModel> articles = new ArrayList<>();
     private static String currentCoffeeType;
     private static String currentBaristaId;
     private static String currentCoffeeId;
+    private static String currentArticleId;
     private static ProfileModel user;
 
 
@@ -83,6 +86,21 @@ public class Provider{
         Provider.transactions = transactions;
     }
 
+    public static ArrayList<ArticleModel> getArticles() {
+        return articles;
+    }
+
+    public static void addArticles(ArticleModel article) {
+        articles.add(article);
+    }
+
+    public static String getCurrentArticleId() {
+        return currentArticleId;
+    }
+
+    public static void setCurrentArticleId(String currentArticleId) {
+        Provider.currentArticleId = currentArticleId;
+    }
 
     //    ===================StatusActivity Punya=========================
     private static String statusTitle, statusHeading1, statusHeading2, statusBtnText;
