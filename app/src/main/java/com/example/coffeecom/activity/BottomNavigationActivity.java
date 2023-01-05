@@ -31,7 +31,6 @@ public class BottomNavigationActivity extends AppCompatActivity {
 
     BottomNavigationView btmNavBar;
     int container = R.id.containerMainPage;
-    ArrayList<Integer> menuItem = new ArrayList<>();
 
     ProfileMainFragment profileMain = new ProfileMainFragment();
     LearnActivityFragment learnMain = new LearnActivityFragment();
@@ -49,11 +48,6 @@ public class BottomNavigationActivity extends AppCompatActivity {
         btmNavBar = findViewById(R.id.bottomNavigationView);
         btmNavBar.setSelectedItemId(R.id.nvBuyCoffeeHome);
 
-        menuItem.add(R.id.nvBuyCoffeeHome);
-        menuItem.add(R.id.nvBaristaHome);
-        menuItem.add(R.id.nvLearnHome);
-        menuItem.add(R.id.nvProfileHome);
-
         manager = getSupportFragmentManager();
         manager.beginTransaction().replace(container, homeMain).commit();
 
@@ -63,16 +57,16 @@ public class BottomNavigationActivity extends AppCompatActivity {
                 switch (item.getItemId())
                 {
                     case R.id.nvBuyCoffeeHome:
-                        replaceFragment(homeMain, item);
+                        replaceMainFragment(homeMain, item);
                         break;
                     case R.id.nvBaristaHome:
-                        replaceFragment(baristaMain, item);
+                        replaceMainFragment(baristaMain, item);
                         break;
                     case R.id.nvLearnHome:
-                        replaceFragment(learnMain, item);
+                        replaceMainFragment(learnMain, item);
                         break;
                     case R.id.nvProfileHome:
-                        replaceFragment(profileMain, item);
+                        replaceMainFragment(profileMain, item);
                         break;
                 }
                 return false;
@@ -90,25 +84,9 @@ public class BottomNavigationActivity extends AppCompatActivity {
         }
     }
 
-    public void replaceFragment (Fragment fragment, MenuItem item){
-        String backStateName = fragment.getClass().getName();
-        boolean fragmentPopped = manager.popBackStackImmediate (backStateName, 0);
-
-        if (!fragmentPopped){ //fragment not in back stack, create it.
-            FragmentTransaction ft = manager.beginTransaction();
-            ft.setCustomAnimations(
-                    R.anim.fade_in,  // enter
-                    R.anim.fade_out,  // exit
-                    R.anim.fade_in,   // popEnter
-                    R.anim.slide_out  // popExit
-            );
-            ft.replace(container, fragment);
-            item.setChecked(true);
-//            if (!isMainItem(item)){
-//                ft.addToBackStack(backStateName);
-//            }
-            ft.commit();
-        }
+    public void replaceMainFragment (Fragment fragment, MenuItem item){
+        replaceFragment(fragment);
+        item.setChecked(true);
     }
 
     public void replaceFragment (Fragment fragment){
@@ -128,16 +106,4 @@ public class BottomNavigationActivity extends AppCompatActivity {
             ft.commit();
         }
     }
-
-    private boolean isMainItem(MenuItem item){
-        //Dont add to backstack when it is main page
-        for (int i = 0; i < menuItem.size(); i++) {
-            if(item.getItemId() == menuItem.get(i)){
-                return true;
-            }
-        }
-        return false;
-    }
-
-
 }
