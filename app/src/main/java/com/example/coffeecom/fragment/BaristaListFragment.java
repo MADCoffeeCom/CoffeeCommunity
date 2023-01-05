@@ -2,6 +2,7 @@ package com.example.coffeecom.fragment;
 
 import static com.example.coffeecom.helper.ToTitleCase.toTitleCase;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -74,9 +75,11 @@ public class BaristaListFragment extends Fragment {
             public void onClick(View view) {
                 //need to find the previous fragment then add
                 AppCompatActivity activity = (AppCompatActivity) view.getContext();
-
-                HomeActivityFragment buyCoffeeHome = new HomeActivityFragment();
-                activity.getSupportFragmentManager().beginTransaction().replace(R.id.containerMainPage,buyCoffeeHome).addToBackStack(null).commit();
+                if (activity.getSupportFragmentManager().getBackStackEntryCount()>0){
+                    activity.getSupportFragmentManager().popBackStack();
+                }
+//                HomeActivityFragment buyCoffeeHome = new HomeActivityFragment();
+//                activity.getSupportFragmentManager().beginTransaction().replace(R.id.containerMainPage,buyCoffeeHome).addToBackStack(null).commit();
 
             }
         });

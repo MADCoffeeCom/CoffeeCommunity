@@ -61,9 +61,7 @@ public class LoginActivity extends AppCompatActivity {
                         data[0] = username.getText().toString();
                         data[1] = passwordTextView.getText().toString();
 
-
-                        PutData putData = new PutData("http://" + Provider.getIpAddress() + "/CoffeeCommunityPHP/login.php", "POST", field, data);
-
+                        PutData putData = new PutData("http://192.168.100.11/CoffeeCommunityPHP/login.php", "POST", field, data);
                         if (putData.startPut()) {
 
                             if (putData.onComplete()) {

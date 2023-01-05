@@ -58,8 +58,8 @@ public class LocationFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 AppCompatActivity activity = (AppCompatActivity) view.getContext();
-//                LocateLocationFragment locateLocation = new LocateLocationFragment();
-//                activity.getSupportFragmentManager().beginTransaction().replace(R.id.containerMainPage,locateLocation).addToBackStack(null).commit();
+                MapsFragment mapsFragment = new MapsFragment();
+                activity.getSupportFragmentManager().beginTransaction().replace(R.id.containerMainPage,mapsFragment).addToBackStack(null).commit();
 //                startActivity(new Intent(getActivity(), LocateLocationActivity.class));
             }
         });
