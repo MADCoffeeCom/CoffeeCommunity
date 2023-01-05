@@ -2,6 +2,7 @@ package com.example.coffeecom.fragment;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 
@@ -16,9 +17,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.example.coffeecom.Provider;
 import com.example.coffeecom.R;
-import com.example.coffeecom.activity.BaristaActivity;
-import com.example.coffeecom.activity.BaristaListActivity;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationCallback;
 import com.google.android.gms.location.LocationRequest;
@@ -103,11 +103,14 @@ public class MapsFragment extends Fragment {
             googleMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener(){
                 @Override
                 public boolean onMarkerClick(Marker marker){
-                    String markettitle = marker.getTitle();
-
-                    Intent intent = new Intent(getActivity().getApplicationContext(), BaristaListActivity.class);
-                    intent.putExtra("title", markettitle);
-                    startActivity(intent);
+                    String markertitle = marker.getTitle();
+                    Provider.setCurrentBaristaId(marker.getTitle());
+                    AppCompatActivity activity = (AppCompatActivity) MapsFragment.this.getContext();
+                    BaristaListFragment baristaListFragment = new BaristaListFragment();
+                    activity.getSupportFragmentManager().beginTransaction().replace(R.id.containerMainPage,baristaListFragment).addToBackStack("bruh").commit();
+//                    Intent intent = new Intent(getActivity().getApplicationContext(), BaristaListFragment.class);
+//                    intent.putExtra("title", markertitle);
+//                    startActivity(intent);
 
                     return false;
                 }
@@ -174,11 +177,16 @@ public class MapsFragment extends Fragment {
         coffeeShopLocation.add(kannaCurryHouse);
         coffeeShopLocation.add(omuLab);
 
-        title.add("jayaOne");
-        title.add("rumahAntarabangsa");
-        title.add("kk13");
-        title.add("kannaCurryHouse");
-        title.add("omuLab");
+        title.add("b0001");
+        title.add("b0001");
+        title.add("b0001");
+        title.add("b0001");
+        title.add("b0001");
+//        title.add("jayaOne");
+//        title.add("rumahAntarabangsa");
+//        title.add("kk13");
+//        title.add("kannaCurryHouse");
+//        title.add("omuLab");
     }
 
 //    private void getCurrentLocation(){

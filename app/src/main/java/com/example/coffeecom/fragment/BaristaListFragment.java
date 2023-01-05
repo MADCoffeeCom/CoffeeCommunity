@@ -75,9 +75,11 @@ public class BaristaListFragment extends Fragment {
             public void onClick(View view) {
                 //need to find the previous fragment then add
                 AppCompatActivity activity = (AppCompatActivity) view.getContext();
-
-                HomeActivityFragment buyCoffeeHome = new HomeActivityFragment();
-                activity.getSupportFragmentManager().beginTransaction().replace(R.id.containerMainPage,buyCoffeeHome).addToBackStack(null).commit();
+                if (activity.getSupportFragmentManager().getBackStackEntryCount()>0){
+                    activity.getSupportFragmentManager().popBackStack();
+                }
+//                HomeActivityFragment buyCoffeeHome = new HomeActivityFragment();
+//                activity.getSupportFragmentManager().beginTransaction().replace(R.id.containerMainPage,buyCoffeeHome).addToBackStack(null).commit();
 
             }
         });
@@ -109,7 +111,7 @@ public class BaristaListFragment extends Fragment {
                 String[] data = new String[1];
                 data[0] = Provider.getBaristas().get(currentBaristaIndex).getBaristaId();
 
-                PutData putData = new PutData("http://10.167.58.200/CoffeeCommunityPHP/coffeeinbarista.php", "POST", field, data);
+                PutData putData = new PutData("http://192.168.100.11/CoffeeCommunityPHP/coffeeinbarista.php", "POST", field, data);
 
 //                FetchData fetchData = new FetchData("http://192.168.56.1/CoffeeCommunityPHP/coffeeinbarista.php");
                 if (putData.startPut()) {

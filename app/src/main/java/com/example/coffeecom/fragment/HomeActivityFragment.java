@@ -61,7 +61,7 @@ public class HomeActivityFragment extends Fragment {
         handler.post(new Runnable() {
             @Override
             public void run() {
-                FetchData fetchData = new FetchData("http://10.167.58.200/CoffeeCommunityPHP/profile.php");
+                FetchData fetchData = new FetchData("http://192.168.100.11/CoffeeCommunityPHP/profile.php");
 
                 if (fetchData.startFetch()) {
                     if (fetchData.onComplete()) {
@@ -109,9 +109,11 @@ public class HomeActivityFragment extends Fragment {
         handler.post(new Runnable() {
             @Override
             public void run() {
-                FetchData fetchData = new FetchData("http://10.167.58.200/CoffeeCommunityPHP/coffee.php");
-
+                Log.i("beforeFetch ", "beforeFetch");
+                FetchData fetchData = new FetchData("http://192.168.100.11/CoffeeCommunityPHP/coffee.php");
+                Log.i("beforeFetch ", "beforeFetch2 ");
                 if (fetchData.startFetch()) {
+                    Log.i("startFetch running", "fetching");
                     if (fetchData.onComplete()) {
                         String result = fetchData.getResult();
                         String[] resultSplitted = new String[11];
@@ -160,7 +162,7 @@ public class HomeActivityFragment extends Fragment {
         handler.post(new Runnable() {
             @Override
             public void run() {
-                FetchData fetchData = new FetchData("http://10.167.58.200/CoffeeCommunityPHP/barista.php");
+                FetchData fetchData = new FetchData("http://192.168.100.11/CoffeeCommunityPHP/barista.php");
 
                 if (fetchData.startFetch()) {
                     if (fetchData.onComplete()) {

@@ -21,7 +21,7 @@ public class Provider{
     private static String currentCoffeeId;
     private static String currentArticleId;
     private static ProfileModel user;
-    private static String ipAddress = "10.167.58.200";
+    private static String ipAddress = "192.168.100.11";
 
     public static String getIpAddress() {
         return ipAddress;
