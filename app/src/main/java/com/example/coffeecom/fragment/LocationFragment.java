@@ -5,6 +5,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 
@@ -25,7 +26,7 @@ public class LocationFragment extends Fragment {
     private TextView currentLocationText;
     private ConstraintLayout locationFragment;
 
-    String currentLocation = Provider.getUser().getUserLocation();
+    String currentLocation = "";
 
     public LocationFragment() {
         // Required empty public constructor
@@ -34,6 +35,7 @@ public class LocationFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+//        currentLocation = Provider.getUser().getUserLocation();
     }
 
     @Override
@@ -55,7 +57,10 @@ public class LocationFragment extends Fragment {
         locationBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(getActivity(), LocateLocationActivity.class));
+                AppCompatActivity activity = (AppCompatActivity) view.getContext();
+//                LocateLocationFragment locateLocation = new LocateLocationFragment();
+//                activity.getSupportFragmentManager().beginTransaction().replace(R.id.containerMainPage,locateLocation).addToBackStack(null).commit();
+//                startActivity(new Intent(getActivity(), LocateLocationActivity.class));
             }
         });
     }

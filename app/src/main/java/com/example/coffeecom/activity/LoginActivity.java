@@ -17,8 +17,6 @@ import com.example.coffeecom.R;
 import com.example.coffeecom.model.ProfileModel;
 import com.vishnusivadas.advanced_httpurlconnection.PutData;
 
-import org.w3c.dom.Text;
-
 public class LoginActivity extends AppCompatActivity {
 
     @Override
@@ -60,7 +58,7 @@ public class LoginActivity extends AppCompatActivity {
                         data[0] = username.getText().toString();
                         data[1] = passwordTextView.getText().toString();
 
-                        PutData putData = new PutData("http://192.168.56.1/CoffeeCommunityPHP/login.php", "POST", field, data);
+                        PutData putData = new PutData("http://10.167.58.200/CoffeeCommunityPHP/login.php", "POST", field, data);
                         if (putData.startPut()) {
 
                             if (putData.onComplete()) {
@@ -69,7 +67,7 @@ public class LoginActivity extends AppCompatActivity {
 
                                 if (splittedresult[0].equals("Login Success")){
                                     Provider.setUser(new ProfileModel(splittedresult[1]));
-                                    Intent intent = new Intent(getApplicationContext(),HomeActivity.class);
+                                    Intent intent = new Intent(getApplicationContext(), BottomNavigationActivity.class);
                                     startActivity(intent);
                                     finish();
                                 }else{

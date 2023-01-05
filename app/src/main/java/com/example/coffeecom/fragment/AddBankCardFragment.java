@@ -1,28 +1,43 @@
-package com.example.coffeecom.activity;
+package com.example.coffeecom.fragment;
 
-import androidx.appcompat.app.AppCompatActivity;
+import static com.example.coffeecom.helper.ToTitleCase.toTitleCase;
 
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
+import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.example.coffeecom.Provider;
 import com.example.coffeecom.R;
+import com.example.coffeecom.adapter.BaristaCardAdapter;
+import com.example.coffeecom.adapter.CoffeeTypeAdapter;
 import com.example.coffeecom.model.BankCardModel;
-import com.google.android.material.badge.BadgeUtils;
+import com.example.coffeecom.model.BaristaModel;
+import com.example.coffeecom.model.CoffeeModel;
+import com.vishnusivadas.advanced_httpurlconnection.FetchData;
 
-import java.util.Scanner;
+import java.util.ArrayList;
 
-public class AddBankCardActivity extends AppCompatActivity {
+
+public class AddBankCardFragment extends Fragment {
 
     TextView cardNumberTextBox, nameOnCardTextBox, ccvTextBox, expiryDateTextBox, bankNameText;
     Button addCardBtn;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_bank_card);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+
+        View view = inflater.inflate(R.layout.activity_add_bank_card,container,false);
 
         addCardBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -38,7 +53,7 @@ public class AddBankCardActivity extends AppCompatActivity {
                 //notify to update to sql server
             }
         });
+
+        return view;
     }
-
-
 }

@@ -3,7 +3,6 @@ package com.example.coffeecom.adapter;
 import static com.example.coffeecom.helper.CoordinateToDistance.coordinateToDistance;
 import static com.example.coffeecom.helper.ToTitleCase.toTitleCase;
 
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,13 +10,14 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.example.coffeecom.activity.BaristaListActivity;
 import com.example.coffeecom.Provider;
 import com.example.coffeecom.R;
+import com.example.coffeecom.fragment.BaristaListFragment;
 import com.example.coffeecom.model.BaristaModel;
 
 import java.util.ArrayList;
@@ -68,9 +68,13 @@ public class BaristaCardAdapter extends RecyclerView.Adapter<BaristaCardAdapter.
             @Override
             public void onClick(View view) {
                 //input code to open details coffee page
+                AppCompatActivity activity = (AppCompatActivity) view.getContext();
+                BaristaListFragment baristaList = new BaristaListFragment();
                 Provider.setCurrentBaristaId(baristas.get(holder.getAdapterPosition()).getBaristaId());
-                Intent intent = new Intent(holder.itemView.getContext(), BaristaListActivity.class);
-                holder.itemView.getContext().startActivity(intent);
+                activity.getSupportFragmentManager().beginTransaction().replace(R.id.containerMainPage,baristaList).addToBackStack(null).commit();
+                //this code still need to refine
+//                Intent intent = new Intent(holder.itemView.getContext(), BaristaListActivity.class);
+//                holder.itemView.getContext().startActivity(intent);
             }
         });
     }

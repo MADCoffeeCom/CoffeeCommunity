@@ -1,42 +1,35 @@
-package com.example.coffeecom.activity;
+package com.example.coffeecom.fragment;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.Manifest;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageButton;
-import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import androidx.fragment.app.Fragment;
 
 import com.example.coffeecom.Provider;
 import com.example.coffeecom.R;
-import com.example.coffeecom.model.CoffeeModel;
-import com.example.coffeecom.model.IngredientsModel;
 
-import java.util.ArrayList;
 
-import pub.devrel.easypermissions.EasyPermissions;
-//import com.droidninja.filepicker.*;
-
-public class AddCoffeeActivity extends AppCompatActivity {
+public class AddCoffeeFragment extends Fragment {
 
     private TextView coffeeNameTextBox, coffeeDescTextBox, coffeePriceTextBox, coffeeTypeTextBox, coffeeIngredientsTextBox;
     private Button addCoffeeBtn;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_coffee);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
 
-        coffeeNameTextBox = findViewById(R.id.coffeeNameTextBox);
-        coffeeDescTextBox = findViewById(R.id.coffeeDescTextBox);
-        coffeePriceTextBox = findViewById(R.id.coffeePriceTextBox);
-        coffeeTypeTextBox = findViewById(R.id.coffeeTypeTextBox);
-        coffeeIngredientsTextBox = findViewById(R.id.coffeeIngredientsTextBox);
-        addCoffeeBtn = findViewById(R.id.addCoffeeBtn);
+        View view = inflater.inflate(R.layout.activity_add_coffee,container,false);
+
+        coffeeNameTextBox = view.findViewById(R.id.coffeeNameTextBox);
+        coffeeDescTextBox = view.findViewById(R.id.coffeeDescTextBox);
+        coffeePriceTextBox = view.findViewById(R.id.coffeePriceTextBox);
+        coffeeTypeTextBox = view.findViewById(R.id.coffeeTypeTextBox);
+        coffeeIngredientsTextBox = view.findViewById(R.id.coffeeIngredientsTextBox);
+        addCoffeeBtn = view.findViewById(R.id.addCoffeeBtn);
 
         addCoffeeBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -44,6 +37,9 @@ public class AddCoffeeActivity extends AppCompatActivity {
                 addNewCoffee();
             }
         });
+
+        // Inflate the layout for this fragment
+        return view;
     }
 
     private void addNewCoffee() {
@@ -61,8 +57,6 @@ public class AddCoffeeActivity extends AppCompatActivity {
         String baristaLocation = Provider.getUser().getUserLocation();
 
         //insert sql code to update and notify change
-
-
-
     }
+
 }

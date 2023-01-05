@@ -1,5 +1,7 @@
 package com.example.coffeecom.adapter;
 
+import android.annotation.SuppressLint;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -7,12 +9,14 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.coffeecom.Provider;
 import com.example.coffeecom.R;
-import com.example.coffeecom.model.CoffeeModel;
+import com.example.coffeecom.fragment.CoffeeListFragment;
 
 import java.util.ArrayList;
 
@@ -48,7 +52,7 @@ public class CoffeeTypeAdapter extends RecyclerView.Adapter<CoffeeTypeAdapter.Vi
 
     //fill in the xml file with necessary information
     @Override
-    public void onBindViewHolder(@NonNull CoffeeTypeAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull CoffeeTypeAdapter.ViewHolder holder, @SuppressLint("RecyclerView") int position) {
         holder.coffeeTitle.setText(coffeeType.get(position));
 
         //code to insert picture
@@ -62,6 +66,15 @@ public class CoffeeTypeAdapter extends RecyclerView.Adapter<CoffeeTypeAdapter.Vi
             @Override
             public void onClick(View view) {
                 //input code here to open details coffee page
+                Log.i("Coffeetype in adapter", coffeeType.get(position));
+                Provider.setCurrentCoffeeType(coffeeType.get(position));
+
+                AppCompatActivity activity = (AppCompatActivity) view.getContext();
+                CoffeeListFragment coffeeList = new CoffeeListFragment();
+                activity.getSupportFragmentManager().beginTransaction().replace(R.id.containerMainPage,coffeeList).addToBackStack(null).commit();
+                //check whether if will set to the correct view
+//                Intent intent = new Intent(holder.itemView.getContext(), CoffeeListActivity.class);
+//                holder.itemView.getContext().startActivity(intent);
 
             }
         });

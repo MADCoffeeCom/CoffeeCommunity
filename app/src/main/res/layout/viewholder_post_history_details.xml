@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/postHistoryDetailsCard"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="24dp"
+    android:layout_marginEnd="24dp"
+    android:layout_marginBottom="24dp"
+    android:background="@drawable/linear_gray_background">
+
+
+    <ImageView
+        android:id="@+id/postHistoryDetailsPic"
+        android:layout_width="80dp"
+        android:layout_height="112dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/round_outline"
+        android:clipToOutline="true"
+        android:scaleType="centerCrop"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/coffee1" />
+
+    <TextView
+        android:id="@+id/postHistoryDetailsTitleText"
+        style="@style/c1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:text="Post Title"
+        app:layout_constraintStart_toEndOf="@+id/postHistoryDetailsPic"
+        app:layout_constraintTop_toTopOf="@+id/postHistoryDetailsPic" />
+
+    <TextView
+        android:id="@+id/postHistoryDetailsDateTimeText"
+        style="@style/c3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="17dp"
+        android:text="12.12.2022 12.12pm"
+        app:layout_constraintStart_toEndOf="@+id/postHistoryDetailsPic"
+        app:layout_constraintTop_toBottomOf="@+id/postHistoryDetailsContentText" />
+
+    <TextView
+        android:id="@+id/postHistoryDetailsContentText"
+        style="@style/c2"
+        android:layout_width="250dp"
+        android:layout_height="57dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="5dp"
+        android:ellipsize="end"
+        android:maxLines="3"
+        android:text="I Start to brew coffee since I was -10 years old. Lorem Ipsum wakakkakak. I Start to brew coffee since I was -10 years old. Lorem Ipsum wakakkakakI Start to brew coffee since I was -10 years old. Lorem Ipsum wakakkakakI Start to brew coffee since I was -10 years old. Lorem Ipsum wakakkakak"
+        app:layout_constraintStart_toEndOf="@+id/postHistoryDetailsPic"
+        app:layout_constraintTop_toBottomOf="@+id/postHistoryDetailsTitleText" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/postHistoryDetailsContentText">
+
+        <ImageView
+            android:id="@+id/imageView9"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            app:srcCompat="@drawable/ic_like" />
+
+        <TextView
+            android:id="@+id/upvoteCountHistoryText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:text="0" />
+
+        <ImageView
+            android:id="@+id/imageView10"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            app:srcCompat="@drawable/ic_dislike" />
+
+        <TextView
+            android:id="@+id/downvoteCountHistoryText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:text="0" />
+
+        <ImageView
+            android:id="@+id/imageView11"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            app:srcCompat="@drawable/ic_comments" />
+
+        <TextView
+            android:id="@+id/commentCountHistoryText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:text="0" />
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

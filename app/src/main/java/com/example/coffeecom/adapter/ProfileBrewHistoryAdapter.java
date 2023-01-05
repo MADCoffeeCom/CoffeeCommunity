@@ -5,12 +5,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.coffeecom.fragment.AddBankCardFragment;
 import com.example.coffeecom.model.OrderModel;
 import com.example.coffeecom.R;
 
@@ -76,16 +79,18 @@ public class ProfileBrewHistoryAdapter extends RecyclerView.Adapter<ProfileBrewH
         int drawableResourceId = holder.itemView.getContext().getResources().getIdentifier(myBrewList[position].getOrderHistoryImage(),"drawable",holder.itemView.getContext().getPackageName());
         Glide.with(holder.itemView.getContext()).load(drawableResourceId).into(holder.brewImage);
 
-//        holder.brewHistoryCard.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Toast.makeText(view.getContext(), "HMMM STILL DOING", Toast.LENGTH_SHORT).show();
-//                //input code to open details coffee order page
-//                //havent complete
-////                Intent intent = new Intent(holder.itemView.getContext(), BaristaListActivity.class);
-////                holder.itemView.getContext().startActivity(intent);
-//            }
-//        });
+        holder.brewHistoryCard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(view.getContext(), "HMMM STILL DOING", Toast.LENGTH_SHORT).show();
+
+                AppCompatActivity activity = (AppCompatActivity) view.getContext();
+
+                //the page havent done yet
+//                AddBankCardFragment addBankCard = new AddBankCardFragment();
+//                activity.getSupportFragmentManager().beginTransaction().replace(R.id.containerMainPage,addBankCard).addToBackStack(null).commit();
+            }
+        });
     }
 
     @Override

@@ -13,6 +13,7 @@ import android.widget.CheckBox;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.coffeecom.Provider;
 import com.example.coffeecom.R;
 import com.example.coffeecom.model.ProfileModel;
 import com.vishnusivadas.advanced_httpurlconnection.PutData;
@@ -66,7 +67,7 @@ public class SignupActivity extends AppCompatActivity {
                 data[2] = passwordTextView.getText().toString();
                 data[3] = email.getText().toString();
 
-                PutData putData = new PutData("http://192.168.56.1/CoffeeCommunityPHP/signup.php", "POST", field, data);
+                PutData putData = new PutData("http://10.167.58.200/CoffeeCommunityPHP/signup.php", "POST", field, data);
                 if (putData.startPut()) {
                     if (putData.onComplete()) {
                         String result = putData.getResult();

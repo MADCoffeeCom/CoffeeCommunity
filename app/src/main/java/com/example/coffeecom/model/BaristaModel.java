@@ -9,8 +9,8 @@ public class BaristaModel extends ProfileModel{
     private ArrayList<BaristaRatingModel> ratings;
 
 
-    public BaristaModel(String userPic, String userStreetNo, String userTaman, int userPostalCode, ArrayList<CoffeeModel> sellingCoffee, String baristaId, String baristaDesc, int yearsOfExperience, ArrayList<BaristaRatingModel> ratings) {
-        super(baristaId, userPic, userStreetNo, userTaman, userPostalCode, sellingCoffee);
+    public BaristaModel(String userPic, String userStreetNo, String userTaman, int userPostalCode, ArrayList<String> sellingCoffeeId, String baristaId, String baristaDesc, int yearsOfExperience, ArrayList<BaristaRatingModel> ratings) {
+        super(baristaId, userPic, userStreetNo, userTaman, userPostalCode, sellingCoffeeId);
         this.yearsOfExperience = yearsOfExperience;
         this.baristaDesc = baristaDesc;
         this.ratings = ratings;

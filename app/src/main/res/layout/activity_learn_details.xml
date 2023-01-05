@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activity.LearnDetailsActivity">
+    tools:context=".fragment.LearnDetailsFragment">
 
     <ImageView
         android:id="@+id/learnDetailsImage"
@@ -48,73 +48,73 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/learnDetailsImage" />
 
+    <TextView
+        android:id="@+id/voteCountText"
+        style="@style/c1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_weight="1"
+        android:text="0"
+        android:textAlignment="center"
+        app:layout_constraintBottom_toBottomOf="@+id/learnDownvoteBtn"
+        app:layout_constraintStart_toEndOf="@+id/learnDownvoteBtn"
+        app:layout_constraintTop_toTopOf="@+id/learnDownvoteBtn" />
+
+    <ImageButton
+        android:id="@+id/learnDownvoteBtn"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:background="@color/transparent"
+        app:layout_constraintBottom_toBottomOf="@+id/learnUpvoteBtn"
+        app:layout_constraintStart_toEndOf="@+id/learnUpvoteBtn"
+        app:layout_constraintTop_toTopOf="@+id/learnUpvoteBtn"
+        app:srcCompat="@drawable/ic_dislike" />
+
+    <ImageButton
+        android:id="@+id/learnUpvoteBtn"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:background="@color/transparent"
+        app:layout_constraintStart_toStartOf="@+id/learnDetailsTypeText"
+        app:layout_constraintTop_toBottomOf="@+id/learnDetailsImage"
+        app:srcCompat="@drawable/ic_like" />
+
+    <ImageButton
+        android:id="@+id/learnShareBtn"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginEnd="24dp"
+        android:background="@color/transparent"
+        app:layout_constraintBottom_toBottomOf="@+id/learnDownvoteBtn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/learnDownvoteBtn"
+        app:srcCompat="@drawable/ic_share" />
+
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="480dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_height="380dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/learnDetailsImage">
+        app:layout_constraintTop_toBottomOf="@+id/learnUpvoteBtn">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:orientation="vertical">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="48sp"
-                android:gravity="center"
-                android:orientation="horizontal">
-
-                <ImageButton
-                    android:id="@+id/learnUpvoteBtn"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginRight="20dp"
-                    android:layout_weight="1"
-                    android:background="@color/transparent"
-                    app:srcCompat="@drawable/ic_like" />
-
-                <ImageButton
-                    android:id="@+id/learnDownvoteBtn"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="20dp"
-                    android:layout_weight="1"
-                    android:background="@color/transparent"
-                    app:srcCompat="@drawable/ic_dislike" />
-
-                <TextView
-                    android:id="@+id/voteCountText"
-                    style="@style/c1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="120dp"
-                    android:layout_weight="1"
-                    android:text="number"
-                    android:textAlignment="center" />
-
-                <ImageButton
-                    android:id="@+id/learnShareBtn"
-                    android:layout_width="wrap_content"
-                    android:layout_height="48dp"
-                    android:layout_marginRight="20dp"
-                    android:layout_weight="1"
-                    android:background="@color/transparent"
-                    app:srcCompat="@drawable/ic_share" />
-
-            </LinearLayout>
 
             <TextView
                 android:id="@+id/learnDetailsContentText"
+                style="@style/c1"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_marginLeft="24dp"
                 android:layout_marginTop="10dp"
-                android:layout_marginRight="24dp" />
+                android:layout_marginRight="24dp"
+                android:layout_marginBottom="40dp"
+                android:ellipsize="none"
+                android:scrollHorizontally="false" />
 
         </LinearLayout>
     </ScrollView>

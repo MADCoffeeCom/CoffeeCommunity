@@ -1,18 +1,29 @@
 package com.example.coffeecom.model;
 
 public class ArticleModel {
-    private String articleId;
+    private String articleId, adminId;
     private String articleTitle, articleType, articleContent, articlePic;
     private int articleUpVote, articleDownVote;
 
-    public ArticleModel(String articleId, String articleTitle, String articleType, String articleContent, String articlePic, int articleUpVote, int articleDownVote) {
+    //ArticleType gt general, history, beans, learn
+
+    public ArticleModel(String articleId, String adminId, String articleTitle, String articleType, String articleContent, String articlePic, int articleUpVote, int articleDownVote) {
         this.articleId = articleId;
+        this.adminId = adminId;
         this.articleTitle = articleTitle;
         this.articleType = articleType;
         this.articleContent = articleContent;
         this.articlePic = articlePic;
         this.articleUpVote = articleUpVote;
         this.articleDownVote = articleDownVote;
+    }
+
+    public String getAdminId() {
+        return adminId;
+    }
+
+    public void setAdminId(String adminId) {
+        this.adminId = adminId;
     }
 
     public String getArticleId() {
