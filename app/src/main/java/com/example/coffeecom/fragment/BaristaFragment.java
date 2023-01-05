@@ -140,7 +140,7 @@ public class BaristaFragment extends Fragment {
             LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
             coffeeSellingRecycleView.setLayoutManager(linearLayoutManager);
 
-            coffeeSellingRecycleViewAdapter = new CoffeeTypeAdapter(coffeeType, coffeePic, getActivity());
+            coffeeSellingRecycleViewAdapter = new CoffeeTypeAdapter(coffeeTitle, coffeePic, getActivity());
             coffeeSellingRecycleView.setAdapter(coffeeSellingRecycleViewAdapter);
         }
     }
