@@ -82,27 +82,27 @@ public class ProfileMainFragment extends Fragment {
         String strDate = dateFormat.format(date);
 
         //dummydata to test all recycle view
-        myOrderHistoryList = new OrderModel[]{
-                new OrderModel(strDate,"coffee1",25.00,"(2 items)"),
-                new OrderModel(strDate,"beans",21.00,"(4 items)"),
-                new OrderModel(strDate,"barista1",12.54,"(7 items)"),
-                new OrderModel(strDate,"barista2",13.59,"(1 item)")
-        };
-
-        myBrewHistoryList = new OrderModel[]{
-                new OrderModel(strDate,"barista2",2.00,"(2 items)"),
-                new OrderModel(strDate,"beans",300.00,"(4 items)"),
-                new OrderModel(strDate,"barista1",140.54,"(7 items)"),
-                new OrderModel(strDate,"barista2",13.59,"(1 item)")
-        };
-
-        myPostHistoryList = new PostModel[]{
-                new PostModel(strDate,"coffee1","Jason So Handsome",12,0),
-                new PostModel(strDate,"beans","KY So Handsome",10,0),
-                new PostModel(strDate,"barista1","GM So Handsome",0,15),
-                new PostModel(strDate,"barista2","YY So Handsome",5,7),
-
-        };
+//        myOrderHistoryList = new OrderModel[]{
+//                new OrderModel(strDate,"coffee1",25.00,"(2 items)"),
+//                new OrderModel(strDate,"beans",21.00,"(4 items)"),
+//                new OrderModel(strDate,"barista1",12.54,"(7 items)"),
+//                new OrderModel(strDate,"barista2",13.59,"(1 item)")
+//        };
+//
+//        myBrewHistoryList = new OrderModel[]{
+//                new OrderModel(strDate,"barista2",2.00,"(2 items)"),
+//                new OrderModel(strDate,"beans",300.00,"(4 items)"),
+//                new OrderModel(strDate,"barista1",140.54,"(7 items)"),
+//                new OrderModel(strDate,"barista2",13.59,"(1 item)")
+//        };
+//
+//        myPostHistoryList = new PostModel[]{
+//                new PostModel(strDate,"coffee1","Jason So Handsome",12,0),
+//                new PostModel(strDate,"beans","KY So Handsome",10,0),
+//                new PostModel(strDate,"barista1","GM So Handsome",0,15),
+//                new PostModel(strDate,"barista2","YY So Handsome",5,7),
+//
+//        };
 
         //Adapter
         orderAdapter = new ProfileOrderHistoryAdapter(myOrderHistoryList);
