@@ -145,7 +145,7 @@ public class WalletFragment extends Fragment {
             LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
             bankCardRecyclerView.setLayoutManager(linearLayoutManager);
 
-            bankCardRecyclerViewAdapter = new BankCardAdapter();
+            bankCardRecyclerViewAdapter = new BankCardAdapter(getActivity());
             bankCardRecyclerView.setAdapter(bankCardRecyclerViewAdapter);
 
         }catch(NullPointerException e){

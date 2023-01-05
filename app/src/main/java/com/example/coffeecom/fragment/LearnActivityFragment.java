@@ -37,15 +37,19 @@ public class LearnActivityFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.activity_learn,container,false);
 
-        recyclerViewGeneralArticleList = view.findViewById(R.id.generalArticleRecyclerView);
-        recyclerViewCoffeeHistoryArticleList = view.findViewById(R.id.coffeeHistoryArticleRecyclerView);
-        recyclerViewCoffeeBeanArticleList = view.findViewById(R.id.coffeeBeanArticleRecycleView);
-        recyclerViewLearnArticleList = view.findViewById(R.id.LearnArticleRecycleView);
+        initialiseID(view);
 
         queryArticle();
 
         // Inflate the layout for this fragment
         return view;
+    }
+
+    private void initialiseID(View view){
+        recyclerViewGeneralArticleList = view.findViewById(R.id.generalArticleRecyclerView);
+        recyclerViewCoffeeHistoryArticleList = view.findViewById(R.id.coffeeHistoryArticleRecyclerView);
+        recyclerViewCoffeeBeanArticleList = view.findViewById(R.id.coffeeBeanArticleRecycleView);
+        recyclerViewLearnArticleList = view.findViewById(R.id.LearnArticleRecycleView);
     }
 
     private void queryArticle() {

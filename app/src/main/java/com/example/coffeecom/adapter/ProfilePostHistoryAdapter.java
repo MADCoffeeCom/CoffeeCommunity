@@ -13,7 +13,6 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.example.coffeecom.activity.MainActivity;
 import com.example.coffeecom.model.PostModel;
 import com.example.coffeecom.R;
 

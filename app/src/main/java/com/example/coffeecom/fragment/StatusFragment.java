@@ -19,6 +19,11 @@ public class StatusFragment extends Fragment {
     TextView statusText, statusHeading1Text, statusHeading2Text;
     Button statusBtn;
 
+    private Fragment fragment;
+
+    public StatusFragment(Fragment fragment) {
+        this.fragment = fragment;
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -44,7 +49,7 @@ public class StatusFragment extends Fragment {
 
                 AppCompatActivity activity = (AppCompatActivity) view.getContext();
                 WalletFragment walletFragment = new WalletFragment();
-                activity.getSupportFragmentManager().beginTransaction().replace(R.id.containerMainPage,walletFragment).addToBackStack(null).commit();
+                activity.getSupportFragmentManager().beginTransaction().replace(R.id.containerMainPage,fragment).addToBackStack(null).commit();
             }
         });
 

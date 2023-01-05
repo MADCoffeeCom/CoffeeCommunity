@@ -1,6 +1,8 @@
 package com.example.coffeecom.adapter;
 
-import android.media.Image;
+import static com.example.coffeecom.helper.FormatDateTime.convertDatetoStringTime;
+
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,16 +17,19 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.coffeecom.Provider;
 import com.example.coffeecom.R;
-import com.example.coffeecom.model.OrderModel;
+import com.example.coffeecom.model.BrewedOrderModel;
 
 import java.util.ArrayList;
 
 public class PendingOrderAdapter extends RecyclerView.Adapter<PendingOrderAdapter.ViewHolder>{
 
-    ArrayList<OrderModel> pendingOrder;
+    ArrayList<BrewedOrderModel> brewedOrder;
+    Context activity;
 
-    public PendingOrderAdapter(ArrayList<OrderModel> pendingOrder) {
-        this.pendingOrder = pendingOrder;
+
+    public PendingOrderAdapter(ArrayList<BrewedOrderModel> brewedOrder, Context activity) {
+        this.brewedOrder = brewedOrder;
+        this.activity = activity;
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
@@ -34,45 +39,29 @@ public class PendingOrderAdapter extends RecyclerView.Adapter<PendingOrderAdapte
         private ImageButton acceptOrderBtn, declineOrderBtn;
         private ConstraintLayout coffeeOrderLayout;
 
-        public ViewHolder(@NonNull View itemView, int viewType) {
+        public ViewHolder(@NonNull View itemView, int viewTypex) {
             super(itemView);
 
-            //no Order
-            if(viewType == 0){
-                coffeeOrderLayout= itemView.findViewById(R.id.coffeeOrderLayout);
-            }
-            //Pending order
-            else if(viewType == 1){
-                orderCoffeePic= itemView.findViewById(R.id.orderCoffeePic);
-                orderCoffeeName= itemView.findViewById(R.id.orderCoffeeName);
-                orderCustomerName= itemView.findViewById(R.id.orderCustomerName);
-                orderCoffeeTime= itemView.findViewById(R.id.orderCoffeeTime);
-                acceptOrderBtn= itemView.findViewById(R.id.acceptOrderBtn);
-                declineOrderBtn= itemView.findViewById(R.id.declineOrderBtn);
-                coffeeOrderLayout= itemView.findViewById(R.id.coffeeOrderLayout);
-            }
-            //Accepted Order
-            else{
-                orderCoffeePic= itemView.findViewById(R.id.orderCoffeePic);
-                orderCoffeeName= itemView.findViewById(R.id.orderCoffeeName);
-                orderCustomerName= itemView.findViewById(R.id.orderCustomerName);
-                orderCoffeeTime= itemView.findViewById(R.id.orderCoffeeTime);
-                coffeeOrderLayout= itemView.findViewById(R.id.coffeeOrderLayout);
-            }
+            coffeeOrderLayout= itemView.findViewById(R.id.coffeeOrderLayout);
+            orderCoffeePic= itemView.findViewById(R.id.orderCoffeePic);
+            orderCoffeeName= itemView.findViewById(R.id.orderCoffeeName);
+            orderCustomerName= itemView.findViewById(R.id.orderCustomerName);
+            orderCoffeeTime= itemView.findViewById(R.id.orderCoffeeTime);
+            acceptOrderBtn= itemView.findViewById(R.id.acceptOrderBtn);
+            declineOrderBtn= itemView.findViewById(R.id.declineOrderBtn);
+
         }
     }
 
 
     @Override
     public int getItemViewType(int position) {
-        if(pendingOrder.isEmpty()){
-            return 0; // No order
-        } else {
-            if(pendingOrder.get(position).getOrderStatus().equals("pending")){
-                return 1; // pending and await accept or decline
-            }else {
-                return 2; // accepted
-            }
+        if(brewedOrder.get(position).getOrderStatus().equals("P")){
+            return 1; // pending and await accept or decline
+        }else if(brewedOrder.get(position).getOrderStatus().equals("A")){
+            return 2; // accepted
+        }else{
+            return 0; //no pending or accepted
         }
     }
 
@@ -93,48 +82,23 @@ public class PendingOrderAdapter extends RecyclerView.Adapter<PendingOrderAdapte
 
     @Override
     public void onBindViewHolder(@NonNull PendingOrderAdapter.ViewHolder holder, int position) {
-        if(pendingOrder.isEmpty()){
-            holder.coffeeOrderLayout.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-
-                }
-            });
-        } else {
-            //coffee title
-            holder.orderCoffeeName.setText(pendingOrder.get(position).getOrderedCoffee().get(0).getCoffeeType());
-
-            //customer name
-            String userId = pendingOrder.get(position).getUserId();
-
-            String userName = "";
-            holder.orderCustomerName.setText(userName);
-
-            //time
-            holder.orderCoffeeName.setText(pendingOrder.get(position).getOrderStartTime().toString());
-
+        if(!brewedOrder.isEmpty()){
+            //Insert details
+            holder.orderCoffeeName.setText(brewedOrder.get(position).getOrderedCoffee().get(0).getCoffeeTitle());
+            holder.orderCustomerName.setText(brewedOrder.get(position).getCustomerName());
+            holder.orderCoffeeTime.setText(convertDatetoStringTime(brewedOrder.get(position).getOrderStartTime()));
             //Insert pic
-            String picUrl = pendingOrder.get(position).getOrderedCoffee().get(0).getCoffeePic();
+            String picUrl = brewedOrder.get(position).getOrderedCoffee().get(0).getCoffeePic();
             int drawableResourceId = holder.itemView.getContext().getResources().getIdentifier(picUrl, "drawable", holder.itemView.getContext().getPackageName());
             Glide.with(holder.itemView.getContext()).load(drawableResourceId).into(holder.orderCoffeePic);
 
-            if(pendingOrder.get(position).getOrderStatus().equals("pending")){
-
-                holder.acceptOrderBtn.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        Provider.getUser().getPendingOrder().get(holder.getAdapterPosition()).setOrderStatus("accepted");
-                        //Notify change listener
-                    }
+            if(brewedOrder.get(position).getOrderStatus().equals("pending")){
+                holder.acceptOrderBtn.setOnClickListener(view -> {
+                    Provider.getUser().getBrewedOrder().get(position).setOrderStatus("A");
                 });
 
-                holder.declineOrderBtn.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        Provider.getUser().getPendingOrder().get(holder.getAdapterPosition()).setOrderStatus("declined");
-                        Provider.getUser().getPendingOrder().remove(holder.getAdapterPosition());
-                        //Notify change listener
-                    }
+                holder.declineOrderBtn.setOnClickListener(view -> {
+                    Provider.getUser().getBrewedOrder().get(position).setOrderStatus("D");
                 });
             }
         }
@@ -142,9 +106,7 @@ public class PendingOrderAdapter extends RecyclerView.Adapter<PendingOrderAdapte
 
     @Override
     public int getItemCount() {
-        return pendingOrder.size();
+        return brewedOrder.size();
     }
-
-
 
 }

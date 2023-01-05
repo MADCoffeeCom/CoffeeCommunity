@@ -10,7 +10,6 @@ public class ProfileModel {
 
     private String userPic;
     private String userName, email;
-    private String userRole;
 
     private String userStreetNo;
     private String userTaman;
@@ -24,11 +23,10 @@ public class ProfileModel {
     private double walletBalance;
 
     private ArrayList<String> sellingCoffeeId = new ArrayList<>();
-    private ArrayList<OrderModel> orderedHistory = new ArrayList<>();
-    private ArrayList<OrderModel> brewedHistory = new ArrayList<>();
+    private ArrayList<BrewedOrderModel> orderedHistory = new ArrayList<>();
     private ArrayList<PostModel> postedPost = new ArrayList<>();
     private ArrayList<BankCardModel> bankCard = new ArrayList<>();
-    private ArrayList<OrderModel> pendingOrder = new ArrayList<>();
+    private ArrayList<BrewedOrderModel> brewedOrder = new ArrayList<>();
 
     public ProfileModel(String a) {
         this.userId = a;
@@ -43,19 +41,17 @@ public class ProfileModel {
         this.sellingCoffeeId = sellingCoffee;
     }
 
-    public void setUserDetails(String userPic, String userId, String username, String email, String userRole, String userStreetNo, String userTaman, int userPostalCode, String userState, String walletId, String walletPin, double walletBalance) {
+    public void setUserDetails(String userPic, String userId, String baristaId, String adminId, String username, String email, String userStreetNo, String userTaman, int userPostalCode, String userState) {
         this.userPic = userPic;
         this.userId = userId;
+        this.baristaId = baristaId;
+        this.adminId = adminId;
         this.userName = username;
         this.email = email;
-        this.userRole = userRole;
         this.userStreetNo = userStreetNo;
         this.userTaman = userTaman;
         this.userPostalCode = userPostalCode;
         this.userState = userState;
-        this.walletPin = walletPin;
-        this.walletId = walletId;
-        this.walletBalance = walletBalance;
     }
 
     //for barista use
@@ -97,14 +93,6 @@ public class ProfileModel {
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public String getUserRole() {
-        return userRole;
-    }
-
-    public void setUserRole(String userRole) {
-        this.userRole = userRole;
     }
 
     public String getUserStreetNo() {
@@ -155,20 +143,12 @@ public class ProfileModel {
         this.walletBalance = walletBalance;
     }
 
-    public ArrayList<OrderModel> getOrderedHistory() {
+    public ArrayList<BrewedOrderModel> getOrderedHistory() {
         return orderedHistory;
     }
 
-    public void setOrderedHistory(ArrayList<OrderModel> orderedHistory) {
+    public void setOrderedHistory(ArrayList<BrewedOrderModel> orderedHistory) {
         this.orderedHistory = orderedHistory;
-    }
-
-    public ArrayList<OrderModel> getBrewedHistory() {
-        return brewedHistory;
-    }
-
-    public void setBrewedHistory(ArrayList<OrderModel> brewedHistory) {
-        this.brewedHistory = brewedHistory;
     }
 
     public ArrayList<PostModel> getPostedPost() {
@@ -197,14 +177,6 @@ public class ProfileModel {
 
     public void addSellingCoffeeId(String coffee) {
         sellingCoffeeId.add(coffee);
-    }
-
-    public ArrayList<OrderModel> getPendingOrder() {
-        return pendingOrder;
-    }
-
-    public void setPendingOrder(ArrayList<OrderModel> pendingOrder) {
-        this.pendingOrder = pendingOrder;
     }
 
     public String getBaristaId() {
@@ -237,5 +209,13 @@ public class ProfileModel {
 
     public void setUserLocation(String userLocation) {
         this.userLocation = userLocation;
+    }
+
+    public ArrayList<BrewedOrderModel> getBrewedOrder() {
+        return brewedOrder;
+    }
+
+    public void addBrewedOrder(BrewedOrderModel order) {
+        this.brewedOrder.add(order);
     }
 }

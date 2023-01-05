@@ -45,15 +45,7 @@ public class BaristaListFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.activity_barista_list,container,false);
 
-        baristaListName = view.findViewById(R.id.baristaListName);
-        baristaListLocation = view.findViewById(R.id.baristaListLocation);
-        baristaListDesc = view.findViewById(R.id.baristaListDesc);
-        baristaListChatBtn = view.findViewById(R.id.baristaListChatBtn);
-        baristaListPic = view.findViewById(R.id.baristaListPic);
-        backBtn = (ImageButton) view.findViewById(R.id.backBtn);
-
-        baristaListRecyclerView = view.findViewById(R.id.coffeeListInBaristaRecyclerView);
-
+        initialiseId(view);
 
         for (int i = 0; i < Provider.getBaristas().size(); i++) {
             if(Provider.getBaristas().get(i).getBaristaId().equals(Provider.getCurrentBaristaId())){
@@ -97,8 +89,19 @@ public class BaristaListFragment extends Fragment {
         return view;
     }
 
+    private void initialiseId(View view) {
+        baristaListName = view.findViewById(R.id.baristaListName);
+        baristaListLocation = view.findViewById(R.id.baristaListLocation);
+        baristaListDesc = view.findViewById(R.id.baristaListDesc);
+        baristaListChatBtn = view.findViewById(R.id.baristaListChatBtn);
+        baristaListPic = view.findViewById(R.id.baristaListPic);
+        backBtn = (ImageButton) view.findViewById(R.id.backBtn);
 
-    private void querySellingCoffee() {
+        baristaListRecyclerView = view.findViewById(R.id.coffeeListInBaristaRecyclerView);
+    }
+
+
+        private void querySellingCoffee() {
         Handler handler = new Handler(Looper.getMainLooper());
         handler.post(new Runnable() {
             @Override
@@ -111,9 +114,7 @@ public class BaristaListFragment extends Fragment {
                 String[] data = new String[1];
                 data[0] = Provider.getBaristas().get(currentBaristaIndex).getBaristaId();
 
-                PutData putData = new PutData("http://192.168.100.11/CoffeeCommunityPHP/coffeeinbarista.php", "POST", field, data);
-
-//                FetchData fetchData = new FetchData("http://192.168.56.1/CoffeeCommunityPHP/coffeeinbarista.php");
+                PutData putData = new PutData("http://" + Provider.getIpAddress() + "/CoffeeCommunityPHP/coffeesoldbybarista.php", "POST", field, data);
                 if (putData.startPut()) {
                     if (putData.onComplete()) {
                         String result = putData.getResult();
