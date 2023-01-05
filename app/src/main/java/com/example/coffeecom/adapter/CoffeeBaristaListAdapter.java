@@ -2,6 +2,7 @@ package com.example.coffeecom.adapter;
 
 import static com.example.coffeecom.helper.ToTitleCase.toTitleCase;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.coffeecom.Provider;
 import com.example.coffeecom.R;
+import com.example.coffeecom.activity.BottomNavigationActivity;
 import com.example.coffeecom.fragment.CoffeeDetailsFragment;
 import com.example.coffeecom.model.BaristaModel;
 import com.example.coffeecom.model.CoffeeModel;
@@ -27,13 +29,15 @@ public class CoffeeBaristaListAdapter extends RecyclerView.Adapter<CoffeeBarista
     ArrayList<CoffeeModel> coffees;
     ArrayList<BaristaModel> baristaWithCoffee;
     BaristaModel currentBarista;
+    Context activity;
     char mode; //b for in barista or c for in coffee view
 
 
-    public CoffeeBaristaListAdapter(ArrayList<CoffeeModel> coffeesWithType, ArrayList<BaristaModel> baristaWithCoffee, char mode) {
+    public CoffeeBaristaListAdapter(ArrayList<CoffeeModel> coffeesWithType, ArrayList<BaristaModel> baristaWithCoffee, char mode, Context activity) {
         this.coffees = coffeesWithType;
         this.baristaWithCoffee = baristaWithCoffee;
         this.mode = mode;
+        this.activity = activity;
     }
 
     public CoffeeBaristaListAdapter(BaristaModel currentBarista, ArrayList<CoffeeModel> coffee, char mode) {
@@ -131,11 +135,7 @@ public class CoffeeBaristaListAdapter extends RecyclerView.Adapter<CoffeeBarista
             public void onClick(View view) {
                 //go to details coffee view
 //                Provider.setCurrentCoffeeId(currentBarista.getSellingCoffee().get(position).getCoffeeId());
-                AppCompatActivity activity = (AppCompatActivity) view.getContext();
-                CoffeeDetailsFragment coffeeDetailsFragment = new CoffeeDetailsFragment();
-                activity.getSupportFragmentManager().beginTransaction().replace(R.id.containerMainPage,coffeeDetailsFragment).addToBackStack(null).commit();
-//                Intent intent = new Intent(holder.itemView.getContext(), CoffeeDetailsActivity.class);
-//                holder.itemView.getContext().startActivity(intent);
+                ((BottomNavigationActivity)activity).replaceFragment(new CoffeeDetailsFragment());
             }
         });
 

@@ -22,6 +22,7 @@ import com.example.coffeecom.model.BaristaModel;
 import com.example.coffeecom.model.CoffeeModel;
 import com.example.coffeecom.model.ProfileModel;
 import com.vishnusivadas.advanced_httpurlconnection.FetchData;
+import com.vishnusivadas.advanced_httpurlconnection.PutData;
 
 import java.util.ArrayList;
 
@@ -62,42 +63,34 @@ public class HomeActivityFragment extends Fragment {
             @Override
             public void run() {
                 FetchData fetchData = new FetchData("http://" + Provider.getIpAddress()+ "/CoffeeCommunityPHP/profile.php");
+                String[] field = new String[1];
+                field[0] = "username";
 
-                if (fetchData.startFetch()) {
-                    if (fetchData.onComplete()) {
-                        String result = fetchData.getResult();
-                        //End ProgressBar (Set visibility to GONE)
-                        String[] resultSplitted = result.split("split");
-                        for (String str: resultSplitted) {
-//                            Log.i(str, "Printing all user...");
+                //Creating array for data
+                String[] data = new String[1];
+                data[0] = Provider.getUser().getUserId();
 
-                            String[] profileDetails = str.split(" - ");
-                            String userId = profileDetails[0];
+                PutData putData = new PutData("http://" + Provider.getIpAddress() + "/CoffeeCommunityPHP/profile.php", "POST", field, data);
+                if (putData.startPut()) {
+                    if (putData.onComplete()) {
+                        String result = putData.getResult();
 
-                            try{
-                                Provider.getUser().getUserId();
-                                Log.i(Provider.getUser().getUserName(), "User Existed in Provider");
+                        String[] profileDetails = result.split(" - ");
+                        String userId = profileDetails[0];
+                        String picUrl = profileDetails[1];
+                        String baristaId = profileDetails[2];
+                        String adminId = profileDetails[3];
+                        String userName = profileDetails[4];
+                        String email = profileDetails[5];
+                        String streetNo = profileDetails[6];
+                        String taman = profileDetails[7];
+                        int postCode = Integer.parseInt(profileDetails[8]);
+                        String state = profileDetails[9];
 
-                            }catch(NullPointerException e){
-                                if(userId.equals(Provider.getUser().getUserId())){
-                                    String picUrl = profileDetails[1];
-                                    String userName = profileDetails[2];
-                                    String email = profileDetails[3];
-                                    String streetNo = profileDetails[4];
-                                    String taman = profileDetails[5];
-                                    int postCode = Integer.parseInt(profileDetails[6]);
-                                    String state = profileDetails[7];
+                        Provider.getUser().setUserDetails(picUrl, userId, baristaId, adminId, userName, email, streetNo, taman, postCode, state);
 
-                                    String walletId = profileDetails[8];
-                                    double walletBalance = Double.valueOf(profileDetails[9]);
-                                    String walletPin = profileDetails[10];
+                        Log.i(Provider.getUser().getUserName(), "User Updated in Provider" + Provider.getUser().getUserId());
 
-                                    Provider.getUser().setUserDetails(picUrl, userId, userName, email, "user", streetNo, taman, postCode, state, walletId, walletPin, walletBalance);
-                                    Log.i(Provider.getUser().getUserName(), "User Updated in Provider");
-
-                                }
-                            }
-                        }
                     }
                 }
             }
@@ -109,7 +102,7 @@ public class HomeActivityFragment extends Fragment {
         handler.post(new Runnable() {
             @Override
             public void run() {
-                FetchData fetchData = new FetchData("http://" + Provider.getIpAddress()+ "/CoffeeCommunityPHP/coffee.php");
+                FetchData fetchData = new FetchData("http://" + Provider.getIpAddress() + "/CoffeeCommunityPHP/coffee.php");
 
                 if (fetchData.startFetch()) {
                     if (fetchData.onComplete()) {
@@ -195,7 +188,7 @@ public class HomeActivityFragment extends Fragment {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
         recyclerViewCoffeeTypeList.setLayoutManager(linearLayoutManager);
 
-        coffeeTypeAdapter = new CoffeeTypeAdapter(coffeeTypeA, coffeePicA);
+        coffeeTypeAdapter = new CoffeeTypeAdapter(coffeeTypeA, coffeePicA, getActivity());
         recyclerViewCoffeeTypeList.setAdapter(coffeeTypeAdapter);
     }
 
@@ -203,7 +196,7 @@ public class HomeActivityFragment extends Fragment {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
         recyclerViewBaristaList.setLayoutManager(linearLayoutManager);
 
-        baristaAdapter = new BaristaCardAdapter(Provider.getBaristas());
+        baristaAdapter = new BaristaCardAdapter(Provider.getBaristas(),getActivity());
         recyclerViewBaristaList.setAdapter(baristaAdapter);
     }
 

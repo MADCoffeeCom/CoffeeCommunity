@@ -7,18 +7,16 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MenuItem;
 
 import com.example.coffeecom.R;
+import com.example.coffeecom.fragment.BaristaFragment;
 import com.example.coffeecom.fragment.HomeActivityFragment;
 import com.example.coffeecom.fragment.LearnActivityFragment;
 import com.example.coffeecom.fragment.NewBaristaFragment;
 import com.example.coffeecom.fragment.ProfileMainFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
-
-import java.util.ArrayList;
 
 /*
 This class is to let each activity and xml to copy and paste it to the corresponding activity
@@ -35,7 +33,8 @@ public class BottomNavigationActivity extends AppCompatActivity {
     ProfileMainFragment profileMain = new ProfileMainFragment();
     LearnActivityFragment learnMain = new LearnActivityFragment();
     HomeActivityFragment homeMain = new HomeActivityFragment();
-    NewBaristaFragment baristaMain = new NewBaristaFragment();
+    NewBaristaFragment newBaristaMain = new NewBaristaFragment();
+    BaristaFragment baristaMain = new BaristaFragment();
 
     FragmentManager manager;
 

@@ -55,9 +55,11 @@ public class WalletPinFragment extends Fragment {
                     Provider.setRedirectedCls(WalletFragment.class);
 
 //                    startActivity(new Intent(getContext(), StatusActivity.class));
-                    AppCompatActivity activity = (AppCompatActivity) view.getContext();
-                    StatusFragment statusFragment = new StatusFragment();
-                    activity.getSupportFragmentManager().beginTransaction().replace(R.id.containerMainPage,statusFragment).addToBackStack(null).commit();
+
+                    //think how to link to various fragment
+//                    AppCompatActivity activity = (AppCompatActivity) view.getContext();
+//                    StatusFragment statusFragment = new StatusFragment();
+//                    activity.getSupportFragmentManager().beginTransaction().replace(R.id.containerMainPage,statusFragment).addToBackStack(null).commit();
                 }else{
                     errorPinText.setVisibility(View.VISIBLE);
                     pinNumberTextBox.setText("");

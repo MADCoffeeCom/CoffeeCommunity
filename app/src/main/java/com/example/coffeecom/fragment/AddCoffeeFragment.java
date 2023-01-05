@@ -24,12 +24,7 @@ public class AddCoffeeFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.activity_add_coffee,container,false);
 
-        coffeeNameTextBox = view.findViewById(R.id.coffeeNameTextBox);
-        coffeeDescTextBox = view.findViewById(R.id.coffeeDescTextBox);
-        coffeePriceTextBox = view.findViewById(R.id.coffeePriceTextBox);
-        coffeeTypeTextBox = view.findViewById(R.id.coffeeTypeTextBox);
-        coffeeIngredientsTextBox = view.findViewById(R.id.coffeeIngredientsTextBox);
-        addCoffeeBtn = view.findViewById(R.id.addCoffeeBtn);
+        initialiseId(view);
 
         addCoffeeBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -42,7 +37,17 @@ public class AddCoffeeFragment extends Fragment {
         return view;
     }
 
-    private void addNewCoffee() {
+    private void initialiseId(View view) {
+        coffeeNameTextBox = view.findViewById(R.id.coffeeNameTextBox);
+        coffeeDescTextBox = view.findViewById(R.id.coffeeDescTextBox);
+        coffeePriceTextBox = view.findViewById(R.id.coffeePriceTextBox);
+        coffeeTypeTextBox = view.findViewById(R.id.coffeeTypeTextBox);
+        coffeeIngredientsTextBox = view.findViewById(R.id.coffeeIngredientsTextBox);
+        addCoffeeBtn = view.findViewById(R.id.addCoffeeBtn);
+    }
+
+
+        private void addNewCoffee() {
 
         String coffeePicUrl = "";
         String coffeeId = "";

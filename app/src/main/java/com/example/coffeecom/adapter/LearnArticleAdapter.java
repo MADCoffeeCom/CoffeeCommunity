@@ -18,6 +18,7 @@ import com.bumptech.glide.Glide;
 import com.example.coffeecom.Provider;
 import com.example.coffeecom.R;
 import com.example.coffeecom.activity.BottomNavigationActivity;
+import com.example.coffeecom.fragment.CoffeeDetailsFragment;
 import com.example.coffeecom.fragment.LearnDetailsFragment;
 import com.example.coffeecom.fragment.TransactionFragment;
 import com.example.coffeecom.model.ArticleModel;
@@ -71,7 +72,7 @@ public class LearnArticleAdapter extends RecyclerView.Adapter<LearnArticleAdapte
             public void onClick(View view) {
                 //input code here to open learn article details page
                 Provider.setCurrentArticleId(articles.get(position).getArticleId());
-                ((BottomNavigationActivity)activity).replaceFragment(new TransactionFragment());
+                ((BottomNavigationActivity)activity).replaceFragment(new LearnDetailsFragment());
             }
         });
 
