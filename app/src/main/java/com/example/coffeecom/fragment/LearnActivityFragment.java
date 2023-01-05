@@ -1,5 +1,6 @@
 package com.example.coffeecom.fragment;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -9,11 +10,13 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.coffeecom.Provider;
 import com.example.coffeecom.R;
+import com.example.coffeecom.activity.BottomNavigationActivity;
 import com.example.coffeecom.adapter.LearnArticleAdapter;
 import com.example.coffeecom.model.ArticleModel;
 import com.vishnusivadas.advanced_httpurlconnection.FetchData;
@@ -50,7 +53,7 @@ public class LearnActivityFragment extends Fragment {
         handler.post(new Runnable() {
             @Override
             public void run() {
-                FetchData fetchData = new FetchData("http://10.167.58.200/CoffeeCommunityPHP/article.php");
+                FetchData fetchData = new FetchData("http://" + Provider.getIpAddress() + "/CoffeeCommunityPHP/article.php");
                 if (fetchData.startFetch()) {
                     if (fetchData.onComplete()) {
                         String result = fetchData.getResult();
@@ -98,7 +101,7 @@ public class LearnActivityFragment extends Fragment {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
         recyclerViewGeneralArticleList.setLayoutManager(linearLayoutManager);
 
-        learnArticleAdapter = new LearnArticleAdapter(articles, getContext());
+        learnArticleAdapter = new LearnArticleAdapter(articles, getActivity());
         recyclerViewGeneralArticleList.setAdapter(learnArticleAdapter);
     }
 
@@ -106,7 +109,7 @@ public class LearnActivityFragment extends Fragment {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
         recyclerViewCoffeeHistoryArticleList.setLayoutManager(linearLayoutManager);
 
-        learnArticleAdapter = new LearnArticleAdapter(articles, getContext());
+        learnArticleAdapter = new LearnArticleAdapter(articles, getActivity());
         recyclerViewCoffeeHistoryArticleList.setAdapter(learnArticleAdapter);
     }
 
@@ -114,7 +117,7 @@ public class LearnActivityFragment extends Fragment {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
         recyclerViewCoffeeBeanArticleList.setLayoutManager(linearLayoutManager);
 
-        learnArticleAdapter = new LearnArticleAdapter(articles, getContext());
+        learnArticleAdapter = new LearnArticleAdapter(articles, getActivity());
         recyclerViewCoffeeBeanArticleList.setAdapter(learnArticleAdapter);
     }
 
@@ -122,7 +125,7 @@ public class LearnActivityFragment extends Fragment {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
         recyclerViewLearnArticleList.setLayoutManager(linearLayoutManager);
 
-        learnArticleAdapter = new LearnArticleAdapter(articles, getContext());
+        learnArticleAdapter = new LearnArticleAdapter(articles, getActivity());
         recyclerViewLearnArticleList.setAdapter(learnArticleAdapter);
     }
 

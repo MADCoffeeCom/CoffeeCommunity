@@ -30,12 +30,8 @@ public class ProfileModel {
     private ArrayList<BankCardModel> bankCard = new ArrayList<>();
     private ArrayList<OrderModel> pendingOrder = new ArrayList<>();
 
-
     public ProfileModel(String a) {
         this.userId = a;
-    }
-
-    public ProfileModel() {
     }
 
     public ProfileModel(String baristaId, String userPic, String userStreetNo, String userTaman, int userPostalCode, ArrayList<String> sellingCoffee) {

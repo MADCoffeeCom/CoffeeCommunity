@@ -17,6 +17,9 @@ import com.example.coffeecom.R;
 import com.example.coffeecom.model.ProfileModel;
 import com.vishnusivadas.advanced_httpurlconnection.PutData;
 
+import java.net.MalformedURLException;
+import java.net.URL;
+
 public class LoginActivity extends AppCompatActivity {
 
     @Override
@@ -99,5 +102,10 @@ public class LoginActivity extends AppCompatActivity {
 //        }else Toast.makeText(this,"LOGIN FAILED", Toast.LENGTH_SHORT).show();
 //        Intent intent = new Intent(this, LoginActivity.class);
 //        startActivity(intent);
+    }
+
+    public URL convertToUrl(String str) throws MalformedURLException {
+        URL url = new URL(str );
+        return url;
     }
 }

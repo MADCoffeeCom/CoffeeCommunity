@@ -27,11 +27,6 @@ public class Provider{
         return ipAddress;
     }
 
-    public static void setIpAddress(String ipAddress) {
-        Provider.ipAddress = ipAddress;
-    }
-
-
     private static ArrayList<TransactionModel> transactions = new ArrayList<>();
 
     public static ArrayList<CoffeeModel> getCoffees() {

@@ -109,11 +109,9 @@ public class HomeActivityFragment extends Fragment {
         handler.post(new Runnable() {
             @Override
             public void run() {
-                Log.i("beforeFetch ", "beforeFetch");
-                FetchData fetchData = new FetchData("http://192.168.100.11/CoffeeCommunityPHP/coffee.php");
-                Log.i("beforeFetch ", "beforeFetch2 ");
+                FetchData fetchData = new FetchData("http://10.167.58.200/CoffeeCommunityPHP/coffee.php");
+
                 if (fetchData.startFetch()) {
-                    Log.i("startFetch running", "fetching");
                     if (fetchData.onComplete()) {
                         String result = fetchData.getResult();
                         String[] resultSplitted = new String[11];

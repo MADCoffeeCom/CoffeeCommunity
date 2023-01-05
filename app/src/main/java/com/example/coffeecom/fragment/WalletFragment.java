@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.coffeecom.Provider;
 import com.example.coffeecom.R;
+import com.example.coffeecom.activity.BottomNavigationActivity;
 import com.example.coffeecom.adapter.BankCardAdapter;
 
 
@@ -72,9 +73,7 @@ public class WalletFragment extends Fragment {
         transactionBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                AppCompatActivity activity = (AppCompatActivity) view.getContext();
-                TransactionFragment transactionFragment = new TransactionFragment();
-                activity.getSupportFragmentManager().beginTransaction().replace(R.id.containerMainPage,transactionFragment).addToBackStack(null).commit();
+                ((BottomNavigationActivity)getActivity()).replaceFragment(new TransactionFragment());
             }
         });
         recyclerViewBankCard();
