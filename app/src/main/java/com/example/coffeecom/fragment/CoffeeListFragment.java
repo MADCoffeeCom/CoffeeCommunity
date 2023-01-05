@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.coffeecom.Provider;
 import com.example.coffeecom.R;
+import com.example.coffeecom.activity.BottomNavigationActivity;
 import com.example.coffeecom.adapter.CoffeeBaristaListAdapter;
 import com.example.coffeecom.model.BaristaModel;
 import com.example.coffeecom.model.CoffeeModel;
@@ -45,10 +46,7 @@ public class CoffeeListFragment extends Fragment {
         backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                AppCompatActivity activity = (AppCompatActivity) view.getContext();
-
-                HomeActivityFragment buyCoffeeHome = new HomeActivityFragment();
-                activity.getSupportFragmentManager().beginTransaction().replace(R.id.containerMainPage,buyCoffeeHome).addToBackStack(null).commit();
+                ((BottomNavigationActivity)getActivity()).onBackPressed();
             }
 
         });
@@ -66,7 +64,7 @@ public class CoffeeListFragment extends Fragment {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
         coffeeListInBaristaRecyclerView.setLayoutManager(linearLayoutManager);
 
-        coffeeListInBaristaAdapter = new CoffeeBaristaListAdapter(coffeesWithType, baristaWithCoffee, 'c');
+        coffeeListInBaristaAdapter = new CoffeeBaristaListAdapter(coffeesWithType, baristaWithCoffee, 'c', getActivity());
         coffeeListInBaristaRecyclerView.setAdapter(coffeeListInBaristaAdapter);
     }
 

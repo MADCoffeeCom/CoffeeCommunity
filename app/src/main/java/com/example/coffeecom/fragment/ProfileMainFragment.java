@@ -51,24 +51,7 @@ public class ProfileMainFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.activity_profile_main,container,false);
 
-        txtProfileName = view.findViewById(R.id.textViewProfileName);
-        txtProfileType = view.findViewById(R.id.textViewProfileType);
-
-        btnEditProfile = view.findViewById(R.id.imageButtonProfileEdit);
-
-        btnTerms = view.findViewById(R.id.btnProfile1);
-        btnPrivacy = view.findViewById(R.id.btnProfile2);
-        btnBankCard = view.findViewById(R.id.btnProfile3);
-        btnHelpDesk = view.findViewById(R.id.btnProfile4);
-        btnFeedback = view.findViewById(R.id.btnProfile5);
-        btnLogOut = view.findViewById(R.id.btnProfile6);
-
-        imgBarista = view.findViewById(R.id.baristaPic);
-
-        //code for
-        orderListRV = view.findViewById(R.id.orderListRV);
-        brewListRV = view.findViewById(R.id.brewListRV);
-        postListRV = view.findViewById(R.id.postListRV);
+        initialiseID(view);
 
         // to edit profile name, picture, etc
         // after got SQL, this line should be altered
@@ -122,5 +105,26 @@ public class ProfileMainFragment extends Fragment {
 
         // Inflate the layout for this fragment
         return view;
+    }
+
+    private void initialiseID(View view){
+        txtProfileName = view.findViewById(R.id.textViewProfileName);
+        txtProfileType = view.findViewById(R.id.textViewProfileType);
+
+        btnEditProfile = view.findViewById(R.id.imageButtonProfileEdit);
+
+        btnTerms = view.findViewById(R.id.btnProfile1);
+        btnPrivacy = view.findViewById(R.id.btnProfile2);
+        btnBankCard = view.findViewById(R.id.btnProfile3);
+        btnHelpDesk = view.findViewById(R.id.btnProfile4);
+        btnFeedback = view.findViewById(R.id.btnProfile5);
+        btnLogOut = view.findViewById(R.id.btnProfile6);
+
+        imgBarista = view.findViewById(R.id.baristaPic);
+
+        //code for
+        orderListRV = view.findViewById(R.id.orderListRV);
+        brewListRV = view.findViewById(R.id.brewListRV);
+        postListRV = view.findViewById(R.id.postListRV);
     }
 }

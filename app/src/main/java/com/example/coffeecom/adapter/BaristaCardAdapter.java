@@ -3,6 +3,7 @@ package com.example.coffeecom.adapter;
 import static com.example.coffeecom.helper.CoordinateToDistance.coordinateToDistance;
 import static com.example.coffeecom.helper.ToTitleCase.toTitleCase;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +18,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.coffeecom.Provider;
 import com.example.coffeecom.R;
+import com.example.coffeecom.activity.BottomNavigationActivity;
 import com.example.coffeecom.fragment.BaristaListFragment;
 import com.example.coffeecom.model.BaristaModel;
 
@@ -25,10 +27,11 @@ import java.util.ArrayList;
 public class BaristaCardAdapter extends RecyclerView.Adapter<BaristaCardAdapter.ViewHolder>{
 
     ArrayList<BaristaModel> baristas;
+    Context activity;
 
-
-    public BaristaCardAdapter(ArrayList<BaristaModel> baristas) {
+    public BaristaCardAdapter(ArrayList<BaristaModel> baristas, Context activity) {
         this.baristas = baristas;
+        this.activity = activity;
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
@@ -68,13 +71,8 @@ public class BaristaCardAdapter extends RecyclerView.Adapter<BaristaCardAdapter.
             @Override
             public void onClick(View view) {
                 //input code to open details coffee page
-                AppCompatActivity activity = (AppCompatActivity) view.getContext();
-                BaristaListFragment baristaList = new BaristaListFragment();
                 Provider.setCurrentBaristaId(baristas.get(holder.getAdapterPosition()).getBaristaId());
-                activity.getSupportFragmentManager().beginTransaction().replace(R.id.containerMainPage,baristaList).addToBackStack(null).commit();
-                //this code still need to refine
-//                Intent intent = new Intent(holder.itemView.getContext(), BaristaListActivity.class);
-//                holder.itemView.getContext().startActivity(intent);
+                ((BottomNavigationActivity)activity).replaceFragment(new BaristaListFragment());
             }
         });
     }

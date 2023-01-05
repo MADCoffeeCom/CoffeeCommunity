@@ -1,6 +1,7 @@
 package com.example.coffeecom.adapter;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.coffeecom.Provider;
 import com.example.coffeecom.R;
+import com.example.coffeecom.activity.BottomNavigationActivity;
 import com.example.coffeecom.fragment.CoffeeListFragment;
 
 import java.util.ArrayList;
@@ -24,10 +26,12 @@ public class CoffeeTypeAdapter extends RecyclerView.Adapter<CoffeeTypeAdapter.Vi
 
     ArrayList<String> coffeeType;
     ArrayList<String> coffeePic;
+    Context activity;
 
-    public CoffeeTypeAdapter(ArrayList<String> coffeeType, ArrayList<String> coffeePic) {
+    public CoffeeTypeAdapter(ArrayList<String> coffeeType, ArrayList<String> coffeePic, Context activity) {
         this.coffeePic = coffeePic;
         this.coffeeType = coffeeType;
+        this.activity = activity;
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{
@@ -69,13 +73,7 @@ public class CoffeeTypeAdapter extends RecyclerView.Adapter<CoffeeTypeAdapter.Vi
                 Log.i("Coffeetype in adapter", coffeeType.get(position));
                 Provider.setCurrentCoffeeType(coffeeType.get(position));
 
-                AppCompatActivity activity = (AppCompatActivity) view.getContext();
-                CoffeeListFragment coffeeList = new CoffeeListFragment();
-                activity.getSupportFragmentManager().beginTransaction().replace(R.id.containerMainPage,coffeeList).addToBackStack(null).commit();
-                //check whether if will set to the correct view
-//                Intent intent = new Intent(holder.itemView.getContext(), CoffeeListActivity.class);
-//                holder.itemView.getContext().startActivity(intent);
-
+                ((BottomNavigationActivity)activity).replaceFragment(new CoffeeListFragment());
             }
         });
     }

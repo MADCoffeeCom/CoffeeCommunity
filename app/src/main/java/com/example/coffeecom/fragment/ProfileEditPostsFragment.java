@@ -39,13 +39,6 @@ public class ProfileEditPostsFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.activity_profile_edit_posts,container,false);
 
-        imagePostRV = view.findViewById(R.id.imagePostRV);
-        captionEdit = view.findViewById(R.id.editTextCaption);
-        btnBack = view.findViewById(R.id.imgEditPostBack);
-        btnAddPicture = view.findViewById(R.id.imgEditPostButtonAddPicture);
-        btnUpdatePost = view.findViewById(R.id.btnUpdatePost);
-        btnDeletePost = view.findViewById(R.id.btnDeletePost);
-
         myImageArrayList = new ArrayList<>();
         myImageArrayList.add(R.drawable.barista1);
         myImageArrayList.add(R.drawable.coffee1);
@@ -54,9 +47,6 @@ public class ProfileEditPostsFragment extends Fragment {
         myImageArrayList.add(R.drawable.barista1);
         myImageArrayList.add(R.drawable.barista1);
 
-
-
-
         imageAdapter = new ProfileEditPostsAdapter(getContext(),myImageArrayList);
         imagePostRV.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
 
@@ -64,5 +54,14 @@ public class ProfileEditPostsFragment extends Fragment {
 
         // Inflate the layout for this fragment
         return view;
+    }
+
+    private void initialiseID(View view){
+        imagePostRV = view.findViewById(R.id.imagePostRV);
+        captionEdit = view.findViewById(R.id.editTextCaption);
+        btnBack = view.findViewById(R.id.imgEditPostBack);
+        btnAddPicture = view.findViewById(R.id.imgEditPostButtonAddPicture);
+        btnUpdatePost = view.findViewById(R.id.btnUpdatePost);
+        btnDeletePost = view.findViewById(R.id.btnDeletePost);
     }
 }

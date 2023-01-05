@@ -195,7 +195,7 @@ public class HomeActivityFragment extends Fragment {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
         recyclerViewCoffeeTypeList.setLayoutManager(linearLayoutManager);
 
-        coffeeTypeAdapter = new CoffeeTypeAdapter(coffeeTypeA, coffeePicA);
+        coffeeTypeAdapter = new CoffeeTypeAdapter(coffeeTypeA, coffeePicA, getActivity());
         recyclerViewCoffeeTypeList.setAdapter(coffeeTypeAdapter);
     }
 
@@ -203,7 +203,7 @@ public class HomeActivityFragment extends Fragment {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
         recyclerViewBaristaList.setLayoutManager(linearLayoutManager);
 
-        baristaAdapter = new BaristaCardAdapter(Provider.getBaristas());
+        baristaAdapter = new BaristaCardAdapter(Provider.getBaristas(),getActivity());
         recyclerViewBaristaList.setAdapter(baristaAdapter);
     }
 

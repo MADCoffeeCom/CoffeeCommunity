@@ -12,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import com.example.coffeecom.R;
+import com.example.coffeecom.activity.BottomNavigationActivity;
 
 
 public class NewBaristaFragment extends Fragment {
@@ -39,9 +40,7 @@ public class NewBaristaFragment extends Fragment {
             public void onClick(View view) {
                 if(experiencesTextBox.getText().length() != 0 && yearsOfExperiencesTextBox.length() != 0){
                     //Write sql code here to directly update database
-                    AppCompatActivity activity = (AppCompatActivity) view.getContext();
-                    BaristaFragment baristaHome = new BaristaFragment();
-                    activity.getSupportFragmentManager().beginTransaction().replace(R.id.containerMainPage,baristaHome).addToBackStack(null).commit();
+                    ((BottomNavigationActivity)getActivity()).replaceFragment(new BaristaFragment());
 
                     Toast.makeText(getContext(), "Application submitted!", Toast.LENGTH_SHORT);
                 }else{

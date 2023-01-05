@@ -1,20 +1,28 @@
 package com.example.coffeecom.adapter;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.coffeecom.Provider;
 import com.example.coffeecom.R;
+import com.example.coffeecom.activity.BottomNavigationActivity;
 import com.example.coffeecom.fragment.AddBankCardFragment;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class BankCardAdapter extends RecyclerView.Adapter<BankCardAdapter.ViewHolder>{
+
+    Context activity;
+
+    public BankCardAdapter(Context activity) {
+        this.activity = activity;
+    }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         TextView bankNameText;
@@ -40,9 +48,10 @@ public class BankCardAdapter extends RecyclerView.Adapter<BankCardAdapter.ViewHo
         holder.bankCardCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                AppCompatActivity activity = (AppCompatActivity) view.getContext();
-                AddBankCardFragment addBankCard = new AddBankCardFragment();
-                activity.getSupportFragmentManager().beginTransaction().replace(R.id.containerMainPage,addBankCard).addToBackStack(null).commit();
+                ((BottomNavigationActivity) activity).replaceFragment(new AddBankCardFragment());
+//                AppCompatActivity activity = (AppCompatActivity) view.getContext();
+//                AddBankCardFragment addBankCard = new AddBankCardFragment();
+//                activity.getSupportFragmentManager().beginTransaction().replace(R.id.containerMainPage,addBankCard).addToBackStack(null).commit();
             }
         });
     }

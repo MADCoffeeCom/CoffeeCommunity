@@ -16,6 +16,7 @@ import android.widget.TextView;
 
 import com.example.coffeecom.Provider;
 import com.example.coffeecom.R;
+import com.example.coffeecom.activity.BottomNavigationActivity;
 
 
 public class CoffeeWalletFragment extends Fragment {
@@ -58,10 +59,7 @@ public class CoffeeWalletFragment extends Fragment {
         topUpWalletBtnFragment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                AppCompatActivity activity = (AppCompatActivity) view.getContext();
-
-                WalletFragment walletFragment = new WalletFragment();
-                activity.getSupportFragmentManager().beginTransaction().replace(R.id.containerMainPage,walletFragment).addToBackStack(null).commit();
+                ((BottomNavigationActivity)getActivity()).replaceFragment(new WalletFragment());
             }
         });
     }

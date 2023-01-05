@@ -18,6 +18,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.coffeecom.Provider;
 import com.example.coffeecom.R;
+import com.example.coffeecom.activity.BottomNavigationActivity;
 import com.example.coffeecom.adapter.RatingBarAdapter;
 import com.example.coffeecom.model.BaristaModel;
 import com.example.coffeecom.model.CoffeeModel;
@@ -52,24 +53,7 @@ public class CoffeeDetailsFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.activity_coffee_details,container,false);
 
-        coffeeDetailsNameText = view.findViewById(R.id.coffeeDetailsNameText);
-        baristaNameCoffeeDetailsText = view.findViewById(R.id.baristaNameCoffeeDetailsText);
-        baristaLocationCoffeeDetailsText = view.findViewById(R.id.baristaLocationCoffeeDetailsText);
-        coffeeDescCoffeeDetailsText = view.findViewById(R.id.coffeeDescCoffeeDetailsText);
-        noRatingText = view.findViewById(R.id.noRatingText);
-        ingredientText = view.findViewById(R.id.ingredientText);
-
-        ratingRecyclerView = view.findViewById(R.id.ratingRecyclerView);
-
-        totalPriceCoffeeDetailsText = view.findViewById(R.id.totalPriceCoffeeDetailsText);
-        noOfCoffeeOrderedText = view.findViewById(R.id.noOfCoffeeOrderedText);
-
-        plusBtnCoffeeDetails = view.findViewById(R.id.plusBtnCoffeeDetails);
-        minusBtnCoffeeDetails = view.findViewById(R.id.minusBtnCoffeeDetails);
-        addToCartBtnCoffeeDetails = view.findViewById(R.id.addToCartBtnCoffeeDetails);
-        coffeeDetailsBackBtn = view.findViewById(R.id.coffeeDetailsBackBtn);
-
-        ratingRecyclerView = view.findViewById(R.id.ratingRecyclerView);
+        initialiseId(view);
 
 
         for (int i = 0; i < Provider.getBaristas().size(); i++) {
@@ -122,11 +106,7 @@ public class CoffeeDetailsFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 //set the previous button fragment
-                AppCompatActivity activity = (AppCompatActivity) view.getContext();
-
-                CoffeeListFragment coffeeList = new CoffeeListFragment();
-                activity.getSupportFragmentManager().beginTransaction().replace(R.id.containerMainPage,coffeeList).addToBackStack(null).commit();
-
+                ((BottomNavigationActivity)getActivity()).onBackPressed();
             }
         });
 
@@ -136,6 +116,27 @@ public class CoffeeDetailsFragment extends Fragment {
 
         // Inflate the layout for this fragment
         return view;
+    }
+
+    private void initialiseId(View view){
+        coffeeDetailsNameText = view.findViewById(R.id.coffeeDetailsNameText);
+        baristaNameCoffeeDetailsText = view.findViewById(R.id.baristaNameCoffeeDetailsText);
+        baristaLocationCoffeeDetailsText = view.findViewById(R.id.baristaLocationCoffeeDetailsText);
+        coffeeDescCoffeeDetailsText = view.findViewById(R.id.coffeeDescCoffeeDetailsText);
+        noRatingText = view.findViewById(R.id.noRatingText);
+        ingredientText = view.findViewById(R.id.ingredientText);
+
+        ratingRecyclerView = view.findViewById(R.id.ratingRecyclerView);
+
+        totalPriceCoffeeDetailsText = view.findViewById(R.id.totalPriceCoffeeDetailsText);
+        noOfCoffeeOrderedText = view.findViewById(R.id.noOfCoffeeOrderedText);
+
+        plusBtnCoffeeDetails = view.findViewById(R.id.plusBtnCoffeeDetails);
+        minusBtnCoffeeDetails = view.findViewById(R.id.minusBtnCoffeeDetails);
+        addToCartBtnCoffeeDetails = view.findViewById(R.id.addToCartBtnCoffeeDetails);
+        coffeeDetailsBackBtn = view.findViewById(R.id.coffeeDetailsBackBtn);
+
+        ratingRecyclerView = view.findViewById(R.id.ratingRecyclerView);
     }
 
 
