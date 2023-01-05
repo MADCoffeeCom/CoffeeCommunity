@@ -6,22 +6,25 @@ import java.util.Date;
 public class OrderModel {
 
     private String orderId;
-    private Date orderStartTime;
-    private Date orderFulfillTime;
-    private double orderTotalPrice;
     private String baristaId;
     private String userId;
+    private Date orderStartTime;
+    private Date orderFulfillTime;
+    private Date duration;
+    private double orderTotalPrice;
+    private String orderStatus; //pending, accepted, declined, taken
     private ArrayList<CoffeeModel> orderedCoffee;
-    private String orderStatus; //pending, accepted, declined
     private String orderHistoryDateTime, orderHistoryImage, orderHistoryTotalItems;
 
-    public OrderModel(String orderId, Date orderStartTime, double orderTotalPrice, String baristaId, String userId, ArrayList<CoffeeModel> orderedCoffee) {
+    public OrderModel(String orderId, String baristaId, String userId, Date orderStartTime, Date orderFulfillTime, Date duration, double orderTotalPrice, String orderStatus) {
         this.orderId = orderId;
-        this.orderStartTime = orderStartTime;
-        this.orderTotalPrice = orderTotalPrice;
         this.baristaId = baristaId;
         this.userId = userId;
-        this.orderedCoffee = orderedCoffee;
+        this.orderStartTime = orderStartTime;
+        this.orderFulfillTime = orderFulfillTime;
+        this.duration = duration;
+        this.orderTotalPrice = orderTotalPrice;
+        this.orderStatus = orderStatus;
     }
 
     //this is for Order History in Profile Page
@@ -68,7 +71,7 @@ public class OrderModel {
         return orderStartTime;
     }
 
-    public void setOrderStartTime(Date orderStartTime) {
+    public void setOrderStartTime(java.sql.Date orderStartTime) {
         this.orderStartTime = orderStartTime;
     }
 
@@ -76,7 +79,7 @@ public class OrderModel {
         return orderFulfillTime;
     }
 
-    public void setOrderFulfillTime(Date orderFulfillTime) {
+    public void setOrderFulfillTime(java.sql.Date orderFulfillTime) {
         this.orderFulfillTime = orderFulfillTime;
     }
 
