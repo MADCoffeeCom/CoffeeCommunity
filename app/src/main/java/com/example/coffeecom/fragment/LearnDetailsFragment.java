@@ -18,6 +18,7 @@ import androidx.fragment.app.Fragment;
 import com.bumptech.glide.Glide;
 import com.example.coffeecom.Provider;
 import com.example.coffeecom.R;
+import com.example.coffeecom.activity.BottomNavigationActivity;
 import com.example.coffeecom.model.ArticleModel;
 import com.vishnusivadas.advanced_httpurlconnection.PutData;
 
@@ -146,8 +147,7 @@ public class LearnDetailsFragment extends Fragment {
         learnDetailsBckBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                AppCompatActivity activity = (AppCompatActivity) view.getContext();
-                activity.getSupportFragmentManager().popBackStack();
+                ((BottomNavigationActivity)getActivity()).onBackPressed();
             }
         });
     }

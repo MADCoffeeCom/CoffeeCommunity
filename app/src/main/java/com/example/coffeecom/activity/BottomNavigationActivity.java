@@ -90,7 +90,7 @@ public class BottomNavigationActivity extends AppCompatActivity {
         }
     }
 
-    private void replaceFragment (Fragment fragment, MenuItem item){
+    public void replaceFragment (Fragment fragment, MenuItem item){
         String backStateName = fragment.getClass().getName();
         boolean fragmentPopped = manager.popBackStackImmediate (backStateName, 0);
 
@@ -104,9 +104,27 @@ public class BottomNavigationActivity extends AppCompatActivity {
             );
             ft.replace(container, fragment);
             item.setChecked(true);
-            if (!isMainItem(item)){
-                ft.addToBackStack(backStateName);
-            }
+//            if (!isMainItem(item)){
+//                ft.addToBackStack(backStateName);
+//            }
+            ft.commit();
+        }
+    }
+
+    public void replaceFragment (Fragment fragment){
+        String backStateName = fragment.getClass().getName();
+        boolean fragmentPopped = manager.popBackStackImmediate (backStateName, 0);
+
+        if (!fragmentPopped){ //fragment not in back stack, create it.
+            FragmentTransaction ft = manager.beginTransaction();
+            ft.setCustomAnimations(
+                    R.anim.fade_in,  // enter
+                    R.anim.fade_out,  // exit
+                    R.anim.fade_in,   // popEnter
+                    R.anim.slide_out  // popExit
+            );
+            ft.replace(container, fragment);
+            ft.addToBackStack(backStateName);
             ft.commit();
         }
     }
