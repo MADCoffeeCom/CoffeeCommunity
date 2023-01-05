@@ -41,21 +41,22 @@
         style="@style/c2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
         android:text="0.00"
         app:layout_constraintBottom_toBottomOf="@+id/textView11"
-        app:layout_constraintStart_toEndOf="@+id/textView11"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/textView11"
         app:layout_constraintVertical_bias="1.0" />
 
-      <TextView
+    <TextView
         android:id="@+id/textView11"
         style="@style/c2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="140dp"
         android:layout_marginTop="8dp"
+        android:layout_marginEnd="3dp"
         android:text="RM"
-        app:layout_constraintStart_toEndOf="@+id/historyDetailsDateTimeText"
+        app:layout_constraintEnd_toStartOf="@+id/historyDetailsTotalPriceText"
         app:layout_constraintTop_toBottomOf="@+id/coffeeQuantityPriceRecycleView" />
 
     <TextView
