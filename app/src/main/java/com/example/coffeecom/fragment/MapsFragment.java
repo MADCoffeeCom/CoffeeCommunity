@@ -91,6 +91,8 @@ public class MapsFragment extends Fragment {
                 }
             };
             googleMap.setMyLocationEnabled(true);
+            googleMap.getUiSettings().setMyLocationButtonEnabled(true);
+
             fusedLocationProviderClient.requestLocationUpdates(locationRequest, locationCallback, null);
 
             for (int i =0; i<coffeeShopLocation.size();i++){

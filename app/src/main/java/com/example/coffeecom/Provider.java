@@ -1,5 +1,10 @@
 package com.example.coffeecom;
 
+import static androidx.core.content.ContentProviderCompat.requireContext;
+
+import android.content.Context;
+import android.net.wifi.WifiManager;
+import android.text.format.Formatter;
 import android.util.Log;
 
 import com.example.coffeecom.model.ArticleModel;
@@ -8,7 +13,14 @@ import com.example.coffeecom.model.CoffeeModel;
 import com.example.coffeecom.model.ProfileModel;
 import com.example.coffeecom.model.TransactionModel;
 
+import java.net.Inet4Address;
+import java.net.InetAddress;
+import java.net.NetworkInterface;
+import java.net.SocketException;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Enumeration;
+import java.util.List;
 
 public class Provider{
 
@@ -21,7 +33,32 @@ public class Provider{
     private static String currentCoffeeId;
     private static String currentArticleId;
     private static ProfileModel user;
-    private static String ipAddress = "192.168.100.11";
+    private static String ipAddress;
+
+    public static String getLocalIpAddress() {
+        try {
+            Log.d("ipv4","bruh");
+            for (Enumeration<NetworkInterface> en = NetworkInterface.getNetworkInterfaces(); en.hasMoreElements();) {
+                NetworkInterface intf = en.nextElement();
+                for (Enumeration<InetAddress> enumIpAddr = intf.getInetAddresses(); enumIpAddr.hasMoreElements();) {
+                    InetAddress inetAddress = enumIpAddr.nextElement();
+                    Log.d("ipv4","bruh1");
+                    if (!inetAddress.isLoopbackAddress() && inetAddress instanceof Inet4Address) {
+                        Log.d("ipv4","bruh2");
+                        return inetAddress.getHostAddress();
+                    }
+                }
+            }
+        } catch (SocketException ex) {
+            ex.printStackTrace();
+        }
+        return null;
+    }
+
+    public static void setIpAddress(String ipAddress) {
+        Log.d("ipv4",ipAddress);
+        Provider.ipAddress = ipAddress;
+    }
 
     public static String getIpAddress() {
         return ipAddress;

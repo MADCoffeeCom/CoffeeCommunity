@@ -1,12 +1,19 @@
 package com.example.coffeecom.activity;
 
+import static androidx.core.content.ContentProviderCompat.requireContext;
+
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.net.wifi.WifiManager;
 import android.os.Bundle;
+import android.text.format.Formatter;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
+import com.example.coffeecom.Provider;
 import com.example.coffeecom.R;
 
 public class LoginOrSignupActivity extends AppCompatActivity {
@@ -16,6 +23,9 @@ public class LoginOrSignupActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Provider.setIpAddress("192.168.100.11");
+//        Provider.setIpAddress(Provider.getLocalIpAddress());
+
         setContentView(R.layout.activity_loginorregister);
 
         loginButton = (Button) findViewById(R.id.loginButton);

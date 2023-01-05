@@ -111,9 +111,8 @@ public class BaristaListFragment extends Fragment {
                 String[] data = new String[1];
                 data[0] = Provider.getBaristas().get(currentBaristaIndex).getBaristaId();
 
-                PutData putData = new PutData("http://192.168.100.11/CoffeeCommunityPHP/coffeeinbarista.php", "POST", field, data);
+                PutData putData = new PutData("http://" + Provider.getIpAddress()+ "/CoffeeCommunityPHP/coffeeinbarista.php", "POST", field, data);
 
-//                FetchData fetchData = new FetchData("http://192.168.56.1/CoffeeCommunityPHP/coffeeinbarista.php");
                 if (putData.startPut()) {
                     if (putData.onComplete()) {
                         String result = putData.getResult();
