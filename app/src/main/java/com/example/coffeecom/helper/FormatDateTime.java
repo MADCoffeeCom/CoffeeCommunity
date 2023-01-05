@@ -9,8 +9,13 @@ public class FormatDateTime {
     private static SimpleDateFormat formatter;
 
 
-    public static String convertDatetoString (java.sql.Date date){
+    public static String convertDatetoStringDate (Date date){
         String dateStr = DATE_FORMAT.format(date);
+        return dateStr;
+    }
+
+    public static String convertDatetoStringTime (Date date){
+        String dateStr = new SimpleDateFormat("hh:mm").format(date);
         return dateStr;
     }
 

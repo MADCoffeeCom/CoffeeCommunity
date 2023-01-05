@@ -13,8 +13,7 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.example.coffeecom.fragment.AddBankCardFragment;
-import com.example.coffeecom.model.OrderModel;
+import com.example.coffeecom.model.BrewedOrderModel;
 import com.example.coffeecom.R;
 
 import java.text.DecimalFormat;
@@ -24,9 +23,9 @@ public class ProfileBrewHistoryAdapter extends RecyclerView.Adapter<ProfileBrewH
     // 1 - Data Source
     // Currently use dummy data
 
-    private OrderModel[] myBrewList;
+    private BrewedOrderModel[] myBrewList;
 
-    public ProfileBrewHistoryAdapter(OrderModel[] myBrewList){
+    public ProfileBrewHistoryAdapter(BrewedOrderModel[] myBrewList){
         this.myBrewList = myBrewList;
     }
 
@@ -67,7 +66,7 @@ public class ProfileBrewHistoryAdapter extends RecyclerView.Adapter<ProfileBrewH
     @Override
     public void onBindViewHolder(@NonNull ProfileBrewHistoryAdapter.ViewHolder holder, int position) {
 
-        final OrderModel myBrewListData = myBrewList[position];
+        final BrewedOrderModel myBrewListData = myBrewList[position];
 
         //To format the double decimal, to prevent the 00 to be eaten
         DecimalFormat df = new DecimalFormat(".00");

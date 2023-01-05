@@ -10,6 +10,8 @@ public class CoffeeModel {
     private String ingredients;
     private String baristaId;
 
+
+
     public CoffeeModel(String coffeeId) {
         this.coffeeId = coffeeId;
     }

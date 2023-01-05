@@ -19,12 +19,11 @@ import com.example.coffeecom.Provider;
 import com.example.coffeecom.R;
 import com.example.coffeecom.adapter.CoffeeTypeAdapter;
 import com.example.coffeecom.adapter.PendingOrderAdapter;
+import com.example.coffeecom.model.BrewedOrderModel;
 import com.example.coffeecom.model.CoffeeModel;
-import com.example.coffeecom.model.OrderModel;
 import com.vishnusivadas.advanced_httpurlconnection.FetchData;
 import com.vishnusivadas.advanced_httpurlconnection.PutData;
 
-import java.sql.Connection;
 import java.util.Date;
 import java.text.ParseException;
 import java.util.ArrayList;
@@ -41,6 +40,8 @@ public class BaristaFragment extends Fragment {
 
     ArrayList<String> coffeeTitle = new ArrayList<>();
     ArrayList<String> coffeePic = new ArrayList<>();
+
+    ArrayList<CoffeeModel> coffeesInOrder = new ArrayList<>();
 
 
     @Override
@@ -63,14 +64,95 @@ public class BaristaFragment extends Fragment {
                 }
             }
         }
+        recyclerViewCoffeeType();
+
 
         Log.i(TAG, "Provider coffee size: " + Provider.getCoffees().size());
         Log.i(TAG, "Provider barista size: " + Provider.getUser().getSellingCoffeeId().size());
 
         queryOrder();
 
-
         return view;
+    }
+
+    private void updateOrderStatus(String status, String orderId) {
+        Handler handler = new Handler(Looper.getMainLooper());
+        handler.post(() -> {
+            String[] field = new String[2];
+            field[0] = "orderStatus";
+            field[1] = "orderId";
+
+            //Creating array for data
+            String[] data = new String[2];
+            data[0] = status;
+            data[1] = orderId;
+
+            PutData putData = new PutData("http://" + Provider.getIpAddress() + "/CoffeeCommunityPHP/updateorderstatus.php", "POST", field, data);
+            if (putData.startPut()) {
+                if (putData.onComplete()) {
+                    String result = putData.getResult();
+                    if(result.equals("Update success")){
+                        Log.i(TAG, "Update Successful");
+                    }
+                    for (int i = 0; i < Provider.getUser().getBrewedOrder().size(); i++) {
+                        if (Provider.getUser().getBrewedOrder().get(i).getOrderId().equals(orderId)){
+                            Provider.getUser().getBrewedOrder().get(i).setOrderStatus(status);
+                        }
+                    }
+
+                }
+                recyclerViewPendingOrder();
+            }
+        });
+    }
+
+    private void querySellingCoffee() {
+        Handler handler = new Handler(Looper.getMainLooper());
+        handler.post(new Runnable() {
+            @Override
+            public void run() {
+                String[] field = new String[1];
+                field[0] = "baristaId";
+
+                //Creating array for data
+                String[] data = new String[1];
+                data[0] = Provider.getUser().getBaristaId();
+
+                PutData putData = new PutData("http://" + Provider.getIpAddress() + "/CoffeeCommunityPHP/brewedorder.php", "POST", field, data);
+                if (putData.startPut()) {
+                    if (putData.onComplete()) {
+                        String result = putData.getResult();
+                        String[] resultSplitted = result.split("split");
+                        for (String str: resultSplitted) {
+                            String[] orderDetails = str.split(" - ");
+                            String orderId = orderDetails[0];
+                            String baristaId = orderDetails[1];
+                            String baristaDesc = orderDetails[2];
+                            String customerID = orderDetails[3];
+                            String customerName = orderDetails[4];
+                            String customerLocation = orderDetails[5];
+                            Date orderStartTime = null;
+                            Date orderEndTime = null;
+                            Date orderDuration = null;
+                            try {
+                                orderStartTime = convertStringtoDate(orderDetails[6]);
+                                orderEndTime = convertStringtoDate(orderDetails[7]);
+                                orderDuration = convertStringtoDate(orderDetails[8]);
+                            } catch (ParseException e) { e.printStackTrace(); }
+                            double orderTotalPrice = Double.valueOf(orderDetails[9]);
+                            String orderStatus = orderDetails[10];
+
+                            BrewedOrderModel order = new BrewedOrderModel(orderId, baristaId, baristaDesc, customerID, customerName, customerLocation, orderStartTime, orderEndTime, orderDuration, orderTotalPrice, orderStatus);
+                            Provider.getUser().addBrewedOrder(order);
+                            Log.i(TAG, "Successfully Added Order " + order.getOrderId());
+//
+                        }
+                    }
+                    queryCoffeeInOrder();
+
+                }
+            }
+        });
     }
 
     private void queryOrder() {
@@ -85,51 +167,88 @@ public class BaristaFragment extends Fragment {
                 String[] data = new String[1];
                 data[0] = Provider.getUser().getBaristaId();
 
-                PutData putData = new PutData("http://" + Provider.getIpAddress() + "/CoffeeCommunityPHP/baristaorder.php", "POST", field, data);
+                PutData putData = new PutData("http://" + Provider.getIpAddress() + "/CoffeeCommunityPHP/brewedorder.php", "POST", field, data);
                 if (putData.startPut()) {
                     if (putData.onComplete()) {
                         String result = putData.getResult();
                         String[] resultSplitted = result.split("split");
                         for (String str: resultSplitted) {
                             String[] orderDetails = str.split(" - ");
-                            Log.i(TAG, "Successfully Added Order " + orderDetails[3]);
                             String orderId = orderDetails[0];
                             String baristaId = orderDetails[1];
-                            String userId = orderDetails[2];
+                            String baristaDesc = orderDetails[2];
+                            String customerID = orderDetails[3];
+                            String customerName = orderDetails[4];
+                            String customerLocation = orderDetails[5];
                             Date orderStartTime = null;
                             Date orderEndTime = null;
                             Date orderDuration = null;
                             try {
-                                orderStartTime = convertStringtoDate(orderDetails[3]);
-                                orderEndTime = convertStringtoDate(orderDetails[4]);
-                                orderDuration = convertStringtoDate(orderDetails[5]);
-                            } catch (ParseException e) {
-                                e.printStackTrace();
-                            }
-                            double orderTotalPrice = Double.valueOf(orderDetails[6]);
-                            String orderStatus = orderDetails[7];
+                                orderStartTime = convertStringtoDate(orderDetails[6]);
+                                orderEndTime = convertStringtoDate(orderDetails[7]);
+                                orderDuration = convertStringtoDate(orderDetails[8]);
+                            } catch (ParseException e) { e.printStackTrace(); }
+                            double orderTotalPrice = Double.valueOf(orderDetails[9]);
+                            String orderStatus = orderDetails[10];
 
-                            OrderModel order = new OrderModel(orderId, baristaId, userId, orderStartTime, orderEndTime, orderDuration, orderTotalPrice, orderStatus);
-
+                            BrewedOrderModel order = new BrewedOrderModel(orderId, baristaId, baristaDesc, customerID, customerName, customerLocation, orderStartTime, orderEndTime, orderDuration, orderTotalPrice, orderStatus);
                             Provider.getUser().addBrewedOrder(order);
                             Log.i(TAG, "Successfully Added Order " + order.getOrderId());
 //
                         }
                     }
-                    Log.i(TAG, "Provider order size: " + Provider.getUser().getBrewedOrder().size());
+                    queryCoffeeInOrder();
+                }
+            }
+        });
+    }
 
-                    recyclerViewCoffeeType();
+    private void queryCoffeeInOrder() {
+        Handler handler = new Handler(Looper.getMainLooper());
+        handler.post(new Runnable() {
+            @Override
+            public void run() {
+                FetchData fetchData = new FetchData("http://" + Provider.getIpAddress() + "/CoffeeCommunityPHP/coffeeinorder.php");
+                if (fetchData.startFetch()) {
+                    if (fetchData.onComplete()) {
+                        String result = fetchData.getResult();
+                        Log.i(TAG, "Result: " + result);
+                        String[] resultSplitted = result.split("split");
+                        for (String str: resultSplitted) {
+                            String[] orderDetails = str.split(" - ");
+                            String orderId = orderDetails[0];
+                            String coffeeId = orderDetails[1];
+                            int amount = Integer.parseInt(orderDetails[2]);
+
+                            CoffeeModel coffee = null;
+                            for (int i = 0; i < Provider.getCoffees().size(); i++) {
+                                if(Provider.getCoffees().get(i).getCoffeeId().equals(coffeeId)){
+                                    coffee = Provider.getCoffees().get(i);
+                                    break;
+                                }
+                            }
+
+                            for (int i = 0; i < Provider.getUser().getBrewedOrder().size(); i++) {
+                                for (int j = 0; j < amount; j++) {
+                                    if (Provider.getUser().getBrewedOrder().get(i).getOrderId().equals(orderId)) {
+                                        Provider.getUser().getBrewedOrder().get(i).addOrderedCoffee(coffee);
+                                        Log.i(TAG, "Successfully Coffee in Order " + coffee.getCoffeeId());
+                                    }
+                                }
+                            }
+                        }
+                    }
                     recyclerViewPendingOrder();
                 }
             }
         });
     }
 
-    private void recyclerViewPendingOrder() {
+    public void recyclerViewPendingOrder() {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
         pendingOrderRecycleView.setLayoutManager(linearLayoutManager);
 
-        pendingOrderRecycleViewAdapter = new PendingOrderAdapter(Provider.getUser().getBrewedOrder());
+        pendingOrderRecycleViewAdapter = new PendingOrderAdapter(Provider.getUser().getBrewedOrder(), getActivity());
         pendingOrderRecycleView.setAdapter(pendingOrderRecycleViewAdapter);
     }
 

@@ -23,10 +23,10 @@ public class ProfileModel {
     private double walletBalance;
 
     private ArrayList<String> sellingCoffeeId = new ArrayList<>();
-    private ArrayList<OrderModel> orderedHistory = new ArrayList<>();
+    private ArrayList<BrewedOrderModel> orderedHistory = new ArrayList<>();
     private ArrayList<PostModel> postedPost = new ArrayList<>();
     private ArrayList<BankCardModel> bankCard = new ArrayList<>();
-    private ArrayList<OrderModel> brewedOrder = new ArrayList<>();
+    private ArrayList<BrewedOrderModel> brewedOrder = new ArrayList<>();
 
     public ProfileModel(String a) {
         this.userId = a;
@@ -143,11 +143,11 @@ public class ProfileModel {
         this.walletBalance = walletBalance;
     }
 
-    public ArrayList<OrderModel> getOrderedHistory() {
+    public ArrayList<BrewedOrderModel> getOrderedHistory() {
         return orderedHistory;
     }
 
-    public void setOrderedHistory(ArrayList<OrderModel> orderedHistory) {
+    public void setOrderedHistory(ArrayList<BrewedOrderModel> orderedHistory) {
         this.orderedHistory = orderedHistory;
     }
 
@@ -211,11 +211,11 @@ public class ProfileModel {
         this.userLocation = userLocation;
     }
 
-    public ArrayList<OrderModel> getBrewedOrder() {
+    public ArrayList<BrewedOrderModel> getBrewedOrder() {
         return brewedOrder;
     }
 
-    public void addBrewedOrder(OrderModel order) {
+    public void addBrewedOrder(BrewedOrderModel order) {
         this.brewedOrder.add(order);
     }
 }

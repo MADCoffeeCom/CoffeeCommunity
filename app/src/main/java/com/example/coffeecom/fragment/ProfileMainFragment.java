@@ -18,7 +18,7 @@ import com.example.coffeecom.R;
 import com.example.coffeecom.adapter.ProfileBrewHistoryAdapter;
 import com.example.coffeecom.adapter.ProfileOrderHistoryAdapter;
 import com.example.coffeecom.adapter.ProfilePostHistoryAdapter;
-import com.example.coffeecom.model.OrderModel;
+import com.example.coffeecom.model.BrewedOrderModel;
 import com.example.coffeecom.model.PostModel;
 
 import java.text.DateFormat;
@@ -36,7 +36,7 @@ public class ProfileMainFragment extends Fragment {
 
     //data source for recycle view
     //maybe after this retrieve from SQL, currently just dummy
-    OrderModel[] myOrderHistoryList, myBrewHistoryList;
+    BrewedOrderModel[] myOrderHistoryList, myBrewHistoryList;
     PostModel[] myPostHistoryList;
 
     //Adapter
