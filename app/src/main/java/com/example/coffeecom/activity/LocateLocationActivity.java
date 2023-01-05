@@ -30,6 +30,4 @@ public class LocateLocationActivity extends AppCompatActivity {
 
         //Insert relocate here
     }
-
-
 }

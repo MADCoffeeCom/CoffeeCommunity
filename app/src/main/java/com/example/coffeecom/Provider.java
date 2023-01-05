@@ -21,16 +21,11 @@ public class Provider{
     private static String currentCoffeeId;
     private static String currentArticleId;
     private static ProfileModel user;
-    private static String ipAddress = "10.167.58.200";
+    private static String ipAddress = "192.168.56.1";
 
     public static String getIpAddress() {
         return ipAddress;
     }
-
-    public static void setIpAddress(String ipAddress) {
-        Provider.ipAddress = ipAddress;
-    }
-
 
     private static ArrayList<TransactionModel> transactions = new ArrayList<>();
 

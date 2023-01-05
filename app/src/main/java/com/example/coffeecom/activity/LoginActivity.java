@@ -17,6 +17,9 @@ import com.example.coffeecom.R;
 import com.example.coffeecom.model.ProfileModel;
 import com.vishnusivadas.advanced_httpurlconnection.PutData;
 
+import java.net.MalformedURLException;
+import java.net.URL;
+
 public class LoginActivity extends AppCompatActivity {
 
     @Override
@@ -58,7 +61,9 @@ public class LoginActivity extends AppCompatActivity {
                         data[0] = username.getText().toString();
                         data[1] = passwordTextView.getText().toString();
 
-                        PutData putData = new PutData("http://10.167.58.200/CoffeeCommunityPHP/login.php", "POST", field, data);
+
+                        PutData putData = new PutData("http://" + Provider.getIpAddress() + "/CoffeeCommunityPHP/login.php", "POST", field, data);
+
                         if (putData.startPut()) {
 
                             if (putData.onComplete()) {
@@ -99,5 +104,10 @@ public class LoginActivity extends AppCompatActivity {
 //        }else Toast.makeText(this,"LOGIN FAILED", Toast.LENGTH_SHORT).show();
 //        Intent intent = new Intent(this, LoginActivity.class);
 //        startActivity(intent);
+    }
+
+    public URL convertToUrl(String str) throws MalformedURLException {
+        URL url = new URL(str );
+        return url;
     }
 }

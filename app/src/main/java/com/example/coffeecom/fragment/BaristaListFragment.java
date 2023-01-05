@@ -2,7 +2,6 @@ package com.example.coffeecom.fragment;
 
 import static com.example.coffeecom.helper.ToTitleCase.toTitleCase;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -109,7 +108,7 @@ public class BaristaListFragment extends Fragment {
                 String[] data = new String[1];
                 data[0] = Provider.getBaristas().get(currentBaristaIndex).getBaristaId();
 
-                PutData putData = new PutData("http://10.167.58.200/CoffeeCommunityPHP/coffeeinbarista.php", "POST", field, data);
+                PutData putData = new PutData("http://" + Provider.getIpAddress() + "/CoffeeCommunityPHP/coffeesoldbybarista.php", "POST", field, data);
 
 //                FetchData fetchData = new FetchData("http://192.168.56.1/CoffeeCommunityPHP/coffeeinbarista.php");
                 if (putData.startPut()) {

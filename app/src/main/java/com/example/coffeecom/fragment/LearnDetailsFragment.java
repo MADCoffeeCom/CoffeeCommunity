@@ -2,7 +2,6 @@ package com.example.coffeecom.fragment;
 
 import static com.example.coffeecom.helper.ToTitleCase.toTitleCase;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -20,12 +19,7 @@ import com.bumptech.glide.Glide;
 import com.example.coffeecom.Provider;
 import com.example.coffeecom.R;
 import com.example.coffeecom.model.ArticleModel;
-import com.example.coffeecom.model.BaristaModel;
-import com.example.coffeecom.model.CoffeeModel;
-import com.vishnusivadas.advanced_httpurlconnection.FetchData;
 import com.vishnusivadas.advanced_httpurlconnection.PutData;
-
-import java.util.ArrayList;
 
 
 public class LearnDetailsFragment extends Fragment {
@@ -152,14 +146,13 @@ public class LearnDetailsFragment extends Fragment {
         learnDetailsBckBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // Create an Intent to go back to the previous activity
-
                 AppCompatActivity activity = (AppCompatActivity) view.getContext();
-                LearnActivityFragment learnHome = new LearnActivityFragment();
-                activity.getSupportFragmentManager().beginTransaction().replace(R.id.containerMainPage,learnHome).addToBackStack(null).commit();
+                activity.getSupportFragmentManager().popBackStack();
             }
         });
     }
+
+
 
     private void updateDownVote(int count) {
         updateVote("articleDownVote", String.valueOf(count), currentArticle.getArticleId());
@@ -189,7 +182,7 @@ public class LearnDetailsFragment extends Fragment {
                 data[1] = number;
                 data[2] = articleId;
 
-                PutData putData = new PutData("http://10.167.58.200/CoffeeCommunityPHP/updatevote.php", "POST", field, data);
+                PutData putData = new PutData("http://" + Provider.getIpAddress() + "/CoffeeCommunityPHP/updatevote.php", "POST", field, data);
                 if (putData.startPut()) {
                     if (putData.onComplete()) {
                         String result = putData.getResult();
