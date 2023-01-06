@@ -17,19 +17,14 @@ import com.example.coffeecom.model.BrewedOrderModel;
 import com.example.coffeecom.R;
 
 import java.text.DecimalFormat;
+import java.util.ArrayList;
 
 public class ProfileBrewHistoryAdapter extends RecyclerView.Adapter<ProfileBrewHistoryAdapter.ViewHolder> {
 
-    // 1 - Data Source
-    // Currently use dummy data
-
-    private BrewedOrderModel[] myBrewList;
-
-    public ProfileBrewHistoryAdapter(BrewedOrderModel[] myBrewList){
-        this.myBrewList = myBrewList;
+    ArrayList<BrewedOrderModel> brewedHistory;
+    public ProfileBrewHistoryAdapter(ArrayList<BrewedOrderModel> brewedHistory){
+        this.brewedHistory = brewedHistory;
     }
-
-
 
     // 2 - View Holder Class
     public class ViewHolder extends RecyclerView.ViewHolder{
@@ -46,14 +41,8 @@ public class ProfileBrewHistoryAdapter extends RecyclerView.Adapter<ProfileBrewH
             this.brewTotalPrice = itemView.findViewById(R.id.txtBrewHistoryPrice);
             this.brewAmount = itemView.findViewById(R.id.txtBrewHistoryAmount);
             this.brewHistoryCard = itemView.findViewById(R.id.coffeeBrewHistoryCard);
-
-//            itemView.setOnClickListener((View.OnClickListener) this);
         }
-
     }
-
-    // 3 - Implementing the methods
-
     @NonNull
     @Override
     public ProfileBrewHistoryAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -66,36 +55,11 @@ public class ProfileBrewHistoryAdapter extends RecyclerView.Adapter<ProfileBrewH
     @Override
     public void onBindViewHolder(@NonNull ProfileBrewHistoryAdapter.ViewHolder holder, int position) {
 
-        final BrewedOrderModel myBrewListData = myBrewList[position];
-
-        //To format the double decimal, to prevent the 00 to be eaten
-        DecimalFormat df = new DecimalFormat(".00");
-
-        holder.brewTotalPrice.setText("RM"+ df.format(myBrewList[position].getOrderTotalPrice()));
-        holder.brewAmount.setText(myBrewList[position].getOrderHistoryTotalItems());
-        holder.brewDateTime.setText((CharSequence) myBrewList[position].getOrderHistoryDateTime());
-
-        int drawableResourceId = holder.itemView.getContext().getResources().getIdentifier(myBrewList[position].getOrderHistoryImage(),"drawable",holder.itemView.getContext().getPackageName());
-        Glide.with(holder.itemView.getContext()).load(drawableResourceId).into(holder.brewImage);
-
-        holder.brewHistoryCard.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(view.getContext(), "HMMM STILL DOING", Toast.LENGTH_SHORT).show();
-
-                AppCompatActivity activity = (AppCompatActivity) view.getContext();
-
-                //the page havent done yet
-//                AddBankCardFragment addBankCard = new AddBankCardFragment();
-//                activity.getSupportFragmentManager().beginTransaction().replace(R.id.containerMainPage,addBankCard).addToBackStack(null).commit();
-            }
-        });
     }
 
     @Override
     public int getItemCount() {
-        return myBrewList.length;
+        return brewedHistory.size();
     }
 
-    // 4 - On Click
 }
