@@ -74,20 +74,22 @@ public class HomeActivityFragment extends Fragment {
                 if (putData.startPut()) {
                     if (putData.onComplete()) {
                         String result = putData.getResult();
-
+                        Log.i(Provider.getUser().getUserName(), "User Updated in Provider" + Provider.getUser().getUserId());
                         String[] profileDetails = result.split(" - ");
                         String userId = profileDetails[0];
                         String picUrl = profileDetails[1];
-                        String baristaId = profileDetails[2];
-                        String adminId = profileDetails[3];
-                        String userName = profileDetails[4];
-                        String email = profileDetails[5];
-                        String streetNo = profileDetails[6];
-                        String taman = profileDetails[7];
-                        int postCode = Integer.parseInt(profileDetails[8]);
-                        String state = profileDetails[9];
+                        String userName = profileDetails[2];
+                        String email = profileDetails[3];
+                        String streetNo = profileDetails[4];
+                        String taman = profileDetails[5];
+                        int postCode = Integer.parseInt(profileDetails[6]);
+                        String state = profileDetails[7];
+                        String walletId = profileDetails[8];
 
-                        Provider.getUser().setUserDetails(picUrl, userId, baristaId, adminId, userName, email, streetNo, taman, postCode, state);
+                        String walletBalance = profileDetails[9];
+                        String walletPin = profileDetails[10];
+
+                        Provider.getUser().setUserDetails(picUrl, userId, "b0001", "", userName, email, streetNo, taman, postCode, state);
 
                         Log.i(Provider.getUser().getUserName(), "User Updated in Provider" + Provider.getUser().getUserId());
 

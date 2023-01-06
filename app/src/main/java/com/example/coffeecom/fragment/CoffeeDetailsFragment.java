@@ -85,9 +85,11 @@ public class CoffeeDetailsFragment extends Fragment {
         plusBtnCoffeeDetails.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Log.i("diao","ni");
                 noOfOrder++;
                 noOfCoffeeOrderedText.setText(String.valueOf(noOfOrder));
                 totalPriceCoffeeDetailsText.setText(String.format("%.2f", (currentCoffee.getCoffeePrice() * noOfOrder )));
+
             }
         });
 
@@ -146,7 +148,7 @@ public class CoffeeDetailsFragment extends Fragment {
         }else{
             LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
             ratingRecyclerView.setLayoutManager(linearLayoutManager);
-
+            Log.i("ni","it");
             ratingAdapter = new RatingBarAdapter(currentBarista.getRatings());
             ratingRecyclerView.setAdapter(ratingAdapter);
         }
