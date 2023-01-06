@@ -36,20 +36,4 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/pickupText" />
 
-    <TextView
-        android:id="@+id/specialRemarksText"
-        style="@style/c1"
-        android:layout_width="match_parent"
-        android:layout_height="55dp"
-        android:layout_marginTop="20dp"
-        android:background="@drawable/textbox"
-        android:gravity="center|left"
-        android:hint="Special remarks to barista..."
-        android:paddingLeft="20dp"
-        android:paddingRight="20dp"
-        android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/coffeeCartCardRecyclerView" />
-
 </androidx.constraintlayout.widget.ConstraintLayout>
