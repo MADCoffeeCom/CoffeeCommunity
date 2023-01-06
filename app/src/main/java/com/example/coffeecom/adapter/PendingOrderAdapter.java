@@ -100,6 +100,7 @@ public class PendingOrderAdapter extends RecyclerView.Adapter<PendingOrderAdapte
 
                 holder.declineOrderBtn.setOnClickListener(view -> {
                     Provider.getUser().getBrewedOrder().get(position).setOrderStatus("D");
+                    notifyDataSetChanged();
                 });
             }
         }
