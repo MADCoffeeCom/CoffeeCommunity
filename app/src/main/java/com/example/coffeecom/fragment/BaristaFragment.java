@@ -153,24 +153,24 @@ public class BaristaFragment extends Fragment {
                         String[] resultSplitted = result.split("split");
                         for (String str: resultSplitted) {
                             String[] orderDetails = str.split(" - ");
-                            String orderId = null;
-                            String baristaId = null;
-                            String baristaDesc = null;
-                            String customerID = null;
-                            String customerName = null;
-                            String customerLocation = null;
+                            String orderId = orderDetails[0];
+                            String baristaId = orderDetails[1];
+                            String baristaDesc = orderDetails[2];
+                            String customerID = orderDetails[3];
+                            String customerName = orderDetails[4];
+                            String customerLocation = orderDetails[5];
                             Date orderStartTime = null;
                             Date orderEndTime = null;
                             Date orderDuration = null;
                             try {
-                                orderStartTime = convertStringtoDate("2023-01-03 16:00:00");
-                                orderEndTime = convertStringtoDate("2023-01-03 16:20:00");
-                                orderDuration = convertStringtoDate("00:20:00");
+                                orderStartTime = convertStringtoDate(orderDetails[6]);
+                                orderEndTime = convertStringtoDate(orderDetails[7]);
+                                orderDuration = convertStringtoDate(orderDetails[8]);
                             } catch (ParseException e) { e.printStackTrace(); }
-                            double orderTotalPrice = 0;
-                            String orderStatus = null;
+                            double orderTotalPrice = Double.valueOf(orderDetails[9]);
+                            String orderStatus = orderDetails[10];
 
-                            BrewedOrderModel order = new BrewedOrderModel("o0001", "b0001", "I am a barista", "UID_abang", "abang", "1.00", orderStartTime, orderEndTime, orderDuration, 9.9, "P");
+                            BrewedOrderModel order = new BrewedOrderModel(orderId, baristaId, baristaDesc, customerID, customerName, customerLocation, orderStartTime, orderEndTime, orderDuration, orderTotalPrice, orderStatus);
                             Provider.getUser().addBrewedOrder(order);
                             Log.i(TAG, "Successfully Added Order " + order.getOrderId());
 //
@@ -195,8 +195,8 @@ public class BaristaFragment extends Fragment {
                         String[] resultSplitted = result.split("split");
                         for (String str: resultSplitted) {
                             String[] orderDetails = str.split(" - ");
-                            String orderId = null;
-                            String coffeeId = null;
+                            String orderId = orderDetails[0];
+                            String coffeeId = orderDetails[1];
                             int amount = Integer.parseInt(orderDetails[2]);
 
                             CoffeeModel coffee = null;

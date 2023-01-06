@@ -62,7 +62,6 @@ public class HomeActivityFragment extends Fragment {
         handler.post(new Runnable() {
             @Override
             public void run() {
-                FetchData fetchData = new FetchData("http://" + Provider.getIpAddress()+ "/CoffeeCommunityPHP/profile.php");
                 String[] field = new String[1];
                 field[0] = "username";
 
@@ -74,22 +73,20 @@ public class HomeActivityFragment extends Fragment {
                 if (putData.startPut()) {
                     if (putData.onComplete()) {
                         String result = putData.getResult();
-                        Log.i(Provider.getUser().getUserName(), "User Updated in Provider" + Provider.getUser().getUserId());
+
                         String[] profileDetails = result.split(" - ");
                         String userId = profileDetails[0];
                         String picUrl = profileDetails[1];
-                        String userName = profileDetails[2];
-                        String email = profileDetails[3];
-                        String streetNo = profileDetails[4];
-                        String taman = profileDetails[5];
-                        int postCode = Integer.parseInt(profileDetails[6]);
-                        String state = profileDetails[7];
-                        String walletId = profileDetails[8];
+                        String baristaId = profileDetails[2];
+                        String adminId = profileDetails[3];
+                        String userName = profileDetails[4];
+                        String email = profileDetails[5];
+                        String streetNo = profileDetails[6];
+                        String taman = profileDetails[7];
+                        int postCode = Integer.parseInt(profileDetails[8]);
+                        String state = profileDetails[9];
 
-                        String walletBalance = profileDetails[9];
-                        String walletPin = profileDetails[10];
-
-                        Provider.getUser().setUserDetails(picUrl, userId, "b0001", "", userName, email, streetNo, taman, postCode, state);
+                        Provider.getUser().setUserDetails(picUrl, userId, baristaId, adminId, userName, email, streetNo, taman, postCode, state);
 
                         Log.i(Provider.getUser().getUserName(), "User Updated in Provider" + Provider.getUser().getUserId());
 
@@ -155,7 +152,7 @@ public class HomeActivityFragment extends Fragment {
         handler.post(new Runnable() {
             @Override
             public void run() {
-                FetchData fetchData = new FetchData("http://" + Provider.getIpAddress()+ "/CoffeeCommunityPHP/barista.php");
+                FetchData fetchData = new FetchData("http://" + Provider.getIpAddress() + "/CoffeeCommunityPHP/barista.php");
 
                 if (fetchData.startFetch()) {
                     if (fetchData.onComplete()) {
@@ -175,7 +172,7 @@ public class HomeActivityFragment extends Fragment {
 
                             if (!Provider.getBaristas().contains(barista)){
                                 Provider.addBarista(barista);
-    //                            Log.i("HomeActivity - Add Barista", "");
+                                //                            Log.i("HomeActivity - Add Barista", "");
                             }
                         }
                     }
