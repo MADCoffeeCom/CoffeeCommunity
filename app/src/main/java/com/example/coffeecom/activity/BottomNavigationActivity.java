@@ -26,18 +26,9 @@ rmb to change the return true at each corresponding case
 public class BottomNavigationActivity extends AppCompatActivity {
 
     private final String TAG = "Navigation";
-
     BottomNavigationView btmNavBar;
     int container = R.id.containerMainPage;
-
-    ProfileMainFragment profileMain = new ProfileMainFragment();
-    LearnActivityFragment learnMain = new LearnActivityFragment();
-    HomeActivityFragment homeMain = new HomeActivityFragment();
-    NewBaristaFragment newBaristaMain = new NewBaristaFragment();
-    BaristaFragment baristaMain = new BaristaFragment();
-
     FragmentManager manager;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +37,12 @@ public class BottomNavigationActivity extends AppCompatActivity {
 
         btmNavBar = findViewById(R.id.bottomNavigationView);
         btmNavBar.setSelectedItemId(R.id.nvBuyCoffeeHome);
+
+        ProfileMainFragment profileMain = new ProfileMainFragment();
+        LearnActivityFragment learnMain = new LearnActivityFragment();
+        HomeActivityFragment homeMain = new HomeActivityFragment();
+        NewBaristaFragment newBaristaMain = new NewBaristaFragment();
+        BaristaFragment baristaMain = new BaristaFragment();
 
         manager = getSupportFragmentManager();
         manager.beginTransaction().replace(container, homeMain).commit();
@@ -98,7 +95,7 @@ public class BottomNavigationActivity extends AppCompatActivity {
                     R.anim.fade_in,  // enter
                     R.anim.fade_out,  // exit
                     R.anim.fade_in,   // popEnter
-                    R.anim.slide_out  // popExit
+                    R.anim.fade_out  // popExit
             );
             ft.replace(container, fragment);
             ft.addToBackStack(backStateName);

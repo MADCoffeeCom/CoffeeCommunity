@@ -19,6 +19,7 @@ import com.example.coffeecom.Provider;
 import com.example.coffeecom.R;
 import com.example.coffeecom.adapter.CoffeeTypeAdapter;
 import com.example.coffeecom.adapter.PendingOrderAdapter;
+import com.example.coffeecom.adapter.SellingCoffeeAdapter;
 import com.example.coffeecom.model.BrewedOrderModel;
 import com.example.coffeecom.model.CoffeeModel;
 import com.vishnusivadas.advanced_httpurlconnection.FetchData;
@@ -49,6 +50,7 @@ public class BaristaFragment extends Fragment {
                              Bundle savedInstanceState) {
         coffeeTitle.clear();
         coffeePic.clear();
+        Log.i(TAG, "onCreateView: Run here once");
         View view = inflater.inflate(R.layout.activity_barista,container,false);
 
         noCoffeeSoldErrorText = view.findViewById(R.id.noCoffeeSoldErrorText);
@@ -63,37 +65,12 @@ public class BaristaFragment extends Fragment {
         return view;
     }
 
-    private void updateOrderStatus(String status, String orderId) {
-        Handler handler = new Handler(Looper.getMainLooper());
-        handler.post(() -> {
-            String[] field = new String[2];
-            field[0] = "orderStatus";
-            field[1] = "orderId";
 
-            //Creating array for data
-            String[] data = new String[2];
-            data[0] = status;
-            data[1] = orderId;
-
-            PutData putData = new PutData("http://" + Provider.getIpAddress() + "/CoffeeCommunityPHP/updateorderstatus.php", "POST", field, data);
-            if (putData.startPut()) {
-                if (putData.onComplete()) {
-                    String result = putData.getResult();
-                    if(result.equals("Update success")){
-                        Log.i(TAG, "Update Successful");
-                    }
-                    for (int i = 0; i < Provider.getUser().getBrewedOrder().size(); i++) {
-                        if (Provider.getUser().getBrewedOrder().get(i).getOrderId().equals(orderId)){
-                            Provider.getUser().getBrewedOrder().get(i).setOrderStatus(status);
-                        }
-                    }
-                }
-                recyclerViewPendingOrder();
-            }
-        });
-    }
 
     private void querySellingCoffee() {
+        Log.i(TAG, "querySellingCoffee: Run here once");
+        Provider.getUser().getSellingCoffeeId().clear();
+
         Handler handler = new Handler(Looper.getMainLooper());
         handler.post(new Runnable() {
             @Override
@@ -118,9 +95,9 @@ public class BaristaFragment extends Fragment {
                     //Match the coffeeId in coffee model
                     for (int i = 0; i < Provider.getCoffees().size(); i++) {
                         for (int j = 0; j < Provider.getUser().getSellingCoffeeId().size(); j++) {
-                            if(Provider.getUser().getSellingCoffeeId().get(i).equals(Provider.getCoffees().get(j).getCoffeeId())){
-                                coffeeTitle.add(Provider.getCoffees().get(j).getCoffeeTitle());
-                                coffeePic.add(Provider.getCoffees().get(j).getCoffeePic());
+                            if(Provider.getUser().getSellingCoffeeId().get(j).equals(Provider.getCoffees().get(i).getCoffeeId())){
+                                coffeeTitle.add(Provider.getCoffees().get(i).getCoffeeTitle());
+                                coffeePic.add(Provider.getCoffees().get(i).getCoffeePic());
                             }
                         }
                     }
@@ -135,6 +112,9 @@ public class BaristaFragment extends Fragment {
     }
 
     private void queryOrder() {
+        Log.i(TAG, "queryOrder: Run here once");
+        Provider.getUser().getBrewedOrder().clear();
+
         Handler handler = new Handler(Looper.getMainLooper());
         handler.post(new Runnable() {
             @Override
@@ -173,7 +153,6 @@ public class BaristaFragment extends Fragment {
                             BrewedOrderModel order = new BrewedOrderModel(orderId, baristaId, baristaDesc, customerID, customerName, customerLocation, orderStartTime, orderEndTime, orderDuration, orderTotalPrice, orderStatus);
                             Provider.getUser().addBrewedOrder(order);
                             Log.i(TAG, "Successfully Added Order " + order.getOrderId());
-//
                         }
                     }
                     queryCoffeeInOrder();
@@ -238,7 +217,7 @@ public class BaristaFragment extends Fragment {
             LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
             coffeeSellingRecycleView.setLayoutManager(linearLayoutManager);
 
-            coffeeSellingRecycleViewAdapter = new CoffeeTypeAdapter(coffeeTitle, coffeePic, getActivity());
+            coffeeSellingRecycleViewAdapter = new SellingCoffeeAdapter(coffeeTitle, coffeePic, getActivity());
             coffeeSellingRecycleView.setAdapter(coffeeSellingRecycleViewAdapter);
         }
     }

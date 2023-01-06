@@ -3,6 +3,9 @@ package com.example.coffeecom.adapter;
 import static com.example.coffeecom.helper.FormatDateTime.convertDatetoStringTime;
 
 import android.content.Context;
+import android.os.Handler;
+import android.os.Looper;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,11 +21,14 @@ import com.bumptech.glide.Glide;
 import com.example.coffeecom.Provider;
 import com.example.coffeecom.R;
 import com.example.coffeecom.model.BrewedOrderModel;
+import com.vishnusivadas.advanced_httpurlconnection.PutData;
 
 import java.util.ArrayList;
 
 public class PendingOrderAdapter extends RecyclerView.Adapter<PendingOrderAdapter.ViewHolder>{
 
+
+    private static final String TAG = "PendingOrderAdapter";
     ArrayList<BrewedOrderModel> brewedOrder;
     Context activity;
 
@@ -82,7 +88,7 @@ public class PendingOrderAdapter extends RecyclerView.Adapter<PendingOrderAdapte
 
     @Override
     public void onBindViewHolder(@NonNull PendingOrderAdapter.ViewHolder holder, int position) {
-        if(!brewedOrder.isEmpty()){
+        if(getItemViewType(position) != 0){
             //Insert details
             holder.orderCoffeeName.setText(brewedOrder.get(position).getOrderedCoffee().get(0).getCoffeeTitle());
             holder.orderCustomerName.setText(brewedOrder.get(position).getCustomerName());
@@ -95,11 +101,14 @@ public class PendingOrderAdapter extends RecyclerView.Adapter<PendingOrderAdapte
             if(brewedOrder.get(position).getOrderStatus().equals("P")){
                 holder.acceptOrderBtn.setOnClickListener(view -> {
                     Provider.getUser().getBrewedOrder().get(position).setOrderStatus("A");
+                    updateOrderStatus(brewedOrder.get(position).getOrderStatus(), brewedOrder.get(position).getOrderId());
                     notifyDataSetChanged();
                 });
 
                 holder.declineOrderBtn.setOnClickListener(view -> {
                     Provider.getUser().getBrewedOrder().get(position).setOrderStatus("D");
+                    updateOrderStatus(brewedOrder.get(position).getOrderStatus(), brewedOrder.get(position).getOrderId());
+                    notifyDataSetChanged();
                 });
             }
         }
@@ -108,6 +117,35 @@ public class PendingOrderAdapter extends RecyclerView.Adapter<PendingOrderAdapte
     @Override
     public int getItemCount() {
         return brewedOrder.size();
+    }
+
+    private void updateOrderStatus(String status, String orderId) {
+        Handler handler = new Handler(Looper.getMainLooper());
+        handler.post(() -> {
+            String[] field = new String[2];
+            field[0] = "orderStatus";
+            field[1] = "orderId";
+
+            //Creating array for data
+            String[] data = new String[2];
+            data[0] = status;
+            data[1] = orderId;
+
+            PutData putData = new PutData("http://" + Provider.getIpAddress() + "/CoffeeCommunityPHP/updateorderstatus.php", "POST", field, data);
+            if (putData.startPut()) {
+                if (putData.onComplete()) {
+                    String result = putData.getResult();
+                    if(result.equals("Update success")){
+                        Log.i(TAG, "Update Successful");
+                    }
+                    for (int i = 0; i < Provider.getUser().getBrewedOrder().size(); i++) {
+                        if (Provider.getUser().getBrewedOrder().get(i).getOrderId().equals(orderId)){
+                            Provider.getUser().getBrewedOrder().get(i).setOrderStatus(status);
+                        }
+                    }
+                }
+            }
+        });
     }
 
 }
