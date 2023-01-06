@@ -92,7 +92,7 @@ public class PendingOrderAdapter extends RecyclerView.Adapter<PendingOrderAdapte
             int drawableResourceId = holder.itemView.getContext().getResources().getIdentifier(picUrl, "drawable", holder.itemView.getContext().getPackageName());
             Glide.with(holder.itemView.getContext()).load(drawableResourceId).into(holder.orderCoffeePic);
 
-            if(brewedOrder.get(position).getOrderStatus().equals("pending")){
+            if(brewedOrder.get(position).getOrderStatus().equals("P")){
                 holder.acceptOrderBtn.setOnClickListener(view -> {
                     Provider.getUser().getBrewedOrder().get(position).setOrderStatus("A");
                 });

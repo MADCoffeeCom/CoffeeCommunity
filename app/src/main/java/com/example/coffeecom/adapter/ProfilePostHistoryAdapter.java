@@ -16,14 +16,17 @@ import com.bumptech.glide.Glide;
 import com.example.coffeecom.model.PostModel;
 import com.example.coffeecom.R;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+
 public class ProfilePostHistoryAdapter extends RecyclerView.Adapter<ProfilePostHistoryAdapter.ViewHolder> {
 
     // 1 - Data Source
     // Currently use dummy data
 
-    private PostModel[] myPostList;
+    private ArrayList<PostModel> myPostList;
 
-    public ProfilePostHistoryAdapter (PostModel[] myPostList){
+    public ProfilePostHistoryAdapter (ArrayList<PostModel> myPostList){
         this.myPostList = myPostList;
     }
 
@@ -67,34 +70,12 @@ public class ProfilePostHistoryAdapter extends RecyclerView.Adapter<ProfilePostH
     @Override
     public void onBindViewHolder(@NonNull ProfilePostHistoryAdapter.ViewHolder holder, int position) {
 
-        final PostModel myPostListData = myPostList[position];
-        holder.postDateTime.setText((CharSequence) myPostList[position].getPostDateTime());
-        holder.postTitle.setText(myPostList[position].getPostTitle());
-        holder.postLikes.setText(String.valueOf(myPostList[position].getUpVote()));
-        holder.postDislikes.setText(String.valueOf(myPostList[position].getDownVote()));
-//        holder.postComments.setText(String.valueOf(myPostList[position].getPostTotalComments()));
-//        holder.postImage.setImageResource(myPostList[position].getPostPic());
-        int drawableResourceId = holder.itemView.getContext().getResources().getIdentifier(myPostList[position].getPostPic(),"drawable",holder.itemView.getContext().getPackageName());
-        Glide.with(holder.itemView.getContext()).load(drawableResourceId).into(holder.postImage);
 
-        holder.postHistoryCard.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(view.getContext(), "HMMM STILL DOING", Toast.LENGTH_SHORT).show();
-
-                AppCompatActivity activity = (AppCompatActivity) view.getContext();
-
-                //the page havent done yet
-//                AddBankCardFragment addBankCard = new AddBankCardFragment();
-//                activity.getSupportFragmentManager().beginTransaction().replace(R.id.containerMainPage,addBankCard).addToBackStack(null).commit();
-
-            }
-        });
     }
 
     @Override
     public int getItemCount() {
-        return myPostList.length;
+        return 0;
     }
 
     // 4 - On Click

@@ -20,14 +20,12 @@ import java.text.DecimalFormat;
 
 public class ProfileOrderHistoryAdapter extends RecyclerView.Adapter<ProfileOrderHistoryAdapter.ViewHolder> {
 
-    // 1 - Data Source
-    // Currently use dummy data
 
-    private BrewedOrderModel[] myOrderList;
-
-    public ProfileOrderHistoryAdapter(BrewedOrderModel[] myOrderList){
-        this.myOrderList = myOrderList;
-    }
+//    private BrewedOrderModel[] myOrderList;
+//
+//    public ProfileOrderHistoryAdapter(BrewedOrderModel[] myOrderList){
+//        this.myOrderList = myOrderList;
+//    }
 
 
 
@@ -66,36 +64,11 @@ public class ProfileOrderHistoryAdapter extends RecyclerView.Adapter<ProfileOrde
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
-        final BrewedOrderModel myOrderListData = myOrderList[position];
-
-        //To format the double decimal, to prevent the 00 to be eaten
-        DecimalFormat df = new DecimalFormat(".00");
-
-        holder.orderTotalPrice.setText("RM"+ df.format(myOrderList[position].getOrderTotalPrice()));
-        holder.orderAmount.setText(myOrderList[position].getOrderHistoryTotalItems());
-        holder.orderDateTime.setText(myOrderList[position].getOrderHistoryDateTime());
-
-        int drawableResourceId = holder.itemView.getContext().getResources().getIdentifier(myOrderList[position].getOrderHistoryImage(),"drawable",holder.itemView.getContext().getPackageName());
-        Glide.with(holder.itemView.getContext()).load(drawableResourceId).into(holder.orderImage);
-
-        holder.orderHistoryCard.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(view.getContext(), "HMMM STILL DOING", Toast.LENGTH_SHORT).show();
-
-                AppCompatActivity activity = (AppCompatActivity) view.getContext();
-
-                //the page havent done yet
-//                AddBankCardFragment addBankCard = new AddBankCardFragment();
-//                activity.getSupportFragmentManager().beginTransaction().replace(R.id.containerMainPage,addBankCard).addToBackStack(null).commit();
-
-            }
-        });
     }
 
     @Override
     public int getItemCount() {
-        return myOrderList.length;
+        return 0;
     }
 
     // 4 - On Click
