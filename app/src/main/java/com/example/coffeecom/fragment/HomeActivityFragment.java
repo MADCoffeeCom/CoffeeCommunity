@@ -1,6 +1,7 @@
 package com.example.coffeecom.fragment;
 
 import static com.example.coffeecom.helper.ToTitleCase.toTitleCase;
+import static com.example.coffeecom.query.QueryBrewedCoffee.queryOrder;
 
 import android.os.Bundle;
 import android.os.Handler;
@@ -21,6 +22,10 @@ import com.example.coffeecom.adapter.CoffeeTypeAdapter;
 import com.example.coffeecom.model.BaristaModel;
 import com.example.coffeecom.model.CoffeeModel;
 import com.example.coffeecom.model.ProfileModel;
+import com.example.coffeecom.query.QueryBrewedCoffee;
+import com.example.coffeecom.query.QueryOrderedCoffee;
+import com.example.coffeecom.query.QueryPost;
+import com.example.coffeecom.query.QuerySellingCoffee;
 import com.vishnusivadas.advanced_httpurlconnection.FetchData;
 import com.vishnusivadas.advanced_httpurlconnection.PutData;
 
@@ -49,6 +54,8 @@ public class HomeActivityFragment extends Fragment {
         recyclerViewCoffeeTypeList = view.findViewById(R.id.coffeeListInBaristaRecyclerView);
         recyclerViewBaristaList = view.findViewById(R.id.baristaRecyclerView);
 
+        QueryPost.queryPost();
+        QueryOrderedCoffee.queryOrderedCoffee();
 
         queryProfile();
         queryCoffeeType();

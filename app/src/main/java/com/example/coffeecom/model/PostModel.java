@@ -1,60 +1,29 @@
 package com.example.coffeecom.model;
 
+import java.util.Date;
+
 public class PostModel {
-    private int postId;
+    private String postId;
     private int upVote, downVote;
-    private String senderId, senderName, postDesc, postPic, postDateTime, postTitle;
+    private String posterId, senderName, postDesc, postPic;
+    Date postDateTime;
 
-    public PostModel(int postId, int upVote, int downVote, String senderId, String senderName, String postDesc, String postPic) {
+    public PostModel(String postId, int upVote, int downVote, String posterId, String senderName, String postDesc, String postPic, Date postDateTime) {
         this.postId = postId;
         this.upVote = upVote;
         this.downVote = downVote;
-        this.senderId = senderId;
+        this.posterId = posterId;
         this.senderName = senderName;
         this.postDesc = postDesc;
         this.postPic = postPic;
-    }
-
-    //new post
-    public PostModel(int postId, String senderId, String senderName, String postDesc, String postPic) {
-        this.postId = postId;
-        this.senderId = senderId;
-        this.senderName = senderName;
-        this.postDesc = postDesc;
-        this.postPic = postPic;
-    }
-
-
-    //for profile page summary
-    public PostModel(String postDateTime, String postPic, String postTitle, int upVote, int downVote){
-        this.postDateTime = postDateTime;
-        this.postPic = postPic;
-        this.postTitle = postTitle;
-        this.upVote = upVote;
-        this.downVote = downVote;
-    }
-
-    public String getPostDateTime() {
-        return postDateTime;
-    }
-
-    public void setPostDateTime(String postDateTime) {
         this.postDateTime = postDateTime;
     }
 
-    public String getPostTitle() {
-        return postTitle;
-    }
-
-    public void setPostTitle(String postTitle) {
-        this.postTitle = postTitle;
-    }
-
-    public int getPostId() {
+    public String getPostId() {
         return postId;
     }
 
-    public void setPostId(int postId) {
+    public void setPostId(String postId) {
         this.postId = postId;
     }
 
@@ -74,12 +43,12 @@ public class PostModel {
         this.downVote = downVote;
     }
 
-    public String getSenderId() {
-        return senderId;
+    public String getPosterId() {
+        return posterId;
     }
 
-    public void setSenderId(String senderId) {
-        this.senderId = senderId;
+    public void setPosterId(String posterId) {
+        this.posterId = posterId;
     }
 
     public String getSenderName() {
@@ -105,4 +74,13 @@ public class PostModel {
     public void setPostPic(String postPic) {
         this.postPic = postPic;
     }
+
+    public Date getPostDateTime() {
+        return postDateTime;
+    }
+
+    public void setPostDateTime(Date postDateTime) {
+        this.postDateTime = postDateTime;
+    }
+
 }

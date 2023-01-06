@@ -59,7 +59,7 @@ public class BaristaFragment extends Fragment {
         pendingOrderRecycleView = view.findViewById(R.id.pendingOrderRecycleView);
         coffeeSellingRecycleView = view.findViewById(R.id.coffeeSellingRecycleView);
 
-        queryOrder();
+        queryOrder(true);
         querySellingCoffee();
 
         return view;
@@ -111,8 +111,7 @@ public class BaristaFragment extends Fragment {
         });
     }
 
-    private void queryOrder() {
-        Log.i(TAG, "queryOrder: Run here once");
+    public void queryOrder(boolean enableRecycleView) {
         Provider.getUser().getBrewedOrder().clear();
 
         Handler handler = new Handler(Looper.getMainLooper());
@@ -155,13 +154,13 @@ public class BaristaFragment extends Fragment {
                             Log.i(TAG, "Successfully Added Order " + order.getOrderId());
                         }
                     }
-                    queryCoffeeInOrder();
+                    queryCoffeeInOrder(enableRecycleView);
                 }
             }
         });
     }
 
-    private void queryCoffeeInOrder() {
+    private void queryCoffeeInOrder(boolean enableRecycleView) {
         Handler handler = new Handler(Looper.getMainLooper());
         handler.post(new Runnable() {
             @Override
@@ -191,12 +190,13 @@ public class BaristaFragment extends Fragment {
                                     if (Provider.getUser().getBrewedOrder().get(i).getOrderId().equals(orderId)) {
                                         Provider.getUser().getBrewedOrder().get(i).addOrderedCoffee(coffee);
                                         Log.i(TAG, "Successfully Coffee in Order " + coffee.getCoffeeId());
+                                        Log.i(TAG, "Successfully Coffee in Order size " + Provider.getUser().getBrewedOrder().size());
                                     }
                                 }
                             }
                         }
                     }
-                    recyclerViewPendingOrder();
+                    if(enableRecycleView) recyclerViewPendingOrder();
                 }
             }
         });

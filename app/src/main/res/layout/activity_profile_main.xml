@@ -15,6 +15,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginBottom="80dp"
         app:layout_constraintVertical_bias="1.0">
 
         <LinearLayout
@@ -33,18 +34,55 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="24dp"
                     android:layout_marginTop="24dp"
-                    android:text="PROFILE"
+                    android:text="Profile"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
-                <include
-                    layout="@layout/profile_name"
-                    android:layout_width="match_parent"
-                    android:layout_height="125dp"
+                <ImageView
+                    android:id="@+id/imageViewProfileImage"
+                    android:layout_width="83dp"
+                    android:layout_height="80dp"
                     android:layout_marginStart="24dp"
+                    android:layout_marginTop="16dp"
+                    android:background="@drawable/round_outline"
+                    android:clipToOutline="true"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/barista1"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textViewProfile1"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginEnd="24dp"/>
+                    app:layout_constraintVertical_bias="0.0" />
+
+                <TextView
+                    android:id="@+id/textViewProfileName"
+                    style="@style/h2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:text="Mr Chegg"
+                    app:layout_constraintStart_toEndOf="@+id/imageViewProfileImage"
+                    app:layout_constraintTop_toTopOf="@+id/imageViewProfileImage" />
+
+                <TextView
+                    android:id="@+id/textViewProfileType"
+                    style="@style/c1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Barista"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="@+id/textViewProfileName"
+                    app:layout_constraintTop_toBottomOf="@+id/textViewProfileName"
+                    app:layout_constraintVertical_bias="0.0" />
+
+                <ImageButton
+                    android:id="@+id/imageButtonProfileEdit"
+                    android:layout_width="22dp"
+                    android:layout_height="24dp"
+                    android:layout_marginEnd="24dp"
+                    android:backgroundTint="@color/transparent"
+                    android:src="@drawable/ic_edit"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/textViewProfileName" />
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>
@@ -54,10 +92,9 @@
                 android:id="@+id/fragmentContainerView2"
                 android:name="com.example.coffeecom.fragment.CoffeeWalletFragment"
                 android:layout_width="match_parent"
-                android:layout_height="56dp"
-                android:layout_marginStart="24dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginEnd="24dp" />
+                android:layout_height="wrap_content"
+                android:layout_marginTop="40dp"
+                />
 
             <TextView
                 android:id="@+id/textViewProfile2"

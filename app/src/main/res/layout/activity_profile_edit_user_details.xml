@@ -27,106 +27,149 @@
         app:layout_constraintStart_toEndOf="@+id/imgEditPostBack"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageView
-        android:id="@+id/imgEditProfileUserPic"
-        android:layout_width="182dp"
-        android:layout_height="187dp"
-        android:layout_marginTop="20dp"
-        android:scaleType="centerCrop"
-        android:src="@drawable/barista1"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewProfile6" />
-
-    <TextView
-        android:id="@+id/textViewProfile7"
-        style="@style/c1"
-        android:textStyle="bold"
-        android:layout_width="wrap_content"
+    <ScrollView
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="24dp"
         android:layout_marginTop="24dp"
-        android:text="Name"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imgEditProfileUserPic" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewProfile6">
 
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="49dp"
-        android:layout_marginLeft="24dp"
-        android:id="@+id/editTextProfileName"
-        android:layout_marginRight="24dp"
-        android:text="\tPlease enter your full name"
-        android:background="@drawable/linear_gray_background"
-        android:textColor="@color/white_60"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.333"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewProfile7" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/textViewProfile8"
-        style="@style/c1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="24dp"
-        android:layout_marginTop="8dp"
-        android:text="Email Address"
-        android:textStyle="bold"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextProfileName" />
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="24dp"
+                android:layout_marginRight="24dp">
 
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="49dp"
-        android:layout_marginLeft="24dp"
-        android:id="@+id/editTextProfileEmail"
-        android:layout_marginRight="24dp"
-        android:background="@drawable/linear_gray_background"
-        android:text="\tPlease enter your email address"
-        android:inputType="textEmailAddress"
-        android:textColor="@color/white_60"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewProfile8" />
+                <TextView
+                    android:id="@+id/textView43"
+                    style="@style/h2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="General"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/textViewProfile9"
-        style="@style/c1"
-        android:textStyle="bold"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="24dp"
-        android:layout_marginTop="8dp"
+                <TextView
+                    android:id="@+id/textViewProfile7"
+                    style="@style/c1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="Name"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView43" />
 
-        android:text="Password"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextProfileEmail" />
+                <EditText
+                    android:id="@+id/editTextProfileName"
+                    style="@style/defaultTextBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/textbox"
+                    android:hint="Name"
+                    android:inputType="none"
+                    android:text="Name"
+                    android:textColor="@color/white_60"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textViewProfile7" />
 
-    <EditText
-        android:id="@+id/editTextProfilePassword"
-        android:layout_width="match_parent"
-        android:layout_height="49dp"
-        android:layout_marginLeft="24dp"
-        android:layout_marginRight="24dp"
-        android:background="@drawable/linear_gray_background"
-        android:inputType="textPassword"
-        android:text="   Password"
-        android:textColor="@color/white_60"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.333"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewProfile9" />
+                <TextView
+                    android:id="@+id/textViewProfile8"
+                    style="@style/c1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="Email Address"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/editTextProfileName" />
+
+                <EditText
+                    android:id="@+id/editTextProfileEmail"
+                    style="@style/defaultTextBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/textbox"
+                    android:hint="Email"
+                    android:inputType="textEmailAddress"
+                    android:text="Email"
+                    android:textColor="@color/white_60"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textViewProfile8" />
+
+                <TextView
+                    android:id="@+id/textViewProfile9"
+                    style="@style/c1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:layout_marginTop="8dp"
+                    android:text="New Password"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/editTextProfileEmail" />
+
+                <EditText
+                    android:id="@+id/editTextProfilePassword"
+                    style="@style/defaultTextBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/textbox"
+                    android:hint="Password"
+                    android:inputType="textPassword"
+                    android:text="   Password"
+                    android:textColor="@color/white_60"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textViewProfile9" />
+
+                <TextView
+                    android:id="@+id/textView42"
+                    style="@style/c2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="Confirm Password"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/editTextProfilePassword" />
+
+                <EditText
+                    android:id="@+id/confirmPasswordTextBox"
+                    style="@style/defaultTextBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/textbox"
+                    android:ems="10"
+                    android:hint="Confirm Password"
+                    android:inputType="none|textPassword"
+                    android:text="Name"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView42" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </LinearLayout>
+    </ScrollView>
 
     <Button
-        android:layout_width="155dp"
-        android:layout_height="54dp"
-        android:layout_marginBottom="60dp"
         android:id="@+id/btnProfileUpdate"
+        style="@style/primaryBtn"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="540dp"
         android:text="Update"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

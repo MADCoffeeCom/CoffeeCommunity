@@ -1,53 +1,44 @@
 package com.example.coffeecom.adapter;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.example.coffeecom.model.BrewedOrderModel;
 import com.example.coffeecom.R;
+import com.example.coffeecom.model.OrderedCoffeeModel;
 
-import java.text.DecimalFormat;
+import java.util.ArrayList;
 
 public class ProfileOrderHistoryAdapter extends RecyclerView.Adapter<ProfileOrderHistoryAdapter.ViewHolder> {
 
+    ArrayList<OrderedCoffeeModel> orderedHistory;
+    Context activity;
 
-//    private BrewedOrderModel[] myOrderList;
-//
-//    public ProfileOrderHistoryAdapter(BrewedOrderModel[] myOrderList){
-//        this.myOrderList = myOrderList;
-//    }
+    public ProfileOrderHistoryAdapter(ArrayList<OrderedCoffeeModel> orderedHistory, Context activity){
+        this.orderedHistory = orderedHistory;
+        this.activity = activity;
+    }
 
-
-
-    // 2 - View Holder Class
     public class ViewHolder extends RecyclerView.ViewHolder{
-
-        public ImageView orderImage;
-        public TextView orderDateTime, orderTotalPrice, orderAmount;
-        public ConstraintLayout orderHistoryCard;
+        public ImageView coffeeCardImage;
+        public TextView coffeeCardTitle;
+        public ConstraintLayout coffeeTypeCard;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            this.orderImage = itemView.findViewById(R.id.imgOrderHistory);
-            this.orderDateTime = itemView.findViewById(R.id.txtOrderHistoryDateTime);
-            this.orderTotalPrice = itemView.findViewById(R.id.txtOrderHistoryPrice);
-            this.orderAmount = itemView.findViewById(R.id.txtOrderHistoryAmount);
-            this.orderHistoryCard = itemView.findViewById(R.id.coffeeOrderHistoryCard);
-
-//            itemView.setOnClickListener((View.OnClickListener) this);
+            this.coffeeCardImage = itemView.findViewById(R.id.coffeeCardImage);
+            this.coffeeCardTitle = itemView.findViewById(R.id.coffeeCardTitle);
+            this.coffeeTypeCard = itemView.findViewById(R.id.coffeeTypeCard);
         }
-
     }
 
     // 3 - Implementing the methods
@@ -56,19 +47,30 @@ public class ProfileOrderHistoryAdapter extends RecyclerView.Adapter<ProfileOrde
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-        View listItem = inflater.inflate(R.layout.viewholder_profile_order_history, parent, false);    //think inflate as display
+        View listItem = inflater.inflate(R.layout.viewholder_coffee_type_small, parent, false);    //think inflate as display
         ViewHolder viewHolder = new ViewHolder(listItem);
         return viewHolder;
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+        String picUrl = orderedHistory.get(position).getOrderedCoffee().get(0).getCoffeePic();
+        int drawableResourceId = holder.itemView.getContext().getResources().getIdentifier(picUrl, "drawable", holder.itemView.getContext().getPackageName());
+        Glide.with(holder.itemView.getContext()).load(drawableResourceId).into(holder.coffeeCardImage);
 
+        holder.coffeeCardTitle.setText("" + orderedHistory.get(position).getOrderedCoffee().get(0).getCoffeeTitle());
+
+        holder.coffeeTypeCard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+//                ((BottomNavigationActivity)activity).replaceFragment(new LearnDetailsFragment());
+            }
+        });
     }
 
     @Override
     public int getItemCount() {
-        return 0;
+        return orderedHistory.size();
     }
 
     // 4 - On Click

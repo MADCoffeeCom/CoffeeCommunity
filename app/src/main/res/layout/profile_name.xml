@@ -12,9 +12,9 @@
         android:id="@+id/imageViewProfileImage"
         android:layout_width="83dp"
         android:layout_height="80dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="16dp"
+        android:background="@drawable/round_outline"
+        android:clipToOutline="true"
+        android:scaleType="centerCrop"
         android:src="@drawable/barista1"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -27,10 +27,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="20dp"
         android:text="Mr Chegg"
         app:layout_constraintStart_toEndOf="@+id/imageViewProfileImage"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="@+id/imageViewProfileImage" />
 
     <TextView
         android:id="@+id/textViewProfileType"
@@ -47,7 +46,6 @@
         android:id="@+id/imageButtonProfileEdit"
         android:layout_width="22dp"
         android:layout_height="24dp"
-        android:layout_marginEnd="16dp"
         android:backgroundTint="@color/transparent"
         android:src="@drawable/ic_edit"
         app:layout_constraintEnd_toEndOf="parent"

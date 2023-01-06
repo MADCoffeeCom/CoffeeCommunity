@@ -21,42 +21,27 @@ import java.util.ArrayList;
 
 public class ProfilePostHistoryAdapter extends RecyclerView.Adapter<ProfilePostHistoryAdapter.ViewHolder> {
 
-    // 1 - Data Source
-    // Currently use dummy data
-
     private ArrayList<PostModel> myPostList;
 
     public ProfilePostHistoryAdapter (ArrayList<PostModel> myPostList){
         this.myPostList = myPostList;
     }
 
-
-
-    // 2 - View Holder Class
     public class ViewHolder extends RecyclerView.ViewHolder{
 
         public ImageView postImage;
-        public TextView postDateTime, postTitle, postLikes, postDislikes, postComments;
+        public TextView postTitle, postLikes;
         public ConstraintLayout postHistoryCard;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-
             this.postImage = itemView.findViewById(R.id.imgPostHistory);
-            this.postDateTime = itemView.findViewById(R.id.txtPostHistoryDate);
             this.postTitle = itemView.findViewById(R.id.txtPostHistoryTitle);
             this.postLikes = itemView.findViewById(R.id.txtPostTotalLikes);
-            this.postDislikes = itemView.findViewById(R.id.txtPostTotalDislikes);
-
             this.postHistoryCard = itemView.findViewById(R.id.coffeePostHistoryCard);
-//            this.postComments = itemView.findViewById(R.id.txtPostTotalComments);
-
-//            itemView.setOnClickListener((View.OnClickListener) this);
         }
 
     }
-
-    // 3 - Implementing the methods
 
     @NonNull
     @Override
@@ -69,13 +54,17 @@ public class ProfilePostHistoryAdapter extends RecyclerView.Adapter<ProfilePostH
 
     @Override
     public void onBindViewHolder(@NonNull ProfilePostHistoryAdapter.ViewHolder holder, int position) {
-
-
+        String picUrl = myPostList.get(position).getPostPic();
+        int drawableResourceId = holder.itemView.getContext().getResources().getIdentifier(picUrl, "drawable", holder.itemView.getContext().getPackageName());
+        Glide.with(holder.itemView.getContext()).load(drawableResourceId).into(holder.postImage);
+        holder.postTitle.setText(myPostList.get(position).getPostDesc());
+        int vote = myPostList.get(position).getUpVote() - myPostList.get(position).getDownVote();
+        holder.postLikes.setText("" + vote);
     }
 
     @Override
     public int getItemCount() {
-        return 0;
+        return myPostList.size();
     }
 
     // 4 - On Click

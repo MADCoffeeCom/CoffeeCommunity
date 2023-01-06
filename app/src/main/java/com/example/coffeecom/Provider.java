@@ -10,6 +10,7 @@ import android.util.Log;
 import com.example.coffeecom.model.ArticleModel;
 import com.example.coffeecom.model.BaristaModel;
 import com.example.coffeecom.model.CoffeeModel;
+import com.example.coffeecom.model.PostModel;
 import com.example.coffeecom.model.ProfileModel;
 import com.example.coffeecom.model.TransactionModel;
 
@@ -28,6 +29,7 @@ public class Provider{
     private static ArrayList<CoffeeModel> coffees = new ArrayList<>();
     private static ArrayList<BaristaModel> baristas = new ArrayList<>();
     private static ArrayList<ArticleModel> articles = new ArrayList<>();
+    private static ArrayList<PostModel> posts = new ArrayList<>();
     private static String currentCoffeeType;
     private static String currentBaristaId;
     private static String currentCoffeeId;
@@ -70,7 +72,13 @@ public class Provider{
         return coffees;
     }
 
+    public static ArrayList<PostModel> getPosts() {
+        return posts;
+    }
 
+    public static void addPosts(PostModel post) {
+        Provider.posts.add(post);
+    }
 
     public static void addCoffee(CoffeeModel coffee) {
         Provider.coffees.add(coffee);

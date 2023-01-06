@@ -1,5 +1,9 @@
 package com.example.coffeecom.fragment;
 
+import static com.example.coffeecom.helper.FormatDateTime.convertStringtoDate;
+import static com.example.coffeecom.helper.ToTitleCase.toTitleCase;
+
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -7,6 +11,9 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.os.Handler;
+import android.os.Looper;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,19 +23,15 @@ import android.widget.TextView;
 
 import com.example.coffeecom.Provider;
 import com.example.coffeecom.R;
+import com.example.coffeecom.activity.BottomNavigationActivity;
+import com.example.coffeecom.activity.LoginOrSignupActivity;
 import com.example.coffeecom.adapter.ProfileBrewHistoryAdapter;
 import com.example.coffeecom.adapter.ProfileOrderHistoryAdapter;
 import com.example.coffeecom.adapter.ProfilePostHistoryAdapter;
-import com.example.coffeecom.model.BrewedOrderModel;
-import com.example.coffeecom.model.PostModel;
-
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-
 
 public class ProfileMainFragment extends Fragment {
+
+    private static final String TAG = "ProfileMainFragment";
 
     private TextView txtProfileName, txtProfileType;
     private ImageView imgBarista;
@@ -36,39 +39,40 @@ public class ProfileMainFragment extends Fragment {
     private ImageButton btnEditProfile;
     private ConstraintLayout btnTerms, btnPrivacy, btnBankCard, btnHelpDesk, btnFeedback, btnLogOut;
 
-    ArrayList<PostModel> myPost;
-
-    //Adapter
     ProfileOrderHistoryAdapter orderAdapter;
     ProfileBrewHistoryAdapter brewAdapter;
     ProfilePostHistoryAdapter postAdapter;
 
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.activity_profile_main,container,false);
         initialiseID(view);
+        brewRecycleView();
+        postRecycleView();
+        orderRecycleView();
 
-        //Adapter
-        orderAdapter = new ProfileOrderHistoryAdapter();
-        orderListRV.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
-
-        brewAdapter = new ProfileBrewHistoryAdapter(Provider.getUser().getBrewedOrder());
-        brewListRV.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
-
-        postAdapter = new ProfilePostHistoryAdapter(myPost);
-        postListRV.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
-
-
-        orderListRV.setAdapter(orderAdapter);
-        brewListRV.setAdapter(brewAdapter);
-        postListRV.setAdapter(postAdapter);
-
-
-        // Inflate the layout for this fragment
         return view;
+    }
+
+    public void orderRecycleView() {
+        orderAdapter = new ProfileOrderHistoryAdapter(Provider.getUser().getOrderedHistory(), getActivity());
+        orderListRV.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
+        orderListRV.setAdapter(orderAdapter);
+    }
+
+    public void brewRecycleView() {
+        Log.i(TAG, "brewRecycleView: " + Provider.getUser().getBrewedOrder().size());
+        brewAdapter = new ProfileBrewHistoryAdapter(Provider.getUser().getBrewedOrder(), getActivity());
+        brewListRV.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
+        brewListRV.setAdapter(brewAdapter);
+    }
+
+    public void postRecycleView() {
+        postAdapter = new ProfilePostHistoryAdapter(Provider.getUser().getPostedPost());
+        postListRV.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
+        postListRV.setAdapter(postAdapter);
     }
 
     private void initialiseID(View view){
@@ -85,5 +89,36 @@ public class ProfileMainFragment extends Fragment {
         orderListRV = view.findViewById(R.id.orderListRV);
         brewListRV = view.findViewById(R.id.brewListRV);
         postListRV = view.findViewById(R.id.postListRV);
+
+        txtProfileName.setText(toTitleCase(Provider.getUser().getUserName()));
+        if(!Provider.getUser().getAdminId().isEmpty()){
+            txtProfileType.setText("Admin");
+        }else if(!Provider.getUser().getBaristaId().isEmpty()){
+            txtProfileType.setText("Barista");
+        }else{
+            txtProfileType.setText("User");
+        }
+
+        initialiseBtn();
     }
+
+    public void initialiseBtn() {
+        btnEditProfile.setOnClickListener(view -> ((BottomNavigationActivity)getActivity()).replaceFragment(new ProfileEditUserFragment()));
+        btnTerms.setOnClickListener(view -> ((BottomNavigationActivity)getActivity()).replaceFragment(new TermsOfUseFragment()));
+        btnPrivacy.setOnClickListener(view -> ((BottomNavigationActivity)getActivity()).replaceFragment(new PrivacyPolicyFragment()));
+        btnBankCard.setOnClickListener(view -> ((BottomNavigationActivity)getActivity()).replaceFragment(new BankCardFragment()));
+        btnHelpDesk.setOnClickListener(view -> ((BottomNavigationActivity)getActivity()).replaceFragment(new HelpdeskFragment()));
+        btnFeedback.setOnClickListener(view -> ((BottomNavigationActivity)getActivity()).replaceFragment(new FeedbackFragment()));
+
+        btnLogOut.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent myIntent = new Intent(((BottomNavigationActivity)getContext()), LoginOrSignupActivity.class);
+                ((BottomNavigationActivity)getActivity()).startActivity(myIntent);
+                ((BottomNavigationActivity)getActivity()).finishAffinity();
+            }
+        });
+    }
+
+
 }

@@ -10,7 +10,7 @@ public class FormatDateTime {
 
 
     public static String convertDatetoStringDate (Date date){
-        String dateStr = DATE_FORMAT.format(date);
+        String dateStr = new SimpleDateFormat("MM-dd-yyyy").format(date);
         return dateStr;
     }
 

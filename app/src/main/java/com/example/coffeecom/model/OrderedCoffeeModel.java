@@ -3,14 +3,14 @@ package com.example.coffeecom.model;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class BrewedOrderModel {
+public class OrderedCoffeeModel {
 
     private String orderId;
     private String baristaId;
+    private String baristaName;
+    private String baristaTaman;
     private String baristaDesc;
-    private String customerId;
-    private String customerName;
-    private String customerLocation;
+    private String userId;
     private Date orderStartTime;
     private Date orderFulfillTime;
     private Date duration;
@@ -18,13 +18,13 @@ public class BrewedOrderModel {
     private String orderStatus; //pending, accepted, declined, taken
     private ArrayList<CoffeeModel> orderedCoffee;
 
-    public BrewedOrderModel(String orderId, String baristaId, String baristaDesc, String customerId, String customerName, String customerLocation, Date orderStartTime, Date orderFulfillTime, Date duration, double orderTotalPrice, String orderStatus) {
+    public OrderedCoffeeModel(String orderId, String baristaId, String baristaName, String baristaTaman, String baristaDesc, String userId, Date orderStartTime, Date orderFulfillTime, Date duration, double orderTotalPrice, String orderStatus) {
         this.orderId = orderId;
         this.baristaId = baristaId;
+        this.baristaName = baristaName;
+        this.baristaTaman = baristaTaman;
         this.baristaDesc = baristaDesc;
-        this.customerId = customerId;
-        this.customerName = customerName;
-        this.customerLocation = customerLocation;
+        this.userId = userId;
         this.orderStartTime = orderStartTime;
         this.orderFulfillTime = orderFulfillTime;
         this.duration = duration;
@@ -32,7 +32,6 @@ public class BrewedOrderModel {
         this.orderStatus = orderStatus;
         this.orderedCoffee = new ArrayList<>();
     }
-
 
     public String getOrderId() {
         return orderId;
@@ -50,6 +49,22 @@ public class BrewedOrderModel {
         this.baristaId = baristaId;
     }
 
+    public String getBaristaName() {
+        return baristaName;
+    }
+
+    public void setBaristaName(String baristaName) {
+        this.baristaName = baristaName;
+    }
+
+    public String getBaristaTaman() {
+        return baristaTaman;
+    }
+
+    public void setBaristaTaman(String baristaTaman) {
+        this.baristaTaman = baristaTaman;
+    }
+
     public String getBaristaDesc() {
         return baristaDesc;
     }
@@ -58,28 +73,12 @@ public class BrewedOrderModel {
         this.baristaDesc = baristaDesc;
     }
 
-    public String getCustomerId() {
-        return customerId;
+    public String getUserId() {
+        return userId;
     }
 
-    public void setCustomerId(String customerId) {
-        this.customerId = customerId;
-    }
-
-    public String getCustomerName() {
-        return customerName;
-    }
-
-    public void setCustomerName(String customerName) {
-        this.customerName = customerName;
-    }
-
-    public String getCustomerLocation() {
-        return customerLocation;
-    }
-
-    public void setCustomerLocation(String customerLocation) {
-        this.customerLocation = customerLocation;
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 
     public Date getOrderStartTime() {
