@@ -36,27 +36,36 @@ public class QueryPost {
                 if (putData.startPut()) {
                     if (putData.onComplete()) {
                         String result = putData.getResult();
-                        String[] resultSplitted = result.split("split");
-                        for (String str: resultSplitted) {
-                            String[] postDetails = str.split(" - ");
-                            String postId = postDetails[0];
-                            String posterId = postDetails[1];
-                            String username = postDetails[2];
-                            int upVote = Integer.parseInt(postDetails[3]);
-                            int downVote = Integer.parseInt(postDetails[4]);
-                            String postDesc = postDetails[5];
-                            String postPicUrl = postDetails[6];
-                            Date postDate = null;
-                            try {
-                                postDate = convertStringtoDate(postDetails[7]);
-                            } catch (ParseException e) { e.printStackTrace(); }
-
-                            PostModel post = new PostModel(postId, upVote, downVote, posterId, username, postDesc, postPicUrl, postDate);
-                            Provider.addPosts(post);
-                            Log.i(TAG, "Successfully Added Post " + post.getPostId());
+                        if (result.equals("No results")){
+                            Log.e(TAG, "queryPost No results ");
+                        }else if(result.equals("Error: Database connection")){
+                            Log.e(TAG, "queryPost Database connection problem");
                         }
-                    }
-                    queryMyPost();
+                        else{
+                            Log.i(TAG, "Successfully Added Post " + result);
+                            String[] resultSplitted = result.split("split");
+                            for (String str: resultSplitted) {
+                                String[] postDetails = str.split(" - ");
+                                String postId = postDetails[0];
+
+                                String posterId = postDetails[1];
+                                String username = postDetails[2];
+                                int upVote = Integer.parseInt(postDetails[3]);
+                                int downVote = Integer.parseInt(postDetails[4]);
+                                String postDesc = postDetails[5];
+                                String postPicUrl = postDetails[6];
+                                Date postDate = null;
+                                try {
+                                    postDate = convertStringtoDate(postDetails[7]);
+                                } catch (ParseException e) { e.printStackTrace(); }
+
+                                PostModel post = new PostModel(postId, upVote, downVote, posterId, username, postDesc, postPicUrl, postDate);
+                                Provider.addPosts(post);
+                                Log.i(TAG, "Successfully Added Post " + post.getPostId());
+                            }
+                        }
+                        queryMyPost();
+                        }
                 }
             }
         });
