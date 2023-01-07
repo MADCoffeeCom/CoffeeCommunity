@@ -71,8 +71,7 @@ public class QueryOrderedCoffee {
                             }
                         }
                         queryCoffeeInOrder();
-                        }
-
+                    }
                 }
             }
         });

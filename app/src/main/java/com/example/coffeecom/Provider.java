@@ -10,6 +10,7 @@ import android.util.Log;
 import com.example.coffeecom.model.ArticleModel;
 import com.example.coffeecom.model.BaristaModel;
 import com.example.coffeecom.model.CoffeeModel;
+import com.example.coffeecom.model.HelpdeskModel;
 import com.example.coffeecom.model.PostModel;
 import com.example.coffeecom.model.ProfileModel;
 import com.example.coffeecom.model.TransactionModel;
@@ -30,6 +31,7 @@ public class Provider{
     private static ArrayList<BaristaModel> baristas = new ArrayList<>();
     private static ArrayList<ArticleModel> articles = new ArrayList<>();
     private static ArrayList<PostModel> posts = new ArrayList<>();
+    private static ArrayList<TransactionModel> transactions = new ArrayList<>();
     private static String currentCoffeeType;
     private static String currentBaristaId;
     private static String currentCoffeeId;
@@ -66,7 +68,7 @@ public class Provider{
         return ipAddress;
     }
 
-    private static ArrayList<TransactionModel> transactions = new ArrayList<>();
+
 
     public static ArrayList<CoffeeModel> getCoffees() {
         return coffees;
@@ -133,8 +135,8 @@ public class Provider{
         return transactions;
     }
 
-    public static void setTransactions(ArrayList<TransactionModel> transactions) {
-        Provider.transactions = transactions;
+    public static void addTransactions(TransactionModel transaction) {
+        Provider.transactions.add(transaction);
     }
 
     public static ArrayList<ArticleModel> getArticles() {
@@ -153,49 +155,4 @@ public class Provider{
         Provider.currentArticleId = currentArticleId;
     }
 
-    //    ===================StatusActivity Punya=========================
-    private static String statusTitle, statusHeading1, statusHeading2, statusBtnText;
-    private static Class<?> redirectedCls;
-
-    public static String getStatusTitle() {
-        return statusTitle;
-    }
-
-    public static void setStatusTitle(String statusTitle) {
-        Provider.statusTitle = statusTitle;
-    }
-
-    public static String getStatusHeading1() {
-        return statusHeading1;
-    }
-
-    public static void setStatusHeading1(String statusHeading1) {
-        Provider.statusHeading1 = statusHeading1;
-    }
-
-    public static String getStatusHeading2() {
-        return statusHeading2;
-    }
-
-    public static void setStatusHeading2(String statusHeading2) {
-        Provider.statusHeading2 = statusHeading2;
-    }
-
-//    =======================StatusClass end==================================
-
-    public static Class getRedirectedCls() {
-        return redirectedCls;
-    }
-
-    public static void setRedirectedCls(Class bruh) {
-        redirectedCls = bruh;
-    }
-
-    public static String getStatusBtnText() {
-        return statusBtnText;
-    }
-
-    public static void setStatusBtnText(String statusBtnText) {
-        Provider.statusBtnText = statusBtnText;
-    }
 }

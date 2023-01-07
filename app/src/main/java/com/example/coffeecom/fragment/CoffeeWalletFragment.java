@@ -51,7 +51,7 @@ public class CoffeeWalletFragment extends Fragment {
         walletCard = view.findViewById(R.id.walletCard);
 
         try{
-            walletBalanceTextFragment.setText(String.valueOf(Provider.getUser().getWalletBalance()));
+            walletBalanceTextFragment.setText(String.format("%.2f", Provider.getUser().getWalletBalance()));
         }catch (NullPointerException e){
             walletBalanceTextFragment.setText("0.00");
         }

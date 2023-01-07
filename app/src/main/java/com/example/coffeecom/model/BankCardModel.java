@@ -1,13 +1,13 @@
 package com.example.coffeecom.model;
 
 public class BankCardModel {
-    private int bankCardNo;
+    private String bankCardNo;
     private String bankHolderName;
-    private int cardCvv;
-    private int cardExpiryDate;
+    private String cardCvv;
+    private String cardExpiryDate;
     private String bankName;
 
-    public BankCardModel(int bankCardNo, String bankHolderName, int cardCvv, int cardExpiryDate, String bankName) {
+    public BankCardModel(String bankCardNo, String bankHolderName, String cardCvv, String cardExpiryDate, String bankName) {
         this.bankCardNo = bankCardNo;
         this.bankHolderName = bankHolderName;
         this.cardCvv = cardCvv;
@@ -15,11 +15,11 @@ public class BankCardModel {
         this.bankName = bankName;
     }
 
-    public int getBankCardNo() {
+    public String getBankCardNo() {
         return bankCardNo;
     }
 
-    public void setBankCardNo(int bankCardNo) {
+    public void setBankCardNo(String bankCardNo) {
         this.bankCardNo = bankCardNo;
     }
 
@@ -31,19 +31,19 @@ public class BankCardModel {
         this.bankHolderName = bankHolderName;
     }
 
-    public int getCardCvv() {
+    public String getCardCvv() {
         return cardCvv;
     }
 
-    public void setCardCvv(int cardCvv) {
+    public void setCardCvv(String cardCvv) {
         this.cardCvv = cardCvv;
     }
 
-    public int getCardExpiryDate() {
+    public String getCardExpiryDate() {
         return cardExpiryDate;
     }
 
-    public void setCardExpiryDate(int cardExpiryDate) {
+    public void setCardExpiryDate(String cardExpiryDate) {
         this.cardExpiryDate = cardExpiryDate;
     }
 

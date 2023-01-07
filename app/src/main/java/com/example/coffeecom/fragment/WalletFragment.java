@@ -26,7 +26,7 @@ public class WalletFragment extends Fragment {
     Button topUp5Btn, topUp10Btn, topUp20Btn, topUp30Btn, topUp50Btn, topUp100Btn;
     TextView topUpAmountTextBox;
     TextView errorWalletText, noBankCardErrorText;
-    ImageButton backBtn;
+    ImageButton backBtn, addBankCardBtn;
 
     RecyclerView bankCardRecyclerView;
     RecyclerView.Adapter bankCardRecyclerViewAdapter;
@@ -49,16 +49,18 @@ public class WalletFragment extends Fragment {
         topUp30Btn = view.findViewById(R.id.topUp30Btn);
         topUp50Btn = view.findViewById(R.id.topUp50Btn);
         topUp100Btn = view.findViewById(R.id.topUp100Btn);
+        addBankCardBtn = view.findViewById(R.id.addBankCardBtn);
         topUpAmountTextBox = view.findViewById(R.id.topUpAmountTextBox);
         topUpAmountTextBox.setText("");
 
         bankCardRecyclerView = view.findViewById(R.id.bankCardRecyclerView);
 
 
-        backBtn.setOnClickListener(new View.OnClickListener() {
+        backBtn.setOnClickListener(view1 -> getActivity().onBackPressed());
+        addBankCardBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                getActivity().finish();
+                ((BottomNavigationActivity)getActivity()).replaceFragment(new AddBankCardFragment());
             }
         });
 
@@ -83,18 +85,9 @@ public class WalletFragment extends Fragment {
             public void onClick(View view) {
 //                Log.d(String.valueOf(topUpAmountTextBox.getText()), "bruhbruh: ");
                 if (!String.valueOf(topUpAmountTextBox.getText()).isEmpty()){
-                    AppCompatActivity activity = (AppCompatActivity) view.getContext();
-                    WalletPinFragment walletPinFragment = new WalletPinFragment();
-                    activity.getSupportFragmentManager().beginTransaction().replace(R.id.containerMainPage,walletPinFragment).addToBackStack(null).commit();
-
                     Bundle bundle = new Bundle();
                     bundle.putString("amount", String.valueOf(topUpAmountTextBox.getText()));
-                    walletPinFragment.setArguments(bundle);
-                    //please check if this is correct
-
-//                    Intent intent = new Intent(getContext(), WalletPinActivity.class);
-//                    intent.putExtra("amount", String.valueOf(topUpAmountTextBox.getText()));
-//                    startActivity(intent);
+                    ((BottomNavigationActivity)getActivity()).replaceFragmentWithData(new WalletPinFragment(), bundle);
                 }else{
                     errorWalletText.setVisibility(View.VISIBLE);
                 }
@@ -107,36 +100,11 @@ public class WalletFragment extends Fragment {
 
     public void topUpFillNumber() {
         topUp5Btn.setOnClickListener(view -> topUpAmountTextBox.setText(String.valueOf(5)));
-        topUp10Btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                topUpAmountTextBox.setText(String.valueOf(10));
-            }
-        });
-        topUp20Btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                topUpAmountTextBox.setText(String.valueOf(20));
-            }
-        });
-        topUp30Btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                topUpAmountTextBox.setText(String.valueOf(30));
-            }
-        });
-        topUp50Btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                topUpAmountTextBox.setText(String.valueOf(50));
-            }
-        });
-        topUp100Btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                topUpAmountTextBox.setText(String.valueOf(100));
-            }
-        });
+        topUp10Btn.setOnClickListener(view -> topUpAmountTextBox.setText(String.valueOf(10)));
+        topUp20Btn.setOnClickListener(view -> topUpAmountTextBox.setText(String.valueOf(20)));
+        topUp30Btn.setOnClickListener(view -> topUpAmountTextBox.setText(String.valueOf(30)));
+        topUp50Btn.setOnClickListener(view -> topUpAmountTextBox.setText(String.valueOf(50)));
+        topUp100Btn.setOnClickListener(view -> topUpAmountTextBox.setText(String.valueOf(100)));
     }
 
     private void recyclerViewBankCard() {
@@ -145,7 +113,7 @@ public class WalletFragment extends Fragment {
             LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
             bankCardRecyclerView.setLayoutManager(linearLayoutManager);
 
-            bankCardRecyclerViewAdapter = new BankCardAdapter(getActivity());
+            bankCardRecyclerViewAdapter = new BankCardAdapter(Provider.getUser().getBankCard(), getActivity());
             bankCardRecyclerView.setAdapter(bankCardRecyclerViewAdapter);
 
         }catch(NullPointerException e){
