@@ -15,7 +15,6 @@ import android.widget.TextView;
 import com.example.coffeecom.Provider;
 import com.example.coffeecom.R;
 import com.example.coffeecom.activity.BottomNavigationActivity;
-import com.example.coffeecom.adapter.PendingOrderAdapter;
 import com.example.coffeecom.adapter.PostAdapter;
 
 public class CommunityFragment extends Fragment {
@@ -31,7 +30,7 @@ public class CommunityFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_community,container,false);
         postRecyclerView = view.findViewById(R.id.postRecyclerView);
         addPost = view.findViewById(R.id.addPost);
-        TbSearch = view.findViewById(R.id.TbSearch);
+        TbSearch = view.findViewById(R.id.articleTbSearch);
 
         recyclerViewPost();
 
