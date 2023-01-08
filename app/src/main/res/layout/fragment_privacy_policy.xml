@@ -28,12 +28,12 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="640dp"
+        android:layout_height="580dp"
         android:layout_marginTop="10dp"
+        android:layout_marginBottom="80dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="@id/backBtn"
-        app:layout_constraintTop_toBottomOf="@+id/privacyPolicyText"
-        app:layout_constraintVertical_bias="0.195">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/privacyPolicyText">
 
         <TextView
             android:id="@+id/privacyPolicyContent"

@@ -67,42 +67,42 @@
 
     <EditText
         android:id="@+id/editTextCaption"
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:layout_marginLeft="24dp"
-        android:layout_marginTop="12dp"
-        android:background="@drawable/linear_gray_background"
-        android:layout_marginRight="24dp"
-        android:layout_marginBottom="100dp"
-        android:text="Write here"
-        android:textAlignment="center"
         style="@style/c2"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:layout_marginLeft="24dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="24dp"
+        android:background="@drawable/textbox"
+        android:gravity="start"
+        android:paddingLeft="16dp"
+        android:paddingTop="16dp"
+        android:paddingRight="16dp"
+        android:paddingBottom="16dp"
+        android:text="Write here"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewProfile2"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewProfile2" />
 
     <Button
         android:id="@+id/btnUpdatePost"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginBottom="100dp"
         android:text="Update Post"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.2"
-        app:layout_constraintStart_toStartOf="@+id/editTextCaption"
-        app:layout_constraintTop_toBottomOf="@+id/editTextCaption" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/btnDeletePost"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/btnDeletePost"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="10dp"
         android:backgroundTint="@color/red"
         android:text="Delete Post"
+        app:layout_constraintBottom_toBottomOf="@+id/btnUpdatePost"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/btnUpdatePost"
-        app:layout_constraintTop_toBottomOf="@+id/editTextCaption" />
+        app:layout_constraintTop_toTopOf="@+id/btnUpdatePost" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
