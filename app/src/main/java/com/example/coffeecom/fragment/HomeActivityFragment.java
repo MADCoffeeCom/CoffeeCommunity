@@ -25,11 +25,13 @@ import com.example.coffeecom.adapter.CoffeeTypeAdapter;
 import com.example.coffeecom.model.BaristaModel;
 import com.example.coffeecom.model.CoffeeModel;
 import com.example.coffeecom.model.ProfileModel;
+import com.example.coffeecom.query.QueryBankCard;
 import com.example.coffeecom.query.QueryBrewedCoffee;
 import com.example.coffeecom.query.QueryCartItem;
 import com.example.coffeecom.query.QueryOrderedCoffee;
 import com.example.coffeecom.query.QueryPost;
 import com.example.coffeecom.query.QuerySellingCoffee;
+import com.example.coffeecom.query.QueryWallet;
 import com.vishnusivadas.advanced_httpurlconnection.FetchData;
 import com.vishnusivadas.advanced_httpurlconnection.PutData;
 
@@ -68,6 +70,8 @@ public class HomeActivityFragment extends Fragment {
         });
         QueryPost.queryPost();
         QueryOrderedCoffee.queryOrderedCoffee();
+        QueryWallet.queryWallet();
+        QueryBankCard.queryBankCard();
 
         queryProfile();
         queryCoffeeType();

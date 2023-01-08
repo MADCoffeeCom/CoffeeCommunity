@@ -46,7 +46,7 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
 
     @Override
     public void onBindViewHolder(@NonNull TransactionAdapter.ViewHolder holder, int position) {
-        holder.transactionDetailsText.setText(transactions.get(position).getTransactionDetails());
+        holder.transactionDetailsText.setText(transactions.get(position).getPaymentType());
 
         String picUrl = "ic_debit";
         double amount = transactions.get(position).getTotalPayment();

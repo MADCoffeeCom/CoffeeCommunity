@@ -17,6 +17,7 @@ import com.example.coffeecom.R;
 import com.example.coffeecom.activity.BottomNavigationActivity;
 import com.example.coffeecom.adapter.TransactionAdapter;
 import com.example.coffeecom.model.TransactionModel;
+import com.example.coffeecom.query.QueryTransaction;
 
 import java.util.ArrayList;
 
@@ -35,6 +36,7 @@ public class TransactionFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.activity_transaction,container,false);
+        QueryTransaction.queryTransaction();
 
         transactionRecyclerView = view.findViewById(R.id.transactionRecyclerView);
 

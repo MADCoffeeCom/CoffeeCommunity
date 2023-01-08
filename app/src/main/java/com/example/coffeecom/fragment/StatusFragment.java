@@ -19,11 +19,6 @@ public class StatusFragment extends Fragment {
     TextView statusText, statusHeading1Text, statusHeading2Text;
     Button statusBtn;
 
-    private Fragment fragment;
-
-    public StatusFragment(Fragment fragment) {
-        this.fragment = fragment;
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -36,20 +31,17 @@ public class StatusFragment extends Fragment {
         statusHeading2Text = view.findViewById(R.id.statusHeading2Text);
         statusBtn = view.findViewById(R.id.statusBtn);
 
-        statusText.setText(Provider.getStatusTitle());
-        statusHeading1Text.setText(Provider.getStatusHeading1());
-        statusHeading2Text.setText(Provider.getStatusHeading2());
-        statusBtn.setText(Provider.getStatusBtnText());
+        Bundle bundle = this.getArguments();
+
+        statusText.setText(bundle.getString("Title"));
+        statusHeading1Text.setText(bundle.getString("Heading1"));
+        statusHeading2Text.setText(bundle.getString("Heading2"));
+        statusBtn.setText(bundle.getString("BtnText"));
         statusBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                finish();
-                //what fragment should i redirect this to ?
-//                startActivity(new Intent(getContext(), Provider.getRedirectedCls().getClass()));
-
-                AppCompatActivity activity = (AppCompatActivity) view.getContext();
-                WalletFragment walletFragment = new WalletFragment();
-                activity.getSupportFragmentManager().beginTransaction().replace(R.id.containerMainPage,fragment).addToBackStack(null).commit();
+                getActivity().onBackPressed();
+                //Bruh
             }
         });
 

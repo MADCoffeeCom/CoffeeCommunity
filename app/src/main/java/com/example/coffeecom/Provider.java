@@ -1,10 +1,16 @@
 package com.example.coffeecom;
 
+import static androidx.core.content.ContentProviderCompat.requireContext;
+
+import android.content.Context;
+import android.net.wifi.WifiManager;
+import android.text.format.Formatter;
 import android.util.Log;
 
 import com.example.coffeecom.model.ArticleModel;
 import com.example.coffeecom.model.BaristaModel;
 import com.example.coffeecom.model.CoffeeModel;
+import com.example.coffeecom.model.HelpdeskModel;
 import com.example.coffeecom.model.PostModel;
 import com.example.coffeecom.model.ProfileModel;
 import com.example.coffeecom.model.TransactionModel;
@@ -14,7 +20,9 @@ import java.net.InetAddress;
 import java.net.NetworkInterface;
 import java.net.SocketException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Enumeration;
+import java.util.List;
 
 public class Provider{
 
@@ -24,6 +32,7 @@ public class Provider{
     private static ArrayList<ArticleModel> articles = new ArrayList<>();
     private static ArrayList<PostModel> posts = new ArrayList<>();
     private static ArrayList<String> baristaIdInCart = new ArrayList<>();
+    private static ArrayList<TransactionModel> transactions = new ArrayList<>();
     private static String currentCoffeeType;
     private static String currentBaristaId;
     private static String currentCoffeeId;
@@ -60,7 +69,7 @@ public class Provider{
         return ipAddress;
     }
 
-    private static ArrayList<TransactionModel> transactions = new ArrayList<>();
+
 
     public static ArrayList<CoffeeModel> getCoffees() {
         return coffees;
@@ -127,8 +136,8 @@ public class Provider{
         return transactions;
     }
 
-    public static void setTransactions(ArrayList<TransactionModel> transactions) {
-        Provider.transactions = transactions;
+    public static void addTransactions(TransactionModel transaction) {
+        Provider.transactions.add(transaction);
     }
 
     public static ArrayList<ArticleModel> getArticles() {

@@ -7,7 +7,7 @@
     tools:context=".fragment.HelpdeskFragment">
 
     <ImageButton
-        android:id="@+id/helpdeskBckBtn"
+        android:id="@+id/backBtn"
         android:layout_width="48dp"
         android:layout_height="48dp"
         android:layout_marginTop="24dp"
@@ -23,7 +23,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         android:text="Helpdesk"
-        app:layout_constraintStart_toEndOf="@+id/helpdeskBckBtn"
+        app:layout_constraintStart_toEndOf="@+id/backBtn"
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText

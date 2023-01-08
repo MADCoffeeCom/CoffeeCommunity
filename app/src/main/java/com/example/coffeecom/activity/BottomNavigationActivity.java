@@ -8,6 +8,7 @@ import androidx.fragment.app.FragmentTransaction;
 
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.example.coffeecom.R;
 import com.example.coffeecom.fragment.BaristaFragment;
@@ -83,10 +84,34 @@ public class BottomNavigationActivity extends AppCompatActivity {
     public void replaceMainFragment (Fragment fragment, MenuItem item){
         replaceFragment(fragment);
         item.setChecked(true);
+        btmNavBar.setVisibility(View.VISIBLE);
     }
 
     public void replaceFragment (Fragment fragment){
+        btmNavBar.setVisibility(View.GONE);
+
         String backStateName = fragment.getClass().getName();
+        boolean fragmentPopped = manager.popBackStackImmediate (backStateName, 0);
+
+        if (!fragmentPopped){ //fragment not in back stack, create it.
+            FragmentTransaction ft = manager.beginTransaction();
+            ft.setCustomAnimations(
+                    R.anim.fade_in,  // enter
+                    R.anim.fade_out,  // exit
+                    R.anim.fade_in,   // popEnter
+                    R.anim.fade_out  // popExit
+            );
+            ft.replace(container, fragment);
+            ft.addToBackStack(backStateName);
+            ft.commit();
+        }
+    }
+
+    public void replaceFragmentWithData (Fragment fragment, Bundle bundle){
+        btmNavBar.setVisibility(View.GONE);
+
+        String backStateName = fragment.getClass().getName();
+        fragment.setArguments(bundle);
         boolean fragmentPopped = manager.popBackStackImmediate (backStateName, 0);
 
         if (!fragmentPopped){ //fragment not in back stack, create it.

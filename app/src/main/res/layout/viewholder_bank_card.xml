@@ -4,9 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/bankCardCard"
     android:layout_width="match_parent"
-    android:layout_height="40dp"
-    android:layout_marginStart="24dp"
-    android:layout_marginEnd="24dp"
+    android:layout_height="50dp"
     android:layout_marginBottom="8dp"
     android:background="@drawable/linear_gray_background">
 
@@ -30,4 +28,15 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/imageView2"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
+        android:id="@+id/deleteBankCardBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:background="@color/transparent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_delete" />
 </androidx.constraintlayout.widget.ConstraintLayout>
