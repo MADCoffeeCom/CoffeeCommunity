@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,16 +27,12 @@ public class SignupActivity extends AppCompatActivity {
         setContentView(R.layout.activity_signup);
 
         Button registerButton = (Button) findViewById(R.id.signup_register);
+        ImageButton backBtn = findViewById(R.id.backBtn);
+
+        backBtn.setOnClickListener(view -> finish());
 
 
-        registerButton.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View view) {
-                validateRegister();
-            }
-        });
-
-
+        registerButton.setOnClickListener(view -> validateRegister());
 
     }
 
