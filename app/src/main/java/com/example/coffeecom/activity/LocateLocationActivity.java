@@ -26,7 +26,7 @@ public class LocateLocationActivity extends AppCompatActivity {
 
 
         backBtn = findViewById(R.id.backBtn);
-        TbSearch = findViewById(R.id.articleTbSearch);
+        TbSearch = findViewById(R.id.TBSearch);
         relocateBtn = findViewById(R.id.relocateBtn);
 
         backBtn.setOnClickListener(view -> finish());

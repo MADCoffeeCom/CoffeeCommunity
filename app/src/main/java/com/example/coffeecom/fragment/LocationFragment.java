@@ -53,7 +53,7 @@ public class LocationFragment extends Fragment {
 
         //Input code below to locate current location
 
-        currentLocationText.setText(currentLocation);
+        currentLocationText.setText(Provider.getUser().getUserTaman());
         locationBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

@@ -42,7 +42,14 @@ public class HelpdeskFragment extends Fragment {
 
     public void orderRecycleView() {
         helpAdapter = new HelpdeskAdapter(helpdesk, getActivity());
-        helpdeskQuestionRecycleView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false) {
+            @Override
+            public boolean canScrollVertically() {
+                return false;
+            }
+        };
+
+        helpdeskQuestionRecycleView.setLayoutManager(linearLayoutManager);
         helpdeskQuestionRecycleView.setAdapter(helpAdapter);
     }
 

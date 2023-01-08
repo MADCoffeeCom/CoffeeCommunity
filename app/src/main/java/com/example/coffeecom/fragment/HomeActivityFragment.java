@@ -1,17 +1,16 @@
 package com.example.coffeecom.fragment;
 
-import static com.example.coffeecom.helper.ToTitleCase.toTitleCase;
-import static com.example.coffeecom.query.QueryBrewedCoffee.queryOrder;
-
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
@@ -25,13 +24,10 @@ import com.example.coffeecom.adapter.BaristaCardAdapter;
 import com.example.coffeecom.adapter.CoffeeTypeAdapter;
 import com.example.coffeecom.model.BaristaModel;
 import com.example.coffeecom.model.CoffeeModel;
-import com.example.coffeecom.model.ProfileModel;
 import com.example.coffeecom.query.QueryBankCard;
-import com.example.coffeecom.query.QueryBrewedCoffee;
 import com.example.coffeecom.query.QueryCartItem;
 import com.example.coffeecom.query.QueryOrderedCoffee;
 import com.example.coffeecom.query.QueryPost;
-import com.example.coffeecom.query.QuerySellingCoffee;
 import com.example.coffeecom.query.QueryWallet;
 import com.vishnusivadas.advanced_httpurlconnection.FetchData;
 import com.vishnusivadas.advanced_httpurlconnection.PutData;
@@ -41,28 +37,33 @@ import java.util.ArrayList;
 
 public class HomeActivityFragment extends Fragment {
 
+    private static final String TAG = "HomeActivityFragment";
+
     private RecyclerView recyclerViewCoffeeTypeList, recyclerViewBaristaList;
-    private RecyclerView.Adapter coffeeTypeAdapter, baristaAdapter;
+    private CoffeeTypeAdapter coffeeTypeAdapter;
+    private BaristaCardAdapter baristaAdapter;
     private ImageButton cartButton;
-    ArrayList<String> coffeeTypeA = new ArrayList<>();
-    ArrayList<String> coffeePicA = new ArrayList<>();
+    private TextView TBSearch;
+    ArrayList<BaristaModel> baristas = new ArrayList<>();
+    ArrayList<CoffeeModel> coffees = new ArrayList<>();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
         Provider.getBaristas().clear();
         Provider.getCoffees().clear();
-        coffeeTypeA.clear();
-        coffeePicA.clear();
+        baristas.clear();
+        coffees.clear();
 
         View view = inflater.inflate(R.layout.activity_home,container,false);
 
 //        Provider.setUser(new ProfileModel("UID_abang"));
         recyclerViewCoffeeTypeList = view.findViewById(R.id.coffeeListInBaristaRecyclerView);
         recyclerViewBaristaList = view.findViewById(R.id.baristaRecyclerView);
+        TBSearch = view.findViewById(R.id.TBSearch);
         cartButton = view.findViewById(R.id.BtnCart);
         cartButton.setOnClickListener(new View.OnClickListener(){
-
             @Override
             public void onClick(View view) {
                 QueryCartItem.queryCartItem();
@@ -73,6 +74,7 @@ public class HomeActivityFragment extends Fragment {
 //                ((BottomNavigationActivity)getActivity()).replaceFragment(new CoffeeCartFragment());
             }
         });
+
         QueryPost.queryPost();
         QueryOrderedCoffee.queryOrderedCoffee();
         QueryWallet.queryWallet();
@@ -82,8 +84,60 @@ public class HomeActivityFragment extends Fragment {
         queryCoffeeType();
         queryBarista();
 
+        TBSearch.setText("");
+        TBSearch.addTextChangedListener(new TextWatcher() {
+
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                filterBarista(String.valueOf(charSequence));
+                filterCoffee(String.valueOf(charSequence));
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+
+        });
+
         return view;
     }
+
+    private void filterBarista(String text) {
+        ArrayList<BaristaModel> filteredlist = new ArrayList<>();
+
+        for (BaristaModel barista : baristas) {
+            if (barista.getUserName().toLowerCase().contains(text.toLowerCase())) {
+                Log.i(TAG, "filter: " + barista.getUserName());
+                filteredlist.add(barista);
+            }
+        }
+
+        if (!filteredlist.isEmpty()) {
+            baristaAdapter.filterList(filteredlist);
+        }
+    }
+
+    private void filterCoffee(String text) {
+        ArrayList<CoffeeModel> filteredlistCoffee = new ArrayList<>();
+
+        for (int i = 0; i < coffees.size(); i++) {
+            if (Provider.getCoffees().get(i).getCoffeeTitle().contains(text.toLowerCase()) || Provider.getCoffees().get(i).getCoffeeType().contains(text.toLowerCase())) {
+                Log.i(TAG, "filter: " + coffees.get(i).getCoffeeTitle());
+                filteredlistCoffee.add(coffees.get(i));
+            }
+        }
+
+        if (!filteredlistCoffee.isEmpty()) {
+            coffeeTypeAdapter.filterList(filteredlistCoffee);
+        }
+    }
+
 
     private void queryProfile() {
         Handler handler = new Handler(Looper.getMainLooper());
@@ -162,12 +216,13 @@ public class HomeActivityFragment extends Fragment {
                             Provider.addCoffee(coffee);
                             Log.i("Home Add new coffee", coffee.getCoffeeId() + " added!");
 
-                            if(!coffeeTypeA.contains(coffeeType)){
-                                coffeeTypeA.add(toTitleCase(coffeeType));
-                                coffeePicA.add(coffeePicUrl);
-                            }
+//                            if(!coffeeTypeA.contains(coffeeType)){
+//                                coffeeTypeA.add(toTitleCase(coffeeType));
+//                                coffeePicA.add(coffeePicUrl);
+//                            }
                         }
                     }
+                    coffees = Provider.getCoffees();
                     //Put here so that it pop the coffee after complete query
                     recyclerViewCoffeeType();
                 }
@@ -207,6 +262,7 @@ public class HomeActivityFragment extends Fragment {
                             }
                         }
                     }
+                    baristas = Provider.getBaristas();
                     recyclerViewBarista();
                 }
             }
@@ -218,7 +274,7 @@ public class HomeActivityFragment extends Fragment {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
         recyclerViewCoffeeTypeList.setLayoutManager(linearLayoutManager);
 
-        coffeeTypeAdapter = new CoffeeTypeAdapter(coffeeTypeA, coffeePicA, getActivity());
+        coffeeTypeAdapter = new CoffeeTypeAdapter(coffees, getActivity());
         recyclerViewCoffeeTypeList.setAdapter(coffeeTypeAdapter);
     }
 
@@ -226,7 +282,7 @@ public class HomeActivityFragment extends Fragment {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
         recyclerViewBaristaList.setLayoutManager(linearLayoutManager);
 
-        baristaAdapter = new BaristaCardAdapter(Provider.getBaristas(),getActivity());
+        baristaAdapter = new BaristaCardAdapter(baristas,getActivity());
         recyclerViewBaristaList.setAdapter(baristaAdapter);
     }
 

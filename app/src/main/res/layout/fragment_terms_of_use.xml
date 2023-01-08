@@ -28,12 +28,13 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="580dp"
+        android:layout_height="540dp"
         android:layout_marginTop="10dp"
         android:layout_marginBottom="80dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/termsOfUseText">
+        app:layout_constraintTop_toBottomOf="@+id/termsOfUseText"
+        app:layout_constraintVertical_bias="0.0">
 
         <TextView
             android:id="@+id/termsOfUseContent"

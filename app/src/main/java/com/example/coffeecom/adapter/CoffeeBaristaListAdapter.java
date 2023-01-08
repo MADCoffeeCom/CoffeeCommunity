@@ -102,6 +102,7 @@ public class CoffeeBaristaListAdapter extends RecyclerView.Adapter<CoffeeBarista
         holder.coffeeDesc.setText(coffees.get(position).getCoffeeDesc());
         holder.coffeePricePerItemText.setText(String.valueOf(coffees.get(position).getCoffeePrice()));
         holder.baristaLocationText.setText(baristaWithCoffee.get(position).getUserTaman());
+
         holder.addToCartBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -142,12 +143,7 @@ public class CoffeeBaristaListAdapter extends RecyclerView.Adapter<CoffeeBarista
             public void onClick(View view) {
                 //go to details coffee view
                 Provider.setCurrentCoffeeId(coffees.get(position).getCoffeeId());
-                AppCompatActivity activity = (AppCompatActivity) view.getContext();
-                CoffeeDetailsFragment coffeeDetails = new CoffeeDetailsFragment();
-                activity.getSupportFragmentManager().beginTransaction().replace(R.id.containerMainPage, coffeeDetails).addToBackStack(null).commit();
-                //need to set different location
-//                Intent intent = new Intent(holder.itemView.getContext(), CoffeeDetailsActivity.class);
-//                holder.itemView.getContext().startActivity(intent);
+                ((BottomNavigationActivity)activity).replaceFragment(new CoffeeDetailsFragment());
             }
         });
 
