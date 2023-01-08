@@ -18,6 +18,7 @@ import com.bumptech.glide.Glide;
 import com.example.coffeecom.Provider;
 import com.example.coffeecom.R;
 import com.example.coffeecom.activity.BottomNavigationActivity;
+import com.example.coffeecom.fragment.CoffeeDetailsFragment;
 import com.example.coffeecom.fragment.CoffeeListFragment;
 import com.example.coffeecom.model.BaristaModel;
 import com.example.coffeecom.model.CoffeeModel;
@@ -74,9 +75,11 @@ public class CoffeeTypeAdapter extends RecyclerView.Adapter<CoffeeTypeAdapter.Vi
             public void onClick(View view) {
                 //input code here to open details coffee page
                 Log.i("Coffeetype in adapter", coffees.get(position).getCoffeeType());
-                Provider.setCurrentCoffeeType(coffees.get(position).getCoffeeType());
+//                Provider.setCurrentCoffeeType(coffees.get(position).getCoffeeType());
+                Provider.setCurrentCoffeeId(coffees.get(position).getCoffeeId());
 
-                ((BottomNavigationActivity)activity).replaceFragment(new CoffeeListFragment());
+
+                ((BottomNavigationActivity)activity).replaceFragment(new CoffeeDetailsFragment());
             }
         });
     }
