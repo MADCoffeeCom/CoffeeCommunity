@@ -18,6 +18,7 @@ import com.example.coffeecom.R;
 import com.example.coffeecom.activity.BottomNavigationActivity;
 import com.example.coffeecom.fragment.AddBankCardFragment;
 import com.example.coffeecom.model.BankCardModel;
+import com.example.coffeecom.query.QueryBankCard;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.ArrayList;
@@ -67,7 +68,8 @@ public class BankCardAdapter extends RecyclerView.Adapter<BankCardAdapter.ViewHo
         holder.deleteBankCardBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                QueryBankCard.removeBankCard(Provider.getUser().getBankCard().get(position).getBankCardNo());
+                notifyDataSetChanged();
             }
         });
     }

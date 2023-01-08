@@ -1,5 +1,7 @@
 package com.example.coffeecom.adapter;
 
+import android.content.Context;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +15,8 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.coffeecom.activity.BottomNavigationActivity;
+import com.example.coffeecom.fragment.PostDetailsFragment;
 import com.example.coffeecom.model.PostModel;
 import com.example.coffeecom.R;
 
@@ -22,9 +26,11 @@ import java.util.ArrayList;
 public class ProfilePostHistoryAdapter extends RecyclerView.Adapter<ProfilePostHistoryAdapter.ViewHolder> {
 
     private ArrayList<PostModel> myPostList;
+    Context activity;
 
-    public ProfilePostHistoryAdapter (ArrayList<PostModel> myPostList){
+    public ProfilePostHistoryAdapter (ArrayList<PostModel> myPostList, Context activity){
         this.myPostList = myPostList;
+        this.activity = activity;
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{
@@ -60,6 +66,15 @@ public class ProfilePostHistoryAdapter extends RecyclerView.Adapter<ProfilePostH
         holder.postTitle.setText(myPostList.get(position).getPostDesc());
         int vote = myPostList.get(position).getUpVote() - myPostList.get(position).getDownVote();
         holder.postLikes.setText("" + vote);
+
+        holder.postHistoryCard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Bundle bundle = new Bundle();
+                bundle.putString("postId", myPostList.get(position).getPostId());
+                ((BottomNavigationActivity)activity).replaceFragmentWithData(new PostDetailsFragment(), bundle);
+            }
+        });
     }
 
     @Override

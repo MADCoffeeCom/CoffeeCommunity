@@ -70,7 +70,7 @@ public class ProfileMainFragment extends Fragment {
     }
 
     public void postRecycleView() {
-        postAdapter = new ProfilePostHistoryAdapter(Provider.getUser().getPostedPost());
+        postAdapter = new ProfilePostHistoryAdapter(Provider.getUser().getPostedPost(), getActivity());
         postListRV.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
         postListRV.setAdapter(postAdapter);
     }

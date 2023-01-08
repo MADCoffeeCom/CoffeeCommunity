@@ -114,4 +114,33 @@ public class QueryBankCard {
         });
     }
 
+    public static void removeBankCard(String cardNo) {
+        Log.i(TAG, "addBankCard: Run here once");
+
+        Handler handler = new Handler(Looper.getMainLooper());
+        handler.post(new Runnable() {
+            @Override
+            public void run() {
+                String[] field = new String[1];
+                field[0] = "cardNo";
+
+                String[] data = new String[1];
+                data[0] = cardNo;
+
+                PutData putData = new PutData("http://" + Provider.getIpAddress() + "/CoffeeCommunityPHP/removebankcard.php", "POST", field, data);
+                if (putData.startPut()) {
+                    if (putData.onComplete()) {
+                        String result = putData.getResult();
+                        Log.i(TAG, "run: " + result);
+                    }
+                    for (int i = 0; i < Provider.getUser().getBankCard().size(); i++) {
+                        if(Provider.getUser().getBankCard().get(i).getBankCardNo().equals(cardNo)){
+                            Provider.getUser().getBankCard().remove(i);
+                        }
+                    }
+                }
+            }
+        });
+    }
+
 }
