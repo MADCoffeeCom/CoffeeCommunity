@@ -19,6 +19,7 @@ import com.bumptech.glide.Glide;
 import com.example.coffeecom.R;
 import com.example.coffeecom.activity.BottomNavigationActivity;
 import com.example.coffeecom.fragment.PostDetailsFragment;
+import com.example.coffeecom.model.CoffeeModel;
 import com.example.coffeecom.model.PostModel;
 
 import java.util.ArrayList;
@@ -48,6 +49,11 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder>{
             postPic = itemView.findViewById(R.id.postPic);
             postCard = itemView.findViewById(R.id.postCard);
         }
+    }
+
+    public void filterList(ArrayList<PostModel> post) {
+        posts = post;
+        notifyDataSetChanged();
     }
 
     @NonNull

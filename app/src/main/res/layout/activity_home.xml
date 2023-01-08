@@ -56,7 +56,7 @@
                 android:layout_marginTop="16dp"/>
 
             <EditText
-                android:id="@+id/articleTbSearch"
+                android:id="@+id/TBSearch"
                 style="@style/defaultTextBox"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"

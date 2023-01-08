@@ -1,6 +1,5 @@
 package com.example.coffeecom.fragment;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -11,16 +10,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.coffeecom.Provider;
 import com.example.coffeecom.R;
-import com.example.coffeecom.activity.BottomNavigationActivity;
 import com.example.coffeecom.adapter.LearnArticleAdapter;
 import com.example.coffeecom.model.ArticleModel;
 import com.vishnusivadas.advanced_httpurlconnection.FetchData;
@@ -90,7 +86,7 @@ public class LearnActivityFragment extends Fragment {
         recyclerViewCoffeeHistoryArticleList = view.findViewById(R.id.coffeeHistoryArticleRecyclerView);
         recyclerViewCoffeeBeanArticleList = view.findViewById(R.id.coffeeBeanArticleRecycleView);
         recyclerViewLearnArticleList = view.findViewById(R.id.LearnArticleRecycleView);
-        articleTbSearch = view.findViewById(R.id.articleTbSearch);
+        articleTbSearch = view.findViewById(R.id.TBSearch);
     }
 
     private void queryArticle() {

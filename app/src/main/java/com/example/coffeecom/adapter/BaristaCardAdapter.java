@@ -20,6 +20,7 @@ import com.example.coffeecom.Provider;
 import com.example.coffeecom.R;
 import com.example.coffeecom.activity.BottomNavigationActivity;
 import com.example.coffeecom.fragment.BaristaListFragment;
+import com.example.coffeecom.model.ArticleModel;
 import com.example.coffeecom.model.BaristaModel;
 
 import java.util.ArrayList;
@@ -47,6 +48,11 @@ public class BaristaCardAdapter extends RecyclerView.Adapter<BaristaCardAdapter.
             baristaDistance = itemView.findViewById(R.id.baristaDistance);
             baristaSmallCard = itemView.findViewById(R.id.baristaSmallCard);
         }
+    }
+
+    public void filterList(ArrayList<BaristaModel> filterlist) {
+        baristas = filterlist;
+        notifyDataSetChanged();
     }
 
     @NonNull
@@ -79,7 +85,7 @@ public class BaristaCardAdapter extends RecyclerView.Adapter<BaristaCardAdapter.
 
     @Override
     public int getItemCount() {
-        return Provider.getBaristas().size();
+        return baristas.size();
     }
 
 

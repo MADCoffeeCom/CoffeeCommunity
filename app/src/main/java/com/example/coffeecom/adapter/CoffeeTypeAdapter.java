@@ -19,18 +19,18 @@ import com.example.coffeecom.Provider;
 import com.example.coffeecom.R;
 import com.example.coffeecom.activity.BottomNavigationActivity;
 import com.example.coffeecom.fragment.CoffeeListFragment;
+import com.example.coffeecom.model.BaristaModel;
+import com.example.coffeecom.model.CoffeeModel;
 
 import java.util.ArrayList;
 
 public class CoffeeTypeAdapter extends RecyclerView.Adapter<CoffeeTypeAdapter.ViewHolder> {
 
-    ArrayList<String> coffeeType;
-    ArrayList<String> coffeePic;
+    ArrayList<CoffeeModel> coffees;
     Context activity;
 
-    public CoffeeTypeAdapter(ArrayList<String> coffeeType, ArrayList<String> coffeePic, Context activity) {
-        this.coffeePic = coffeePic;
-        this.coffeeType = coffeeType;
+    public CoffeeTypeAdapter(ArrayList<CoffeeModel> coffees, Context activity) {
+        this.coffees = coffees;
         this.activity = activity;
     }
 
@@ -47,6 +47,11 @@ public class CoffeeTypeAdapter extends RecyclerView.Adapter<CoffeeTypeAdapter.Vi
         }
     }
 
+    public void filterList(ArrayList<CoffeeModel> coffee) {
+        coffees = coffee;
+        notifyDataSetChanged();
+    }
+
     //Create viewholder or card based on the xml file
     @Override
     public CoffeeTypeAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -57,10 +62,10 @@ public class CoffeeTypeAdapter extends RecyclerView.Adapter<CoffeeTypeAdapter.Vi
     //fill in the xml file with necessary information
     @Override
     public void onBindViewHolder(@NonNull CoffeeTypeAdapter.ViewHolder holder, @SuppressLint("RecyclerView") int position) {
-        holder.coffeeTitle.setText(coffeeType.get(position));
+        holder.coffeeTitle.setText(coffees.get(position).getCoffeeTitle());
 
         //code to insert picture
-        String picUrl = coffeePic.get(position);
+        String picUrl = coffees.get(position).getCoffeePic();
         int drawableResourceId = holder.itemView.getContext().getResources().getIdentifier(picUrl, "drawable", holder.itemView.getContext().getPackageName());
         Glide.with(holder.itemView.getContext()).load(drawableResourceId).into(holder.coffeePic);
 
@@ -68,8 +73,8 @@ public class CoffeeTypeAdapter extends RecyclerView.Adapter<CoffeeTypeAdapter.Vi
             @Override
             public void onClick(View view) {
                 //input code here to open details coffee page
-                Log.i("Coffeetype in adapter", coffeeType.get(position));
-                Provider.setCurrentCoffeeType(coffeeType.get(position));
+                Log.i("Coffeetype in adapter", coffees.get(position).getCoffeeType());
+                Provider.setCurrentCoffeeType(coffees.get(position).getCoffeeType());
 
                 ((BottomNavigationActivity)activity).replaceFragment(new CoffeeListFragment());
             }
@@ -79,7 +84,7 @@ public class CoffeeTypeAdapter extends RecyclerView.Adapter<CoffeeTypeAdapter.Vi
     //loop for how many times
     @Override
     public int getItemCount() {
-        return coffeeType.size();
+        return coffees.size();
     }
 
 

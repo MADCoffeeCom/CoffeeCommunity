@@ -6,111 +6,116 @@
     android:layout_height="match_parent"
     tools:context=".fragment.HelpdeskFragment">
 
-    <ImageButton
-        android:id="@+id/backBtn"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:layout_marginTop="24dp"
-        android:background="@color/transparent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_back" />
-
-    <TextView
-        android:id="@+id/helpdeskText"
-        style="@style/h1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:text="Helpdesk"
-        app:layout_constraintStart_toEndOf="@+id/backBtn"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <EditText
-        android:id="@+id/articleTbSearch"
-        style="@style/defaultTextBox"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="12dp"
-        android:layout_marginEnd="24dp"
-        android:background="@drawable/textbox"
-        android:drawableLeft="@drawable/ic_search"
-        android:ems="10"
-        android:hint="Search for Help..."
-        android:inputType="text"
-        android:textColorHint="@color/disable_grey"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/helpdeskText" />
+        android:layout_height="match_parent"
+        android:layout_marginBottom="80dp"
+        android:paddingBottom="24dp"
+        >
 
-    <TextView
-        android:id="@+id/textView33"
-        style="@style/h2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="18dp"
-        android:text="Popular help resources"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/articleTbSearch" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
 
-    <TextView
-        android:id="@+id/textView34"
-        style="@style/h2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="18dp"
-        android:text="Having more question?"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/helpdeskQuestionRecycleView" />
+            >
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/helpdeskQuestionRecycleView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical"
-        android:layout_marginTop="15dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView33" />
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/textView35"
-        style="@style/c2"
-        android:layout_width="match_parent"
-        android:layout_height="46dp"
-        android:layout_marginLeft="24dp"
-        android:layout_marginTop="15dp"
-        android:layout_marginRight="24dp"
-        android:background="@drawable/vertical_gray_background"
-        android:drawableLeft="@drawable/ic_call"
-        android:drawablePadding="10dp"
-        android:gravity="center|left"
-        android:paddingLeft="20dp"
-        android:text="Call Us at 012-3456789!"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView34" />
+                <ImageButton
+                    android:id="@+id/backBtn"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:layout_marginTop="24dp"
+                    android:background="@color/transparent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/ic_back" />
 
-    <TextView
-        android:id="@+id/textView36"
-        style="@style/c2"
-        android:layout_width="match_parent"
-        android:layout_height="46dp"
-        android:layout_marginLeft="24dp"
-        android:layout_marginTop="15dp"
-        android:layout_marginRight="24dp"
-        android:background="@drawable/vertical_gray_background"
-        android:drawableLeft="@drawable/ic_email"
-        android:drawablePadding="10dp"
-        android:gravity="center|left"
-        android:paddingLeft="20dp"
-        android:text="Email Us at coffeecommunity4u@gmail.com!"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.333"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView35" />
+                <TextView
+                    android:id="@+id/helpdeskText"
+                    style="@style/h1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    android:text="Helpdesk"
+                    app:layout_constraintStart_toEndOf="@+id/backBtn"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/textView33"
+                    style="@style/h2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginTop="16dp"
+                    android:text="Popular help resources"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/helpdeskText" />
+
+                <TextView
+                    android:id="@+id/textView34"
+                    style="@style/h2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginTop="16dp"
+                    android:text="Having more question?"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/helpdeskQuestionRecycleView" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/helpdeskQuestionRecycleView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginTop="15dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView33" />
+
+                <TextView
+                    android:id="@+id/textView35"
+                    style="@style/c2"
+                    android:layout_width="match_parent"
+                    android:layout_height="46dp"
+                    android:layout_marginLeft="24dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginRight="24dp"
+                    android:background="@drawable/vertical_gray_background"
+                    android:drawableLeft="@drawable/ic_call"
+                    android:drawablePadding="10dp"
+                    android:gravity="center|left"
+                    android:paddingLeft="20dp"
+                    android:text="Call Us at 012-3456789!"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView34" />
+
+                <TextView
+                    android:id="@+id/textView36"
+                    style="@style/c2"
+                    android:layout_width="match_parent"
+                    android:layout_height="46dp"
+                    android:layout_marginLeft="24dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginRight="24dp"
+                    android:background="@drawable/vertical_gray_background"
+                    android:drawableLeft="@drawable/ic_email"
+                    android:drawablePadding="10dp"
+                    android:gravity="center|left"
+                    android:paddingLeft="20dp"
+                    android:text="Email Us at coffeecommunity4u@gmail.com!"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.333"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView35" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </LinearLayout>
+    </ScrollView>
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

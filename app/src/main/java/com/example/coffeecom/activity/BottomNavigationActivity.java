@@ -7,6 +7,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 
@@ -20,6 +21,8 @@ import com.example.coffeecom.fragment.ProfileMainFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 
+import java.util.ArrayList;
+
 /*
 This class is to let each activity and xml to copy and paste it to the corresponding activity
 since we are using activity so we need to do like this
@@ -32,6 +35,8 @@ public class BottomNavigationActivity extends AppCompatActivity {
     int container = R.id.containerMainPage;
     FragmentManager manager;
 
+    ArrayList<String> mainScreen = new ArrayList<>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,6 +44,11 @@ public class BottomNavigationActivity extends AppCompatActivity {
 
         btmNavBar = findViewById(R.id.bottomNavigationView);
         btmNavBar.setSelectedItemId(R.id.nvBuyCoffeeHome);
+        mainScreen.add("com.example.coffeecom.fragment.HomeActivityFragment");
+        mainScreen.add("com.example.coffeecom.fragment.BaristaFragment");
+        mainScreen.add("com.example.coffeecom.fragment.LearnActivityFragment");
+        mainScreen.add("com.example.coffeecom.fragment.CommunityFragment");
+        mainScreen.add("com.example.coffeecom.fragment.ProfileMainFragment");
 
         ProfileMainFragment profileMain = new ProfileMainFragment();
         LearnActivityFragment learnMain = new LearnActivityFragment();
@@ -81,6 +91,9 @@ public class BottomNavigationActivity extends AppCompatActivity {
         int count = manager.getBackStackEntryCount();
         if (count == 0) {
             super.onBackPressed();
+        } else if (count == 1){
+            btmNavBar.setVisibility(View.VISIBLE);
+            getSupportFragmentManager().popBackStack();
         } else {
             getSupportFragmentManager().popBackStack();
         }
@@ -89,11 +102,11 @@ public class BottomNavigationActivity extends AppCompatActivity {
     public void replaceMainFragment (Fragment fragment, MenuItem item){
         replaceFragment(fragment);
         item.setChecked(true);
-//        btmNavBar.setVisibility(View.VISIBLE);
+        btmNavBar.setVisibility(View.VISIBLE);
     }
 
     public void replaceFragment (Fragment fragment){
-//        btmNavBar.setVisibility(View.GONE);
+        btmNavBar.setVisibility(View.GONE);
 
         String backStateName = fragment.getClass().getName();
         boolean fragmentPopped = manager.popBackStackImmediate (backStateName, 0);
@@ -107,13 +120,16 @@ public class BottomNavigationActivity extends AppCompatActivity {
                     R.anim.fade_out  // popExit
             );
             ft.replace(container, fragment);
-            ft.addToBackStack(backStateName);
+            Log.i(TAG, "replaceFragment: " + backStateName);
+            if(!mainScreen.contains(backStateName)){
+                ft.addToBackStack(backStateName);
+            }
             ft.commit();
         }
     }
 
     public void replaceFragmentWithData (Fragment fragment, Bundle bundle){
-//        btmNavBar.setVisibility(View.GONE);
+        btmNavBar.setVisibility(View.GONE);
 
         String backStateName = fragment.getClass().getName();
         fragment.setArguments(bundle);
