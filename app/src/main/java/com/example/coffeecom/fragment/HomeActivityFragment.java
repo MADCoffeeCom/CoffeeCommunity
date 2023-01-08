@@ -10,6 +10,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageButton;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -17,12 +19,14 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.coffeecom.Provider;
 import com.example.coffeecom.R;
+import com.example.coffeecom.activity.BottomNavigationActivity;
 import com.example.coffeecom.adapter.BaristaCardAdapter;
 import com.example.coffeecom.adapter.CoffeeTypeAdapter;
 import com.example.coffeecom.model.BaristaModel;
 import com.example.coffeecom.model.CoffeeModel;
 import com.example.coffeecom.model.ProfileModel;
 import com.example.coffeecom.query.QueryBrewedCoffee;
+import com.example.coffeecom.query.QueryCartItem;
 import com.example.coffeecom.query.QueryOrderedCoffee;
 import com.example.coffeecom.query.QueryPost;
 import com.example.coffeecom.query.QuerySellingCoffee;
@@ -36,7 +40,7 @@ public class HomeActivityFragment extends Fragment {
 
     private RecyclerView recyclerViewCoffeeTypeList, recyclerViewBaristaList;
     private RecyclerView.Adapter coffeeTypeAdapter, baristaAdapter;
-
+    private ImageButton cartButton;
     ArrayList<String> coffeeTypeA = new ArrayList<>();
     ArrayList<String> coffeePicA = new ArrayList<>();
 
@@ -53,7 +57,15 @@ public class HomeActivityFragment extends Fragment {
         Provider.setUser(new ProfileModel("UID_abang"));
         recyclerViewCoffeeTypeList = view.findViewById(R.id.coffeeListInBaristaRecyclerView);
         recyclerViewBaristaList = view.findViewById(R.id.baristaRecyclerView);
+        cartButton = view.findViewById(R.id.BtnCart);
+        cartButton.setOnClickListener(new View.OnClickListener(){
 
+            @Override
+            public void onClick(View view) {
+                QueryCartItem.queryCartItem();
+                ((BottomNavigationActivity)getActivity()).replaceFragment(new CoffeeCartFragment());
+            }
+        });
         QueryPost.queryPost();
         QueryOrderedCoffee.queryOrderedCoffee();
 
@@ -90,7 +102,7 @@ public class HomeActivityFragment extends Fragment {
                         String email = profileDetails[5];
                         String streetNo = profileDetails[6];
                         String taman = profileDetails[7];
-                        int postCode = Integer.parseInt(profileDetails[8]);
+                        String postCode = (profileDetails[8]);
                         String state = profileDetails[9];
 
                         Provider.getUser().setUserDetails(picUrl, userId, baristaId, adminId, userName, email, streetNo, taman, postCode, state);
@@ -172,10 +184,13 @@ public class HomeActivityFragment extends Fragment {
                             String baristaPic = baristaDetails[1];
                             String username = baristaDetails[2];
                             String baristaDesc = baristaDetails[3];
-                            String userTaman = baristaDetails[4];
-                            String userLocation = baristaDetails[5];
+                            String userStreetNo =  baristaDetails[4];
+                            String userPostalCode = baristaDetails[5];
+                            String userState = baristaDetails[6];
+                            String userTaman = baristaDetails[7];
+                            String userLocation = baristaDetails[8];
 
-                            BaristaModel barista = new BaristaModel(baristaId, baristaPic, username, baristaDesc, userTaman, userLocation);
+                            BaristaModel barista = new BaristaModel(baristaId, baristaPic, username, baristaDesc, userStreetNo, userPostalCode, userState, userTaman, userLocation);
 
                             if (!Provider.getBaristas().contains(barista)){
                                 Provider.addBarista(barista);

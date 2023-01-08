@@ -20,6 +20,8 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
     private ArrayList<CartModel> cartModelList;
     private LayoutInflater inflater;
     private Context context;
+    private RecyclerView recyclerViewCartCardList;
+    private RecyclerView.Adapter recyclerViewCartCardListAdapter;
 
     public CartAdapter(Context context, ArrayList<CartModel> cartModelList) {
         this.context = context;
@@ -61,6 +63,13 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
             coffeeCartCardRecyclerView.setAdapter(cartCardAdapter);
             coffeeCartCardRecyclerView.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false));
         }
+    }
+
+    private void recyclerViewCardCard() {
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
+        recyclerViewCartCardList.setLayoutManager(linearLayoutManager);
+        recyclerViewCartCardListAdapter = new CartCardAdapter(context, cartModelList.get(0).getCartCardModelsList());
+        recyclerViewCartCardList.setAdapter(recyclerViewCartCardListAdapter);
     }
 }
 

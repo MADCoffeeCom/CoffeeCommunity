@@ -5,6 +5,18 @@ plugins {
 }
 
 android {
+    packagingOptions {
+        exclude 'META-INF/DEPENDENCIES'
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/LICENSE.txt'
+        exclude 'META-INF/license.txt'
+        exclude 'META-INF/NOTICE'
+        exclude 'META-INF/NOTICE.txt'
+        exclude 'META-INF/notice.txt'
+        exclude 'META-INF/ASL2.0'
+        exclude("META-INF/*.kotlin_module")
+        exclude 'META-INF/LGPL2.1'
+    }
     namespace 'com.example.coffeecom'
     compileSdk 32
 
@@ -45,6 +57,9 @@ dependencies {
     implementation 'com.google.android.gms:play-services-location:19.0.1'
     implementation 'com.android.volley:volley:1.2.1'
     implementation 'com.google.firebase:firebase-auth:21.0.2'
+    implementation fileTree(dir: 'C:\\Users\\kwany\\AndroidStudioProjects\\CoffeeCommunity\\app\\libs', include: ['*.aar', '*.jar'], exclude: [])
+    implementation fileTree(dir: 'C:\\Users\\kwany\\AndroidStudioProjects\\CoffeeCommunity\\app\\libs', include: ['*.aar', '*.jar'], exclude: [])
+    implementation files('C:\\Users\\kwany\\AndroidStudioProjects\\CoffeeCommunity\\app\\libs\\jackson-core-2.2.3')
     annotationProcessor 'com.github.bumptech.glide:compiler:4.14.2'
     implementation 'androidx.appcompat:appcompat:1.5.1'
     implementation 'com.google.android.material:material:1.7.0'

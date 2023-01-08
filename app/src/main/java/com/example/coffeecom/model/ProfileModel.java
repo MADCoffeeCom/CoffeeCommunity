@@ -13,7 +13,7 @@ public class ProfileModel {
 
     private String userStreetNo;
     private String userTaman;
-    private int userPostalCode;
+    private String userPostalCode;
     private String userState;
 
     private String userLocation;
@@ -27,12 +27,13 @@ public class ProfileModel {
     private ArrayList<PostModel> postedPost = new ArrayList<>();
     private ArrayList<BankCardModel> bankCard = new ArrayList<>();
     private ArrayList<BrewedOrderModel> brewedOrder = new ArrayList<>();
+    private ArrayList<CartCardModel> cartItem = new ArrayList<>();
 
     public ProfileModel(String a) {
         this.userId = a;
     }
 
-    public ProfileModel(String baristaId, String userPic, String userStreetNo, String userTaman, int userPostalCode, ArrayList<String> sellingCoffee) {
+    public ProfileModel(String baristaId, String userPic, String userStreetNo, String userTaman, String userPostalCode, ArrayList<String> sellingCoffee) {
         this.baristaId = baristaId;
         this.userStreetNo = userStreetNo;
         this.userPic = userPic;
@@ -41,7 +42,7 @@ public class ProfileModel {
         this.sellingCoffeeId = sellingCoffee;
     }
 
-    public void setUserDetails(String userPic, String userId, String baristaId, String adminId, String username, String email, String userStreetNo, String userTaman, int userPostalCode, String userState) {
+    public void setUserDetails(String userPic, String userId, String baristaId, String adminId, String username, String email, String userStreetNo, String userTaman, String userPostalCode, String userState) {
         this.userPic = userPic;
         this.userId = userId;
         this.baristaId = baristaId;
@@ -61,6 +62,18 @@ public class ProfileModel {
         this.userName = userName;
         this.userTaman = userTaman;
         this.userLocation = userLocation;
+    }
+
+    public ArrayList<CartCardModel> getCartCard() {
+        return cartItem;
+    }
+
+    public void setCartItem(ArrayList<CartCardModel> cartItem) {
+        this.cartItem = cartItem;
+    }
+
+    public void addCartCard(CartCardModel cc){
+        cartItem.add(cc);
     }
 
     public String getUserPic() {
@@ -111,11 +124,11 @@ public class ProfileModel {
         this.userTaman = userTaman;
     }
 
-    public int getUserPostalCode() {
+    public String getUserPostalCode() {
         return userPostalCode;
     }
 
-    public void setUserPostalCode(int userPostalCode) {
+    public void setUserPostalCode(String userPostalCode) {
         this.userPostalCode = userPostalCode;
     }
 

@@ -4,10 +4,12 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.coffeecom.R;
 import com.example.coffeecom.model.CartCardModel;
 
@@ -18,6 +20,7 @@ public class CartCardAdapter extends RecyclerView.Adapter<CartCardAdapter.ViewHo
     private ArrayList<CartCardModel> cartCardModelList;
     private LayoutInflater inflater;
     private Context context;
+    ArrayList<String> coffeePic = new ArrayList<>();
 
     public CartCardAdapter(Context context, ArrayList<CartCardModel> cartCardModelList) {
         this.context = context;
@@ -33,6 +36,10 @@ public class CartCardAdapter extends RecyclerView.Adapter<CartCardAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
+        coffeePic.add("coffee1");
+        String picUrl = coffeePic.get(position);
+        int drawableResourceId = holder.itemView.getContext().getResources().getIdentifier(picUrl, "drawable", holder.itemView.getContext().getPackageName());
+        Glide.with(holder.itemView.getContext()).load(drawableResourceId).into(holder.coffeePic);
         CartCardModel cartCardModel = cartCardModelList.get(position);
         holder.bindData(cartCardModel);
     }
@@ -43,7 +50,7 @@ public class CartCardAdapter extends RecyclerView.Adapter<CartCardAdapter.ViewHo
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
-        TextView coffeePic;
+        ImageView coffeePic;
         TextView coffeeName;
         TextView coffeePrice;
         TextView coffeeQuantity;
@@ -57,10 +64,9 @@ public class CartCardAdapter extends RecyclerView.Adapter<CartCardAdapter.ViewHo
         }
 
         public void bindData(CartCardModel cartCardModel) {
-            coffeePic.setText(cartCardModel.getCoffeePic());
             coffeeName.setText(cartCardModel.getCoffeeName());
-            coffeePrice.setText((int) cartCardModel.getCoffeePrice());
-            coffeeQuantity.setText(cartCardModel.getCoffeeQuantity());
+            coffeePrice.setText(Double.toString(cartCardModel.getCoffeePrice()));
+            coffeeQuantity.setText(Integer.toString(cartCardModel.getCoffeeQuantity()));
         }
     }
 }

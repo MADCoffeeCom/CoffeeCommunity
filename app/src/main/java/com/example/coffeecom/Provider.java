@@ -1,10 +1,5 @@
 package com.example.coffeecom;
 
-import static androidx.core.content.ContentProviderCompat.requireContext;
-
-import android.content.Context;
-import android.net.wifi.WifiManager;
-import android.text.format.Formatter;
 import android.util.Log;
 
 import com.example.coffeecom.model.ArticleModel;
@@ -19,9 +14,7 @@ import java.net.InetAddress;
 import java.net.NetworkInterface;
 import java.net.SocketException;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Enumeration;
-import java.util.List;
 
 public class Provider{
 
@@ -30,6 +23,7 @@ public class Provider{
     private static ArrayList<BaristaModel> baristas = new ArrayList<>();
     private static ArrayList<ArticleModel> articles = new ArrayList<>();
     private static ArrayList<PostModel> posts = new ArrayList<>();
+    private static ArrayList<String> baristaIdInCart = new ArrayList<>();
     private static String currentCoffeeType;
     private static String currentBaristaId;
     private static String currentCoffeeId;
@@ -153,6 +147,17 @@ public class Provider{
         Provider.currentArticleId = currentArticleId;
     }
 
+    public static ArrayList<String> getBaristaIdInCart() {
+        return baristaIdInCart;
+    }
+
+    public static void setBaristaIdInCart(ArrayList<String> baristaInCart) {
+        Provider.baristaIdInCart = baristaInCart;
+    }
+
+    public static void addBaristaIdInCart(String ba){
+        baristaIdInCart.add(ba);
+    }
     //    ===================StatusActivity Punya=========================
     private static String statusTitle, statusHeading1, statusHeading2, statusBtnText;
     private static Class<?> redirectedCls;

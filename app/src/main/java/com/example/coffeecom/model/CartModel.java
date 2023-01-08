@@ -1,14 +1,31 @@
 package com.example.coffeecom.model;
 
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.coffeecom.fragment.CoffeeCartFragment;
+
+import java.util.ArrayList;
 import java.util.List;
 
 public class CartModel {
+    private BaristaModel barista;
     private String baristaAddress;
-    private List<CartCardModel> cartCardModelsList;
+    private ArrayList<CartCardModel> cartCardModelsList;
 
-    public CartModel(String baristaAddress, List<CartCardModel> cartCardModelsList) {
-        this.baristaAddress = baristaAddress;
+
+    public CartModel(BaristaModel barista, ArrayList<CartCardModel> cartCardModelsList) {
+        this.barista = barista;
         this.cartCardModelsList = cartCardModelsList;
+        this.baristaAddress = barista.getUserStreetNo() + " " + barista.getUserTaman() + " " + barista.getUserState() + " ";
+    }
+
+    public BaristaModel getBarista() {
+        return barista;
+    }
+
+    public void setBarista(BaristaModel barista) {
+        this.barista = barista;
     }
 
     public String getBaristaAddress() {
@@ -19,13 +36,18 @@ public class CartModel {
         this.baristaAddress = baristaAddress;
     }
 
-    public List<CartCardModel> getCartCardModelsList() {
+    public ArrayList<CartCardModel> getCartCardModelsList() {
         return cartCardModelsList;
     }
 
-    public void setCartCardModelsList(List<CartCardModel> cartCardModelsList) {
+    public void addCartCardModel (CartCardModel cc){
+        cartCardModelsList.add(cc);
+    }
+
+    public void setCartCardModelsList(ArrayList<CartCardModel> cartCardModelsList) {
         this.cartCardModelsList = cartCardModelsList;
     }
+
 
 }
 

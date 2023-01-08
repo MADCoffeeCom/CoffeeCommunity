@@ -9,16 +9,20 @@ public class BaristaModel extends ProfileModel{
     private ArrayList<BaristaRatingModel> ratings;
 
 
-    public BaristaModel(String userPic, String userStreetNo, String userTaman, int userPostalCode, ArrayList<String> sellingCoffeeId, String baristaId, String baristaDesc, int yearsOfExperience, ArrayList<BaristaRatingModel> ratings) {
+    public BaristaModel(String userPic, String userStreetNo, String userTaman, String userPostalCode, ArrayList<String> sellingCoffeeId, String baristaId, String baristaDesc, int yearsOfExperience, ArrayList<BaristaRatingModel> ratings) {
         super(baristaId, userPic, userStreetNo, userTaman, userPostalCode, sellingCoffeeId);
         this.yearsOfExperience = yearsOfExperience;
         this.baristaDesc = baristaDesc;
         this.ratings = ratings;
     }
 
-    public BaristaModel(String baristaId, String pic, String userName, String baristaDesc, String userTaman, String userLocation) {
+    public BaristaModel(String baristaId, String pic, String userName, String baristaDesc, String userStreetNo, String userPostalCode, String userState, String userTaman, String userLocation) {
         super(baristaId, pic, userName, userTaman, userLocation);
         this.baristaDesc = baristaDesc;
+        this.setUserStreetNo(userStreetNo);
+        this.setUserPostalCode(userPostalCode);
+        this.setUserState(userState);
+
     }
 
 
