@@ -30,7 +30,6 @@ public class LearnArticleAdapter extends RecyclerView.Adapter<LearnArticleAdapte
     ArrayList<ArticleModel> articles;
     FragmentActivity activity;
 
-
     public LearnArticleAdapter(ArrayList<ArticleModel> articles, FragmentActivity activity) {
         this.activity = activity;
         this.articles = articles;
@@ -48,6 +47,11 @@ public class LearnArticleAdapter extends RecyclerView.Adapter<LearnArticleAdapte
             articleCard = itemView.findViewById(R.id.articleCard);
 
         }
+    }
+
+    public void filterList(ArrayList<ArticleModel> filterlist) {
+        articles = filterlist;
+        notifyDataSetChanged();
     }
 
     //Create viewholder or card based on the xml file

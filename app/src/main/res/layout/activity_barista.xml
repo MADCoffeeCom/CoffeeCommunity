@@ -28,7 +28,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView28"/>
 
     <EditText
-        android:id="@+id/TbSearch"
+        android:id="@+id/articleTbSearch"
         style="@style/defaultTextBox"
         android:layout_width="match_parent"
         android:layout_height="48dp"
@@ -53,7 +53,7 @@
         android:layout_marginTop="40dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/TbSearch"/>
+        app:layout_constraintTop_toBottomOf="@+id/articleTbSearch"/>
 
     <TextView
         android:id="@+id/textView30"

@@ -73,7 +73,7 @@
         app:layout_constraintTop_toBottomOf="@+id/baristaListName" />
 
     <EditText
-        android:id="@+id/TbSearch"
+        android:id="@+id/articleTbSearch"
         style="@style/defaultTextBox"
         android:layout_width="match_parent"
         android:layout_height="48dp"
@@ -97,6 +97,6 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/TbSearch" />
+        app:layout_constraintTop_toBottomOf="@+id/articleTbSearch" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

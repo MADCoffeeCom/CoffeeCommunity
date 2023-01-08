@@ -4,10 +4,14 @@ import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
@@ -26,23 +30,59 @@ import java.util.ArrayList;
 
 public class LearnActivityFragment extends Fragment {
 
+    private static final String TAG = "LearnActivityFragment";
+
     private RecyclerView recyclerViewGeneralArticleList, recyclerViewCoffeeHistoryArticleList, recyclerViewCoffeeBeanArticleList, recyclerViewLearnArticleList;
-    private RecyclerView.Adapter learnArticleAdapter;
+    private LearnArticleAdapter generalArticleAdapter, historyArticleAdapter, beanArticleAdapter, learnArticleAdapter;
+    private TextView articleTbSearch;
+
+    ArrayList<ArticleModel> articles;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
         Provider.getArticles().clear();
-
         View view = inflater.inflate(R.layout.activity_learn,container,false);
-
         initialiseID(view);
-
         queryArticle();
 
-        // Inflate the layout for this fragment
+        articleTbSearch.setText("");
+        articleTbSearch.addTextChangedListener(new TextWatcher() {
+
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                filter(String.valueOf(charSequence));
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+
+        });
         return view;
+    }
+
+    private void filter(String text) {
+        ArrayList<ArticleModel> filteredlist = new ArrayList<>();
+
+        for (ArticleModel item : articles) {
+            if (item.getArticleTitle().toLowerCase().contains(text.toLowerCase())) {
+                Log.i(TAG, "filter: " + item.getArticleTitle());
+                filteredlist.add(item);
+            }
+        }
+        if (!filteredlist.isEmpty()) {
+            generalArticleAdapter.filterList(filterArticleBasedOnType("general", filteredlist));
+            historyArticleAdapter.filterList(filterArticleBasedOnType("history", filteredlist));
+            beanArticleAdapter.filterList(filterArticleBasedOnType("beans", filteredlist));
+            learnArticleAdapter.filterList(filterArticleBasedOnType("learn", filteredlist));
+        }
     }
 
     private void initialiseID(View view){
@@ -50,6 +90,7 @@ public class LearnActivityFragment extends Fragment {
         recyclerViewCoffeeHistoryArticleList = view.findViewById(R.id.coffeeHistoryArticleRecyclerView);
         recyclerViewCoffeeBeanArticleList = view.findViewById(R.id.coffeeBeanArticleRecycleView);
         recyclerViewLearnArticleList = view.findViewById(R.id.LearnArticleRecycleView);
+        articleTbSearch = view.findViewById(R.id.articleTbSearch);
     }
 
     private void queryArticle() {
@@ -82,18 +123,16 @@ public class LearnActivityFragment extends Fragment {
                         }
                         Log.i("Learn", "Successfully Added Article " + Provider.getArticles().get(0).getArticleUpVote());
                     }
-                    recyclerViewGeneralArticle(filterArticleBasedOnType("general"));
-                    recyclerViewHistoryArticle(filterArticleBasedOnType("history"));
-                    recyclerViewBeanArticle(filterArticleBasedOnType("beans"));
-                    recyclerViewLearnArticle(filterArticleBasedOnType("learn"));
+                    articles = Provider.getArticles();
+                    buildRV(articles);
                 }
             }
         });
     }
 
-    private ArrayList<ArticleModel> filterArticleBasedOnType(String type){
+    private ArrayList<ArticleModel> filterArticleBasedOnType(String type, ArrayList<ArticleModel> oriArticles){
         ArrayList<ArticleModel> articlesWithType = new ArrayList<>();
-        for (ArticleModel article: Provider.getArticles()) {
+        for (ArticleModel article: oriArticles) {
             if (article.getArticleType().equals(type)){
                 articlesWithType.add(article);
             }
@@ -101,39 +140,20 @@ public class LearnActivityFragment extends Fragment {
         return articlesWithType;
     }
 
-    private void recyclerViewGeneralArticle(ArrayList<ArticleModel> articles) {
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
-        recyclerViewGeneralArticleList.setLayoutManager(linearLayoutManager);
+    private void buildRV(ArrayList<ArticleModel> articles) {
+        recyclerViewGeneralArticleList.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
+        recyclerViewCoffeeHistoryArticleList.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
+        recyclerViewCoffeeBeanArticleList.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
+        recyclerViewLearnArticleList.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
 
-        learnArticleAdapter = new LearnArticleAdapter(articles, getActivity());
+        generalArticleAdapter = new LearnArticleAdapter(filterArticleBasedOnType("general", articles), getActivity());
+        historyArticleAdapter = new LearnArticleAdapter(filterArticleBasedOnType("history", articles), getActivity());
+        beanArticleAdapter = new LearnArticleAdapter(filterArticleBasedOnType("beans", articles), getActivity());
+        learnArticleAdapter = new LearnArticleAdapter(filterArticleBasedOnType("learn", articles), getActivity());
+
         recyclerViewGeneralArticleList.setAdapter(learnArticleAdapter);
-    }
-
-    private void recyclerViewHistoryArticle(ArrayList<ArticleModel> articles) {
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
-        recyclerViewCoffeeHistoryArticleList.setLayoutManager(linearLayoutManager);
-
-        learnArticleAdapter = new LearnArticleAdapter(articles, getActivity());
-        recyclerViewCoffeeHistoryArticleList.setAdapter(learnArticleAdapter);
-    }
-
-    private void recyclerViewBeanArticle(ArrayList<ArticleModel> articles) {
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
-        recyclerViewCoffeeBeanArticleList.setLayoutManager(linearLayoutManager);
-
-        learnArticleAdapter = new LearnArticleAdapter(articles, getActivity());
-        recyclerViewCoffeeBeanArticleList.setAdapter(learnArticleAdapter);
-    }
-
-    private void recyclerViewLearnArticle(ArrayList<ArticleModel> articles) {
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
-        recyclerViewLearnArticleList.setLayoutManager(linearLayoutManager);
-
-        learnArticleAdapter = new LearnArticleAdapter(articles, getActivity());
+        recyclerViewCoffeeHistoryArticleList.setAdapter(historyArticleAdapter);
+        recyclerViewCoffeeBeanArticleList.setAdapter(beanArticleAdapter);
         recyclerViewLearnArticleList.setAdapter(learnArticleAdapter);
     }
-
-
-
-
 }
