@@ -56,7 +56,7 @@ public class HomeActivityFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.activity_home,container,false);
 
-        Provider.setUser(new ProfileModel("UID_abang"));
+//        Provider.setUser(new ProfileModel("UID_abang"));
         recyclerViewCoffeeTypeList = view.findViewById(R.id.coffeeListInBaristaRecyclerView);
         recyclerViewBaristaList = view.findViewById(R.id.baristaRecyclerView);
         cartButton = view.findViewById(R.id.BtnCart);

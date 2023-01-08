@@ -12,6 +12,7 @@ import android.view.View;
 
 import com.example.coffeecom.R;
 import com.example.coffeecom.fragment.BaristaFragment;
+import com.example.coffeecom.fragment.CommunityFragment;
 import com.example.coffeecom.fragment.HomeActivityFragment;
 import com.example.coffeecom.fragment.LearnActivityFragment;
 import com.example.coffeecom.fragment.NewBaristaFragment;
@@ -44,6 +45,7 @@ public class BottomNavigationActivity extends AppCompatActivity {
         HomeActivityFragment homeMain = new HomeActivityFragment();
         NewBaristaFragment newBaristaMain = new NewBaristaFragment();
         BaristaFragment baristaMain = new BaristaFragment();
+        CommunityFragment communityMain = new CommunityFragment();
 
         manager = getSupportFragmentManager();
         manager.beginTransaction().replace(container, homeMain).commit();
@@ -61,6 +63,9 @@ public class BottomNavigationActivity extends AppCompatActivity {
                         break;
                     case R.id.nvLearnHome:
                         replaceMainFragment(learnMain, item);
+                        break;
+                    case R.id.nvCommunityHome:
+                        replaceMainFragment(communityMain, item);
                         break;
                     case R.id.nvProfileHome:
                         replaceMainFragment(profileMain, item);
@@ -84,11 +89,11 @@ public class BottomNavigationActivity extends AppCompatActivity {
     public void replaceMainFragment (Fragment fragment, MenuItem item){
         replaceFragment(fragment);
         item.setChecked(true);
-        btmNavBar.setVisibility(View.VISIBLE);
+//        btmNavBar.setVisibility(View.VISIBLE);
     }
 
     public void replaceFragment (Fragment fragment){
-        btmNavBar.setVisibility(View.GONE);
+//        btmNavBar.setVisibility(View.GONE);
 
         String backStateName = fragment.getClass().getName();
         boolean fragmentPopped = manager.popBackStackImmediate (backStateName, 0);
@@ -108,7 +113,7 @@ public class BottomNavigationActivity extends AppCompatActivity {
     }
 
     public void replaceFragmentWithData (Fragment fragment, Bundle bundle){
-        btmNavBar.setVisibility(View.GONE);
+//        btmNavBar.setVisibility(View.GONE);
 
         String backStateName = fragment.getClass().getName();
         fragment.setArguments(bundle);

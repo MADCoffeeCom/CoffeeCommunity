@@ -38,8 +38,6 @@ public class LearnDetailsFragment extends Fragment {
     boolean isDownvoted = false;
     private int upvoteCount = 0;
     private int downvoteCount = 0;
-    private String down = "articleDownVote";
-    private String up = "articleUpVote";
 
 
     @Override
@@ -182,7 +180,7 @@ public class LearnDetailsFragment extends Fragment {
                 data[1] = number;
                 data[2] = articleId;
 
-                PutData putData = new PutData("http://" + Provider.getIpAddress() + "/CoffeeCommunityPHP/updatevote.php", "POST", field, data);
+                PutData putData = new PutData("http://" + Provider.getIpAddress() + "/CoffeeCommunityPHP/updatearticlevote.php", "POST", field, data);
                 if (putData.startPut()) {
                     if (putData.onComplete()) {
                         String result = putData.getResult();

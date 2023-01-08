@@ -12,6 +12,7 @@ import com.example.coffeecom.model.PostModel;
 import com.vishnusivadas.advanced_httpurlconnection.PutData;
 
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class QueryPost {
@@ -81,5 +82,46 @@ public class QueryPost {
 
             }
         }
+    }
+
+    public static void addPost(String postDesc, String postPic) {
+
+        String postId = "p" + (Provider.getPosts().size() + 1);
+        Log.i(TAG, "addPost: Run here once");
+
+        Handler handler = new Handler(Looper.getMainLooper());
+        handler.post(new Runnable() {
+            @Override
+            public void run() {
+                String[] field = new String[6];
+                field[0] = "postId";
+                field[1] = "posterId";
+                field[2] = "upVote";
+                field[3] = "downVote";
+                field[4] = "postDesc";
+                field[5] = "postPicUrl";
+//                field[6] = "postDate";
+
+                String[] data = new String[6];
+                data[0] = postId;
+                data[1] = Provider.getUser().getUserId();
+                data[2] = "0";
+                data[3] = "0";
+                data[4] = postDesc;
+                data[5] = postPic;
+//                data[6] = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").format(new Date());
+
+                PostModel post = new PostModel(postId, 0, 0, data[3], Provider.getUser().getUserName(), data[4], data[5], new Date());
+                Provider.addPosts(post);
+
+                PutData putData = new PutData("http://" + Provider.getIpAddress() + "/CoffeeCommunityPHP/addpost.php", "POST", field, data);
+                if (putData.startPut()) {
+                    if (putData.onComplete()) {
+                        String result = putData.getResult();
+                        Log.i(TAG, "run: " + result);
+                    }
+                }
+            }
+        });
     }
 }
