@@ -19,7 +19,7 @@ public class CartModel {
         this.cartCardModelsList = cartCardModelsList;
         this.baristaAddress = barista.getUserStreetNo() + " " + barista.getUserTaman() + " " + barista.getUserState() + " ";
     }
-
+    public  void removeCartCard(CartCardModel cm){ cartCardModelsList.remove(cm);}
     public BaristaModel getBarista() {
         return barista;
     }
@@ -48,6 +48,12 @@ public class CartModel {
         this.cartCardModelsList = cartCardModelsList;
     }
 
+    public void replaceSecondToFirst(){
+        for (int i= 0; i < cartCardModelsList.size()-1 ; i++){
+            cartCardModelsList.set(0,cartCardModelsList.get(i+1));
+        }
+        cartCardModelsList.remove(cartCardModelsList.size()-1);
+    }
 
 }
 

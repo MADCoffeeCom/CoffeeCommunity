@@ -9,6 +9,8 @@ import android.util.Log;
 
 import com.example.coffeecom.model.ArticleModel;
 import com.example.coffeecom.model.BaristaModel;
+import com.example.coffeecom.model.CartCardModel;
+import com.example.coffeecom.model.CartModel;
 import com.example.coffeecom.model.CoffeeModel;
 import com.example.coffeecom.model.HelpdeskModel;
 import com.example.coffeecom.model.PostModel;
@@ -33,6 +35,7 @@ public class Provider{
     private static ArrayList<PostModel> posts = new ArrayList<>();
     private static ArrayList<String> baristaIdInCart = new ArrayList<>();
     private static ArrayList<TransactionModel> transactions = new ArrayList<>();
+    private static ArrayList<CartModel> cartModelList = new ArrayList<>();
     private static String currentCoffeeType;
     private static String currentBaristaId;
     private static String currentCoffeeId;
@@ -155,6 +158,18 @@ public class Provider{
     public static void setCurrentArticleId(String currentArticleId) {
         Provider.currentArticleId = currentArticleId;
     }
+
+    public static void removeCartModel(CartModel cm ){cartModelList.remove(cm);}
+
+    public static ArrayList<CartModel> getCartModelList() {
+        return cartModelList;
+    }
+
+    public static void setCartModelList(ArrayList<CartModel> cartModelList) {
+        Provider.cartModelList = cartModelList;
+    }
+
+    public static void addCartModelList(CartModel cm){ cartModelList.add(cm);}
 
     public static ArrayList<String> getBaristaIdInCart() {
         return baristaIdInCart;

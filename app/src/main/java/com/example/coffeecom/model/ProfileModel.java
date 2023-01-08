@@ -7,7 +7,7 @@ public class ProfileModel {
     private String userId;
     private String baristaId;
     private String adminId;
-
+    private String cartId;
     private String userPic;
     private String userName, email;
 

@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
 
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -65,7 +66,11 @@ public class HomeActivityFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 QueryCartItem.queryCartItem();
-                ((BottomNavigationActivity)getActivity()).replaceFragment(new CoffeeCartFragment());
+                AppCompatActivity activity = (AppCompatActivity) HomeActivityFragment.this.getContext();
+                CoffeeCartFragment baristaListFragment = new CoffeeCartFragment();
+                activity.getSupportFragmentManager().beginTransaction().replace(R.id.containerMainPage,baristaListFragment).addToBackStack("HomeActivityFragment").commit();
+
+//                ((BottomNavigationActivity)getActivity()).replaceFragment(new CoffeeCartFragment());
             }
         });
         QueryPost.queryPost();

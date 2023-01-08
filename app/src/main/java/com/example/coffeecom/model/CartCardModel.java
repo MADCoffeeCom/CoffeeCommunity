@@ -1,13 +1,16 @@
 package com.example.coffeecom.model;
 
 public class CartCardModel {
+    private String coffeeId;
     private String coffeePic;
     private String coffeeName;
     private double coffeePrice;
     private int coffeeQuantity;
     private String baristaId;
 
-    public CartCardModel(String coffeePic, String coffeeName, double coffeePrice, int coffeeQuantity, String baristaId) {
+
+    public CartCardModel(String coffeeId, String coffeePic, String coffeeName, double coffeePrice, int coffeeQuantity, String baristaId) {
+        this.coffeeId = coffeeId;
         this.coffeePic = coffeePic;
         this.coffeeName = coffeeName;
         this.coffeePrice = coffeePrice;
@@ -53,5 +56,13 @@ public class CartCardModel {
 
     public void setCoffeeQuantity(int coffeeQuantity) {
         this.coffeeQuantity = coffeeQuantity;
+    }
+
+    public String getCoffeeId() {
+        return coffeeId;
+    }
+
+    public void setCoffeeId(String coffeeId) {
+        this.coffeeId = coffeeId;
     }
 }

@@ -126,7 +126,7 @@ public class MapsFragment extends Fragment {
                     Provider.setCurrentBaristaId(marker.getTitle());
                     AppCompatActivity activity = (AppCompatActivity) MapsFragment.this.getContext();
                     BaristaListFragment baristaListFragment = new BaristaListFragment();
-                    activity.getSupportFragmentManager().beginTransaction().replace(R.id.containerMainPage,baristaListFragment).addToBackStack("bruh").commit();
+                    activity.getSupportFragmentManager().beginTransaction().replace(R.id.containerMainPage,baristaListFragment).addToBackStack("MapsFragment").commit();
 //                    Intent intent = new Intent(getActivity().getApplicationContext(), BaristaListFragment.class);
 //                    intent.putExtra("title", markertitle);
 //                    startActivity(intent);

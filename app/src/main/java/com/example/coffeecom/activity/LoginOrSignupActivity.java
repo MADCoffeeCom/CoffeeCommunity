@@ -23,7 +23,7 @@ public class LoginOrSignupActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Provider.setIpAddress("192.168.56.1");
+        Provider.setIpAddress("192.168.100.11");
 //        Provider.setIpAddress(Provider.getLocalIpAddress());
 
         setContentView(R.layout.activity_loginorregister);

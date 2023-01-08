@@ -85,12 +85,12 @@ public class LoginActivity extends AppCompatActivity {
                 });
             }catch (Exception e) {
                 Log.d("myTag", "error");
-                Toast.makeText(this, "Register FAILED", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Login FAILED", Toast.LENGTH_SHORT).show();
             }
         }
         else{
             Log.d("myTag", "errrrrror");
-            Toast.makeText(this, "Register Bruh", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Login Bruh", Toast.LENGTH_SHORT).show();
 
         }
 
