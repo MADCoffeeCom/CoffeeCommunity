@@ -230,7 +230,7 @@ public class MapsFragment extends Fragment {
                                     Log.i("Maps Fragment","Lattitude of address is :" + result.getGeometry().getLocation().getLat());
                                     Log.i("Maps Fragment","Longitude of address is :" + result.getGeometry().getLocation().getLng());
                                     coffeeShopLocation.add(new LatLng (Double.parseDouble(result.getGeometry().getLocation().getLat()), Double.parseDouble(result.getGeometry().getLocation().getLng())));
-                                    title.add(result.getGeometry().getLocation_type());
+                                    title.add(ba.getBaristaId());
                                     Log.i("Maps Fragment","Location is " + result.getGeometry().getLocation_type() + " "+ coffeeShopLocation.size() + " " + title.size());
                                 }
 
