@@ -34,7 +34,7 @@
     <Button
         android:id="@+id/topUpWalletBtnFragment"
         style="@style/smallPrimaryBtn"
-        android:layout_width="124dp"
+        android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
         android:text="Top Up"

@@ -34,6 +34,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="barista name"
+        android:textColor="@color/pure_white"
         app:layout_constraintBottom_toBottomOf="@+id/backBtn"
         app:layout_constraintStart_toEndOf="@+id/backBtn"
         app:layout_constraintTop_toTopOf="@+id/backBtn" />
@@ -59,6 +60,7 @@
         android:gravity="bottom"
         android:inputType="textMultiLine"
         android:text="barista desc"
+        android:textColor="@color/pure_white"
         app:layout_constraintBottom_toBottomOf="@+id/baristaListPic"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -69,6 +71,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="TextView"
+        android:textColor="@color/pure_white"
         app:layout_constraintStart_toStartOf="@+id/baristaListDesc"
         app:layout_constraintTop_toBottomOf="@+id/baristaListName" />
 
@@ -82,10 +85,11 @@
         android:layout_marginEnd="24dp"
         android:background="@drawable/textbox"
         android:drawableLeft="@drawable/ic_search"
+        android:drawableTint="@color/white_60"
         android:ems="10"
         android:hint="Search for coffee/barista..."
         android:inputType="text"
-        android:textColorHint="@color/disable_grey"
+        android:textColorHint="@color/white_60"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"

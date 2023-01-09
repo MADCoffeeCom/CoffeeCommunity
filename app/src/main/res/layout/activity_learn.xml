@@ -38,10 +38,11 @@
         android:layout_marginEnd="24dp"
         android:background="@drawable/textbox"
         android:drawableLeft="@drawable/ic_search"
+        android:drawableTint="@color/white_60"
         android:ems="10"
         android:hint="Search for Materials..."
         android:inputType="text"
-        android:textColorHint="@color/disable_grey"
+        android:textColorHint="@color/white_60"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/learnDescText" />

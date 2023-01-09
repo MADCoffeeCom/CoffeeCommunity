@@ -1,21 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".fragment.ProfileMainFragment"
-    android:background="#0C1015"
-    android:layout_height="match_parent">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".fragment.ProfileMainFragment">
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginBottom="80dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginBottom="80dp"
         app:layout_constraintVertical_bias="1.0">
 
         <LinearLayout
@@ -79,6 +78,7 @@
                     android:layout_width="22dp"
                     android:layout_height="24dp"
                     android:layout_marginEnd="24dp"
+                    android:tint="@color/orange"
                     android:backgroundTint="@color/transparent"
                     android:src="@drawable/ic_edit"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -88,13 +88,12 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-            <androidx.fragment.app.FragmentContainerView
-                android:id="@+id/fragmentContainerView2"
-                android:name="com.example.coffeecom.fragment.CoffeeWalletFragment"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="40dp"
-                />
+<!--            <androidx.fragment.app.FragmentContainerView-->
+<!--                android:id="@+id/fragmentContainerView2"-->
+<!--                android:name="com.example.coffeecom.fragment.CoffeeWalletFragment"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginTop="40dp" />-->
 
             <TextView
                 android:id="@+id/textViewProfile2"
@@ -157,27 +156,28 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:paddingBottom="20dp"
                 android:layout_marginStart="24dp"
-                android:layout_marginEnd="24dp">
+                android:layout_marginEnd="24dp"
+                android:orientation="vertical"
+                android:paddingBottom="20dp">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/btnProfile1"
                     android:layout_width="match_parent"
                     android:layout_height="55dp"
-                    android:id="@+id/btnProfile1"
                     android:layout_marginBottom="8dp"
                     android:background="@drawable/vertical_gray_background">
 
                     <ImageView
                         android:id="@+id/imgProfileGeneral1"
-                        android:src="@drawable/ic_terms"
                         android:layout_width="26dp"
                         android:layout_height="26dp"
                         android:layout_marginStart="24dp"
+                        android:src="@drawable/ic_terms"
+                        android:tint="@color/white_60"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"/>
+                        app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
                         android:id="@+id/txtProfileGeneral1"
@@ -192,21 +192,22 @@
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/btnProfile2"
                     android:layout_width="match_parent"
                     android:layout_height="55dp"
-                    android:id="@+id/btnProfile2"
                     android:layout_marginBottom="8dp"
                     android:background="@drawable/vertical_gray_background">
 
                     <ImageView
                         android:id="@+id/imgProfileGeneral2"
-                        android:src="@drawable/ic_privacy"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="24dp"
+                        android:src="@drawable/ic_privacy"
+                        android:tint="@color/white_60"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"/>
+                        app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
                         android:id="@+id/txtProfileGeneral2"
@@ -221,21 +222,22 @@
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/btnProfile3"
                     android:layout_width="match_parent"
                     android:layout_height="55dp"
-                    android:id="@+id/btnProfile3"
                     android:layout_marginBottom="8dp"
                     android:background="@drawable/vertical_gray_background">
 
                     <ImageView
                         android:id="@+id/imgProfileGeneral3"
-                        android:src="@drawable/ic_bank"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="24dp"
+                        android:src="@drawable/ic_bank"
+                        android:tint="@color/white_60"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"/>
+                        app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
                         android:id="@+id/txtProfileGeneral3"
@@ -250,21 +252,22 @@
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/btnProfile4"
                     android:layout_width="match_parent"
                     android:layout_height="55dp"
-                    android:id="@+id/btnProfile4"
                     android:layout_marginBottom="8dp"
                     android:background="@drawable/vertical_gray_background">
 
                     <ImageView
                         android:id="@+id/imgProfileGeneral4"
-                        android:src="@drawable/ic_helpdesk"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="24dp"
+                        android:src="@drawable/ic_helpdesk"
+                        android:tint="@color/white_60"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"/>
+                        app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
                         android:id="@+id/txtProfileGeneral4"
@@ -279,21 +282,22 @@
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/btnProfile5"
                     android:layout_width="match_parent"
                     android:layout_height="55dp"
-                    android:id="@+id/btnProfile5"
                     android:layout_marginBottom="8dp"
                     android:background="@drawable/vertical_gray_background">
 
                     <ImageView
                         android:id="@+id/imgProfileGeneral5"
-                        android:src="@drawable/ic_feedback"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="24dp"
+                        android:src="@drawable/ic_feedback"
+                        android:tint="@color/white_60"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"/>
+                        app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
                         android:id="@+id/txtProfileGeneral5"
@@ -308,21 +312,22 @@
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/btnProfile6"
                     android:layout_width="match_parent"
                     android:layout_height="55dp"
-                    android:id="@+id/btnProfile6"
                     android:layout_marginBottom="8dp"
                     android:background="@drawable/vertical_gray_background">
 
                     <ImageView
                         android:id="@+id/imgProfileGeneral6"
-                        android:src="@drawable/ic_logout"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="24dp"
+                        android:src="@drawable/ic_logout"
+                        android:tint="@color/white_60"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"/>
+                        app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
                         android:id="@+id/txtProfileGeneral6"

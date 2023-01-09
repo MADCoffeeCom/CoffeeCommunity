@@ -12,12 +12,15 @@
         <item name="cornerRadius">10dp</item>
     </style>
 
-    <style name="primaryBtn" parent="@style/button" />
+    <style name="primaryBtn" parent="@style/button" >
+        <item name="android:textColor">@color/pure_white</item>
+    </style>
 
     <style name="secondaryBtn" parent="@style/button">
         <item name="backgroundTint">@color/transparent</item>
         <item name="strokeColor">@color/orange</item>
         <item name="strokeWidth">3dp</item>
+        <item name="android:stateListAnimator">"@null"</item>
     </style>
 
     <style name="thirdBtn" parent="@style/button">

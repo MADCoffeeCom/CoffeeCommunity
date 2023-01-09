@@ -28,6 +28,7 @@
         android:layout_marginBottom="24dp"
 
         android:text="Sign Up"
+        android:textColor="@color/pure_white"
         app:layout_constraintBottom_toBottomOf="@+id/imageView7"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

@@ -44,6 +44,7 @@
         android:layout_height="14dp"
         android:layout_marginEnd="4dp"
         android:src="@drawable/ic_like"
+        android:tint="@color/orange"
         app:layout_constraintBottom_toBottomOf="@+id/txtPostTotalLikes"
         app:layout_constraintEnd_toStartOf="@+id/txtPostTotalLikes"
         app:layout_constraintTop_toTopOf="@+id/txtPostTotalLikes" />

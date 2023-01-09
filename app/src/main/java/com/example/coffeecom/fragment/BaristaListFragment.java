@@ -74,15 +74,16 @@ public class BaristaListFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 //need to find the previous fragment then add
-                AppCompatActivity activity = (AppCompatActivity) view.getContext();
-                if (activity.getSupportFragmentManager().getBackStackEntryCount()>0){
-                    activity.getSupportFragmentManager().popBackStack();
-                }else{
-                    MapsFragment mapsFragment= new MapsFragment();
-                    activity.getSupportFragmentManager().beginTransaction().replace(R.id.containerMainPage,mapsFragment).addToBackStack(null).commit();
-                }
+//                AppCompatActivity activity = (AppCompatActivity) view.getContext();
+//                if (activity.getSupportFragmentManager().getBackStackEntryCount()>0){
+//                    activity.getSupportFragmentManager().popBackStack();
+//                }else{
+//                    MapsFragment mapsFragment= new MapsFragment();
+//                    activity.getSupportFragmentManager().beginTransaction().replace(R.id.containerMainPage,mapsFragment).addToBackStack(null).commit();
+//                }
 //                HomeActivityFragment buyCoffeeHome = new HomeActivityFragment();
 //                activity.getSupportFragmentManager().beginTransaction().replace(R.id.containerMainPage,buyCoffeeHome).addToBackStack(null).commit();
+                getActivity().onBackPressed();
 
             }
         });

@@ -59,12 +59,11 @@ public class BaristaFragment extends Fragment {
         pendingOrderRecycleView = view.findViewById(R.id.pendingOrderRecycleView);
         coffeeSellingRecycleView = view.findViewById(R.id.coffeeSellingRecycleView);
 
-        queryOrder(true);
+        recyclerViewPendingOrder();
         querySellingCoffee();
 
         return view;
     }
-
 
 
     private void querySellingCoffee() {
@@ -106,97 +105,6 @@ public class BaristaFragment extends Fragment {
                     Log.i(TAG, "Provider coffee size: " + Provider.getCoffees().size());
                     Log.i(TAG, "Provider barista size: " + Provider.getUser().getSellingCoffeeId().size());
 
-                }
-            }
-        });
-    }
-
-    public void queryOrder(boolean enableRecycleView) {
-        Provider.getUser().getBrewedOrder().clear();
-
-        Handler handler = new Handler(Looper.getMainLooper());
-        handler.post(new Runnable() {
-            @Override
-            public void run() {
-                String[] field = new String[1];
-                field[0] = "baristaId";
-
-                //Creating array for data
-                String[] data = new String[1];
-                data[0] = Provider.getUser().getBaristaId();
-
-                PutData putData = new PutData("http://" + Provider.getIpAddress() + "/CoffeeCommunityPHP/brewedorder.php", "POST", field, data);
-                if (putData.startPut()) {
-                    if (putData.onComplete()) {
-                        String result = putData.getResult();
-                        String[] resultSplitted = result.split("split");
-                        for (String str: resultSplitted) {
-                            String[] orderDetails = str.split(" - ");
-                            String orderId = orderDetails[0];
-                            String baristaId = orderDetails[1];
-                            String baristaDesc = orderDetails[2];
-                            String customerID = orderDetails[3];
-                            String customerName = orderDetails[4];
-                            String customerLocation = orderDetails[5];
-                            Date orderStartTime = null;
-                            Date orderEndTime = null;
-                            Date orderDuration = null;
-                            try {
-                                orderStartTime = convertStringtoDate(orderDetails[6]);
-                                orderEndTime = convertStringtoDate(orderDetails[7]);
-                                orderDuration = convertStringtoDate(orderDetails[8]);
-                            } catch (ParseException e) { e.printStackTrace(); }
-                            double orderTotalPrice = Double.valueOf(orderDetails[9]);
-                            String orderStatus = orderDetails[10];
-
-                            BrewedOrderModel order = new BrewedOrderModel(orderId, baristaId, baristaDesc, customerID, customerName, customerLocation, orderStartTime, orderEndTime, orderDuration, orderTotalPrice, orderStatus);
-                            Provider.getUser().addBrewedOrder(order);
-                            Log.i(TAG, "Successfully Added Order " + order.getOrderId());
-                        }
-                    }
-                    queryCoffeeInOrder(enableRecycleView);
-                }
-            }
-        });
-    }
-
-    private void queryCoffeeInOrder(boolean enableRecycleView) {
-        Handler handler = new Handler(Looper.getMainLooper());
-        handler.post(new Runnable() {
-            @Override
-            public void run() {
-                FetchData fetchData = new FetchData("http://" + Provider.getIpAddress() + "/CoffeeCommunityPHP/coffeeinorder.php");
-                if (fetchData.startFetch()) {
-                    if (fetchData.onComplete()) {
-                        String result = fetchData.getResult();
-                        Log.i(TAG, "Result: " + result);
-                        String[] resultSplitted = result.split("split");
-                        for (String str: resultSplitted) {
-                            String[] orderDetails = str.split(" - ");
-                            String orderId = orderDetails[0];
-                            String coffeeId = orderDetails[1];
-                            int amount = Integer.parseInt(orderDetails[2]);
-
-                            CoffeeModel coffee = null;
-                            for (int i = 0; i < Provider.getCoffees().size(); i++) {
-                                if(Provider.getCoffees().get(i).getCoffeeId().equals(coffeeId)){
-                                    coffee = Provider.getCoffees().get(i);
-                                    break;
-                                }
-                            }
-
-                            for (int i = 0; i < Provider.getUser().getBrewedOrder().size(); i++) {
-                                for (int j = 0; j < amount; j++) {
-                                    if (Provider.getUser().getBrewedOrder().get(i).getOrderId().equals(orderId)) {
-                                        Provider.getUser().getBrewedOrder().get(i).addOrderedCoffee(coffee);
-                                        Log.i(TAG, "Successfully Coffee in Order " + coffee.getCoffeeId());
-                                        Log.i(TAG, "Successfully Coffee in Order size " + Provider.getUser().getBrewedOrder().size());
-                                    }
-                                }
-                            }
-                        }
-                    }
-                    if(enableRecycleView) recyclerViewPendingOrder();
                 }
             }
         });

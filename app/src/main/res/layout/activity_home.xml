@@ -44,6 +44,7 @@
                     android:background="@color/transparent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="@+id/textView5"
+                    app:tint="@color/orange"
                     app:srcCompat="@drawable/ic_cart" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -65,10 +66,11 @@
                 android:layout_marginRight="24dp"
                 android:background="@drawable/textbox"
                 android:drawableLeft="@drawable/ic_search"
+                android:drawableTint="@color/white_60"
                 android:ems="10"
                 android:hint="Search for coffee/barista..."
                 android:inputType="text"
-                android:textColorHint="@color/disable_grey" />
+                android:textColorHint="@color/white_60" />
 
             <androidx.fragment.app.FragmentContainerView
                 android:id="@+id/fragmentContainerView2"

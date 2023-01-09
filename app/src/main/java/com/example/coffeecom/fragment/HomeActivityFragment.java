@@ -25,6 +25,7 @@ import com.example.coffeecom.adapter.CoffeeTypeAdapter;
 import com.example.coffeecom.model.BaristaModel;
 import com.example.coffeecom.model.CoffeeModel;
 import com.example.coffeecom.query.QueryBankCard;
+import com.example.coffeecom.query.QueryBrewedCoffee;
 import com.example.coffeecom.query.QueryCartItem;
 import com.example.coffeecom.query.QueryOrderedCoffee;
 import com.example.coffeecom.query.QueryPost;
@@ -67,22 +68,24 @@ public class HomeActivityFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 QueryCartItem.queryCartItem();
-                AppCompatActivity activity = (AppCompatActivity) HomeActivityFragment.this.getContext();
-                CoffeeCartFragment baristaListFragment = new CoffeeCartFragment();
-                activity.getSupportFragmentManager().beginTransaction().replace(R.id.containerMainPage,baristaListFragment).addToBackStack("HomeActivityFragment").commit();
+                ((BottomNavigationActivity)getActivity()).replaceFragment(new CoffeeCartFragment());
+//                AppCompatActivity activity = (AppCompatActivity) HomeActivityFragment.this.getContext();
+//                CoffeeCartFragment baristaListFragment = new CoffeeCartFragment();
+//                activity.getSupportFragmentManager().beginTransaction().replace(R.id.containerMainPage,baristaListFragment).addToBackStack("HomeActivityFragment").commit();
 
 //                ((BottomNavigationActivity)getActivity()).replaceFragment(new CoffeeCartFragment());
             }
         });
 
-        QueryPost.queryPost();
-        QueryOrderedCoffee.queryOrderedCoffee();
-        QueryWallet.queryWallet();
-        QueryBankCard.queryBankCard();
 
         queryProfile();
         queryCoffeeType();
         queryBarista();
+        QueryPost.queryPost();
+        QueryOrderedCoffee.queryOrderedCoffee();
+        QueryBrewedCoffee.queryOrder();
+        QueryWallet.queryWallet();
+        QueryBankCard.queryBankCard();
 
         TBSearch.setText("");
         TBSearch.addTextChangedListener(new TextWatcher() {

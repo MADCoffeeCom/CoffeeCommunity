@@ -27,7 +27,7 @@ public class LearnDetailsFragment extends Fragment {
 
     private static final String TAG = "LearnDetailsFragment";
     private ImageView learnDetailsBckBtn;
-    private ImageView upvoteBtn, downvoteBtn, shareBtn;
+    private ImageView upvoteBtn, downvoteBtn;
     private TextView learnDetailsTitleText, learnDetailsTypeText;
     private TextView learnDetailsContentText;
     private ImageView learnDetailsImage;
@@ -60,7 +60,6 @@ public class LearnDetailsFragment extends Fragment {
     private void initialiseId(View view) {
         upvoteBtn = view.findViewById(R.id.learnUpvoteBtn);
         downvoteBtn = view.findViewById(R.id.learnDownvoteBtn);
-        shareBtn = view.findViewById(R.id.learnShareBtn);
         learnDetailsBckBtn = view.findViewById(R.id.learnDetailsBckBtn);
         learnDetailsTitleText = view.findViewById(R.id.learnDetailsTitleText);
         learnDetailsTypeText = view.findViewById(R.id.learnDetailsTypeText);
@@ -134,13 +133,6 @@ public class LearnDetailsFragment extends Fragment {
             }
         });
 
-        //code for share
-        shareBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //code for share article function
-            }
-        });
 
         learnDetailsBckBtn.setOnClickListener(new View.OnClickListener() {
             @Override

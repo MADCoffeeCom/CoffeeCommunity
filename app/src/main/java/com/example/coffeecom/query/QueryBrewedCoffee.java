@@ -30,7 +30,9 @@ public class QueryBrewedCoffee {
 
                 //Creating array for data
                 String[] data = new String[1];
+                Log.i(TAG, "run: ErrorERRRRRRRRRRORRR");
                 data[0] = Provider.getUser().getBaristaId();
+                Log.i(TAG, "run: ErrorERRRRRRRRRRORRR" + Provider.getUser().getBaristaId());
 
                 PutData putData = new PutData("http://" + Provider.getIpAddress() + "/CoffeeCommunityPHP/brewedorder.php", "POST", field, data);
                 if (putData.startPut()) {
@@ -70,8 +72,10 @@ public class QueryBrewedCoffee {
     public static void queryCoffeeInOrder() {
         Handler handler = new Handler(Looper.getMainLooper());
         handler.post(new Runnable() {
+
             @Override
             public void run() {
+
                 FetchData fetchData = new FetchData("http://" + Provider.getIpAddress() + "/CoffeeCommunityPHP/coffeeinorder.php");
                 if (fetchData.startFetch()) {
                     if (fetchData.onComplete()) {

@@ -13,6 +13,7 @@
         android:layout_height="48dp"
         android:layout_marginTop="24dp"
         android:background="@color/transparent"
+        android:tint="@color/white"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/ic_back" />
@@ -98,7 +99,7 @@
                 <Button
                     android:id="@+id/topUpWalletBtnFragment2"
                     style="@style/smallPrimaryBtn"
-                    android:layout_width="124dp"
+                    android:layout_width="100dp"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="10dp"
                     android:text="Top Up"
@@ -251,6 +252,7 @@
         <Button
             android:id="@+id/coffeeCartPayBtn"
             style="@style/smallPrimaryBtn"
+            android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:layout_marginEnd="24dp"
             android:text="Pay"
