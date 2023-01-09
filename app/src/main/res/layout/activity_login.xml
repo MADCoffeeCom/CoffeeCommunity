@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:contentDescription="Coffee Beans"
     tools:context=".activity.LoginActivity">
 
     <ImageView
@@ -12,6 +13,7 @@
         android:layout_height="240dp"
         android:background="@drawable/round_outline"
         android:clipToOutline="true"
+        android:contentDescription="Coffee Beans"
         android:scaleType="centerCrop"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -38,11 +40,11 @@
         android:layout_marginStart="24dp"
         android:layout_marginTop="24dp"
         android:layout_marginEnd="24dp"
+        android:autofillHints="AUTOFILL_HINT_USERNAME"
         android:background="@drawable/textbox"
         android:ems="10"
-        android:inputType="textPersonName"
-        android:text="abang"
         android:hint="Username"
+        android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView6" />
@@ -55,11 +57,11 @@
         android:layout_marginStart="24dp"
         android:layout_marginTop="24dp"
         android:layout_marginEnd="24dp"
+        android:autofillHints="AUTOFILL_HINT_PASSWORD"
         android:background="@drawable/textbox"
         android:ems="10"
         android:hint="Password"
         android:inputType="textPassword"
-        android:text="abang"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editText_username" />
@@ -81,8 +83,30 @@
         android:layout_height="48dp"
         android:layout_marginTop="24dp"
         android:background="@color/transparent"
+        android:contentDescription="Back Button"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/ic_back" />
+
+    <CheckBox
+        android:id="@+id/rememberMeCheckBox"
+        style="@style/c1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Remember Me"
+        app:layout_constraintStart_toStartOf="@+id/editText_password"
+        app:layout_constraintTop_toBottomOf="@+id/editText_password" />
+
+    <TextView
+        android:id="@+id/forgotPassword"
+        style="@style/c1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Forgot Password?"
+        android:textStyle="italic"
+        app:layout_constraintBottom_toBottomOf="@+id/rememberMeCheckBox"
+        app:layout_constraintEnd_toEndOf="@+id/editText_password"
+        app:layout_constraintTop_toTopOf="@+id/rememberMeCheckBox" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

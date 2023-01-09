@@ -114,6 +114,7 @@ public class ProfileMainFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Intent myIntent = new Intent(((BottomNavigationActivity)getContext()), LoginOrSignupActivity.class);
+                myIntent.putExtra("isLoggedOut", "true");
                 ((BottomNavigationActivity)getActivity()).startActivity(myIntent);
                 ((BottomNavigationActivity)getActivity()).finishAffinity();
             }

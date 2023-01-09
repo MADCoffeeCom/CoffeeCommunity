@@ -28,6 +28,8 @@ import java.util.List;
 
 public class Provider{
 
+    public static final String SENDER = "communitycoffee76@gmail.com";
+    public static final String SENDERPASSWORD = "communitycoffee7612";
 
     private static ArrayList<CoffeeModel> coffees = new ArrayList<>();
     private static ArrayList<BaristaModel> baristas = new ArrayList<>();
