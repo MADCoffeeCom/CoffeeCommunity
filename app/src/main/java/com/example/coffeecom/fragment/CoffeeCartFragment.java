@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RadioGroup;
 
 import com.example.coffeecom.Provider;
 import com.example.coffeecom.R;
@@ -26,6 +27,7 @@ public class CoffeeCartFragment extends Fragment {
     private RecyclerView coffeeCartCardRecyclerView;
     private RecyclerView.Adapter cartAdapter;
     private ArrayList<CartModel> cartModelList;
+    private RadioGroup radioGroup1;
 
     private ImageView coffeeCartBckBtn;
 
@@ -37,6 +39,8 @@ public class CoffeeCartFragment extends Fragment {
         coffeeCartBckBtn = rootView.findViewById(R.id.coffeeCartBckBtn);
         coffeeCartCardRecyclerView = rootView.findViewById(R.id.coffeeCartRecyclerView);
         coffeeCartCardRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
+        radioGroup1 = rootView.findViewById(R.id.radiogroup1);
+        radioGroup1.addView();
 
         coffeeCartBckBtn.setOnClickListener(new View.OnClickListener() {
             @Override
