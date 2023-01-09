@@ -9,6 +9,8 @@
 
     <ImageButton
         android:id="@+id/imgEditPostBack"
+        android:tint="@color/white"
+        android:contentDescription="@string/back"
         android:layout_width="48dp"
         android:layout_height="48dp"
         android:layout_marginTop="24dp"
@@ -29,6 +31,7 @@
 
     <ImageButton
         android:id="@+id/imgEditPostButtonAddPicture"
+        android:contentDescription="@string/add_image"
         android:layout_width="48dp"
         android:layout_height="48dp"
         android:layout_marginTop="20dp"
@@ -79,7 +82,7 @@
         android:paddingTop="16dp"
         android:paddingRight="16dp"
         android:paddingBottom="16dp"
-        android:text="Write here"
+        android:hint="Write here"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewProfile2" />

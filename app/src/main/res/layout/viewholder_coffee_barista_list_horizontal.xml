@@ -70,13 +70,14 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:text="Location"
-        android:textSize="8dp"
+        android:textSize="8sp"
         app:layout_constraintBottom_toBottomOf="@+id/titleTextHoriCard"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/titleTextHoriCard" />
 
     <ImageButton
         android:id="@+id/addToCartBtn"
+        android:contentDescription="@string/add_to_cart"
         android:layout_width="48dp"
         android:layout_height="48dp"
         android:background="@color/transparent"

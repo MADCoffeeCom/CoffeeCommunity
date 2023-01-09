@@ -8,6 +8,8 @@
 
     <ImageButton
         android:id="@+id/rateBaristaBckBtn"
+        android:tint="@color/white"
+        android:contentDescription="@string/back"
         android:layout_width="48dp"
         android:layout_height="48dp"
         android:layout_marginTop="24dp"
@@ -38,6 +40,7 @@
 
         <ImageView
             android:id="@+id/rateBaristaPic"
+            android:contentDescription="@string/barista_profile_pic"
             android:layout_width="236dp"
             android:layout_height="165dp"
             android:layout_marginStart="24dp"
@@ -77,6 +80,7 @@
 
     <RatingBar
         android:id="@+id/rateBaristaRatingBar"
+        android:contentDescription="@string/rate_barista"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"

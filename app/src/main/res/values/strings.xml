@@ -35,5 +35,16 @@
     <string name="upvote">Upvote</string>
     <string name="downvote">Downvote</string>
     <string name="article_picture">Article Picture</string>
+    <string name="add_image">Add Image</string>
+    <string name="edit_profile">Edit Profile</string>
+    <string name="add_post">Add Post</string>
+    <string name="rate_app">Rate App</string>
+    <string name="set_location">Set Location</string>
+    <string name="post_picture">Post Picture</string>
+    <string name="rate_barista">Rate Barista</string>
+    <string name="delete_bank_card">Delete Bank Card</string>
+    <string name="add_to_cart">Add To Cart</string>
+    <string name="accept_order">Accept Order</string>
+    <string name="decline_order">Decline Order</string>
 
 </resources>

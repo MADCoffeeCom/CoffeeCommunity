@@ -82,6 +82,7 @@
 
     <ImageButton
         android:id="@+id/deleteCardBtn"
+        android:contentDescription="@string/delete_coffee"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"

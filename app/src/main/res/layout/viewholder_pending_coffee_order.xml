@@ -38,7 +38,7 @@
         android:layout_width="wrap_content"
         android:layout_height="16dp"
         android:text="Customer Name"
-        android:textSize="8dp"
+        android:textSize="8sp"
         app:layout_constraintEnd_toEndOf="@+id/orderCoffeeName"
         app:layout_constraintStart_toStartOf="@+id/orderCoffeeName"
         app:layout_constraintTop_toBottomOf="@+id/orderCoffeeName" />
@@ -56,12 +56,12 @@
 
     <ImageButton
         android:id="@+id/acceptOrderBtn"
+        android:contentDescription="@string/accept_order"
         android:layout_width="wrap_content"
         android:layout_height="48dp"
         android:layout_marginTop="8dp"
         android:background="@drawable/round_outline"
         android:backgroundTint="@color/orange"
-        app:layout_constraintBottom_toBottomOf="@+id/baristaPic"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/orderCoffeePic"
         app:layout_constraintTop_toTopOf="parent"
@@ -69,6 +69,7 @@
 
     <ImageButton
         android:id="@+id/declineOrderBtn"
+        android:contentDescription="@string/decline_order"
         android:layout_width="wrap_content"
         android:layout_height="48dp"
         android:layout_marginBottom="8dp"
