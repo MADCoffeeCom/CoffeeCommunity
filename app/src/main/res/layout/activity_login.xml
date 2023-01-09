@@ -83,7 +83,7 @@
         android:layout_height="48dp"
         android:layout_marginTop="24dp"
         android:background="@color/transparent"
-        android:contentDescription="Back Button"
+        android:contentDescription="@string/back"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/ic_back" />

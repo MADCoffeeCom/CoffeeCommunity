@@ -10,6 +10,7 @@
         android:id="@+id/baristaListPic"
         android:layout_width="match_parent"
         android:layout_height="250dp"
+        android:contentDescription="@string/barista_profile_pic"
         android:background="@drawable/round_outline"
         android:clipToOutline="true"
         android:scaleType="centerCrop"
@@ -20,6 +21,7 @@
 
     <ImageButton
         android:id="@+id/backBtn"
+        android:contentDescription="@string/back"
         android:layout_width="48dp"
         android:layout_height="48dp"
         android:layout_marginTop="24dp"
@@ -88,11 +90,9 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/coffeeListInBaristaRecyclerView"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tbSearch"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toBottomOf="@+id/tbSearch" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
