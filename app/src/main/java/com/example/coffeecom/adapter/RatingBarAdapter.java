@@ -1,5 +1,7 @@
 package com.example.coffeecom.adapter;
 
+import static com.example.coffeecom.helper.ToTitleCase.toTitleCase;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -44,7 +46,7 @@ public class RatingBarAdapter extends RecyclerView.Adapter<RatingBarAdapter.View
 
     @Override
     public void onBindViewHolder(@NonNull RatingBarAdapter.ViewHolder holder, int position) {
-        holder.ratingPeopleText.setText(ratingModels.get(position).getRaterName());
+        holder.ratingPeopleText.setText(toTitleCase(ratingModels.get(position).getRaterName()));
         holder.ratingDescText.setText(ratingModels.get(position).getRatingDesc());
         holder.ratingBar.setRating(ratingModels.get(position).getRating());
     }

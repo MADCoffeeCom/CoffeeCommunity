@@ -110,7 +110,7 @@ public class BottomNavigationActivity extends AppCompatActivity {
 
         String backStateName = fragment.getClass().getName();
         boolean fragmentPopped = manager.popBackStackImmediate (backStateName, 0);
-
+        Log.i(TAG, "replaceFragment: " + backStateName);
         if (!fragmentPopped){ //fragment not in back stack, create it.
             FragmentTransaction ft = manager.beginTransaction();
             ft.setCustomAnimations(
@@ -147,5 +147,13 @@ public class BottomNavigationActivity extends AppCompatActivity {
             ft.addToBackStack(backStateName);
             ft.commit();
         }
+    }
+
+    public int getContainer() {
+        return container;
+    }
+
+    public void setContainer(int container) {
+        this.container = container;
     }
 }

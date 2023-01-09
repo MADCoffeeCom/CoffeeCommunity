@@ -2,7 +2,6 @@ package com.example.coffeecom.adapter;
 
 import static com.example.coffeecom.helper.ToTitleCase.toTitleCase;
 
-import android.app.Activity;
 import android.content.Context;
 import android.os.Handler;
 import android.os.Looper;
@@ -15,7 +14,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -32,12 +30,10 @@ import com.example.coffeecom.query.QueryCartItem;
 import com.vishnusivadas.advanced_httpurlconnection.PutData;
 
 import java.util.ArrayList;
-import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.Future;
 
 public class CoffeeBaristaListAdapter extends RecyclerView.Adapter<CoffeeBaristaListAdapter.ViewHolder> {
 
+    private static final String TAG = "CoffeeBaristaListAdapter";
     ArrayList<CoffeeModel> coffees;
     ArrayList<BaristaModel> baristaWithCoffee;
     BaristaModel currentBarista;
@@ -52,16 +48,23 @@ public class CoffeeBaristaListAdapter extends RecyclerView.Adapter<CoffeeBarista
         this.activity = activity;
     }
 
-    public CoffeeBaristaListAdapter(BaristaModel currentBarista, ArrayList<CoffeeModel> coffee, char mode) {
+    public CoffeeBaristaListAdapter(BaristaModel currentBarista, ArrayList<CoffeeModel> coffee, char mode, Context activity) {
         this.coffees = coffee;
         this.currentBarista = currentBarista;
         this.mode = mode;
+        this.activity = activity;
     }
+
+    public void filterList(ArrayList<CoffeeModel> filterlist) {
+        coffees = filterlist;
+        notifyDataSetChanged();
+    }
+
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         ImageView coffeeListPic, addToCartBtn;
         TextView cardTitle, coffeeDesc, coffeePricePerItemText, baristaLocationText;
-        ConstraintLayout coffeeCardListHorizontal;
+        ConstraintLayout coffeeBaristaListCard;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -71,8 +74,8 @@ public class CoffeeBaristaListAdapter extends RecyclerView.Adapter<CoffeeBarista
             coffeeDesc = itemView.findViewById(R.id.descTextHoriCard);
             coffeePricePerItemText = itemView.findViewById(R.id.coffeePricePerItemText);
             baristaLocationText = itemView.findViewById(R.id.baristaLocationText);
+            coffeeBaristaListCard = itemView.findViewById(R.id.coffeeBaristaListCard);
             addToCartBtn = itemView.findViewById(R.id.addToCartBtn);
-            coffeeCardListHorizontal = itemView.findViewById(R.id.coffeeBaristaListHoriCard);
         }
     }
 
@@ -106,39 +109,35 @@ public class CoffeeBaristaListAdapter extends RecyclerView.Adapter<CoffeeBarista
         holder.addToCartBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                    CoffeeModel currentSelectedCoffee = coffees.get(position);
-                    boolean containThisCoffee = false;
-                    int coffeeAmountInCart;
-                    Log.i("CoffeeBaristaListAdapter", "Here: " + Provider.getUser().getCartCard().size());
-                    for (CartCardModel cc : Provider.getUser().getCartCard()) {
-                        Log.i("CoffeeBaristaListAdapter", "Here: " + cc.getCoffeeName() + " " + currentSelectedCoffee.getCoffeeTitle());
-                        if (cc.getCoffeeName().equals(currentSelectedCoffee.getCoffeeTitle())) {
-                            coffeeAmountInCart = cc.getCoffeeQuantity() + 1;
-                            cc.setCoffeeQuantity(coffeeAmountInCart);
-                            containThisCoffee = true;
-                            updateCoffeeInCart(Provider.getUser(), currentSelectedCoffee, coffeeAmountInCart);
-                            notifyDataSetChanged();
-                            break;
-                        }
-                    }
-                    if (containThisCoffee == false) {
-                        coffeeAmountInCart = 1;
-                        CartCardModel cartCardModel = new CartCardModel(currentSelectedCoffee.getCoffeeId(), currentSelectedCoffee.getCoffeePic(), currentSelectedCoffee.getCoffeeTitle(), currentSelectedCoffee.getCoffeePrice(), coffeeAmountInCart, currentSelectedCoffee.getBaristaId());
-                        Provider.getUser().addCartCard(cartCardModel);
-                        if (!Provider.getBaristaIdInCart().contains(currentSelectedCoffee.getBaristaId())){
-                            Provider.addBaristaIdInCart(currentSelectedCoffee.getBaristaId());
-                        }
-                        addCoffeeIntoCart(Provider.getUser(), currentSelectedCoffee, coffeeAmountInCart);
+                CoffeeModel currentSelectedCoffee = coffees.get(position);
+                boolean containThisCoffee = false;
+                int coffeeAmountInCart;
+                Log.i("CoffeeBaristaListAdapter", "Here: " + Provider.getUser().getCartCard().size());
+                for (CartCardModel cc : Provider.getUser().getCartCard()) {
+                    Log.i("CoffeeBaristaListAdapter", "Here: " + cc.getCoffeeName() + " " + currentSelectedCoffee.getCoffeeTitle());
+                    if (cc.getCoffeeName().equals(currentSelectedCoffee.getCoffeeTitle())) {
+                        coffeeAmountInCart = cc.getCoffeeQuantity() + 1;
+                        cc.setCoffeeQuantity(coffeeAmountInCart);
+                        containThisCoffee = true;
+                        updateCoffeeInCart(Provider.getUser(), currentSelectedCoffee, coffeeAmountInCart);
                         notifyDataSetChanged();
+                        break;
                     }
                 }
-
-
-
-
+                if (containThisCoffee == false) {
+                    coffeeAmountInCart = 1;
+                    CartCardModel cartCardModel = new CartCardModel(currentSelectedCoffee.getCoffeeId(), currentSelectedCoffee.getCoffeePic(), currentSelectedCoffee.getCoffeeTitle(), currentSelectedCoffee.getCoffeePrice(), coffeeAmountInCart, currentSelectedCoffee.getBaristaId());
+                    Provider.getUser().addCartCard(cartCardModel);
+                    if (!Provider.getBaristaIdInCart().contains(currentSelectedCoffee.getBaristaId())){
+                        Provider.addBaristaIdInCart(currentSelectedCoffee.getBaristaId());
+                    }
+                    addCoffeeIntoCart(Provider.getUser(), currentSelectedCoffee, coffeeAmountInCart);
+                    notifyDataSetChanged();
+                }
+            }
         });
 
-        holder.coffeeCardListHorizontal.setOnClickListener(new View.OnClickListener() {
+        holder.coffeeBaristaListCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 //go to details coffee view
@@ -161,22 +160,47 @@ public class CoffeeBaristaListAdapter extends RecyclerView.Adapter<CoffeeBarista
         holder.addToCartBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //straight add to cart & make toast
+                CoffeeModel currentSelectedCoffee = coffees.get(position);
+                boolean containThisCoffee = false;
+                int coffeeAmountInCart;
+                Log.i("CoffeeBaristaListAdapter", "Here: " + Provider.getUser().getCartCard().size());
+                for (CartCardModel cc : Provider.getUser().getCartCard()) {
+                    Log.i("CoffeeBaristaListAdapter", "Here: " + cc.getCoffeeName() + " " + currentSelectedCoffee.getCoffeeTitle());
+                    if (cc.getCoffeeName().equals(currentSelectedCoffee.getCoffeeTitle())) {
+                        coffeeAmountInCart = cc.getCoffeeQuantity() + 1;
+                        cc.setCoffeeQuantity(coffeeAmountInCart);
+                        containThisCoffee = true;
+                        updateCoffeeInCart(Provider.getUser(), currentSelectedCoffee, coffeeAmountInCart);
+                        notifyDataSetChanged();
+                        break;
+                    }
+                }
+                if (containThisCoffee == false) {
+                    coffeeAmountInCart = 1;
+                    CartCardModel cartCardModel = new CartCardModel(currentSelectedCoffee.getCoffeeId(), currentSelectedCoffee.getCoffeePic(), currentSelectedCoffee.getCoffeeTitle(), currentSelectedCoffee.getCoffeePrice(), coffeeAmountInCart, currentSelectedCoffee.getBaristaId());
+                    Provider.getUser().addCartCard(cartCardModel);
+                    if (!Provider.getBaristaIdInCart().contains(currentSelectedCoffee.getBaristaId())){
+                        Provider.addBaristaIdInCart(currentSelectedCoffee.getBaristaId());
+                    }
+                    addCoffeeIntoCart(Provider.getUser(), currentSelectedCoffee, coffeeAmountInCart);
+                    notifyDataSetChanged();
+                }
             }
         });
 
-        holder.coffeeCardListHorizontal.setOnClickListener(new View.OnClickListener() {
+        holder.coffeeBaristaListCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 //go to details coffee view
-//                Provider.setCurrentCoffeeId(currentBarista.getSellingCoffee().get(position).getCoffeeId());
-                ((BottomNavigationActivity) activity).replaceFragment(new CoffeeDetailsFragment());
+                Provider.setCurrentCoffeeId(coffees.get(position).getCoffeeId());
+                CoffeeDetailsFragment coffeeFrag = new CoffeeDetailsFragment();
+                try{
+                    ((BottomNavigationActivity)activity).replaceFragment(coffeeFrag);
+                }catch (NullPointerException e){
+                    e.printStackTrace();
+                }
             }
         });
-
-        //coffee pic
-//        int drawableResourceId = holder.itemView.getContext().getResources().getIdentifier(currentBarista.getSellingCoffee().get(position).getCoffeePic(), "drawable", holder.itemView.getContext().getPackageName());
-//        Glide.with(holder.itemView.getContext()).load(drawableResourceId).into(holder.coffeeListPic);
     }
 
     @Override

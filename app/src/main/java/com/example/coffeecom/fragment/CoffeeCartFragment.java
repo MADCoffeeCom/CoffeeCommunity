@@ -41,13 +41,7 @@ public class CoffeeCartFragment extends Fragment {
         coffeeCartBckBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                AppCompatActivity activity = (AppCompatActivity) view.getContext();
-                if (activity.getSupportFragmentManager().getBackStackEntryCount()>0){
-                    activity.getSupportFragmentManager().popBackStack();
-                }else{
-                    HomeActivityFragment homeActivityFragment= new HomeActivityFragment();
-                    activity.getSupportFragmentManager().beginTransaction().replace(R.id.containerMainPage,homeActivityFragment).addToBackStack(null).commit();
-                }
+                getActivity().onBackPressed();
             }
         });
 

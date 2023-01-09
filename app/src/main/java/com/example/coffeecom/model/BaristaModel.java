@@ -6,7 +6,7 @@ public class BaristaModel extends ProfileModel{
 
     private String baristaDesc;
     private int yearsOfExperience;
-    private ArrayList<BaristaRatingModel> ratings;
+    private ArrayList<BaristaRatingModel> ratings = new ArrayList<>();
 
 
     public BaristaModel(String userPic, String userStreetNo, String userTaman, String userPostalCode, ArrayList<String> sellingCoffeeId, String baristaId, String baristaDesc, int yearsOfExperience, ArrayList<BaristaRatingModel> ratings) {
@@ -25,12 +25,9 @@ public class BaristaModel extends ProfileModel{
 
     }
 
-
-
     public BaristaModel(String userId) {
         super(userId);
     }
-
 
     public String getBaristaDesc() {
         return baristaDesc;
@@ -44,10 +41,9 @@ public class BaristaModel extends ProfileModel{
         return ratings;
     }
 
-    public void setRatings(ArrayList<BaristaRatingModel> ratings) {
-        this.ratings = ratings;
+    public void addRatings(BaristaRatingModel rating) {
+        this.ratings.add(rating);
     }
-
 
     public int getYearsOfExperience() {
         return yearsOfExperience;
