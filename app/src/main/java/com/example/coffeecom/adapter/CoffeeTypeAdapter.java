@@ -74,6 +74,7 @@ public class CoffeeTypeAdapter extends RecyclerView.Adapter<CoffeeTypeAdapter.Vi
             @Override
             public void onClick(View view) {
                 //input code here to open details coffee page
+
                 Log.i("Coffeetype in adapter", coffees.get(position).getCoffeeType());
 //                Provider.setCurrentCoffeeType(coffees.get(position).getCoffeeType());
                 Provider.setCurrentCoffeeId(coffees.get(position).getCoffeeId());

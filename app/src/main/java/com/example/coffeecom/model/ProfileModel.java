@@ -1,5 +1,7 @@
 package com.example.coffeecom.model;
 
+import com.example.coffeecom.Provider;
+
 import java.util.ArrayList;
 
 public class ProfileModel {
@@ -66,6 +68,15 @@ public class ProfileModel {
 
     public ArrayList<CartCardModel> getCartCard() {
         return cartItem;
+    }
+
+    public CartCardModel getOneCardCart(String coffeeId){
+        for (CartCardModel cc : Provider.getUser().getCartCard()) {
+            if (cc.getCoffeeId().equals(coffeeId)){
+                return cc;
+            }
+        }
+        return null;
     }
 
     public void setCartItem(ArrayList<CartCardModel> cartItem) {
