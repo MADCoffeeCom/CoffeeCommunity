@@ -46,6 +46,8 @@ android {
 }
 
 dependencies {
+    implementation 'com.github.yesidlazaro:GmailBackground:1.2.0'
+//    implementation 'com.sun.mail:javax.mail:1.6.2'
     implementation 'com.fasterxml.jackson.core:jackson-databind:2.13.2'
     implementation "com.fasterxml.jackson.core:jackson-core:2.14.1"
     implementation 'com.github.VishnuSivadasVS:Advanced-HttpURLConnection:1.2'
@@ -71,3 +73,14 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.4'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.0'
 }
+
+//configurations.all {
+//    resolutionStrategy.eachDependency { DependencyResolveDetails details ->
+//        def requested = details.requested
+//        if (requested.group == 'com.android.support') {
+//            if (!requested.name.startsWith("multidex")) {
+//                details.useVersion '25.3.0'
+//            }
+//        }
+//    }
+//}

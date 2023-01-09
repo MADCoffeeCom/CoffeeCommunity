@@ -3,12 +3,15 @@ package com.example.coffeecom.activity;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -23,7 +26,15 @@ import java.net.URL;
 
 public class LoginActivity extends AppCompatActivity {
 
-    ImageButton backBtn;
+    private static final String TAG = "LoginActivity";
+
+    private ImageButton backBtn;
+    private CheckBox saveLoginCheckBox;
+    private SharedPreferences loginPreferences;
+    private SharedPreferences.Editor loginPrefsEditor;
+    private Boolean saveLogin;
+    private TextView username, passwordTextView, forgotPassword;
+    private String isLoggedOut = "false";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,7 +43,36 @@ public class LoginActivity extends AppCompatActivity {
 
         Button loginButton = (Button) findViewById(R.id.loginpage_loginButton);
         backBtn = findViewById(R.id.backBtn);
+        forgotPassword = findViewById(R.id.forgotPassword);
+        saveLoginCheckBox = findViewById(R.id.rememberMeCheckBox);
+        username = (TextView) findViewById(R.id.editText_username);
+        passwordTextView = (TextView) findViewById(R.id.editText_password);
         backBtn.setOnClickListener(view -> finish());
+
+        Bundle bundle = getIntent().getExtras();
+        if(bundle != null){
+            isLoggedOut = bundle.getString("isLoggedOut");
+        }
+            Log.i(TAG, "isLoggedOut: " + isLoggedOut);
+
+        forgotPassword.setOnClickListener(view -> {
+            Intent intent = new Intent(LoginActivity.this, ForgotPasswordActivity.class);
+            startActivity(intent);
+        });
+
+        loginPreferences = getSharedPreferences("loginPrefs", MODE_PRIVATE);
+        loginPrefsEditor = loginPreferences.edit();
+
+        saveLogin = loginPreferences.getBoolean("saveLogin", false);
+        if (saveLogin == true ) {
+            username.setText(loginPreferences.getString("username", ""));
+            passwordTextView.setText(loginPreferences.getString("password", ""));
+            saveLoginCheckBox.setChecked(true);
+        }
+//        if(!isLoggedOut.equals("true")){
+//            validateLogin();
+//            overridePendingTransition(0, 0);
+//        }
 
         loginButton.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -45,8 +85,6 @@ public class LoginActivity extends AppCompatActivity {
     //username: abang
     //password: abang
     public void validateLogin(){
-        TextView username = (TextView) findViewById(R.id.editText_username);
-        TextView passwordTextView = (TextView) findViewById(R.id.editText_password);
 
         if (!passwordTextView.getText().toString().equals("") && !username.getText().toString().equals("")) {
             try {
@@ -64,6 +102,16 @@ public class LoginActivity extends AppCompatActivity {
                         String[] data = new String[2];
                         data[0] = username.getText().toString();
                         data[1] = passwordTextView.getText().toString();
+
+                        if (saveLoginCheckBox.isChecked()) {
+                            loginPrefsEditor.putBoolean("saveLogin", true);
+                            loginPrefsEditor.putString("username", username.getText().toString());
+                            loginPrefsEditor.putString("password", passwordTextView.getText().toString());
+                            loginPrefsEditor.commit();
+                        } else {
+                            loginPrefsEditor.clear();
+                            loginPrefsEditor.commit();
+                        }
 
                         PutData putData = new PutData("http://" + Provider.getIpAddress() + "/CoffeeCommunityPHP/login.php", "POST", field, data);
                         if (putData.startPut()) {
@@ -97,15 +145,6 @@ public class LoginActivity extends AppCompatActivity {
             Toast.makeText(this, "Login Bruh", Toast.LENGTH_SHORT).show();
 
         }
-
-
-
-
-//        if (username.getText().toString().equals("abang") && passwordTextView.getText().toString().equals("abang")){
-//            Toast.makeText(this, "LOGIN SUCCESSFUL", Toast.LENGTH_SHORT).show();
-//        }else Toast.makeText(this,"LOGIN FAILED", Toast.LENGTH_SHORT).show();
-//        Intent intent = new Intent(this, LoginActivity.class);
-//        startActivity(intent);
     }
 
     public URL convertToUrl(String str) throws MalformedURLException {
