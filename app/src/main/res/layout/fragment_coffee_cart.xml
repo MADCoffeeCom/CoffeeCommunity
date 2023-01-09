@@ -67,144 +67,92 @@
                 android:text="Payment Method"
                 android:textSize="16sp" />
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/paymentBtn1"
+            <RadioGroup
                 android:layout_width="match_parent"
-                android:layout_height="55dp"
-                android:layout_marginBottom="20dp"
-                android:background="@drawable/vertical_gray_background">
+                android:layout_height="match_parent" >
 
-                <TextView
-                    android:id="@+id/coffeeWalletAmountText"
-                    style="@style/h2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:text="RM0.00"
-                    app:layout_constraintBottom_toBottomOf="@+id/coffeeBalanceText"
-                    app:layout_constraintStart_toEndOf="@+id/coffeeBalanceText"
-                    app:layout_constraintTop_toTopOf="@+id/coffeeBalanceText" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="20dp"
+                    android:background="@drawable/vertical_gray_background"
+                    android:paddingLeft="16dp">
 
-                <TextView
-                    android:id="@+id/coffeeBalanceText"
-                    style="@style/c1"
-                    android:layout_width="67dp"
-                    android:layout_height="39dp"
-                    android:layout_marginStart="16dp"
-                    android:text="@string/balance"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/imageView15"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    <RadioButton
+                        android:id="@+id/paymentBtn1"
+                        style="@style/c1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="55dp"
+                        android:paddingLeft="5dp"
+                        android:text="@string/balance" />
 
-                <Button
-                    android:id="@+id/topUpWalletBtnFragment2"
-                    style="@style/smallPrimaryBtn"
-                    android:layout_width="100dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="10dp"
-                    android:text="Top Up"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    <TextView
+                        android:id="@+id/coffeeWalletAmountText"
+                        style="@style/h2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginEnd="8dp"
+                        android:text="RM0.00" />
 
-                <ImageView
-                    android:id="@+id/imageView15"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="24dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/ic_payment_method" />
+                    <Button
+                        android:id="@+id/paymentTopUpBtn"
+                        style="@style/smallPrimaryBtn"
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="10dp"
+                        android:text="Top Up" />
+                </LinearLayout>
 
-            </androidx.constraintlayout.widget.ConstraintLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="20dp"
+                    android:background="@drawable/vertical_gray_background"
+                    android:paddingLeft="16dp">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/paymentBtn2"
-                android:layout_width="match_parent"
-                android:layout_height="55dp"
-                android:layout_marginBottom="20dp"
-                android:background="@drawable/vertical_gray_background">
+                    <RadioButton
+                        android:id="@+id/paymentBtn2"
+                        style="@style/c1"
+                        android:paddingLeft="5dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="55dp"
+                        android:text="Cash on Pick Up" />
+                </LinearLayout>
 
-                <ImageView
-                    android:id="@+id/imageView14"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="24dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/ic_payment_method" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="20dp"
+                    android:background="@drawable/vertical_gray_background"
+                    android:paddingLeft="16dp">
 
-                <TextView
-                    android:id="@+id/cashOnPickText"
-                    style="@style/c2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:text="Cash on Pick Up"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/imageView14"
-                    app:layout_constraintTop_toTopOf="parent" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
+                    <RadioButton
+                        android:id="@+id/paymentBtn3"
+                        style="@style/c1"
+                        android:paddingLeft="5dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="55dp"
+                        android:text="Credit/Debit Card" />
+                </LinearLayout>
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/paymentBtn3"
-                android:layout_width="match_parent"
-                android:layout_height="55dp"
-                android:layout_marginBottom="20dp"
-                android:background="@drawable/vertical_gray_background">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="20dp"
+                    android:background="@drawable/vertical_gray_background"
+                    android:paddingLeft="16dp">
 
-                <ImageView
-                    android:id="@+id/imageView13"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="24dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/ic_payment_method" />
+                    <RadioButton
+                        android:id="@+id/paymentBtn4"
+                        style="@style/c1"
+                        android:paddingLeft="5dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="55dp"
+                        android:text="E-wallet" />
+                </LinearLayout>
 
-                <TextView
-                    android:id="@+id/creditDebitText"
-                    style="@style/c2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:text="Credit/Debit Card"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/imageView13"
-                    app:layout_constraintTop_toTopOf="parent" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/paymentBtn4"
-                android:layout_width="match_parent"
-                android:layout_height="55dp"
-                android:layout_marginBottom="20dp"
-                android:background="@drawable/vertical_gray_background">
-
-                <ImageView
-                    android:id="@+id/imageView12"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="24dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/ic_payment_method" />
-
-                <TextView
-                    android:id="@+id/eWalletText"
-                    style="@style/c2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:text="E-wallet"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/imageView12"
-                    app:layout_constraintTop_toTopOf="parent" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
+            </RadioGroup>
 
         </LinearLayout>
     </ScrollView>
