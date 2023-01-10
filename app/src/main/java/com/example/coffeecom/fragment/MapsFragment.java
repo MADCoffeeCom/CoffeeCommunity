@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -20,6 +21,7 @@ import androidx.fragment.app.Fragment;
 
 import com.example.coffeecom.Provider;
 import com.example.coffeecom.R;
+import com.example.coffeecom.activity.BottomNavigationActivity;
 import com.example.coffeecom.helper.AddressConverter;
 import com.example.coffeecom.helper.GoogleResponse;
 import com.example.coffeecom.helper.Result;
@@ -54,6 +56,7 @@ public class MapsFragment extends Fragment {
     private FusedLocationProviderClient fusedLocationProviderClient;
     private static final int Request_code = 101;
     private double lat, lng;
+    private ImageButton backBtn;
     ArrayList<LatLng>coffeeShopLocation = new ArrayList<LatLng>();
 //    LatLng jayaOne = new LatLng(3.118628469625429, 101.63541564002739);
 //    LatLng rumahAntarabangsa = new LatLng(3.1197533284499657, 101.6370464230398);
@@ -175,10 +178,23 @@ public class MapsFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater,
                              @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_maps, container, false);
+        View view = inflater.inflate(R.layout.fragment_maps, container, false);
+        backBtn = view.findViewById(R.id.mapBackBtn);
+
+        backBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getActivity().onBackPressed();
+            }
+        });
+
+
+        return view;
 
 
     }
+
+
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
