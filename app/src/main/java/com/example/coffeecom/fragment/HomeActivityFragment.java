@@ -244,6 +244,7 @@ public class  HomeActivityFragment extends Fragment {
             @Override
             public void run() {
                 FetchData fetchData = new FetchData("http://" + Provider.getIpAddress() + "/CoffeeCommunityPHP/barista.php");
+//                FetchData fetchData = new FetchData("https://coffeecommunityapp.000webhostapp.com/barista.php");
 
                 if (fetchData.startFetch()) {
                     if (fetchData.onComplete()) {
