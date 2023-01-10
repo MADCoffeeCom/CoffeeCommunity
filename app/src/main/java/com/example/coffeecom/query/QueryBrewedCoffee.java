@@ -38,7 +38,7 @@ public class QueryBrewedCoffee {
                 if (putData.startPut()) {
                     if (putData.onComplete()) {
                         String result = putData.getResult();
-                        Log.i(TAG, "run: " + result);
+                        Log.i(TAG, "queryBrewedOrder: " + result);
                         String[] resultSplitted = result.split("split");
                         for (String str: resultSplitted) {
                             String[] orderDetails = str.split(" - ");
