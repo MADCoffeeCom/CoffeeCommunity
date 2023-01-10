@@ -140,6 +140,7 @@ public class CoffeeCartFragment extends Fragment {
                                         AlertDialog dialog2 = builder2.create();
                                         dialog2.show();
                                     }
+
                                     if (wantPurchase == true){
                                         for (CartModel cm: Provider.getCartModelList()){
                                             String orderId = "o" + new Random().nextInt(9999);
@@ -223,7 +224,15 @@ public class CoffeeCartFragment extends Fragment {
                 });
 
                 AlertDialog dialog = builder.create();
-                dialog.show();
+                if (Provider.getCartModelList().size()==0){
+                    Toast.makeText(getContext(),"Please add some coffee into the cart", Toast.LENGTH_SHORT).show();
+                }
+                else if (!paymentBtn1.isChecked() && !paymentBtn2.isChecked()){
+                    Toast.makeText(getContext(),"Please select payment method", Toast.LENGTH_SHORT).show();
+                }else{
+                    dialog.show();
+                }
+
             }
         });
 
