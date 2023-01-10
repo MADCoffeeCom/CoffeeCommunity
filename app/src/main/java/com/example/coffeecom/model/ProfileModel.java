@@ -26,6 +26,7 @@ public class ProfileModel {
 
     private ArrayList<String> sellingCoffeeId = new ArrayList<>();
     private ArrayList<OrderedCoffeeModel> orderedHistory = new ArrayList<>();
+    private ArrayList<OrderedCoffeeModel> pendingOrder = new ArrayList<>();
     private ArrayList<PostModel> postedPost = new ArrayList<>();
     private ArrayList<BankCardModel> bankCard = new ArrayList<>();
     private ArrayList<BrewedOrderModel> brewedOrder = new ArrayList<>();
@@ -241,5 +242,13 @@ public class ProfileModel {
 
     public void addBrewedOrder(BrewedOrderModel order) {
         this.brewedOrder.add(order);
+    }
+
+    public ArrayList<OrderedCoffeeModel> getPendingOrder() {
+        return pendingOrder;
+    }
+
+    public void addPendingOrder(OrderedCoffeeModel order) {
+        this.pendingOrder.add(order);
     }
 }

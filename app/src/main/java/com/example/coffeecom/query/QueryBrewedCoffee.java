@@ -17,7 +17,7 @@ import java.util.Date;
 
 public class QueryBrewedCoffee {
 
-    private static final String TAG = "QueryOrderedCoffee";
+    private static final String TAG = "QueryBrewedCoffee";
     public static void queryOrder() {
         Provider.getUser().getBrewedOrder().clear();
 
@@ -30,15 +30,13 @@ public class QueryBrewedCoffee {
 
                 //Creating array for data
                 String[] data = new String[1];
-                Log.i(TAG, "run: ErrorERRRRRRRRRRORRR");
                 data[0] = Provider.getUser().getBaristaId();
-                Log.i(TAG, "run: ErrorERRRRRRRRRRORRR" + Provider.getUser().getBaristaId());
 
                 PutData putData = new PutData("http://" + Provider.getIpAddress() + "/CoffeeCommunityPHP/brewedorder.php", "POST", field, data);
                 if (putData.startPut()) {
                     if (putData.onComplete()) {
                         String result = putData.getResult();
-                        Log.i(TAG, "run: " + result);
+                        Log.i(TAG, "BrewedCofeed Checking Result: " + result);
                         String[] resultSplitted = result.split("split");
                         for (String str: resultSplitted) {
                             String[] orderDetails = str.split(" - ");
@@ -61,7 +59,7 @@ public class QueryBrewedCoffee {
 
                             BrewedOrderModel order = new BrewedOrderModel(orderId, baristaId, baristaDesc, customerID, customerName, customerLocation, orderStartTime, orderEndTime, orderDuration, orderTotalPrice, orderStatus);
                             Provider.getUser().addBrewedOrder(order);
-                            Log.i(TAG, "Successfully Added Order " + order.getOrderId());
+                            Log.i(TAG, "Successfully Added Brew Order " + order.getOrderId());
                         }
                     }
                     queryCoffeeInOrder();

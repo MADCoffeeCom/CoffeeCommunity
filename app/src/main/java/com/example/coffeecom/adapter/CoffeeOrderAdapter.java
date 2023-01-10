@@ -10,28 +10,23 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.coffeecom.Provider;
 import com.example.coffeecom.R;
-import com.example.coffeecom.activity.BottomNavigationActivity;
-import com.example.coffeecom.fragment.CoffeeDetailsFragment;
-import com.example.coffeecom.fragment.CoffeeListFragment;
-import com.example.coffeecom.model.BaristaModel;
-import com.example.coffeecom.model.CoffeeModel;
+import com.example.coffeecom.model.OrderedCoffeeModel;
 
 import java.util.ArrayList;
 
-public class CoffeeTypeAdapter extends RecyclerView.Adapter<CoffeeTypeAdapter.ViewHolder> {
+public class CoffeeOrderAdapter extends RecyclerView.Adapter<CoffeeOrderAdapter.ViewHolder>{
 
-    ArrayList<CoffeeModel> coffees;
+    ArrayList<OrderedCoffeeModel> orders;
     Context activity;
 
-    public CoffeeTypeAdapter(ArrayList<CoffeeModel> coffees, Context activity) {
-        this.coffees = coffees;
+    public CoffeeOrderAdapter(ArrayList<OrderedCoffeeModel> orders, Context activity) {
+        this.orders = orders;
         this.activity = activity;
     }
 
@@ -50,34 +45,28 @@ public class CoffeeTypeAdapter extends RecyclerView.Adapter<CoffeeTypeAdapter.Vi
         }
     }
 
-    public void filterList(ArrayList<CoffeeModel> coffee) {
-        coffees = coffee;
-        notifyDataSetChanged();
-    }
-
     //Create viewholder or card based on the xml file
     @Override
-    public CoffeeTypeAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public CoffeeOrderAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View inflate = LayoutInflater.from(parent.getContext()).inflate(R.layout.viewholder_coffee_type_small, parent, false);
-        return new ViewHolder(inflate);
+        return new CoffeeOrderAdapter.ViewHolder(inflate);
     }
 
     //fill in the xml file with necessary information
     @Override
-    public void onBindViewHolder(@NonNull CoffeeTypeAdapter.ViewHolder holder, @SuppressLint("RecyclerView") int position) {
-        holder.coffeeTitle.setText(coffees.get(position).getCoffeeTitle());
+    public void onBindViewHolder(@NonNull CoffeeOrderAdapter.ViewHolder holder, @SuppressLint("RecyclerView") int position) {
+        holder.coffeeTitle.setText(orders.get(position).getBaristaName());
 
         //code to insert picture
-        String picUrl = coffees.get(position).getCoffeePic();
+        String picUrl = Provider.getUser().getPendingOrder().get(position).getOrderedCoffee().get(0).getCoffeePic();
         int drawableResourceId = holder.itemView.getContext().getResources().getIdentifier(picUrl, "drawable", holder.itemView.getContext().getPackageName());
         Glide.with(holder.itemView.getContext()).load(drawableResourceId).into(holder.coffeePic);
 
         holder.coffeeCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.i("Coffeetype in adapter", coffees.get(position).getCoffeeType());
-                Provider.setCurrentCoffeeId(coffees.get(position).getCoffeeId());
-                ((BottomNavigationActivity)activity).replaceFragment(new CoffeeDetailsFragment());
+                Log.i("CoffeeOrderAdapter", "Opening status");
+
 
             }
         });
@@ -86,9 +75,6 @@ public class CoffeeTypeAdapter extends RecyclerView.Adapter<CoffeeTypeAdapter.Vi
     //loop for how many times
     @Override
     public int getItemCount() {
-        return coffees.size();
+        return orders.size();
     }
-
-
-
 }

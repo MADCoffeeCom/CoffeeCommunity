@@ -22,7 +22,9 @@ import com.example.coffeecom.fragment.PostDetailsFragment;
 import com.example.coffeecom.model.CoffeeModel;
 import com.example.coffeecom.model.PostModel;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder>{
 
@@ -66,7 +68,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder>{
     @Override
     public void onBindViewHolder(@NonNull PostAdapter.ViewHolder holder, int position) {
         holder.posterNameText.setText(toTitleCase(posts.get(position).getSenderName()));
-        holder.postDateText.setText(convertDatetoStringDate(posts.get(position).getPostDateTime()));
+        holder.postDateText.setText(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(posts.get(position).getPostDateTime()));
         holder.postDescText.setText(posts.get(position).getPostDesc());
 
         String picUrl = posts.get(position).getPostPic();

@@ -14,7 +14,7 @@ public class QueryRating {
 
     public static void queryRating(String baristaId){
 
-        Log.i(TAG, "updateFeedback: Run here once");
+        Log.i(TAG, "queryRating: Run here once");
 
         Handler handler = new Handler(Looper.getMainLooper());
         handler.post(new Runnable() {
@@ -53,6 +53,37 @@ public class QueryRating {
                             Log.i(TAG, "Added rating: " + ratingModel.getRaterName());
 
                         }
+                    }
+                }
+            }
+        });
+    }
+
+    public static void addRating(String baristaId, String userId, String rating, String ratingDesc){
+
+        Log.i(TAG, "addRating: Run here once");
+
+        Handler handler = new Handler(Looper.getMainLooper());
+        handler.post(new Runnable() {
+            @Override
+            public void run() {
+
+                String[] field = new String[1];
+                field[0] = "baristaId";
+                field[0] = "userId";
+                field[0] = "rating";
+                field[0] = "ratingDesc";
+
+                String[] data = new String[1];
+                data[0] = baristaId;
+                data[0] = userId;
+                data[0] = rating;
+                data[0] = ratingDesc;
+
+                PutData putData = new PutData("http://" + Provider.getIpAddress() + "/CoffeeCommunityPHP/ratebarista.php", "POST", field, data);
+                if (putData.startPut()) {
+                    if (putData.onComplete()) {
+                        String result = putData.getResult();
                     }
                 }
             }

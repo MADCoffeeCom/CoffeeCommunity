@@ -5,10 +5,8 @@ import static com.example.coffeecom.helper.FormatDateTime.convertStringtoDate;
 import android.os.Handler;
 import android.os.Looper;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.example.coffeecom.Provider;
-import com.example.coffeecom.fragment.HomeActivityFragment;
 import com.example.coffeecom.model.CoffeeModel;
 import com.example.coffeecom.model.OrderedCoffeeModel;
 import com.vishnusivadas.advanced_httpurlconnection.FetchData;
@@ -17,11 +15,12 @@ import com.vishnusivadas.advanced_httpurlconnection.PutData;
 import java.text.ParseException;
 import java.util.Date;
 
-public class QueryOrderedCoffee {
+public class QueryOrderedAndPendingCoffee {
     private static final String TAG = "QueryOrderedCoffee";
 
-    public static void queryOrderedCoffee(){
+    public static void queryOrderedAndPendingCoffee(){
         Provider.getUser().getOrderedHistory().clear();
+        Provider.getUser().getPendingOrder().clear();
 
         Handler handler = new Handler(Looper.getMainLooper());
         handler.post(new Runnable() {
@@ -44,6 +43,7 @@ public class QueryOrderedCoffee {
                             Log.e(TAG, "queryOrderedCoffee Database connection problem");
                         }
                         else{
+                            Log.i("QueryOrderedCoffee", "result : " + result);
                             String[] resultSplitted = result.split("split");
                             for (String str: resultSplitted) {
                                 String[] orderDetails = str.split(" - ");
@@ -64,10 +64,17 @@ public class QueryOrderedCoffee {
                                 } catch (ParseException e) { e.printStackTrace(); }
                                 double orderTotalPrice = Double.valueOf(orderDetails[9]);
                                 String orderStatus = orderDetails[10];
-
+                                Log.i("orderStatus", orderStatus);
                                 OrderedCoffeeModel order = new OrderedCoffeeModel(orderId, baristaId, baristaName, baristaTaman, baristaDesc, userId, orderStartTime, orderEndTime, orderDuration, orderTotalPrice, orderStatus);
-                                Provider.getUser().addOrderedHistory(order);
-                                Log.i(TAG, "Successfully Added Order " + order.getOrderId());
+
+                                if(order.getOrderStatus().equals("P")){
+                                    Provider.getUser().addPendingOrder(order);
+                                    Log.i(TAG, "Successfully Added Pending Order " + order.getOrderId());
+                                }else if(order.getOrderStatus().equals("T")){
+                                    Provider.getUser().addOrderedHistory(order);
+                                    Log.i(TAG, "Successfully Added Taken Order " + order.getOrderId());
+                                }
+
                             }
                         }
                         queryCoffeeInOrder();
@@ -106,7 +113,16 @@ public class QueryOrderedCoffee {
                                 for (int j = 0; j < amount; j++) {
                                     if (Provider.getUser().getOrderedHistory().get(i).getOrderId().equals(orderId)) {
                                         Provider.getUser().getOrderedHistory().get(i).addOrderedCoffee(coffee);
-                                        Log.i(TAG, "Successfully Coffee in Order " + coffee.getCoffeeId());
+                                        Log.i(TAG, "Successfully added OrderHistory in Order " + coffee.getCoffeeId());
+                                    }
+                                }
+                            }
+
+                            for (int i = 0; i < Provider.getUser().getPendingOrder().size(); i++) {
+                                for (int j = 0; j < amount; j++) {
+                                    if (Provider.getUser().getPendingOrder().get(i).getOrderId().equals(orderId)) {
+                                        Provider.getUser().getPendingOrder().get(i).addOrderedCoffee(coffee);
+                                        Log.i(TAG, "Successfully added PendingOrder in Order " + coffee.getCoffeeId());
                                     }
                                 }
                             }

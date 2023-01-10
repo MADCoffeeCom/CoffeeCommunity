@@ -59,7 +59,9 @@ public class QueryPost {
                                 String postPicUrl = postDetails[6];
                                 Date postDate = null;
                                 try {
-                                    postDate = convertStringtoDate(postDetails[7]);
+                                    Log.i("Date", "" + postDetails[7]);
+                                    postDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(postDetails[7]);
+                                    Log.i("Date", "" + postDate);
                                 } catch (ParseException e) { e.printStackTrace(); }
 
                                 PostModel post = new PostModel(postId, upVote, downVote, posterId, username, postDesc, postPicUrl, postDate);

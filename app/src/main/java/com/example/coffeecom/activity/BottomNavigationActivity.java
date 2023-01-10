@@ -149,6 +149,12 @@ public class BottomNavigationActivity extends AppCompatActivity {
         }
     }
 
+    public void clearBackStack() {
+        for(int i = 0; i < manager.getBackStackEntryCount(); ++i) {
+            manager.popBackStack();
+        }
+    }
+
     public int getContainer() {
         return container;
     }
