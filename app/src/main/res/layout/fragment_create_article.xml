@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragment.AddBankCardFragment">
+    tools:context=".fragment.CreateArticleFragment">
 
     <ImageButton
         android:id="@+id/backBtn"
@@ -19,28 +19,17 @@
         app:srcCompat="@drawable/ic_back" />
 
     <TextView
-        android:id="@+id/addBankCardTitleText"
+        android:id="@+id/createArticleTitleText"
         style="@style/h1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Add Card"
-        app:layout_constraintBottom_toBottomOf="@+id/backBtn"
+        android:layout_marginTop="24dp"
+        android:text="Create Article"
         app:layout_constraintStart_toEndOf="@+id/backBtn"
-        app:layout_constraintTop_toTopOf="@+id/backBtn" />
-
-    <TextView
-        android:id="@+id/textView18"
-        style="@style/c1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="8dp"
-        android:text="Enter/edit credit/debit card details"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/addBankCardTitleText" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/cardNumberTextBox"
+        android:id="@+id/articleTitleTextBox"
         style="@style/defaultTextBox"
         android:layout_width="match_parent"
         android:layout_height="50dp"
@@ -49,15 +38,13 @@
         android:layout_marginEnd="24dp"
         android:background="@drawable/textbox"
         android:ems="10"
-        android:hint="Card Number"
-        android:inputType="textPersonName"
-        android:textColorHint="@color/disable_grey"
+        android:hint="Article Title"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView18" />
+        app:layout_constraintTop_toBottomOf="@+id/createArticleTitleText" />
 
     <EditText
-        android:id="@+id/nameOnCardTextBox"
+        android:id="@+id/articleTypeTextBox"
         style="@style/defaultTextBox"
         android:layout_width="match_parent"
         android:layout_height="50dp"
@@ -66,72 +53,54 @@
         android:layout_marginEnd="24dp"
         android:background="@drawable/textbox"
         android:ems="10"
-        android:hint="Name on Card"
-        android:inputType="textPersonName"
-        android:textColorHint="@color/disable_grey"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cardNumberTextBox" />
-
-    <EditText
-        android:id="@+id/ccvTextBox"
-        style="@style/defaultTextBox"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="24dp"
-        android:background="@drawable/textbox"
-        android:ems="10"
-        android:hint="CCV"
-        android:inputType="textPersonName"
-        android:textColorHint="@color/disable_grey"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/nameOnCardTextBox" />
-
-    <EditText
-        android:id="@+id/expiryDateTextBox"
-        style="@style/defaultTextBox"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="24dp"
-        android:background="@drawable/textbox"
-        android:ems="10"
-        android:hint="Expiry Date"
-        android:inputType="textPersonName"
-        android:textColorHint="@color/disable_grey"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ccvTextBox" />
-
-    <EditText
-        android:id="@+id/bankNameText"
-        style="@style/defaultTextBox"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="24dp"
-        android:background="@drawable/textbox"
-        android:ems="10"
-        android:hint="Bank Name"
-        android:inputType="textPersonName"
-        android:textColorHint="@color/disable_grey"
+        android:hint="Article Type"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/expiryDateTextBox" />
+        app:layout_constraintTop_toBottomOf="@+id/articleTitleTextBox" />
+
+    <EditText
+        android:id="@+id/articlePicTextBox"
+        style="@style/defaultTextBox"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="24dp"
+        android:background="@drawable/textbox"
+        android:ems="10"
+        android:hint="Article Picture"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/articleTypeTextBox" />
+
+    <EditText
+        android:id="@+id/articleContentTextBox"
+        style="@style/defaultTextBox"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="24dp"
+        android:background="@drawable/textbox"
+        android:ems="0"
+        android:gravity="start"
+        android:hint="Article Content"
+        android:paddingTop="12dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/articlePicTextBox" />
 
     <Button
-        android:id="@+id/addCardBtn"
+        android:id="@+id/articlePostBtn"
+        android:contentDescription="@string/post_article"
         style="@style/primaryBtn"
         android:layout_width="200dp"
-        android:layout_height="wrap_content"
+        android:layout_height="54dp"
         android:layout_marginTop="600dp"
-        android:text="Add Card"
+        android:text="Post it!"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

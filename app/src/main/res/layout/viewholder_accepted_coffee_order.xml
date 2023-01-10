@@ -36,11 +36,11 @@
 
     <TextView
         android:id="@+id/orderCustomerName"
+        style="@style/c2"
         android:layout_width="wrap_content"
         android:layout_height="16dp"
         android:text="Customer Name"
-        style="@style/c2"
-        android:textSize="8dp"
+        android:textSize="8sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/orderCoffeeName" />

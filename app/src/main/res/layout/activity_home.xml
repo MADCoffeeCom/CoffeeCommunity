@@ -38,6 +38,7 @@
 
                 <ImageButton
                     android:id="@+id/BtnCart"
+                    android:contentDescription="@string/view_cart"
                     android:layout_width="48dp"
                     android:layout_height="48dp"
                     android:layout_marginEnd="16dp"

@@ -4,93 +4,94 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragment.FeedbackFragment">
+    tools:context=".fragment.ApplicationDetailsFragment">
 
     <ImageButton
-        android:id="@+id/backBtn"
+        android:id="@+id/applicationDetailsBckBtn"
+        android:tint="@color/white"
         android:contentDescription="@string/back"
         android:layout_width="48dp"
         android:layout_height="48dp"
         android:layout_marginTop="24dp"
         android:background="@color/transparent"
-        android:tint="@color/white"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/ic_back" />
 
     <TextView
-        android:id="@+id/feedbackText"
+        android:id="@+id/applicationDetailsText"
         style="@style/h1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
-        android:text="Feedback"
-        app:layout_constraintStart_toEndOf="@+id/backBtn"
+        android:text="Application"
+        app:layout_constraintStart_toEndOf="@+id/applicationDetailsBckBtn"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textView39"
+        android:id="@+id/applicantNameText"
         style="@style/h2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:layout_marginTop="24dp"
-        android:text="Rate our apps!"
+        android:text="Applicant Name"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/backBtn" />
+        app:layout_constraintTop_toBottomOf="@+id/applicationDetailsBckBtn" />
 
     <TextView
-        android:id="@+id/textView38"
-        style="@style/h2"
+        android:id="@+id/applicantExperienceText"
+        style="@style/c5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="40dp"
-        android:text="Feedback to us!"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/feedbackRatingBar" />
+        android:layout_marginStart="5dp"
+        android:text="1 years"
+        app:layout_constraintBottom_toBottomOf="@+id/textview51"
+        app:layout_constraintStart_toEndOf="@+id/textview51" />
 
-    <RatingBar
-        android:id="@+id/feedbackRatingBar"
-        android:contentDescription="@string/rate_app"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="8dp"
-        android:stepSize="1"
-        android:theme="@style/RatingBar"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView39" />
-
-    <Button
-        android:id="@+id/feedbackSubmitBtn"
-        style="@style/primaryBtn"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="600dp"
-        android:text="Submit"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <EditText
-        android:id="@+id/feedbackTextBox"
-        style="@style/defaultTextBox"
+    <TextView
+        android:id="@+id/applicantBackgroundText"
+        style="@style/c1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="24dp"
-        android:background="@drawable/textbox"
-        android:ems="10"
-        android:gravity="start"
-        android:hint="Write here..."
-        android:inputType="textPersonName"
-        android:paddingTop="12dp"
-        android:paddingBottom="12dp"
+        android:text="TextView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView38"
-        tools:inputType="textMultiLine" />
+        app:layout_constraintTop_toBottomOf="@+id/textview51" />
 
+    <TextView
+        android:id="@+id/textview51"
+        style="@style/c5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Years of Experience:"
+        app:layout_constraintStart_toStartOf="@+id/applicantNameText"
+        app:layout_constraintTop_toBottomOf="@+id/applicantNameText" />
+
+    <Button
+        android:id="@+id/acceptApplyBtn"
+        style="@style/primaryBtn"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="600dp"
+        android:text="Accept"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/declineApplyBtn"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/declineApplyBtn"
+        style="@style/secondaryBtn"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="600dp"
+        android:text="Decline"
+        app:layout_constraintEnd_toStartOf="@+id/acceptApplyBtn"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
