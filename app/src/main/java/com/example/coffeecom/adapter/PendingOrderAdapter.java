@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -45,7 +46,7 @@ public class PendingOrderAdapter extends RecyclerView.Adapter<PendingOrderAdapte
         private ImageButton acceptOrderBtn, declineOrderBtn;
         private ConstraintLayout coffeeOrderLayout;
 
-        public ViewHolder(@NonNull View itemView, int viewTypex) {
+        public ViewHolder(@NonNull View itemView, int viewType) {
             super(itemView);
 
             coffeeOrderLayout= itemView.findViewById(R.id.coffeeOrderLayout);
@@ -102,12 +103,14 @@ public class PendingOrderAdapter extends RecyclerView.Adapter<PendingOrderAdapte
                 holder.acceptOrderBtn.setOnClickListener(view -> {
                     Provider.getUser().getBrewedOrder().get(position).setOrderStatus("A");
                     updateOrderStatus(brewedOrder.get(position).getOrderStatus(), brewedOrder.get(position).getOrderId());
+                    Toast.makeText(view.getContext(), "Accepted", Toast.LENGTH_SHORT).show();
                     notifyDataSetChanged();
                 });
 
                 holder.declineOrderBtn.setOnClickListener(view -> {
                     Provider.getUser().getBrewedOrder().get(position).setOrderStatus("D");
                     updateOrderStatus(brewedOrder.get(position).getOrderStatus(), brewedOrder.get(position).getOrderId());
+                    Toast.makeText(view.getContext(), "Declined", Toast.LENGTH_SHORT).show();
                     notifyDataSetChanged();
                 });
             }
