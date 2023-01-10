@@ -91,16 +91,16 @@ public class MapsFragment extends Fragment {
                 @Override
                 public void onLocationResult(@NonNull LocationResult locationResult) {
                     super.onLocationResult(locationResult);
-                    Toast.makeText(getActivity().getApplicationContext(), "Location result is=" + locationResult, Toast.LENGTH_LONG).show();
+//                    Toast.makeText(getActivity().getApplicationContext(), "Location result is=" + locationResult, Toast.LENGTH_LONG).show();
 
                     if (locationResult == null){
-                        Toast.makeText(getActivity().getApplicationContext(), "Current location is null", Toast.LENGTH_LONG).show();
+//                        Toast.makeText(getActivity().getApplicationContext(), "Current location is null", Toast.LENGTH_LONG).show();
                         return;
 
                     }
                     for(Location location:locationResult.getLocations()){
                         if (location != null){
-                            Toast.makeText(getActivity().getApplicationContext(), "Location result is=" + location.getLongitude(), Toast.LENGTH_LONG).show();
+//                            Toast.makeText(getActivity().getApplicationContext(), "Location result is=" + location.getLongitude(), Toast.LENGTH_LONG).show();
                         }
                     }
                 }

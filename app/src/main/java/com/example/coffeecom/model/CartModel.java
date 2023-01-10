@@ -12,6 +12,7 @@ public class CartModel {
     private BaristaModel barista;
     private String baristaAddress;
     private ArrayList<CartCardModel> cartCardModelsList;
+    private double totalPrice =0;
 
 
     public CartModel(BaristaModel barista, ArrayList<CartCardModel> cartCardModelsList) {
@@ -46,6 +47,14 @@ public class CartModel {
 
     public void setCartCardModelsList(ArrayList<CartCardModel> cartCardModelsList) {
         this.cartCardModelsList = cartCardModelsList;
+    }
+
+    public double getTotalPrice() {
+        return totalPrice;
+    }
+
+    public void setTotalPrice(double totalPrice) {
+        this.totalPrice = totalPrice;
     }
 
     public void replaceSecondToFirst(){

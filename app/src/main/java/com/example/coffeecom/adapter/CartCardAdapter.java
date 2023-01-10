@@ -18,6 +18,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.coffeecom.Provider;
 import com.example.coffeecom.R;
+import com.example.coffeecom.activity.BottomNavigationActivity;
 import com.example.coffeecom.fragment.BaristaListFragment;
 import com.example.coffeecom.fragment.CoffeeCartFragment;
 import com.example.coffeecom.fragment.CoffeeDetailsFragment;
@@ -30,6 +31,8 @@ import com.vishnusivadas.advanced_httpurlconnection.PutData;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.Callable;
+import java.util.concurrent.CompletableFuture;
 
 public class CartCardAdapter extends RecyclerView.Adapter<CartCardAdapter.ViewHolder> {
     private ArrayList<CartCardModel> cartCardModelList;
@@ -159,6 +162,7 @@ public class CartCardAdapter extends RecyclerView.Adapter<CartCardAdapter.ViewHo
                         for(CartCardModel cc : cm.getCartCardModelsList()){
                             if (cc.getCoffeeId().equals(coffeeId)){
                                 if (cm.getCartCardModelsList().get(0).equals(cc)){
+
                                     cm.replaceSecondToFirst();
                                     notifyDataSetChanged();
                                 }
@@ -171,6 +175,12 @@ public class CartCardAdapter extends RecyclerView.Adapter<CartCardAdapter.ViewHo
                         }
                     }
                     notifyDataSetChanged();
+                    try {
+                        CompletableFuture.supplyAsync(() -> new CoffeeCartFragment.initializeCartTotalPrice()).join().call();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+//                    ((BottomNavigationActivity)context).replaceFragment(new CoffeeCartFragment());
                 }
                 else{
                     data[2] = Integer.toString(amount-1);
@@ -197,6 +207,13 @@ public class CartCardAdapter extends RecyclerView.Adapter<CartCardAdapter.ViewHo
                         }
                     }
                     notifyDataSetChanged();
+                    try {
+                        CompletableFuture.supplyAsync(() -> new CoffeeCartFragment.initializeCartTotalPrice()).join().call();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+
+//                    ((BottomNavigationActivity)context).replaceFragment(new CoffeeCartFragment());
                     //End Write and Read data with URL
                 }
             }});

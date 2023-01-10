@@ -12,7 +12,6 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -23,6 +22,8 @@ import com.example.coffeecom.activity.BottomNavigationActivity;
 import com.example.coffeecom.adapter.BaristaCardAdapter;
 import com.example.coffeecom.adapter.CoffeeTypeAdapter;
 import com.example.coffeecom.model.BaristaModel;
+import com.example.coffeecom.model.CartCardModel;
+import com.example.coffeecom.model.CartModel;
 import com.example.coffeecom.model.CoffeeModel;
 import com.example.coffeecom.query.QueryBankCard;
 import com.example.coffeecom.query.QueryBrewedCoffee;
@@ -34,6 +35,9 @@ import com.vishnusivadas.advanced_httpurlconnection.FetchData;
 import com.vishnusivadas.advanced_httpurlconnection.PutData;
 
 import java.util.ArrayList;
+import java.util.concurrent.Callable;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutionException;
 
 
 public class HomeActivityFragment extends Fragment {
@@ -51,7 +55,6 @@ public class HomeActivityFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
         Provider.getBaristas().clear();
         Provider.getCoffees().clear();
         baristas.clear();
@@ -288,6 +291,7 @@ public class HomeActivityFragment extends Fragment {
         baristaAdapter = new BaristaCardAdapter(baristas,getActivity());
         recyclerViewBaristaList.setAdapter(baristaAdapter);
     }
+
 
 
 }

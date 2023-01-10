@@ -41,4 +41,34 @@ public class QueryWallet {
         });
     }
 
+    public static void updateWallet() {
+        Log.i(TAG, "queryWallet: Run here once");
+
+        Handler handler = new Handler(Looper.getMainLooper());
+        handler.post(new Runnable() {
+            @Override
+            public void run() {
+                String[] field = new String[2];
+                field[0] = "walletBalance";
+                field[1] = "userId";
+
+                String[] data = new String[2];
+                data[0] = Double.toString(Provider.getUser().getWalletBalance());
+                data[1] = Provider.getUser().getUserId();
+
+                PutData putData = new PutData("http://" + Provider.getIpAddress() + "/CoffeeCommunityPHP/updatewallet.php", "POST", field, data);
+                if (putData.startPut()) {
+                    if (putData.onComplete()) {
+                        String result = putData.getResult();
+                        if (result.equals("Update Success")){
+                            //if condition
+                        }else{
+
+                        };
+                    }
+                }
+            }
+        });
+    }
+
 }

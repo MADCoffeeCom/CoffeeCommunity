@@ -44,6 +44,7 @@ public class Provider{
     private static String currentArticleId;
     private static ProfileModel user;
     private static String ipAddress;
+    private static double cartTotalPrice =0;
 
     public static String getLocalIpAddress() {
         try {
@@ -74,7 +75,17 @@ public class Provider{
         return ipAddress;
     }
 
+    public static double getCartTotalPrice() {
+        return cartTotalPrice;
+    }
 
+    public static void setCartTotalPrice(double cartTotalPrice) {
+        Provider.cartTotalPrice = cartTotalPrice;
+    }
+
+    public static void addCartTotalPrice(double ctp){
+        cartTotalPrice = cartTotalPrice + ctp;
+    }
 
     public static ArrayList<CoffeeModel> getCoffees() {
         return coffees;
@@ -115,6 +126,15 @@ public class Provider{
 
     public static String getCurrentBaristaId() {
         return currentBaristaId;
+    }
+
+    public static BaristaModel getCurrentBarista(String baristaId){
+        for (BaristaModel bm : baristas){
+            if (bm.getBaristaId().equals(baristaId)){
+                return bm;
+                }
+            }
+        return null;
     }
 
     public static void setCurrentBaristaId(String newBarista) {
