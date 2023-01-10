@@ -19,6 +19,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.coffeecom.Provider;
 import com.example.coffeecom.R;
 import com.example.coffeecom.activity.BottomNavigationActivity;
@@ -34,6 +35,7 @@ import com.vishnusivadas.advanced_httpurlconnection.PutData;
 public class CoffeeDetailsFragment extends Fragment {
 
     private ImageView coffeeDetailsBackBtn;
+    private ImageView coffeeImage;
     private TextView coffeeDetailsNameText, baristaNameCoffeeDetailsText, baristaLocationCoffeeDetailsText, ingredientText;
     private TextView coffeeDescCoffeeDetailsText;
     private TextView noRatingText;
@@ -115,6 +117,9 @@ public class CoffeeDetailsFragment extends Fragment {
             }
         });
 
+        int drawableResourceId = getContext().getResources().getIdentifier(currentCoffee.getCoffeePic(), "drawable", getContext().getPackageName());
+        Glide.with(getContext()).load(drawableResourceId).into(coffeeImage);
+
         addToCartBtnCoffeeDetails.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -176,6 +181,8 @@ public class CoffeeDetailsFragment extends Fragment {
         coffeeDetailsBackBtn = view.findViewById(R.id.coffeeDetailsBackBtn);
 
         ratingRecyclerView = view.findViewById(R.id.ratingRecyclerView);
+        coffeeImage = view.findViewById(R.id.coffeeDetailsPic);
+
     }
 
 
