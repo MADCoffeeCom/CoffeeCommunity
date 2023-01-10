@@ -1,7 +1,10 @@
 package com.example.coffeecom.activity;
 
+import static java.security.AccessController.getContext;
+
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -18,11 +21,15 @@ import android.widget.Toast;
 
 import com.example.coffeecom.Provider;
 import com.example.coffeecom.R;
+import com.example.coffeecom.fragment.HomeActivityFragment;
+import com.example.coffeecom.helper.QueryHomePage;
 import com.example.coffeecom.model.ProfileModel;
 import com.vishnusivadas.advanced_httpurlconnection.PutData;
 
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.concurrent.Callable;
+import java.util.concurrent.CompletableFuture;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -94,7 +101,12 @@ public class LoginActivity extends AppCompatActivity {
     //username: abang
     //password: abang
     public void validateLogin(){
-
+        ProgressDialog pd = new ProgressDialog(LoginActivity.this);
+        pd.setMessage("Please wait");
+        pd.setCancelable(false);
+        pd.setInverseBackgroundForced(false);
+        pd.create();
+        pd.show();
         if (!passwordTextView.getText().toString().equals("") && !username.getText().toString().equals("")) {
             try {
                 Handler handler = new Handler(Looper.getMainLooper());
@@ -135,13 +147,32 @@ public class LoginActivity extends AppCompatActivity {
                                     if(Provider.getUser().getUserId().equals("UID_admin")){
                                         intent = new Intent(getApplicationContext(), AdminBottomNavigationActivity.class);
                                     }else{
+                                        CompletableFuture cf = null;
+
+                                        Provider.setWaitingState(true);
+                                        pd.show();
+                                        try {
+
+                                            Provider.getBaristas().clear();
+                                            Provider.getCoffees().clear();
+                                            cf.supplyAsync(() -> new HomeActivityFragment.QueryWaiterHomePage()).join().call();
+                                        } catch (Exception e) {
+                                            e.printStackTrace();
+                                        }
+
+
+
                                         intent = new Intent(getApplicationContext(), BottomNavigationActivity.class);
                                     }
+
                                     startActivity(intent);
+
                                     finish();
+                                    pd.dismiss();
                                 }else{
-                                    Log.d("myTag", result + data[1]);
+                                    Log.d("myTag", result);
                                     Toast.makeText(getApplicationContext(),result,Toast.LENGTH_SHORT).show();
+                                    pd.dismiss();
                                 }
                                 //End ProgressBar (Set visibility to GONE)
                             }
@@ -164,5 +195,22 @@ public class LoginActivity extends AppCompatActivity {
     public URL convertToUrl(String str) throws MalformedURLException {
         URL url = new URL(str );
         return url;
+    }
+
+    public static class QueryWaiterHomePage implements Callable<Void> {
+        @Override
+        public Void call() throws Exception {
+            QueryHomePage.queryHomepage();
+            return null;
+        }
+    }
+
+    public static class ChangeWaitingState implements Callable<Void>{
+        @Override
+        public Void call() throws Exception {
+            Log.i("waiting","Waiting is done");
+            Provider.setWaitingState(false);
+            return null;
+        }
     }
 }

@@ -11,7 +11,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.coffeecom.R;
-import com.example.coffeecom.query.QueryProfile;
+import com.example.coffeecom.query.UpdatePassword;
 
 public class EnterNewPasswordActivity extends AppCompatActivity {
 
@@ -39,7 +39,7 @@ public class EnterNewPasswordActivity extends AppCompatActivity {
                 String cpassword = "" + confirmPasswordTextBox.getText();
 
                 if(password.equals(cpassword)){
-                    QueryProfile.updatePassword(email, password);
+                    UpdatePassword.updatePassword(email, password);
                     Toast.makeText(EnterNewPasswordActivity.this, "Password update successfully!", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(EnterNewPasswordActivity.this, LoginActivity.class);
                     startActivity(intent);
