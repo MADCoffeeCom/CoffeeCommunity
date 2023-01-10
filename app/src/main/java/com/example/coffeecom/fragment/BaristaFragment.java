@@ -24,6 +24,7 @@ import com.example.coffeecom.adapter.SellingCoffeeAdapter;
 import com.example.coffeecom.model.BrewedOrderModel;
 import com.example.coffeecom.model.CoffeeModel;
 import com.example.coffeecom.model.OrderedCoffeeModel;
+import com.example.coffeecom.query.QueryBrewedCoffee;
 import com.vishnusivadas.advanced_httpurlconnection.FetchData;
 import com.vishnusivadas.advanced_httpurlconnection.PutData;
 
@@ -53,6 +54,7 @@ public class BaristaFragment extends Fragment {
                              Bundle savedInstanceState) {
         coffeeTitle.clear();
         coffeePic.clear();
+//        QueryBrewedCoffee.queryOrder();
         Log.i(TAG, "onCreateView: Run here once");
         View view = inflater.inflate(R.layout.activity_barista,container,false);
 
@@ -124,20 +126,20 @@ public class BaristaFragment extends Fragment {
     }
 
     public void recyclerViewPendingOrder() {
-        ArrayList<BrewedOrderModel> order = new ArrayList<>();
+        Provider.getOrder().clear();
         for (int i = 0; i < Provider.getUser().getBrewedOrder().size(); i++) {
-            if (Provider.getUser().getBrewedOrder().get(i).getOrderStatus().equals("P")){
-                order.add(Provider.getUser().getBrewedOrder().get(i));
+            if (Provider.getUser().getBrewedOrder().get(i).getOrderStatus().equals("P")||Provider.getUser().getBrewedOrder().get(i).getOrderStatus().equals("A")){
+                Provider.getOrder().add(Provider.getUser().getBrewedOrder().get(i));
             }
         }
 
-        if(order.isEmpty()){
+        if(Provider.getOrder().isEmpty()){
             noOrderErrorText.setVisibility(View.VISIBLE);
         }else{
             LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
             pendingOrderRecycleView.setLayoutManager(linearLayoutManager);
 
-            pendingOrderRecycleViewAdapter = new PendingOrderAdapter(Provider.getUser().getBrewedOrder(), getActivity());
+            pendingOrderRecycleViewAdapter = new PendingOrderAdapter(Provider.getOrder(), getActivity());
             pendingOrderRecycleView.setAdapter(pendingOrderRecycleViewAdapter);
         }
     }

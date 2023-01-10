@@ -10,6 +10,7 @@ import android.util.Log;
 import com.example.coffeecom.model.ApplicationModel;
 import com.example.coffeecom.model.ArticleModel;
 import com.example.coffeecom.model.BaristaModel;
+import com.example.coffeecom.model.BrewedOrderModel;
 import com.example.coffeecom.model.CartCardModel;
 import com.example.coffeecom.model.CartModel;
 import com.example.coffeecom.model.CoffeeModel;
@@ -40,6 +41,7 @@ public class Provider{
     private static ArrayList<String> baristaIdInCart = new ArrayList<>();
     private static ArrayList<TransactionModel> transactions = new ArrayList<>();
     private static ArrayList<CartModel> cartModelList = new ArrayList<>();
+    private static ArrayList<BrewedOrderModel> order = new ArrayList<>();
     private static ArrayList<ApplicationModel> application = new ArrayList<>();
     private static ArrayList<ReportedPostModel> reportedPosts = new ArrayList<>();
 
@@ -48,7 +50,7 @@ public class Provider{
     private static String currentCoffeeId;
     private static String currentArticleId;
     private static ProfileModel user;
-    private static String ipAddress = "192.168.100.11";
+    private static String ipAddress = "192.168.100.38";
 //    private static String ipAddress = "coffeecommunityapp.000webhostapp.com";
     private static double cartTotalPrice =0;
     private static boolean waitingState = false;
@@ -78,12 +80,16 @@ public class Provider{
         Provider.ipAddress = ipAddress;
     }
 
-    public static boolean isWaitingState() {
-        return waitingState;
+    public static ArrayList<BrewedOrderModel> getOrder() {
+        return order;
     }
 
-    public static void setWaitingState(boolean waitingState) {
-        Provider.waitingState = waitingState;
+    public static void setOrder(ArrayList<BrewedOrderModel> order) {
+        Provider.order = order;
+    }
+
+    public static void addOrder(BrewedOrderModel BrewedOrder){
+        order.add(BrewedOrder);
     }
 
     public static String getIpAddress() {
