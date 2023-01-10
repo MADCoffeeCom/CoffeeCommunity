@@ -66,4 +66,6 @@ public class LoginOrSignupActivity extends AppCompatActivity {
         startActivity(intent);
         finish();
     }
+
+
 }

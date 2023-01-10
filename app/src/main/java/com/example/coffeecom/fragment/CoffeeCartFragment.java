@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -16,8 +17,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -51,10 +54,13 @@ public class CoffeeCartFragment extends Fragment {
     private RadioButton paymentBtn1;
     private RadioButton paymentBtn2;
     private ImageView coffeeCartBckBtn;
+    private ConstraintLayout cl1;
+    private ConstraintLayout cl2;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-
+        RadioGroup group = new RadioGroup(getContext());
         Provider.getCartModelList().clear();
         cartModelList = Provider.getCartModelList();
         View rootView = inflater.inflate(R.layout.fragment_coffee_cart, container, false);
@@ -67,6 +73,26 @@ public class CoffeeCartFragment extends Fragment {
         coffeeWalletAmountText = rootView.findViewById((R.id.coffeeWalletAmountText));
         paymentBtn1 = rootView.findViewById(R.id.coffeeBalanceRadioBtn);
         paymentBtn2 = rootView.findViewById(R.id.creditDebitRadioBtn);
+        cl1 = rootView.findViewById(R.id.cl1);
+        cl2 = rootView.findViewById(R.id.cl2);
+
+        paymentBtn1.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if (paymentBtn1.isChecked()){
+                    paymentBtn2.setChecked(false);
+                }
+            }
+        });
+
+        paymentBtn2.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if (paymentBtn2.isChecked()){
+                    paymentBtn1.setChecked(false);
+                }
+            }
+        });
 
         try{
             coffeeWalletAmountText.setText(String.format("%.2f", Provider.getUser().getWalletBalance()));

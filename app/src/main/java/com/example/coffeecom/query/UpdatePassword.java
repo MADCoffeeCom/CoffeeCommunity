@@ -7,7 +7,7 @@ import android.util.Log;
 import com.example.coffeecom.Provider;
 import com.vishnusivadas.advanced_httpurlconnection.PutData;
 
-public class QueryProfile {
+public class UpdatePassword {
 
     private static final String TAG = "QueryProfile";
 
