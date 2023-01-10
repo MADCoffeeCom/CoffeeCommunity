@@ -16,6 +16,8 @@ import com.example.coffeecom.R;
 import com.example.coffeecom.fragment.ApplicationFragment;
 import com.example.coffeecom.fragment.LearnActivityFragment;
 import com.example.coffeecom.fragment.ProfileMainFragment;
+import com.example.coffeecom.fragment.ReportedBaristaFragment;
+import com.example.coffeecom.fragment.ReportedPostFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 
@@ -36,7 +38,9 @@ public class AdminBottomNavigationActivity extends AppCompatActivity {
 
         ApplicationFragment application = new ApplicationFragment();
         LearnActivityFragment learn = new LearnActivityFragment();
-        ProfileMainFragment profile = new ProfileMainFragment();
+        ReportedBaristaFragment reportedBarista = new ReportedBaristaFragment();
+        ReportedPostFragment reportedPost = new ReportedPostFragment();
+
 
         manager = getSupportFragmentManager();
         manager.beginTransaction().replace(container, application).commit();
@@ -51,6 +55,12 @@ public class AdminBottomNavigationActivity extends AppCompatActivity {
                         break;
                     case R.id.nvLearnHome:
                         replaceMainFragment(learn, item);
+                        break;
+                    case R.id.nvReportedBarista:
+                        replaceMainFragment(reportedBarista, item);
+                        break;
+                    case R.id.nvReportedPost:
+                        replaceMainFragment(reportedPost, item);
                         break;
                     case R.id.nvProfileHome:
                         Intent myIntent = new Intent(AdminBottomNavigationActivity.this, LoginOrSignupActivity.class);
@@ -70,7 +80,7 @@ public class AdminBottomNavigationActivity extends AppCompatActivity {
         if (count == 0) {
             super.onBackPressed();
         } else if (count == 1){
-            btmNavBar.setVisibility(View.VISIBLE);
+//            btmNavBar.setVisibility(View.VISIBLE);
             getSupportFragmentManager().popBackStack();
         } else {
             getSupportFragmentManager().popBackStack();
@@ -80,11 +90,11 @@ public class AdminBottomNavigationActivity extends AppCompatActivity {
     public void replaceMainFragment (Fragment fragment, MenuItem item){
         replaceFragment(fragment);
         item.setChecked(true);
-        btmNavBar.setVisibility(View.VISIBLE);
+//        btmNavBar.setVisibility(View.VISIBLE);
     }
 
     public void replaceFragment (Fragment fragment){
-        btmNavBar.setVisibility(View.GONE);
+//        btmNavBar.setVisibility(View.GONE);
 
         String backStateName = fragment.getClass().getName();
         boolean fragmentPopped = manager.popBackStackImmediate (backStateName, 0);
@@ -105,7 +115,7 @@ public class AdminBottomNavigationActivity extends AppCompatActivity {
     }
 
     public void replaceFragmentWithData (Fragment fragment, Bundle bundle){
-        btmNavBar.setVisibility(View.GONE);
+//        btmNavBar.setVisibility(View.GONE);
 
         String backStateName = fragment.getClass().getName();
         fragment.setArguments(bundle);

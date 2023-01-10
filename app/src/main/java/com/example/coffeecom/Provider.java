@@ -16,6 +16,7 @@ import com.example.coffeecom.model.CoffeeModel;
 import com.example.coffeecom.model.HelpdeskModel;
 import com.example.coffeecom.model.PostModel;
 import com.example.coffeecom.model.ProfileModel;
+import com.example.coffeecom.model.ReportedPostModel;
 import com.example.coffeecom.model.TransactionModel;
 
 import java.net.Inet4Address;
@@ -40,6 +41,8 @@ public class Provider{
     private static ArrayList<TransactionModel> transactions = new ArrayList<>();
     private static ArrayList<CartModel> cartModelList = new ArrayList<>();
     private static ArrayList<ApplicationModel> application = new ArrayList<>();
+    private static ArrayList<ReportedPostModel> reportedPosts = new ArrayList<>();
+
     private static String currentCoffeeType;
     private static String currentBaristaId;
     private static String currentCoffeeId;
@@ -213,5 +216,13 @@ public class Provider{
 
     public static void addApplication(ApplicationModel app) {
         Provider.application.add(app);
+    }
+
+    public static ArrayList<ReportedPostModel> getReportedPosts() {
+        return reportedPosts;
+    }
+
+    public static void addReportedPosts(ReportedPostModel reportedPost) {
+        Provider.reportedPosts.add(reportedPost);
     }
 }

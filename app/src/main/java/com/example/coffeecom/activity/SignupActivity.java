@@ -99,7 +99,7 @@ public class SignupActivity extends AppCompatActivity {
         }
         else{
             Log.d("myTag", "errrrrror");
-            Toast.makeText(this, "Register Bruh", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Please fill in all the details", Toast.LENGTH_SHORT).show();
 
         }
 //

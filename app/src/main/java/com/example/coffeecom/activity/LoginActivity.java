@@ -156,7 +156,7 @@ public class LoginActivity extends AppCompatActivity {
         }
         else{
             Log.d("myTag", "errrrrror");
-            Toast.makeText(this, "Login Bruh", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Please fill in all the details", Toast.LENGTH_SHORT).show();
 
         }
     }

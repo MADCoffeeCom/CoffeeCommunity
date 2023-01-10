@@ -63,7 +63,7 @@ public class ApplicationDetailsFragment extends Fragment {
             QueryApplication.declineApplication(currentApplicant.getApplicaitonId());
             QueryApplication.queryApplication();
             getActivity().onBackPressed();
-            Toast.makeText(getContext(), "Accepted!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), "Decline!", Toast.LENGTH_SHORT).show();
         });
 
         return view;

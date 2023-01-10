@@ -3,23 +3,23 @@
 
     <item
         android:id="@+id/nvBuyCoffeeHome"
-        android:icon="@drawable/nv_buy_coffee_home_black"
-        android:title="" />
+        android:icon="@drawable/nv_barista_home_black"
+        android:title="Buy Coffee" />
     <item
         android:id="@+id/nvBaristaHome"
-        android:title=""
-        android:icon="@drawable/nv_barista_home_black"/>
+        android:title="Barista"
+        android:icon="@drawable/nv_buy_coffee_home_black"/>
     <item
         android:id="@+id/nvLearnHome"
-        android:title=""
+        android:title="Learn"
         android:icon="@drawable/nv_learn_home_black"/>
     <item
         android:id="@+id/nvCommunityHome"
-        android:title=""
+        android:title="Community"
         android:icon="@drawable/nv_community_home_black"/>
     <item
         android:id="@+id/nvProfileHome"
-        android:title=""
+        android:title="Profile"
         android:icon="@drawable/nv_profile_home_black"/>
 
 

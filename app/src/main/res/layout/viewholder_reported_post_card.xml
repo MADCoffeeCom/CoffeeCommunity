@@ -69,13 +69,4 @@
         app:layout_constraintBottom_toBottomOf="@+id/textview51"
         app:layout_constraintStart_toEndOf="@+id/textview51" />
 
-    <ImageButton
-        android:id="@+id/deletePostBtn"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:background="@color/transparent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="@drawable/ic_delete" />
-
 </androidx.constraintlayout.widget.ConstraintLayout>
