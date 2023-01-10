@@ -149,7 +149,7 @@ public class LoginActivity extends AppCompatActivity {
                                     }else{
                                         CompletableFuture cf = null;
 
-                                        Provider.setWaitingState(true);
+//                                        Provider.setWaitingState(true);
                                         pd.show();
                                         try {
 
@@ -209,7 +209,7 @@ public class LoginActivity extends AppCompatActivity {
         @Override
         public Void call() throws Exception {
             Log.i("waiting","Waiting is done");
-            Provider.setWaitingState(false);
+//            Provider.setWaitingState(false);
             return null;
         }
     }

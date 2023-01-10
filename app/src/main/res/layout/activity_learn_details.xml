@@ -22,6 +22,7 @@
     <ImageButton
         android:id="@+id/learnDetailsBckBtn"
         android:contentDescription="@string/back"
+        android:elevation="8dp"
         android:layout_width="48dp"
         android:layout_height="48dp"
         android:layout_marginTop="24dp"
@@ -35,6 +36,7 @@
         style="@style/h1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:elevation="8dp"
         android:layout_marginStart="24dp"
         android:text="learn title"
         android:textColor="@color/pure_white"
@@ -47,6 +49,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
+        android:elevation="8dp"
         android:layout_marginTop="200dp"
         android:text="learn type"
         android:textColor="@color/pure_white"

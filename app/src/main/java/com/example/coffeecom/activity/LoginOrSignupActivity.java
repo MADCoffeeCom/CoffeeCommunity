@@ -58,13 +58,13 @@ public class LoginOrSignupActivity extends AppCompatActivity {
     public void openLoginActivity(){
         Intent intent = new Intent(this, LoginActivity.class);
         startActivity(intent);
-        finish();
+//        finish();
     }
 
     public void openRegisterActivity(){
         Intent intent = new Intent(this, SignupActivity.class);
         startActivity(intent);
-        finish();
+//        finish();
     }
 
 

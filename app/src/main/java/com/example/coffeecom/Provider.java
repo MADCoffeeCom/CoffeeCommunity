@@ -78,14 +78,6 @@ public class Provider{
         Provider.ipAddress = ipAddress;
     }
 
-    public static boolean isWaitingState() {
-        return waitingState;
-    }
-
-    public static void setWaitingState(boolean waitingState) {
-        Provider.waitingState = waitingState;
-    }
-
     public static String getIpAddress() {
         return ipAddress;
     }
