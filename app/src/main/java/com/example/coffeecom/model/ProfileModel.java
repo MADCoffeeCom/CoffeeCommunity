@@ -31,6 +31,8 @@ public class ProfileModel {
     private ArrayList<BrewedOrderModel> brewedOrder = new ArrayList<>();
     private ArrayList<CartCardModel> cartItem = new ArrayList<>();
 
+
+
     public ProfileModel(String a) {
         this.userId = a;
     }

@@ -10,6 +10,7 @@ import android.util.Log;
 import com.example.coffeecom.model.ApplicationModel;
 import com.example.coffeecom.model.ArticleModel;
 import com.example.coffeecom.model.BaristaModel;
+import com.example.coffeecom.model.BrewedOrderModel;
 import com.example.coffeecom.model.CartCardModel;
 import com.example.coffeecom.model.CartModel;
 import com.example.coffeecom.model.CoffeeModel;
@@ -40,6 +41,7 @@ public class Provider{
     private static ArrayList<String> baristaIdInCart = new ArrayList<>();
     private static ArrayList<TransactionModel> transactions = new ArrayList<>();
     private static ArrayList<CartModel> cartModelList = new ArrayList<>();
+    private static ArrayList<BrewedOrderModel> order = new ArrayList<>();
     private static ArrayList<ApplicationModel> application = new ArrayList<>();
     private static ArrayList<ReportedPostModel> reportedPosts = new ArrayList<>();
 
@@ -76,6 +78,18 @@ public class Provider{
     public static void setIpAddress(String ipAddress) {
         Log.d("ipv4",ipAddress);
         Provider.ipAddress = ipAddress;
+    }
+
+    public static ArrayList<BrewedOrderModel> getOrder() {
+        return order;
+    }
+
+    public static void setOrder(ArrayList<BrewedOrderModel> order) {
+        Provider.order = order;
+    }
+
+    public static void addOrder(BrewedOrderModel BrewedOrder){
+        order.add(BrewedOrder);
     }
 
     public static String getIpAddress() {

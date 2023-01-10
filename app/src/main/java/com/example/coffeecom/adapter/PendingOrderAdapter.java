@@ -105,14 +105,16 @@ public class PendingOrderAdapter extends RecyclerView.Adapter<PendingOrderAdapte
 
             if(brewedOrder.get(position).getOrderStatus().equals("P")){
                 holder.acceptOrderBtn.setOnClickListener(view -> {
-                    Provider.getUser().getBrewedOrder().get(position).setOrderStatus("A");
+//                    Provider.getUser().getBrewedOrder().get(position).setOrderStatus("A");
+                    Provider.getOrder().get(position).setOrderStatus("A");
                     updateOrderStatus(brewedOrder.get(position).getOrderStatus(), brewedOrder.get(position).getOrderId());
                     Toast.makeText(view.getContext(), "Accepted", Toast.LENGTH_SHORT).show();
                     notifyDataSetChanged();
                 });
 
                 holder.declineOrderBtn.setOnClickListener(view -> {
-                    Provider.getUser().getBrewedOrder().get(position).setOrderStatus("D");
+//                    Provider.getUser().getBrewedOrder().get(position).setOrderStatus("D");
+                    Provider.getOrder().get(position).setOrderStatus("D");
                     updateOrderStatus(brewedOrder.get(position).getOrderStatus(), brewedOrder.get(position).getOrderId());
                     Toast.makeText(view.getContext(), "Declined", Toast.LENGTH_SHORT).show();
                     notifyDataSetChanged();
@@ -124,7 +126,7 @@ public class PendingOrderAdapter extends RecyclerView.Adapter<PendingOrderAdapte
                     @Override
                     public void onClick(View view) {
                         Bundle bundle = new Bundle();
-                        bundle.putString("orderId", Provider.getUser().getBrewedOrder().get(position).getOrderId());
+                        bundle.putString("orderId", Provider.getOrder().get(position).getOrderId());
                         ((BottomNavigationActivity)activity).replaceFragmentWithData(new PendingOrderFragment(), bundle);
                     }
                 });
