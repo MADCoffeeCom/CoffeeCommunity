@@ -240,4 +240,28 @@ public class QueryPost {
             }
         });
     }
+
+    public static void reportPost(String postId, String reason) {
+        Handler handler = new Handler(Looper.getMainLooper());
+        handler.post(new Runnable() {
+            @Override
+            public void run() {
+                String[] field = new String[2];
+                field[0] = "postId";
+                field[1] = "reason";
+
+                String[] data = new String[2];
+                data[0] = postId;
+                data[1] = reason;
+
+                PutData putData = new PutData("http://" + Provider.getIpAddress() + "/CoffeeCommunityPHP/reportpost.php", "POST", field, data);
+                if (putData.startPut()) {
+                    if (putData.onComplete()) {
+                        String result = putData.getResult();
+                        Log.i(TAG, "run: " + result);
+                    }
+                }
+            }
+        });
+    }
 }

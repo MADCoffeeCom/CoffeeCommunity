@@ -56,9 +56,9 @@ public class AdminBottomNavigationActivity extends AppCompatActivity {
                     case R.id.nvLearnHome:
                         replaceMainFragment(learn, item);
                         break;
-                    case R.id.nvReportedBarista:
-                        replaceMainFragment(reportedBarista, item);
-                        break;
+//                    case R.id.nvReportedBarista:
+//                        replaceMainFragment(reportedBarista, item);
+//                        break;
                     case R.id.nvReportedPost:
                         replaceMainFragment(reportedPost, item);
                         break;

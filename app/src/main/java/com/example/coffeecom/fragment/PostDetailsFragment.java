@@ -22,6 +22,7 @@ import com.example.coffeecom.Provider;
 import com.example.coffeecom.R;
 import com.example.coffeecom.activity.BottomNavigationActivity;
 import com.example.coffeecom.model.PostModel;
+import com.example.coffeecom.query.QueryPost;
 import com.vishnusivadas.advanced_httpurlconnection.PutData;
 
 public class PostDetailsFragment extends Fragment {
@@ -31,7 +32,7 @@ public class PostDetailsFragment extends Fragment {
     PostModel currentPost;
     ImageView postPic;
     TextView posterText, postDateText, postDescText, postVoteCountText;
-    ImageButton backBtn, postUpVoteBtn, postDownVoteBtn;
+    ImageButton backBtn, postUpVoteBtn, postDownVoteBtn, reportBtn;
 
     int currentPostIndex = 0;
     boolean isUpvoted = false;
@@ -67,6 +68,7 @@ public class PostDetailsFragment extends Fragment {
         backBtn = view.findViewById(R.id.backBtn);
         postUpVoteBtn = view.findViewById(R.id.postUpVoteBtn);
         postDownVoteBtn = view.findViewById(R.id.postDownVoteBtn);
+        reportBtn = view.findViewById(R.id.reportBtn);
     }
 
     private void onBind(View view) {
@@ -83,6 +85,15 @@ public class PostDetailsFragment extends Fragment {
         String picUrl = currentPost.getPostPic();
         int drawableResourceId = view.getContext().getResources().getIdentifier(picUrl, "drawable", view.getContext().getPackageName());
         Glide.with(view.getContext()).load(drawableResourceId).into(postPic);
+
+        reportBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Bundle bundle = new Bundle();
+                bundle.putString("postId", currentPost.getPostId());
+                ((BottomNavigationActivity)getActivity()).replaceFragmentWithData(new ReportPostFragment(),bundle);
+            }
+        });
 
         postUpVoteBtn.setOnClickListener(new View.OnClickListener() {
             @Override
