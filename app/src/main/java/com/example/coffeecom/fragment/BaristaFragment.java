@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
@@ -22,6 +23,7 @@ import com.example.coffeecom.adapter.PendingOrderAdapter;
 import com.example.coffeecom.adapter.SellingCoffeeAdapter;
 import com.example.coffeecom.model.BrewedOrderModel;
 import com.example.coffeecom.model.CoffeeModel;
+import com.example.coffeecom.model.OrderedCoffeeModel;
 import com.vishnusivadas.advanced_httpurlconnection.FetchData;
 import com.vishnusivadas.advanced_httpurlconnection.PutData;
 
@@ -34,7 +36,8 @@ public class BaristaFragment extends Fragment {
 
     private static final String TAG = "Barista";
 
-    private TextView noCoffeeSoldErrorText;
+    private TextView noCoffeeSoldErrorText, noOrderErrorText;
+    private ImageButton addSellingCoffeeBtn;
 
     RecyclerView pendingOrderRecycleView, coffeeSellingRecycleView;
     RecyclerView.Adapter pendingOrderRecycleViewAdapter, coffeeSellingRecycleViewAdapter;
@@ -54,13 +57,23 @@ public class BaristaFragment extends Fragment {
         View view = inflater.inflate(R.layout.activity_barista,container,false);
 
         noCoffeeSoldErrorText = view.findViewById(R.id.noCoffeeSoldErrorText);
+        noOrderErrorText = view.findViewById(R.id.noOrderErrorText);
+        addSellingCoffeeBtn = view.findViewById(R.id.addSellingCoffeeBtn);
         noCoffeeSoldErrorText.setVisibility(View.GONE);
+        noOrderErrorText.setVisibility(View.GONE);
 
         pendingOrderRecycleView = view.findViewById(R.id.pendingOrderRecycleView);
         coffeeSellingRecycleView = view.findViewById(R.id.coffeeSellingRecycleView);
 
         recyclerViewPendingOrder();
         querySellingCoffee();
+
+        addSellingCoffeeBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
 
         return view;
     }
@@ -111,11 +124,22 @@ public class BaristaFragment extends Fragment {
     }
 
     public void recyclerViewPendingOrder() {
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
-        pendingOrderRecycleView.setLayoutManager(linearLayoutManager);
+        ArrayList<BrewedOrderModel> order = new ArrayList<>();
+        for (int i = 0; i < Provider.getUser().getBrewedOrder().size(); i++) {
+            if (Provider.getUser().getBrewedOrder().get(i).getOrderStatus().equals("P")){
+                order.add(Provider.getUser().getBrewedOrder().get(i));
+            }
+        }
 
-        pendingOrderRecycleViewAdapter = new PendingOrderAdapter(Provider.getUser().getBrewedOrder(), getActivity());
-        pendingOrderRecycleView.setAdapter(pendingOrderRecycleViewAdapter);
+        if(order.isEmpty()){
+            noOrderErrorText.setVisibility(View.VISIBLE);
+        }else{
+            LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
+            pendingOrderRecycleView.setLayoutManager(linearLayoutManager);
+
+            pendingOrderRecycleViewAdapter = new PendingOrderAdapter(order, getActivity());
+            pendingOrderRecycleView.setAdapter(pendingOrderRecycleViewAdapter);
+        }
     }
 
     private void recyclerViewCoffeeType() {

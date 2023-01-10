@@ -6,79 +6,57 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 
 import com.example.coffeecom.R;
-import com.example.coffeecom.fragment.BaristaFragment;
-import com.example.coffeecom.fragment.CommunityFragment;
-import com.example.coffeecom.fragment.HomeActivityFragment;
+import com.example.coffeecom.fragment.ApplicationFragment;
 import com.example.coffeecom.fragment.LearnActivityFragment;
-import com.example.coffeecom.fragment.NewBaristaFragment;
 import com.example.coffeecom.fragment.ProfileMainFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 
-import java.util.ArrayList;
-
-/*
-This class is to let each activity and xml to copy and paste it to the corresponding activity
-since we are using activity so we need to do like this
-rmb to change the return true at each corresponding case
- */
-public class BottomNavigationActivity extends AppCompatActivity {
+public class AdminBottomNavigationActivity extends AppCompatActivity {
 
     private final String TAG = "BottomNavigationActivity";
     BottomNavigationView btmNavBar;
     int container = R.id.containerMainPage;
     FragmentManager manager;
 
-    ArrayList<String> mainScreen = new ArrayList<>();
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_bottom_navigation);
+        setContentView(R.layout.activity_admin_bottom_navigation);
 
         btmNavBar = findViewById(R.id.bottomNavigationView);
-        btmNavBar.setSelectedItemId(R.id.nvBuyCoffeeHome);
-        mainScreen.add("com.example.coffeecom.fragment.HomeActivityFragment");
-        mainScreen.add("com.example.coffeecom.fragment.BaristaFragment");
-        mainScreen.add("com.example.coffeecom.fragment.LearnActivityFragment");
-        mainScreen.add("com.example.coffeecom.fragment.CommunityFragment");
-        mainScreen.add("com.example.coffeecom.fragment.ProfileMainFragment");
+        btmNavBar.setSelectedItemId(R.id.nvApplication);
 
-        ProfileMainFragment profileMain = new ProfileMainFragment();
-        LearnActivityFragment learnMain = new LearnActivityFragment();
-        HomeActivityFragment homeMain = new HomeActivityFragment();
-        NewBaristaFragment newBaristaMain = new NewBaristaFragment();
-        BaristaFragment baristaMain = new BaristaFragment();
-        CommunityFragment communityMain = new CommunityFragment();
+        ApplicationFragment application = new ApplicationFragment();
+        LearnActivityFragment learn = new LearnActivityFragment();
+        ProfileMainFragment profile = new ProfileMainFragment();
 
         manager = getSupportFragmentManager();
-        manager.beginTransaction().replace(container, homeMain).commit();
+        manager.beginTransaction().replace(container, application).commit();
 
         btmNavBar.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId())
                 {
-                    case R.id.nvBuyCoffeeHome:
-                        replaceMainFragment(homeMain, item);
-                        break;
-                    case R.id.nvBaristaHome:
-                        replaceMainFragment(baristaMain, item);
+                    case R.id.nvApplication:
+                        replaceMainFragment(application, item);
                         break;
                     case R.id.nvLearnHome:
-                        replaceMainFragment(learnMain, item);
-                        break;
-                    case R.id.nvCommunityHome:
-                        replaceMainFragment(communityMain, item);
+                        replaceMainFragment(learn, item);
                         break;
                     case R.id.nvProfileHome:
-                        replaceMainFragment(profileMain, item);
+                        Intent myIntent = new Intent(AdminBottomNavigationActivity.this, LoginOrSignupActivity.class);
+                        myIntent.putExtra("isLoggedOut", "true");
+                        startActivity(myIntent);
+                        finishAffinity();
                         break;
                 }
                 return false;
@@ -121,9 +99,7 @@ public class BottomNavigationActivity extends AppCompatActivity {
             );
             ft.replace(container, fragment);
             Log.i(TAG, "replaceFragment: " + backStateName);
-            if(!mainScreen.contains(backStateName)){
-                ft.addToBackStack(backStateName);
-            }
+            ft.addToBackStack(backStateName);
             ft.commit();
         }
     }

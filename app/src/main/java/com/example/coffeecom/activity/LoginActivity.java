@@ -122,7 +122,12 @@ public class LoginActivity extends AppCompatActivity {
 
                                 if (splittedresult[0].equals("Login Success")){
                                     Provider.setUser(new ProfileModel(splittedresult[1]));
-                                    Intent intent = new Intent(getApplicationContext(), BottomNavigationActivity.class);
+                                    Intent intent = null;
+                                    if(Provider.getUser().getUserId().equals("UID_admin")){
+                                        intent = new Intent(getApplicationContext(), AdminBottomNavigationActivity.class);
+                                    }else{
+                                        intent = new Intent(getApplicationContext(), BottomNavigationActivity.class);
+                                    }
                                     startActivity(intent);
                                     finish();
                                 }else{

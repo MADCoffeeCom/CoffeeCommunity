@@ -25,6 +25,7 @@ import com.example.coffeecom.model.BaristaModel;
 import com.example.coffeecom.model.CartCardModel;
 import com.example.coffeecom.model.CartModel;
 import com.example.coffeecom.model.CoffeeModel;
+import com.example.coffeecom.query.QueryArticle;
 import com.example.coffeecom.query.QueryBankCard;
 import com.example.coffeecom.query.QueryBrewedCoffee;
 import com.example.coffeecom.query.QueryCartItem;
@@ -40,7 +41,7 @@ import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 
 
-public class HomeActivityFragment extends Fragment {
+public class  HomeActivityFragment extends Fragment {
 
     private static final String TAG = "HomeActivityFragment";
 
@@ -89,6 +90,7 @@ public class HomeActivityFragment extends Fragment {
         QueryBrewedCoffee.queryOrder();
         QueryWallet.queryWallet();
         QueryBankCard.queryBankCard();
+        QueryArticle.queryArticle();
 
         TBSearch.setText("");
         TBSearch.addTextChangedListener(new TextWatcher() {

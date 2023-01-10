@@ -130,4 +130,16 @@
         </LinearLayout>
     </ScrollView>
 
+    <ImageButton
+        android:id="@+id/addArticleBtn"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginEnd="16dp"
+        android:background="@color/transparent"
+        android:src="@drawable/ic_plus"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@+id/learnTitleText"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/learnTitleText" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

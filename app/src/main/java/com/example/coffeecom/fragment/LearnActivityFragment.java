@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
@@ -17,6 +18,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.coffeecom.Provider;
 import com.example.coffeecom.R;
+import com.example.coffeecom.activity.AdminBottomNavigationActivity;
+import com.example.coffeecom.activity.BottomNavigationActivity;
 import com.example.coffeecom.adapter.LearnArticleAdapter;
 import com.example.coffeecom.model.ArticleModel;
 import com.vishnusivadas.advanced_httpurlconnection.FetchData;
@@ -31,16 +34,31 @@ public class LearnActivityFragment extends Fragment {
     private RecyclerView recyclerViewGeneralArticleList, recyclerViewCoffeeHistoryArticleList, recyclerViewCoffeeBeanArticleList, recyclerViewLearnArticleList;
     private LearnArticleAdapter generalArticleAdapter, historyArticleAdapter, beanArticleAdapter, learnArticleAdapter;
     private TextView articleTbSearch;
+    private ImageButton addArticleBtn;
 
     ArrayList<ArticleModel> articles;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        Provider.getArticles().clear();
+
         View view = inflater.inflate(R.layout.activity_learn,container,false);
         initialiseID(view);
-        queryArticle();
+        articles = Provider.getArticles();
+        Log.i(TAG, "articles: " +  articles.size());
+        Log.i(TAG, "articles: " +  Provider.getArticles().size());
+        buildRV(articles);
+
+        if(Provider.getUser().getUserId().equals("UID_admin")){
+            addArticleBtn.setVisibility(View.VISIBLE);
+            addArticleBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    ((AdminBottomNavigationActivity)getActivity()).replaceFragment(new CreateArticleFragment());
+                }
+            });
+        }
+
 
         articleTbSearch.setText("");
         articleTbSearch.addTextChangedListener(new TextWatcher() {
@@ -87,44 +105,10 @@ public class LearnActivityFragment extends Fragment {
         recyclerViewCoffeeBeanArticleList = view.findViewById(R.id.coffeeBeanArticleRecycleView);
         recyclerViewLearnArticleList = view.findViewById(R.id.LearnArticleRecycleView);
         articleTbSearch = view.findViewById(R.id.TBSearch);
+        addArticleBtn = view.findViewById(R.id.addArticleBtn);
     }
 
-    private void queryArticle() {
-        Handler handler = new Handler(Looper.getMainLooper());
-        handler.post(new Runnable() {
-            @Override
-            public void run() {
-                FetchData fetchData = new FetchData("http://" + Provider.getIpAddress() + "/CoffeeCommunityPHP/article.php");
-                if (fetchData.startFetch()) {
-                    if (fetchData.onComplete()) {
-                        String result = fetchData.getResult();
-                        String[] resultSplitted = result.split("split");
-                        for (String str: resultSplitted) {
-//                            Log.i(str, "Printing all user...");
 
-                            String[] profileDetails = str.split(" - ");
-                            String articleId = profileDetails[0];
-                            String adminId = profileDetails[1];
-                            String articleTitle = profileDetails[2];
-                            String articleType = profileDetails[3];
-                            int articleUpVote = Integer.parseInt(profileDetails[4]);
-                            int articleDownVote = Integer.parseInt(profileDetails[5]);
-                            String articleContent = profileDetails[6];
-                            String articlePicUrl = profileDetails[7];
-
-                            ArticleModel article = new ArticleModel(articleId, adminId, articleTitle, articleType, articleContent, articlePicUrl, articleUpVote, articleDownVote);
-                            Provider.addArticles(article);
-                            Log.i("Learn", "Successfully Added Article " + article.getArticleId());
-
-                        }
-                        Log.i("Learn", "Successfully Added Article " + Provider.getArticles().get(0).getArticleUpVote());
-                    }
-                    articles = Provider.getArticles();
-                    buildRV(articles);
-                }
-            }
-        });
-    }
 
     private ArrayList<ArticleModel> filterArticleBasedOnType(String type, ArrayList<ArticleModel> oriArticles){
         ArrayList<ArticleModel> articlesWithType = new ArrayList<>();

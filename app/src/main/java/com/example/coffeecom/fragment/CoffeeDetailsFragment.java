@@ -180,15 +180,15 @@ public class CoffeeDetailsFragment extends Fragment {
 
 
     private void recyclerViewRating() {
-//        if (!currentBarista.getRatings().isEmpty()) {
+        if (!currentBarista.getRatings().isEmpty()) {
             LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
             ratingRecyclerView.setLayoutManager(linearLayoutManager);
             Log.i("ni","it");
             ratingAdapter = new RatingBarAdapter(currentBarista.getRatings());
             ratingRecyclerView.setAdapter(ratingAdapter);
-//        }else{
-//            noRatingText.setVisibility(View.VISIBLE);
-//        }
+        }else{
+            noRatingText.setVisibility(View.VISIBLE);
+        }
     }
     public void addCoffeeIntoCart(ProfileModel currentUser, CoffeeModel currentSelectedCoffee, int amount) {
         Handler handler = new Handler(Looper.getMainLooper());
