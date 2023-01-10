@@ -49,13 +49,13 @@
                     app:srcCompat="@drawable/ic_cart" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <androidx.fragment.app.FragmentContainerView
-                android:id="@+id/fragmentContainerView3"
-                android:name="com.example.coffeecom.fragment.LocationFragment"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp"
-                android:layout_marginTop="16dp"/>
+<!--            <androidx.fragment.app.FragmentContainerView-->
+<!--                android:id="@+id/fragmentContainerView3"-->
+<!--                android:name="com.example.coffeecom.fragment.LocationFragment"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginBottom="16dp"-->
+<!--                android:layout_marginTop="16dp"/>-->
 
             <EditText
                 android:id="@+id/TBSearch"
@@ -73,12 +73,12 @@
                 android:inputType="text"
                 android:textColorHint="@color/white_60" />
 
-            <androidx.fragment.app.FragmentContainerView
-                android:id="@+id/fragmentContainerView2"
-                android:name="com.example.coffeecom.fragment.CoffeeWalletFragment"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="40dp"/>
+<!--            <androidx.fragment.app.FragmentContainerView-->
+<!--                android:id="@+id/fragmentContainerView2"-->
+<!--                android:name="com.example.coffeecom.fragment.CoffeeWalletFragment"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginTop="40dp"/>-->
 
 
             <TextView
@@ -115,6 +115,31 @@
                 android:paddingRight="16dp"
                 android:layout_marginBottom="40dp"
                 />
+
+            <TextView
+                android:id="@+id/textView55"
+                style="@style/h2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="24dp"
+                android:text="Coffee Order" />
+
+            <TextView
+                android:id="@+id/noCoffeeOrderErrorText"
+                style="@style/c1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="24dp"
+                android:text="No coffee order yet"
+                android:visibility="gone" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/coffeeOrderRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="40dp"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp" />
 
         </LinearLayout>
     </ScrollView>

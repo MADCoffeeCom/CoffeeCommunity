@@ -1,6 +1,5 @@
 package com.example.coffeecom.fragment;
 
-import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -19,41 +18,43 @@ import com.example.coffeecom.Provider;
 import com.example.coffeecom.R;
 import com.example.coffeecom.activity.BottomNavigationActivity;
 import com.example.coffeecom.adapter.BaristaCardAdapter;
+import com.example.coffeecom.adapter.CoffeeOrderAdapter;
 import com.example.coffeecom.adapter.CoffeeTypeAdapter;
 import com.example.coffeecom.helper.QueryHomePage;
 import com.example.coffeecom.model.BaristaModel;
-import com.example.coffeecom.model.CartCardModel;
-import com.example.coffeecom.model.CartModel;
 import com.example.coffeecom.model.CoffeeModel;
+import com.example.coffeecom.model.OrderedCoffeeModel;
 import com.example.coffeecom.query.QueryCartItem;
 
 import java.util.ArrayList;
 import java.util.concurrent.Callable;
-import java.util.concurrent.CompletableFuture;
 
 
 public class  HomeActivityFragment extends Fragment {
 
     private static final String TAG = "HomeActivityFragment";
 
-    private RecyclerView recyclerViewCoffeeTypeList, recyclerViewBaristaList;
+    private RecyclerView recyclerViewCoffeeTypeList, recyclerViewBaristaList, coffeeOrderRecyclerView;
     private CoffeeTypeAdapter coffeeTypeAdapter;
     private BaristaCardAdapter baristaAdapter;
+    private CoffeeOrderAdapter coffeeOrderAdapter;
     private ImageButton cartButton;
-    private TextView TBSearch;
+    private TextView TBSearch, noCoffeeOrderErrorText;
     ArrayList<BaristaModel> baristas = new ArrayList<>();
     ArrayList<CoffeeModel> coffees = new ArrayList<>();
+    ArrayList<OrderedCoffeeModel> pendingOrder = new ArrayList<>();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
 
         View view = inflater.inflate(R.layout.activity_home,container,false);
 
 //        Provider.setUser(new ProfileModel("UID_abang"));
         recyclerViewCoffeeTypeList = view.findViewById(R.id.coffeeListInBaristaRecyclerView);
         recyclerViewBaristaList = view.findViewById(R.id.baristaRecyclerView);
+        coffeeOrderRecyclerView = view.findViewById(R.id.coffeeOrderRecyclerView);
+        noCoffeeOrderErrorText = view.findViewById(R.id.noCoffeeOrderErrorText);
         TBSearch = view.findViewById(R.id.TBSearch);
         cartButton = view.findViewById(R.id.BtnCart);
         cartButton.setOnClickListener(new View.OnClickListener(){
@@ -68,11 +69,14 @@ public class  HomeActivityFragment extends Fragment {
 //                ((BottomNavigationActivity)getActivity()).replaceFragment(new CoffeeCartFragment());
             }
         });
-                coffees = Provider.getCoffees();
-                //Put here so that it pop the coffee after complete query
-                recyclerViewCoffeeType();
-                baristas = Provider.getBaristas();
-                recyclerViewBarista();
+        coffees = Provider.getCoffees();
+        //Put here so that it pop the coffee after complete query
+        recyclerViewCoffeeType();
+        baristas = Provider.getBaristas();
+        recyclerViewBarista();
+        pendingOrder = Provider.getUser().getPendingOrder();
+        Log.i(TAG, "onCreateView: " + pendingOrder.size());
+        recyclerViewCoffeeOrder();
 
 
 
@@ -142,9 +146,6 @@ public class  HomeActivityFragment extends Fragment {
         }
     }
 
-
-
-
     private void recyclerViewCoffeeType() {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
         recyclerViewCoffeeTypeList.setLayoutManager(linearLayoutManager);
@@ -159,6 +160,18 @@ public class  HomeActivityFragment extends Fragment {
 
         baristaAdapter = new BaristaCardAdapter(baristas,getActivity());
         recyclerViewBaristaList.setAdapter(baristaAdapter);
+    }
+
+    private void recyclerViewCoffeeOrder() {
+        if(pendingOrder.isEmpty()){
+            noCoffeeOrderErrorText.setVisibility(View.VISIBLE);
+        }else{
+            LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
+            coffeeOrderRecyclerView.setLayoutManager(linearLayoutManager);
+
+            coffeeOrderAdapter = new CoffeeOrderAdapter(pendingOrder,getActivity());
+            coffeeOrderRecyclerView.setAdapter(coffeeOrderAdapter);
+        }
     }
 
 

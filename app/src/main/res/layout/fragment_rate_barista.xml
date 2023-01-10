@@ -7,7 +7,7 @@
     tools:context=".fragment.RateBaristaFragment">
 
     <ImageButton
-        android:id="@+id/rateBaristaBckBtn"
+        android:id="@+id/backBtn"
         android:tint="@color/white"
         android:contentDescription="@string/back"
         android:layout_width="48dp"
@@ -25,7 +25,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         android:text="Rate Barista"
-        app:layout_constraintStart_toEndOf="@+id/rateBaristaBckBtn"
+        app:layout_constraintStart_toEndOf="@+id/backBtn"
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -80,11 +80,11 @@
 
     <RatingBar
         android:id="@+id/rateBaristaRatingBar"
-        android:contentDescription="@string/rate_barista"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:stepSize="0.5"
+        android:contentDescription="@string/rate_barista"
+        android:stepSize="1"
         android:theme="@style/RatingBar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -94,7 +94,7 @@
         android:id="@+id/rateBaristaFeedbackText"
         style="@style/c1"
         android:layout_width="match_parent"
-        android:layout_height="40dp"
+        android:layout_height="50dp"
         android:layout_marginStart="24dp"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="24dp"
