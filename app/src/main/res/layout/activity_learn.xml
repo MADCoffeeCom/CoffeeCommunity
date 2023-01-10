@@ -107,7 +107,7 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/coffeeBeanArticleRecycleView"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:paddingLeft="16dp">
 
             </androidx.recyclerview.widget.RecyclerView>
@@ -124,7 +124,7 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/LearnArticleRecycleView"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_marginBottom="40dp"
                 android:paddingLeft="16dp" />
         </LinearLayout>

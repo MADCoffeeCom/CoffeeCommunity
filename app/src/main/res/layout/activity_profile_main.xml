@@ -89,12 +89,12 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-<!--            <androidx.fragment.app.FragmentContainerView-->
-<!--                android:id="@+id/fragmentContainerView2"-->
-<!--                android:name="com.example.coffeecom.fragment.CoffeeWalletFragment"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_marginTop="40dp" />-->
+            <androidx.fragment.app.FragmentContainerView
+                android:id="@+id/fragmentContainerView2"
+                android:name="com.example.coffeecom.fragment.CoffeeWalletFragment"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="40dp" />
 
             <TextView
                 android:id="@+id/textViewProfile2"

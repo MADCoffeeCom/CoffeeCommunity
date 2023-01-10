@@ -46,5 +46,6 @@
     <string name="add_to_cart">Add To Cart</string>
     <string name="accept_order">Accept Order</string>
     <string name="decline_order">Decline Order</string>
+    <string name="post_article">Post Article</string>
 
 </resources>
