@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -33,6 +34,7 @@ import com.vishnusivadas.advanced_httpurlconnection.PutData;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Random;
 import java.util.concurrent.Callable;
 import java.util.concurrent.CompletableFuture;
@@ -63,8 +65,8 @@ public class CoffeeCartFragment extends Fragment {
         paymentTopUpBtn = rootView.findViewById((R.id.paymentTopUpBtn));
         coffeeCartPayBtn = rootView.findViewById((R.id.coffeeCartPayBtn));
         coffeeWalletAmountText = rootView.findViewById((R.id.coffeeWalletAmountText));
-        paymentBtn1 = rootView.findViewById(R.id.paymentBtn1);
-        paymentBtn2 = rootView.findViewById(R.id.paymentBtn2);
+        paymentBtn1 = rootView.findViewById(R.id.coffeeBalanceRadioBtn);
+        paymentBtn2 = rootView.findViewById(R.id.creditDebitRadioBtn);
 
         try{
             coffeeWalletAmountText.setText(String.format("%.2f", Provider.getUser().getWalletBalance()));
@@ -133,9 +135,9 @@ public class CoffeeCartFragment extends Fragment {
                                                     data[0] = orderId;
                                                     data[1] = cm.getBarista().getBaristaId();
                                                     data[2] = Provider.getUser().getUserId();
-                                                    data[3] = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new java.util.Date());
-                                                    data[4] = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new java.util.Date());
-                                                    data[5] = new SimpleDateFormat("HH:mm:ss").format(new java.util.Date());
+                                                    data[3] = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
+                                                    data[4] = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
+                                                    data[5] = new SimpleDateFormat("HH:mm:ss").format(new Date());
                                                     data[6] = Double.toString(cm.getTotalPrice());
                                                     data[7] = "P";
 
@@ -180,6 +182,8 @@ public class CoffeeCartFragment extends Fragment {
                                     }
                                     Provider.getCartModelList().clear();
                                     DeleteFromCart.deleteFromCart();
+                                    Toast.makeText(getContext(), "Successfully ordered!", Toast.LENGTH_SHORT).show();
+                                    getActivity().onBackPressed();
                                 } catch (Exception e) {
                                     e.printStackTrace();
                                 }

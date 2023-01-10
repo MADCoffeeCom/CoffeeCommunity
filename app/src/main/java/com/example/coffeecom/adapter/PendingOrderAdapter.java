@@ -111,6 +111,8 @@ public class PendingOrderAdapter extends RecyclerView.Adapter<PendingOrderAdapte
                     notifyDataSetChanged();
                 });
             }
+        }else if(getItemViewType(position) == 0){
+
         }
     }
 

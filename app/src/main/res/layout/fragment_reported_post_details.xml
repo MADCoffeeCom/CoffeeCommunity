@@ -5,7 +5,7 @@
     android:id="@+id/frameLayout2"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragment.PostDetailsFragment" >
+    tools:context=".fragment.ReportedPostDetailsFragment" >
 
     <ImageButton
         android:id="@+id/backBtn"
@@ -15,7 +15,7 @@
         android:layout_marginTop="24dp"
         android:background="@color/transparent"
         android:src="@drawable/ic_back"
-        android:tint="@color/white"
+        app:tint="@color/white"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -78,51 +78,48 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/postDescText" />
 
-    <ImageButton
-        android:id="@+id/postUpVoteBtn"
-        android:contentDescription="@string/upvote"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="16dp"
-        android:background="@color/transparent"
-        android:src="@drawable/ic_like"
-        android:tint="@color/white"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/postPic" />
-
-    <ImageButton
-        android:id="@+id/postDownVoteBtn"
-        android:contentDescription="@string/downvote"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
+    <TextView
+        android:id="@+id/reasonText"
+        style="@style/c1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:background="@color/transparent"
-        android:src="@drawable/ic_dislike"
-        android:tint="@color/white"
-        app:layout_constraintBottom_toBottomOf="@+id/postUpVoteBtn"
-        app:layout_constraintStart_toEndOf="@+id/postUpVoteBtn"
-        app:layout_constraintTop_toTopOf="@+id/postUpVoteBtn" />
+        android:text="TextView"
+        app:layout_constraintBottom_toBottomOf="@+id/textView53"
+        app:layout_constraintStart_toEndOf="@+id/textView53"
+        app:layout_constraintTop_toTopOf="@+id/textView53" />
+
+    <Button
+        android:id="@+id/keepPostBtn"
+        style="@style/smallPrimaryBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="600dp"
+        android:text="Keep Post"
+        app:layout_constraintStart_toStartOf="@+id/postPic"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/deletePostBtn"
+        style="@style/smallSecondaryBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="600dp"
+        android:layout_marginEnd="40dp"
+        android:text="Delete Post"
+        app:layout_constraintEnd_toEndOf="@+id/postPic"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/postVoteCountText"
+        android:id="@+id/textView53"
         style="@style/c1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
-        android:text="TextView"
-        app:layout_constraintBottom_toBottomOf="@+id/postDownVoteBtn"
-        app:layout_constraintStart_toEndOf="@+id/postDownVoteBtn"
-        app:layout_constraintTop_toTopOf="@+id/postDownVoteBtn" />
+        android:layout_marginTop="16dp"
+        android:text="Reason:"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/postPic" />
 
-    <ImageButton
-        android:id="@+id/reportBtn"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:layout_marginEnd="24dp"
-        android:background="@color/transparent"
-        android:src="@drawable/ic_report"
-        app:layout_constraintBottom_toBottomOf="@+id/textView48"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/textView48" />
 </androidx.constraintlayout.widget.ConstraintLayout>

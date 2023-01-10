@@ -2,6 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:foreground="?android:attr/selectableItemBackground"
     android:id="@+id/reportedPostCard"
     android:layout_width="match_parent"
     android:layout_height="132dp"
@@ -67,14 +68,5 @@
         android:text="Harassment"
         app:layout_constraintBottom_toBottomOf="@+id/textview51"
         app:layout_constraintStart_toEndOf="@+id/textview51" />
-
-    <ImageButton
-        android:id="@+id/deletePostBtn"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:background="@color/transparent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="@drawable/ic_delete" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

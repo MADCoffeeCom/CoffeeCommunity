@@ -33,7 +33,7 @@ public class LoginActivity extends AppCompatActivity {
     private SharedPreferences loginPreferences;
     private SharedPreferences.Editor loginPrefsEditor;
     private Boolean saveLogin;
-    private TextView username, passwordTextView, forgotPassword;
+    private TextView username, passwordTextView, forgotPassword, signUpBtn;
     private String isLoggedOut = "false";
 
     @Override
@@ -45,6 +45,7 @@ public class LoginActivity extends AppCompatActivity {
         backBtn = findViewById(R.id.backBtn);
         forgotPassword = findViewById(R.id.forgotPassword);
         saveLoginCheckBox = findViewById(R.id.rememberMeCheckBox);
+        signUpBtn = findViewById(R.id.signUpBtn);
         username = (TextView) findViewById(R.id.editText_username);
         passwordTextView = (TextView) findViewById(R.id.editText_password);
         backBtn.setOnClickListener(view -> finish());
@@ -58,6 +59,14 @@ public class LoginActivity extends AppCompatActivity {
         forgotPassword.setOnClickListener(view -> {
             Intent intent = new Intent(LoginActivity.this, ForgotPasswordActivity.class);
             startActivity(intent);
+        });
+
+        signUpBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(LoginActivity.this, SignupActivity.class);
+                startActivity(intent);
+            }
         });
 
         loginPreferences = getSharedPreferences("loginPrefs", MODE_PRIVATE);
@@ -122,7 +131,12 @@ public class LoginActivity extends AppCompatActivity {
 
                                 if (splittedresult[0].equals("Login Success")){
                                     Provider.setUser(new ProfileModel(splittedresult[1]));
-                                    Intent intent = new Intent(getApplicationContext(), BottomNavigationActivity.class);
+                                    Intent intent = null;
+                                    if(Provider.getUser().getUserId().equals("UID_admin")){
+                                        intent = new Intent(getApplicationContext(), AdminBottomNavigationActivity.class);
+                                    }else{
+                                        intent = new Intent(getApplicationContext(), BottomNavigationActivity.class);
+                                    }
                                     startActivity(intent);
                                     finish();
                                 }else{
@@ -142,7 +156,7 @@ public class LoginActivity extends AppCompatActivity {
         }
         else{
             Log.d("myTag", "errrrrror");
-            Toast.makeText(this, "Login Bruh", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Please fill in all the details", Toast.LENGTH_SHORT).show();
 
         }
     }

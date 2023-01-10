@@ -68,99 +68,73 @@
                 android:text="Payment Method"
                 android:textSize="16sp" />
 
-            <RadioGroup
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" >
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginBottom="20dp"
-                    android:background="@drawable/vertical_gray_background"
-                    android:paddingLeft="16dp">
-
-                    <TextView
-                        android:id="@+id/coffeeWalletAmountText"
-                        style="@style/h2"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="8dp"
-                        android:layout_marginEnd="8dp"
-                        android:text="RM0.00" />
-
-                    <Button
-                        android:id="@+id/paymentTopUpBtn"
-                        style="@style/smallPrimaryBtn"
-                        android:layout_width="100dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="10dp"
-                        android:text="Top Up" />
-                </LinearLayout>
+                android:layout_height="match_parent"
+                android:layout_marginBottom="16dp"
+                android:background="@drawable/linear_gray_background">
 
                 <RadioButton
-                    android:id="@+id/paymentBtn1"
+                    android:id="@+id/coffeeBalanceRadioBtn"
+                    style="@style/c1"
+                    android:layout_width="93dp"
+                    android:layout_height="48dp"
+                    android:layout_marginStart="8dp"
+                    android:text="Coffee Balance"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <Button
+                    android:id="@+id/paymentTopUpBtn"
+                    style="@style/smallPrimaryBtn"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="8dp"
+                    android:text="Top Up"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/textView4"
+                    style="@style/h2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:text="RM"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/coffeeBalanceRadioBtn"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/coffeeWalletAmountText"
+                    style="@style/h2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0.00"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/textView4"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="16dp"
+                android:background="@drawable/linear_gray_background">
+
+                <RadioButton
+                    android:id="@+id/creditDebitRadioBtn"
                     style="@style/c1"
                     android:layout_width="wrap_content"
-                    android:layout_height="55dp"
-                    android:background="@drawable/vertical_gray_background"
-                    android:paddingLeft="5dp"
-                    android:text="@string/balance" />
-
-                <RadioButton
-                    android:id="@+id/paymentBtn2"
-                    style="@style/c1"
-                    android:layout_width="match_parent"
-                    android:layout_height="55dp"
-                    android:background="@drawable/vertical_gray_background"
-                    android:paddingLeft="5dp"
-                    android:text="Cash on Pick Up" />
-
-                <RadioButton
-                    android:id="@+id/paymentBtn3"
-                    style="@style/c1"
-                    android:layout_width="match_parent"
-                    android:layout_height="55dp"
-                    android:background="@drawable/vertical_gray_background"
-                    android:paddingLeft="5dp"
-                    android:text="Credit/Debit Card" />
-
-                <RadioButton
-                    android:id="@+id/paymentBtn4"
-                    style="@style/c1"
-                    android:layout_width="match_parent"
-                    android:layout_height="55dp"
-                    android:background="@drawable/vertical_gray_background"
-                    android:paddingLeft="5dp"
-                    android:text="E-wallet" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginBottom="20dp"
-                    android:background="@drawable/vertical_gray_background"
-                    android:paddingLeft="16dp">
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginBottom="20dp"
-                    android:background="@drawable/vertical_gray_background"
-                    android:paddingLeft="16dp">
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginBottom="20dp"
-                    android:background="@drawable/vertical_gray_background"
-                    android:paddingLeft="16dp">
-
-                </LinearLayout>
-
-            </RadioGroup>
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:text="Credit/DebitCard"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
         </LinearLayout>
     </ScrollView>

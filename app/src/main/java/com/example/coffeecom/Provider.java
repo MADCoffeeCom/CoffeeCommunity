@@ -7,6 +7,7 @@ import android.net.wifi.WifiManager;
 import android.text.format.Formatter;
 import android.util.Log;
 
+import com.example.coffeecom.model.ApplicationModel;
 import com.example.coffeecom.model.ArticleModel;
 import com.example.coffeecom.model.BaristaModel;
 import com.example.coffeecom.model.CartCardModel;
@@ -15,6 +16,7 @@ import com.example.coffeecom.model.CoffeeModel;
 import com.example.coffeecom.model.HelpdeskModel;
 import com.example.coffeecom.model.PostModel;
 import com.example.coffeecom.model.ProfileModel;
+import com.example.coffeecom.model.ReportedPostModel;
 import com.example.coffeecom.model.TransactionModel;
 
 import java.net.Inet4Address;
@@ -38,12 +40,15 @@ public class Provider{
     private static ArrayList<String> baristaIdInCart = new ArrayList<>();
     private static ArrayList<TransactionModel> transactions = new ArrayList<>();
     private static ArrayList<CartModel> cartModelList = new ArrayList<>();
+    private static ArrayList<ApplicationModel> application = new ArrayList<>();
+    private static ArrayList<ReportedPostModel> reportedPosts = new ArrayList<>();
+
     private static String currentCoffeeType;
     private static String currentBaristaId;
     private static String currentCoffeeId;
     private static String currentArticleId;
     private static ProfileModel user;
-    private static String ipAddress;
+    private static String ipAddress = "coffeecommunityapp.000webhostapp.com";
     private static double cartTotalPrice =0;
 
     public static String getLocalIpAddress() {
@@ -204,49 +209,20 @@ public class Provider{
     public static void addBaristaIdInCart(String ba){
         baristaIdInCart.add(ba);
     }
-    //    ===================StatusActivity Punya=========================
-    private static String statusTitle, statusHeading1, statusHeading2, statusBtnText;
-    private static Class<?> redirectedCls;
 
-    public static String getStatusTitle() {
-        return statusTitle;
+    public static ArrayList<ApplicationModel> getApplication() {
+        return application;
     }
 
-    public static void setStatusTitle(String statusTitle) {
-        Provider.statusTitle = statusTitle;
+    public static void addApplication(ApplicationModel app) {
+        Provider.application.add(app);
     }
 
-    public static String getStatusHeading1() {
-        return statusHeading1;
+    public static ArrayList<ReportedPostModel> getReportedPosts() {
+        return reportedPosts;
     }
 
-    public static void setStatusHeading1(String statusHeading1) {
-        Provider.statusHeading1 = statusHeading1;
-    }
-
-    public static String getStatusHeading2() {
-        return statusHeading2;
-    }
-
-    public static void setStatusHeading2(String statusHeading2) {
-        Provider.statusHeading2 = statusHeading2;
-    }
-
-//    =======================StatusClass end==================================
-
-    public static Class getRedirectedCls() {
-        return redirectedCls;
-    }
-
-    public static void setRedirectedCls(Class bruh) {
-        redirectedCls = bruh;
-    }
-
-    public static String getStatusBtnText() {
-        return statusBtnText;
-    }
-
-    public static void setStatusBtnText(String statusBtnText) {
-        Provider.statusBtnText = statusBtnText;
+    public static void addReportedPosts(ReportedPostModel reportedPost) {
+        Provider.reportedPosts.add(reportedPost);
     }
 }

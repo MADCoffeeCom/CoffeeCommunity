@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/nvApplication"
+        android:icon="@drawable/nv_buy_coffee_home_black"
+        android:title="Barista Application" />
+    <item
+        android:id="@+id/nvLearnHome"
+        android:title="Learn"
+        android:icon="@drawable/nv_learn_home_black"/>
+
+    <item
+        android:id="@+id/nvReportedBarista"
+        android:title="Reported Barista"
+        android:icon="@drawable/nv_profile_home_black"/>
+
+    <item
+        android:id="@+id/nvReportedPost"
+        android:title="Reported Post"
+        android:icon="@drawable/nv_community_home_black"/>
+
+    <item
+        android:id="@+id/nvProfileHome"
+        android:title="Log Out"
+        android:icon="@drawable/ic_logout"/>
+</menu>

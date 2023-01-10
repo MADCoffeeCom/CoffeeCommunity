@@ -21,6 +21,8 @@ import com.vishnusivadas.advanced_httpurlconnection.PutData;
 
 public class SignupActivity extends AppCompatActivity {
 
+    TextView logInBtn;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,6 +30,14 @@ public class SignupActivity extends AppCompatActivity {
 
         Button registerButton = (Button) findViewById(R.id.signup_register);
         ImageButton backBtn = findViewById(R.id.backBtn);
+        logInBtn = findViewById(R.id.logInBtn);
+        logInBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(SignupActivity.this, LoginActivity.class);
+                startActivity(intent);
+            }
+        });
 
         backBtn.setOnClickListener(view -> finish());
 
@@ -89,7 +99,7 @@ public class SignupActivity extends AppCompatActivity {
         }
         else{
             Log.d("myTag", "errrrrror");
-            Toast.makeText(this, "Register Bruh", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Please fill in all the details", Toast.LENGTH_SHORT).show();
 
         }
 //
