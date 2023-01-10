@@ -61,8 +61,8 @@ public class CartCardAdapter extends RecyclerView.Adapter<CartCardAdapter.ViewHo
     @Override
     public void onBindViewHolder(ViewHolder holder, @SuppressLint("RecyclerView") int position) {
 
-        coffeePic.add("coffee1");
-        String picUrl = coffeePic.get(position);
+//        coffeePic.add("coffee1");
+        String picUrl = cartCardModelList.get(position).getCoffeePic();
         int drawableResourceId = holder.itemView.getContext().getResources().getIdentifier(picUrl, "drawable", holder.itemView.getContext().getPackageName());
         Glide.with(holder.itemView.getContext()).load(drawableResourceId).into(holder.coffeePic);
         CartCardModel cartCardModel = cartCardModelList.get(position);
