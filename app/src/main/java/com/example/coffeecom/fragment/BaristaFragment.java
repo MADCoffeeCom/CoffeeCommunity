@@ -137,7 +137,7 @@ public class BaristaFragment extends Fragment {
             LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
             pendingOrderRecycleView.setLayoutManager(linearLayoutManager);
 
-            pendingOrderRecycleViewAdapter = new PendingOrderAdapter(order, getActivity());
+            pendingOrderRecycleViewAdapter = new PendingOrderAdapter(Provider.getUser().getBrewedOrder(), getActivity());
             pendingOrderRecycleView.setAdapter(pendingOrderRecycleViewAdapter);
         }
     }

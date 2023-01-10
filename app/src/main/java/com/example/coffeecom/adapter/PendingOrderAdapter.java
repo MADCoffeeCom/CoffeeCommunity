@@ -78,10 +78,11 @@ public class PendingOrderAdapter extends RecyclerView.Adapter<PendingOrderAdapte
     @NonNull
     @Override
     public PendingOrderAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        if (viewType == 0){
-            View inflate = LayoutInflater.from(parent.getContext()).inflate(R.layout.viewholder_no_coffee_order, parent, false);
-            return new PendingOrderAdapter.ViewHolder(inflate, viewType);
-        }else if (viewType == 1){
+//        if (viewType == 0){
+//            View inflate = LayoutInflater.from(parent.getContext()).inflate(R.layout.viewholder_no_coffee_order, parent, false);
+//            return new PendingOrderAdapter.ViewHolder(inflate, viewType);
+//        }else
+            if (viewType == 1){
             View inflate = LayoutInflater.from(parent.getContext()).inflate(R.layout.viewholder_pending_coffee_order, parent, false);
             return new PendingOrderAdapter.ViewHolder(inflate, viewType);
         }else{
