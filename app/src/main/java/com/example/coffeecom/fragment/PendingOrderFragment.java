@@ -1,5 +1,7 @@
 package com.example.coffeecom.fragment;
 
+import static com.example.coffeecom.helper.ToTitleCase.toTitleCase;
+
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -15,6 +17,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.coffeecom.Provider;
 import com.example.coffeecom.R;
@@ -62,15 +65,17 @@ public class PendingOrderFragment extends Fragment {
             }
         }
 
-        customerName.setText(currentOrder.getCustomerName());
+        customerName.setText(toTitleCase(currentOrder.getCustomerName()));
         orderId.setText(currentOrder.getOrderId());
-        totalPriceText.setText("" + currentOrder.getOrderTotalPrice());
+        totalPriceText.setText(String.format("%.2f", currentOrder.getOrderTotalPrice()));
 
         brewedButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Provider.getUser().getBrewedOrder().get(currentOrderIndex).setOrderStatus("B");
                 updateOrderStatus("B", currentOrder.getOrderId());
+                getActivity().onBackPressed();
+                Toast.makeText(getContext(), "Brewed finish!", Toast.LENGTH_SHORT).show();
             }
         });
 

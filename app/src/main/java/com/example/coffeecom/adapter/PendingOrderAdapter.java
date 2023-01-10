@@ -119,13 +119,13 @@ public class PendingOrderAdapter extends RecyclerView.Adapter<PendingOrderAdapte
                 });
             }
 
-            if(getItemViewType(position) == 1){
+            if(getItemViewType(position) == 2){
                 holder.coffeeOrderLayout.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
                         Bundle bundle = new Bundle();
                         bundle.putString("orderId", Provider.getUser().getBrewedOrder().get(position).getOrderId());
-                        ((BottomNavigationActivity)activity).replaceFragment(new PendingOrderFragment());
+                        ((BottomNavigationActivity)activity).replaceFragmentWithData(new PendingOrderFragment(), bundle);
                     }
                 });
             }
