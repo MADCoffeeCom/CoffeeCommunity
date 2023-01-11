@@ -127,11 +127,28 @@ public class BaristaFragment extends Fragment {
 
     public void recyclerViewPendingOrder() {
         Provider.getOrder().clear();
+        Log.i("BaristaFragment BrewedOrder size",""+Provider.getUser().getBrewedOrder().size());
         for (int i = 0; i < Provider.getUser().getBrewedOrder().size(); i++) {
             if (Provider.getUser().getBrewedOrder().get(i).getOrderStatus().equals("P")||Provider.getUser().getBrewedOrder().get(i).getOrderStatus().equals("A")){
                 Provider.getOrder().add(Provider.getUser().getBrewedOrder().get(i));
+
+//                Log.i("BaristaFragment added brewedOrder",""+Provider.getOrder().get(i).getOrderedCoffee().get(0).getCoffeeTitle());
             }
         }
+        Log.i("BaristaFragment Order size",""+Provider.getOrder().size());
+        for (BrewedOrderModel bom : Provider.getOrder()){
+            Log.i("cm barista order Id", ""+bom.getOrderId());
+            for (CoffeeModel cm : bom.getOrderedCoffee()){
+                Log.i("cm barista", ""+cm.getCoffeeTitle());
+            }
+        }
+//        for (int i = 0; i < Provider.getOrder().size(); i++) {
+//            if (!(Provider.getUser().getBrewedOrder().get(i).getOrderStatus().equals("P")||Provider.getUser().getBrewedOrder().get(i).getOrderStatus().equals("A"))){
+//                Provider.getOrder().remove(i);
+//
+////                Log.i("BaristaFragment added brewedOrder",""+Provider.getOrder().get(i).getOrderedCoffee().get(0));
+//            }
+//        }
 
         if(Provider.getOrder().isEmpty()){
             noOrderErrorText.setVisibility(View.VISIBLE);

@@ -38,8 +38,13 @@ public class QueryBrewedCoffee {
                         String result = putData.getResult();
                         Log.i(TAG, "BrewedCofeed Checking Result: " + result);
                         String[] resultSplitted = result.split("split");
+                        Log.i(TAG, "BrewedCofeed Checking ResultSplitted: " + resultSplitted);
+                        Log.i("QueryBrewedCoffee Result Size", ""+resultSplitted.length);
                         for (String str: resultSplitted) {
                             String[] orderDetails = str.split(" - ");
+                            for (String str1 : orderDetails){
+                                Log.i("OrderDetails", str1);
+                            }
                             String orderId = orderDetails[0];
                             String baristaId = orderDetails[1];
                             String baristaDesc = orderDetails[2];
@@ -59,6 +64,7 @@ public class QueryBrewedCoffee {
 
                             BrewedOrderModel order = new BrewedOrderModel(orderId, baristaId, baristaDesc, customerID, customerName, customerLocation, orderStartTime, orderEndTime, orderDuration, orderTotalPrice, orderStatus);
                             Provider.getUser().addBrewedOrder(order);
+                            Log.i("QueryBrewedCoffee Brewed Order Size", ""+ Provider.getUser().getBrewedOrder().size());
                             Log.i(TAG, "Successfully Added Brew Order " + order.getOrderId());
                         }
                     }
@@ -103,6 +109,7 @@ public class QueryBrewedCoffee {
                                     }
                                 }
                             }
+                            Log.i("QueryBrewedCoffee Brewed Order Size after ", ""+ Provider.getUser().getBrewedOrder().size());
                         }
                     }
                 }

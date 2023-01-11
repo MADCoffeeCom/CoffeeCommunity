@@ -31,8 +31,8 @@ import java.util.List;
 
 public class Provider{
 
-    public static final String SENDER = "communitycoffee76@gmail.com";
-    public static final String SENDERPASSWORD = "communitycoffee7612";
+//    public static final String SENDER = "communitycoffee76@gmail.com";
+//    public static final String SENDERPASSWORD = "communitycoffee7612";
 
     private static ArrayList<CoffeeModel> coffees = new ArrayList<>();
     private static ArrayList<BaristaModel> baristas = new ArrayList<>();
@@ -50,7 +50,7 @@ public class Provider{
     private static String currentCoffeeId;
     private static String currentArticleId;
     private static ProfileModel user;
-    private static String ipAddress = "192.168.100.38";
+    private static String ipAddress = "192.168.100.11";
 //    private static String ipAddress = "coffeecommunityapp.000webhostapp.com";
     private static double cartTotalPrice =0;
     private static boolean waitingState = false;

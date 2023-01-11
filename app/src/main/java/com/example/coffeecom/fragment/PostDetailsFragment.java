@@ -107,7 +107,7 @@ public class PostDetailsFragment extends Fragment {
                     if (isDownvoted) {
                         postDownVoteBtn.setColorFilter(getResources().getColor(R.color.white));
                         isDownvoted = false;
-                        upvoteCount -= 1;
+                        downvoteCount -=1;
                     }
                 } else {
                     // Remove the upvote and change the button color back to its original color
@@ -132,7 +132,7 @@ public class PostDetailsFragment extends Fragment {
                     if (isUpvoted) {
                         postUpVoteBtn.setColorFilter(getResources().getColor(R.color.white));
                         isUpvoted = false;
-                        downvoteCount -= 1;
+                        upvoteCount -=1;
                     }
                 } else {
                     // Remove the downvote and change the button color back to its original color
