@@ -102,7 +102,12 @@ public class CoffeeCartFragment extends Fragment {
         paymentTopUpBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ((BottomNavigationActivity)getActivity()).replaceFragment(new WalletFragment());
+                if (Provider.getUser().getWalletPin() == null) {
+                    ((BottomNavigationActivity)getActivity()).replaceFragment(new ActivateWalletFragment());
+                }
+                else{
+                    ((BottomNavigationActivity)getActivity()).replaceFragment(new WalletFragment());
+                }
             }
         });
 

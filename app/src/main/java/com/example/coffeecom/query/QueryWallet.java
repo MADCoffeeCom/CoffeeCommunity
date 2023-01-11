@@ -43,10 +43,16 @@ public class QueryWallet {
                         String walletId = str[0];
                         String walletBalance = str[1];
                         String walletpin = str[2];
+                        if (str[2].equals("empty")){
+                            walletpin = null;
+                        }
+                        else{
+                            walletpin = str[2];
+                        }
 
                         Provider.getUser().setWalletId(walletId);
                         Provider.getUser().setWalletBalance(Double.parseDouble(walletBalance));
-                        Provider.getUser().setWalletPin(walletpin);
+                        Provider.getUser().setWalletPin(null);
                     }
                     }
                 }
@@ -86,6 +92,41 @@ public class QueryWallet {
             }
         });
     }
+
+    public static void insertWalletPin(String walletPin) {
+        Log.i(TAG, "queryWallet: Run here once");
+
+        Handler handler = new Handler(Looper.getMainLooper());
+        handler.post(new Runnable() {
+            @Override
+            public void run() {
+                String[] field = new String[3];
+                field[0] = "walletPin";
+                field[1] = "userId";
+                field[2] = "walletId";
+
+
+                String[] data = new String[3];
+                data[0] = walletPin;
+                data[1] = Provider.getUser().getUserId();
+                data[2] = Provider.getUser().getWalletPin();
+
+                PutData putData = new PutData("http://" + Provider.getIpAddress() + "/CoffeeCommunityPHP/insertwallet.php", "POST", field, data);
+                if (putData.startPut()) {
+                    if (putData.onComplete()) {
+                        String result = putData.getResult();
+                        Log.i("QueryWallet Insert Wallet Pin", result);
+                        if (result.equals("Insert Wallet Pin success")){
+                            //if condition
+                        }else{
+
+                        };
+                    }
+                }
+            }
+        });
+    }
+
     public static void updateWallet() {
         Log.i(TAG, "queryWallet: Run here once");
 
