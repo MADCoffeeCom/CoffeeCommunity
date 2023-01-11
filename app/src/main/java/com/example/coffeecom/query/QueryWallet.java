@@ -37,23 +37,23 @@ public class QueryWallet {
                             insertWallet(ranWalletId);
                         }else if (result.equals("Error: Database connection")){
                             Log.i(TAG, "run: " + result);
-                        }
-                        else{
-                        String[] str = result.split(" - ");
-                        String walletId = str[0];
-                        String walletBalance = str[1];
-                        String walletpin = str[2];
-                        if (str[2].equals("empty")){
-                            walletpin = null;
-                        }
-                        else{
-                            walletpin = str[2];
-                        }
+                        }else{
+                            String[] str = result.split(" - ");
+                            String walletId = str[0];
+                            String walletBalance = str[1];
+                            String walletpin = str[2];
+    //                        if (str[2].equals("empty")){
+    //                            walletpin = null;
+    //                        }
+    //                        else{
+    //                            walletpin = str[2];
+    //                        }
 
-                        Provider.getUser().setWalletId(walletId);
-                        Provider.getUser().setWalletBalance(Double.parseDouble(walletBalance));
-                        Provider.getUser().setWalletPin(walletpin);
-                    }
+                            Provider.getUser().setWalletId(walletId);
+                            Provider.getUser().setWalletBalance(Double.parseDouble(walletBalance));
+                            Provider.getUser().setWalletPin(walletpin);
+                            Log.i(TAG, "run: " + walletpin);
+                        }
                     }
                 }
             }

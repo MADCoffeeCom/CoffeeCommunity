@@ -34,11 +34,15 @@ public class AddPostFragment extends Fragment {
         createPostBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String postDesc = "" + captionTextBox.getText();
-                String postPic = "" + pictureTextBox.getText();
-                QueryPost.addPost(postDesc, postPic);
-                Toast.makeText(getContext(), "Posted successfully!", Toast.LENGTH_SHORT).show();
-                getActivity().onBackPressed();
+
+                if(!captionTextBox.getText().equals("")){
+                    String postDesc = "" + captionTextBox.getText();
+                    String postPic = "" + pictureTextBox.getText();
+                    QueryPost.addPost(postDesc, postPic);
+                    Toast.makeText(getContext(), "Posted successfully!", Toast.LENGTH_SHORT).show();
+                    QueryPost.queryPost();
+                    getActivity().onBackPressed();
+                }
             }
         });
 

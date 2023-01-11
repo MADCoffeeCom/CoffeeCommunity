@@ -59,7 +59,11 @@ public class CoffeeWalletFragment extends Fragment {
         topUpWalletBtnFragment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ((BottomNavigationActivity)getActivity()).replaceFragment(new WalletFragment());
+                if(Provider.getUser().getWalletId() == null){
+                    ((BottomNavigationActivity)getActivity()).replaceFragment(new ActivateWalletFragment());
+                }else{
+                    ((BottomNavigationActivity)getActivity()).replaceFragment(new WalletFragment());
+                }
             }
         });
     }

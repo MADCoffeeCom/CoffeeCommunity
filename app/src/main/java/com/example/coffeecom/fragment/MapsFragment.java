@@ -113,12 +113,15 @@ public class MapsFragment extends Fragment {
 
             fusedLocationProviderClient.requestLocationUpdates(locationRequest, locationCallback, null);
             Log.i("Maps Fragment","Debugging Maps Fragment 9" + coffeeShopLocation.get(0));
-            for (int i =0; i<coffeeShopLocation.size();i++){
-                Log.i("Maps Fragment","Debugging Maps Fragment 8" + coffeeShopLocation.get(i));
-                for (int j=0; j<title.size();j++){
-                    googleMap.addMarker(new MarkerOptions().position(coffeeShopLocation.get(i)).title(String.valueOf(title.get(j))));
-                    Log.i("Maps Fragment","Debugging Maps Fragment 7" + coffeeShopLocation.get(i) + title.get(j));
-                }
+//            for (int i =0; i<coffeeShopLocation.size();i++){
+//                Log.i("Maps Fragment","Debugging Maps Fragment 8" + coffeeShopLocation.get(i));
+//                for (int j=0; j<title.size();j++){
+//                    googleMap.addMarker(new MarkerOptions().position(coffeeShopLocation.get(i)).title(String.valueOf(title.get(j))));
+//                    Log.i("Maps Fragment","Debugging Maps Fragment 7" + coffeeShopLocation.get(i) + title.get(j));
+//                }
+//            }
+            for (int i=0; i<coffeeShopLocation.size();i++){
+                googleMap.addMarker(new MarkerOptions().position(coffeeShopLocation.get(i)).title(String.valueOf(title.get(i))));
             }
 
 
@@ -126,6 +129,7 @@ public class MapsFragment extends Fragment {
                 @Override
                 public boolean onMarkerClick(Marker marker){
                     String markertitle = marker.getTitle();
+                    Log.i("selectedBaristaInMap", ""+ markertitle);
                     Provider.setCurrentBaristaId(marker.getTitle());
                     AppCompatActivity activity = (AppCompatActivity) MapsFragment.this.getContext();
                     BaristaListFragment baristaListFragment = new BaristaListFragment();
@@ -146,7 +150,7 @@ public class MapsFragment extends Fragment {
                         lat = location.getLatitude();
                         lng = location.getLongitude();
 
-                        LatLng latLng = new LatLng(5.426713899999999,100.3056012);
+                        LatLng latLng = new LatLng(lat,lng);
 
 //                        googleMap.addMarker(new MarkerOptions().position(latLng).title("Your Current Position"));
                         googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng,15));
@@ -163,7 +167,7 @@ public class MapsFragment extends Fragment {
 //
 //                    markerOptions.title(latLng.latitude+" : " + latLng.longitude);
 
-                    googleMap.clear();
+//                    googleMap.clear();
 
                     googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15));
 
@@ -247,6 +251,7 @@ public class MapsFragment extends Fragment {
                                     Log.i("Maps Fragment","Longitude of address is :" + result.getGeometry().getLocation().getLng());
                                     coffeeShopLocation.add(new LatLng (Double.parseDouble(result.getGeometry().getLocation().getLat()), Double.parseDouble(result.getGeometry().getLocation().getLng())));
                                     title.add(ba.getBaristaId());
+                                    Log.i("addingBaristaToMap", ba.getBaristaId());
                                     Log.i("Maps Fragment","Location is " + result.getGeometry().getLocation_type() + " "+ coffeeShopLocation.size() + " " + title.size());
                                 }
 

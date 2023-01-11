@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.example.coffeecom.Provider;
 import com.example.coffeecom.R;
 import com.example.coffeecom.fragment.BaristaFragment;
 import com.example.coffeecom.fragment.CommunityFragment;
@@ -53,8 +54,8 @@ public class BottomNavigationActivity extends AppCompatActivity {
         ProfileMainFragment profileMain = new ProfileMainFragment();
         LearnActivityFragment learnMain = new LearnActivityFragment();
         HomeActivityFragment homeMain = new HomeActivityFragment();
-        NewBaristaFragment newBaristaMain = new NewBaristaFragment();
         BaristaFragment baristaMain = new BaristaFragment();
+        NewBaristaFragment newBaristaMain = new NewBaristaFragment();
         CommunityFragment communityMain = new CommunityFragment();
 
         manager = getSupportFragmentManager();
@@ -69,7 +70,7 @@ public class BottomNavigationActivity extends AppCompatActivity {
                         replaceMainFragment(homeMain, item);
                         break;
                     case R.id.nvBaristaHome:
-                        replaceMainFragment(baristaMain, item);
+                        replaceMainFragment((Provider.getUser().getBaristaId().equals("") ? newBaristaMain : baristaMain), item);
                         break;
                     case R.id.nvLearnHome:
                         replaceMainFragment(learnMain, item);

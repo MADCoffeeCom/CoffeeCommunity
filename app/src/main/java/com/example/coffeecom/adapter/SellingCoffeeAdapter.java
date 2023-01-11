@@ -19,17 +19,16 @@ import com.example.coffeecom.R;
 import com.example.coffeecom.activity.BottomNavigationActivity;
 import com.example.coffeecom.fragment.CoffeeDetailsFragment;
 import com.example.coffeecom.fragment.CoffeeListFragment;
+import com.example.coffeecom.model.CoffeeModel;
 
 import java.util.ArrayList;
 
 public class SellingCoffeeAdapter extends RecyclerView.Adapter<SellingCoffeeAdapter.ViewHolder>{
-    ArrayList<String> coffeeTitle;
-    ArrayList<String> coffeePic;
+    ArrayList<CoffeeModel> coffees;
     Context activity;
 
-    public SellingCoffeeAdapter(ArrayList<String> coffeeTitle, ArrayList<String> coffeePic, Context activity) {
-        this.coffeePic = coffeePic;
-        this.coffeeTitle = coffeeTitle;
+    public SellingCoffeeAdapter(ArrayList<CoffeeModel> coffees, Context activity) {
+        this.coffees = coffees;
         this.activity = activity;
     }
 
@@ -56,10 +55,10 @@ public class SellingCoffeeAdapter extends RecyclerView.Adapter<SellingCoffeeAdap
     //fill in the xml file with necessary information
     @Override
     public void onBindViewHolder(@NonNull SellingCoffeeAdapter.ViewHolder holder, @SuppressLint("RecyclerView") int position) {
-        holder.coffeeTitle.setText(coffeeTitle.get(position));
+        holder.coffeeTitle.setText(coffees.get(position).getCoffeeTitle());
 
         //code to insert picture
-        String picUrl = coffeePic.get(position);
+        String picUrl = coffees.get(position).getCoffeePic();
         int drawableResourceId = holder.itemView.getContext().getResources().getIdentifier(picUrl, "drawable", holder.itemView.getContext().getPackageName());
         Glide.with(holder.itemView.getContext()).load(drawableResourceId).into(holder.coffeePic);
 
@@ -67,8 +66,8 @@ public class SellingCoffeeAdapter extends RecyclerView.Adapter<SellingCoffeeAdap
             @Override
             public void onClick(View view) {
                 //input code here to open details coffee page
-                Log.i("Coffeetype in adapter", coffeeTitle.get(position));
-                Provider.setCurrentCoffeeType(coffeeTitle.get(position));
+                Log.i("Coffeetype in adapter", coffees.get(position).getCoffeeId());
+                Provider.setCurrentCoffeeId(coffees.get(position).getCoffeeId());
 
                 ((BottomNavigationActivity)activity).replaceFragment(new CoffeeDetailsFragment());
             }
@@ -78,6 +77,6 @@ public class SellingCoffeeAdapter extends RecyclerView.Adapter<SellingCoffeeAdap
     //loop for how many times
     @Override
     public int getItemCount() {
-        return coffeeTitle.size();
+        return coffees.size();
     }
 }

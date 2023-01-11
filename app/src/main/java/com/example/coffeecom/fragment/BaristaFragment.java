@@ -44,8 +44,7 @@ public class BaristaFragment extends Fragment {
     RecyclerView pendingOrderRecycleView, coffeeSellingRecycleView;
     RecyclerView.Adapter pendingOrderRecycleViewAdapter, coffeeSellingRecycleViewAdapter;
 
-    ArrayList<String> coffeeTitle = new ArrayList<>();
-    ArrayList<String> coffeePic = new ArrayList<>();
+    ArrayList<CoffeeModel> sellingCoffee = new ArrayList<>();
 
     ArrayList<CoffeeModel> coffeesInOrder = new ArrayList<>();
 
@@ -53,8 +52,7 @@ public class BaristaFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        coffeeTitle.clear();
-        coffeePic.clear();
+        sellingCoffee.clear();
 //        QueryBrewedCoffee.queryOrder();
         Log.i(TAG, "onCreateView: Run here once");
         View view = inflater.inflate(R.layout.activity_barista,container,false);
@@ -111,8 +109,7 @@ public class BaristaFragment extends Fragment {
                     for (int i = 0; i < Provider.getCoffees().size(); i++) {
                         for (int j = 0; j < Provider.getUser().getSellingCoffeeId().size(); j++) {
                             if(Provider.getUser().getSellingCoffeeId().get(j).equals(Provider.getCoffees().get(i).getCoffeeId())){
-                                coffeeTitle.add(Provider.getCoffees().get(i).getCoffeeTitle());
-                                coffeePic.add(Provider.getCoffees().get(i).getCoffeePic());
+                                sellingCoffee.add(Provider.getCoffees().get(i));
                             }
                         }
                     }
@@ -163,13 +160,13 @@ public class BaristaFragment extends Fragment {
     }
 
     private void recyclerViewCoffeeType() {
-        if(coffeeTitle.isEmpty()) {
+        if(sellingCoffee.isEmpty()) {
             noCoffeeSoldErrorText.setVisibility(View.VISIBLE);
         }else{
             LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
             coffeeSellingRecycleView.setLayoutManager(linearLayoutManager);
 
-            coffeeSellingRecycleViewAdapter = new SellingCoffeeAdapter(coffeeTitle, coffeePic, getActivity());
+            coffeeSellingRecycleViewAdapter = new SellingCoffeeAdapter(sellingCoffee, getActivity());
             coffeeSellingRecycleView.setAdapter(coffeeSellingRecycleViewAdapter);
         }
     }

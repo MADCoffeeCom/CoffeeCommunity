@@ -86,9 +86,11 @@ public class WalletFragment extends Fragment {
             @Override
             public void onClick(View view) {
 //                Log.d(String.valueOf(topUpAmountTextBox.getText()), "bruhbruh: ");
-                if (!String.valueOf(topUpAmountTextBox.getText()).isEmpty()){
-                    Bundle bundle = new Bundle();
-                    bundle.putString("amount", String.valueOf(topUpAmountTextBox.getText()));
+                Bundle bundle = new Bundle();
+                bundle.putString("amount", String.valueOf(topUpAmountTextBox.getText()));
+                if(Provider.getUser().getWalletPin().equals("empty")){
+                    ((BottomNavigationActivity)getActivity()).replaceFragmentWithData(new WalletPinFragment(), bundle);
+                }else if (!String.valueOf(topUpAmountTextBox.getText()).isEmpty()){
                     ((BottomNavigationActivity)getActivity()).replaceFragmentWithData(new WalletPinFragment(), bundle);
                 }else{
                     errorWalletText.setVisibility(View.VISIBLE);

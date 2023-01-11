@@ -106,6 +106,7 @@
         android:layout_height="wrap_content"
         android:text="Forgot Password?"
         android:textStyle="italic"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="@+id/rememberMeCheckBox"
         app:layout_constraintEnd_toEndOf="@+id/editText_password"
         app:layout_constraintTop_toTopOf="@+id/rememberMeCheckBox" />
