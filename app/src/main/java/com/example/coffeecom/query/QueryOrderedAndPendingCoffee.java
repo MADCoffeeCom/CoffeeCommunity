@@ -46,7 +46,11 @@ public class QueryOrderedAndPendingCoffee {
                             Log.i("QueryOrderedCoffee", "result : " + result);
                             String[] resultSplitted = result.split("split");
                             for (String str: resultSplitted) {
+
                                 String[] orderDetails = str.split(" - ");
+                                for (String str1 : orderDetails){
+                                    Log.i("QueryOAPCoffee",""+str1+ " ");
+                                }
                                 String orderId = orderDetails[0];
                                 Log.i(TAG, "Debugging " + orderId);
                                 String baristaId = orderDetails[1];

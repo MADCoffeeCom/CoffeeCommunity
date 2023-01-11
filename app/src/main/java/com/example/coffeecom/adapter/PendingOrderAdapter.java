@@ -116,21 +116,21 @@ public class PendingOrderAdapter extends RecyclerView.Adapter<PendingOrderAdapte
 
             if(brewedOrder.get(position).getOrderStatus().equals("P")){
                 holder.acceptOrderBtn.setOnClickListener(view -> {
-//                    Provider.getUser().getBrewedOrder().get(position).setOrderStatus("A");
-                    Provider.getOrder().get(position).setOrderStatus("A");
-                    updateOrderStatus(brewedOrder.get(position).getOrderStatus(), brewedOrder.get(position).getOrderId());
+                    Provider.getUser().getBrewedOrder().get(position).setOrderStatus("A");
+                    updateOrderStatus("A", brewedOrder.get(position).getOrderId());
+                    Provider.getOrder().remove(position);
                     Toast.makeText(view.getContext(), "Accepted", Toast.LENGTH_SHORT).show();
                     notifyDataSetChanged();
-//                    QueryOrderedAndPendingCoffee.queryCoffeeInOrder();
+                    QueryOrderedAndPendingCoffee.queryOrderedAndPendingCoffee();
                 });
 
                 holder.declineOrderBtn.setOnClickListener(view -> {
-//                    Provider.getUser().getBrewedOrder().get(position).setOrderStatus("D");
-                    Provider.getOrder().get(position).setOrderStatus("D");
-                    updateOrderStatus(brewedOrder.get(position).getOrderStatus(), brewedOrder.get(position).getOrderId());
+                    Provider.getUser().getBrewedOrder().get(position).setOrderStatus("D");
+                    updateOrderStatus("D", brewedOrder.get(position).getOrderId());
+                    Provider.getOrder().remove(position);
                     Toast.makeText(view.getContext(), "Declined", Toast.LENGTH_SHORT).show();
                     notifyDataSetChanged();
-//                    QueryOrderedAndPendingCoffee.queryCoffeeInOrder();
+                    QueryOrderedAndPendingCoffee.queryOrderedAndPendingCoffee();
                 });
             }
 
@@ -172,6 +172,9 @@ public class PendingOrderAdapter extends RecyclerView.Adapter<PendingOrderAdapte
                     String result = putData.getResult();
                     if(result.equals("Update success")){
                         Log.i(TAG, "Update Successful");
+                    }
+                    else{
+                        Log.i(TAG,result +" " + status + " " +orderId);
                     }
                     for (int i = 0; i < Provider.getUser().getBrewedOrder().size(); i++) {
                         if (Provider.getUser().getBrewedOrder().get(i).getOrderId().equals(orderId)){
