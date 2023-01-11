@@ -51,9 +51,13 @@ public class SignupActivity extends AppCompatActivity {
         TextView email = (TextView) findViewById(R.id.signup_email);
         TextView passwordTextView = (TextView) findViewById(R.id.signup_password);
         TextView confirmTextView = (TextView) findViewById(R.id.signup_confirmpassword);
+        TextView streetNo = (TextView) findViewById(R.id.signup_street_no);
+        TextView taman = (TextView) findViewById(R.id.signup_taman);
+        TextView postalCode = (TextView) findViewById(R.id.signup_postal_code);
+        TextView state = (TextView) findViewById(R.id.signup_state);
         CheckBox tc_agreement = (CheckBox) findViewById(R.id.tc_agreement);
 
-        if (tc_agreement.isChecked() && passwordTextView.getText().toString().equals(confirmTextView.getText().toString()) && !email.getText().toString().equals("") && !username.getText().toString().equals("")) {
+        if (tc_agreement.isChecked() && passwordTextView.getText().toString().equals(confirmTextView.getText().toString()) && !email.getText().toString().equals("")  && !streetNo.getText().toString().equals("") && !taman.getText().toString().equals("") && !postalCode.getText().toString().equals("") && !state.getText().toString().equals("")) {
             try {
         Handler handler = new Handler(Looper.getMainLooper());
         handler.post(new Runnable() {
@@ -61,18 +65,27 @@ public class SignupActivity extends AppCompatActivity {
             public void run() {
                 //Starting Write and Read data with URL
                 //Creating array for parameters
-                String[] field = new String[4];
+                String[] field = new String[8];
                 field[0] = "username";
                 field[1] = "userId";
                 field[2] = "password";
                 field[3] = "email";
+                field[4] = "userStreetNo";
+                field[5] = "userTaman";
+                field[6] = "userPostalCode";
+                field[7] = "userState";
+
 
                 //Creating array for data
-                String[] data = new String[4];
+                String[] data = new String[8];
                 data[0] = username.getText().toString();
                 data[1] = "UID_"+username.getText().toString();
                 data[2] = passwordTextView.getText().toString();
                 data[3] = email.getText().toString();
+                data[4] = streetNo.getText().toString();
+                data[5] = taman.getText().toString();
+                data[6] = postalCode.getText().toString();
+                data[7] = state.getText().toString();
 
                 PutData putData = new PutData("http://" + Provider.getIpAddress()+ "/CoffeeCommunityPHP/signup.php", "POST", field, data);
                 if (putData.startPut()) {
