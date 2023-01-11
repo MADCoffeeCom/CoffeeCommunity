@@ -29,17 +29,21 @@ public class QueryBankCard {
                 if (putData.startPut()) {
                     if (putData.onComplete()) {
                         String result = putData.getResult();
-                        String[] splitResult = result.split("split");
-                        for (String bruh:splitResult) {
-                            String[] str = bruh.split(" - ");
-                            String cardNo = str[0];
-                            String cardHolderName = str[1];
-                            String cardCvv = str[2];
-                            String expDate = str[3];
-                            String bankName = str[4];
+                        if (result.equals("No results")){}
+                        else if(result.equals("Error: Database connection")){}
+                        else{
+                            String[] splitResult = result.split("split");
+                            for (String bruh:splitResult) {
+                                String[] str = bruh.split(" - ");
+                                String cardNo = str[0];
+                                String cardHolderName = str[1];
+                                String cardCvv = str[2];
+                                String expDate = str[3];
+                                String bankName = str[4];
 
-                            BankCardModel card = new BankCardModel(cardNo, cardHolderName, cardCvv, expDate, bankName);
-                            Provider.getUser().addBankCard(card);
+                                BankCardModel card = new BankCardModel(cardNo, cardHolderName, cardCvv, expDate, bankName);
+                                Provider.getUser().addBankCard(card);
+                            }
 
                         }
                     }

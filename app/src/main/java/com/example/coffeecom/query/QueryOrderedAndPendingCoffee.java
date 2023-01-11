@@ -38,9 +38,9 @@ public class QueryOrderedAndPendingCoffee {
                     if (putData.onComplete()) {
                         String result = putData.getResult();
                         if (result.equals("No results")){
-                            Log.e(TAG, "queryOrderedCoffee No results ");
+                            Log.i(TAG, "queryOrderedCoffee No results ");
                         }else if(result.equals("Error: Database connection")){
-                            Log.e(TAG, "queryOrderedCoffee Database connection problem");
+                            Log.i(TAG, "queryOrderedCoffee Database connection problem");
                         }
                         else{
                             Log.i("QueryOrderedCoffee", "result : " + result);
