@@ -119,9 +119,9 @@ public class  HomeActivityFragment extends Fragment {
 
     private void filterBarista(String text) {
         ArrayList<BaristaModel> filteredlist = new ArrayList<>();
-
+        double sensitivity = 0.5;
         for (BaristaModel barista : baristas) {
-                if (similarity(text, barista.getUserName()) > 0.3) {
+                if (similarity(text, barista.getUserName()) > sensitivity || isSubString(text,barista.getUserName() )) {
                     Log.i(TAG, "filter b: " + text + "\n" + barista.getUserName());
                     filteredlist.add(barista);
 //            if (barista.getUserName().toLowerCase().contains(text.toLowerCase())) {
@@ -138,9 +138,9 @@ public class  HomeActivityFragment extends Fragment {
 
     private void filterCoffee(String text) {
         ArrayList<CoffeeModel> filteredlistCoffee = new ArrayList<>();
-
+        double sensitivity = 0.5;
         for (int i = 0; i < coffees.size(); i++) {
-            if (similarity(text,(Provider.getCoffees().get(i).getCoffeeTitle())) >0.3|| similarity(text,Provider.getCoffees().get(i).getCoffeeType())>0.3){
+            if (similarity(text,(Provider.getCoffees().get(i).getCoffeeTitle())) > sensitivity|| similarity(text,Provider.getCoffees().get(i).getCoffeeType())>sensitivity || isSubString(text, Provider.getCoffees().get(i).getCoffeeTitle()) || isSubString(text, Provider.getCoffees().get(i).getCoffeeType())){
                 filteredlistCoffee.add(coffees.get(i));
                 Log.i(TAG, "filter c: " + text + "\n" + coffees.get(i).getCoffeeTitle());
             }
@@ -170,8 +170,17 @@ public class  HomeActivityFragment extends Fragment {
 
     }
 
-    public static void isSubString(String s1, String s2){
-
+    public static boolean isSubString(String s1, String s2){
+        String longer = s1, shorter = s2;
+        if (s1.length() < s2.length()) { // longer should always have greater length
+            longer = s2; shorter = s1;
+        }
+        int longerLength = longer.length();
+        if (longerLength == 0) { return true; /* both strings are zero length */ }
+        if (longer.substring(0,shorter.length()).equalsIgnoreCase(shorter)){
+            return true;
+        }
+        return false;
     }
 
     public static int editDistance(String s1, String s2) {

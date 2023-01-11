@@ -63,22 +63,23 @@ public class CoffeeDetailsFragment extends Fragment {
         View view = inflater.inflate(R.layout.activity_coffee_details,container,false);
 
         initialiseId(view);
-
-
-        for (int i = 0; i < Provider.getBaristas().size(); i++) {
-            if(Provider.getBaristas().get(i).getBaristaId().equals(Provider.getCurrentBaristaId())){
-                currentBaristaIndex = i;
-            }
-        }
         for (int j = 0; j < Provider.getCoffees().size(); j++) {
             if(Provider.getCoffees().get(j).getCoffeeId().equals(Provider.getCurrentCoffeeId())){
                 currentCoffeeIndex = j;
                 break;
             }
         }
+        currentCoffee = Provider.getCoffees().get(currentCoffeeIndex);
+        for (int i = 0; i < Provider.getBaristas().size(); i++) {
+            if (Provider.getBaristas().get(i).getBaristaId().equals(currentCoffee.getBaristaId())){
+                currentBaristaIndex = i;
+                break;
+            }
+        }
+
 
         currentBarista = Provider.getBaristas().get(currentBaristaIndex);
-        currentCoffee = Provider.getCoffees().get(currentCoffeeIndex);
+
         QueryRating.queryRating(currentBarista.getBaristaId());
 
 
