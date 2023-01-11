@@ -90,20 +90,19 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView50" />
 
-    <TextView
+    <EditText
         android:id="@+id/rateBaristaFeedbackText"
-        style="@style/c1"
-        android:layout_width="match_parent"
+        style="@style/defaultTextBox"
+        android:layout_width="0dp"
         android:layout_height="50dp"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="24dp"
         android:background="@drawable/textbox"
+        android:ems="10"
         android:gravity="center|left"
         android:hint="Feedback..."
-        android:paddingLeft="20dp"
-        android:paddingRight="20dp"
-        android:textSize="16sp"
+        android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/rateBaristaRatingBar" />

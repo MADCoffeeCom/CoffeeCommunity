@@ -150,6 +150,7 @@ public class BottomNavigationActivity extends AppCompatActivity {
     }
 
     public void clearBackStack() {
+        btmNavBar.setVisibility(View.VISIBLE);
         for(int i = 0; i < manager.getBackStackEntryCount(); ++i) {
             manager.popBackStack();
         }

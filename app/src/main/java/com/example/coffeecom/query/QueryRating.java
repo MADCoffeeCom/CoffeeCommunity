@@ -84,6 +84,7 @@ public class QueryRating {
                 if (putData.startPut()) {
                     if (putData.onComplete()) {
                         String result = putData.getResult();
+                        Log.i(TAG, "run: "+ result);
                     }
                 }
             }

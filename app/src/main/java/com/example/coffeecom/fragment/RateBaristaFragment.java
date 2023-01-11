@@ -1,5 +1,7 @@
 package com.example.coffeecom.fragment;
 
+import static com.example.coffeecom.helper.ToTitleCase.toTitleCase;
+
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -59,7 +61,7 @@ public class RateBaristaFragment extends Fragment {
         String picUrl = currentBarista.getUserPic();
         int drawableResourceId = getContext().getResources().getIdentifier(picUrl, "drawable", getContext().getPackageName());
         Glide.with(getContext()).load(drawableResourceId).into(rateBaristaPic);
-        rateBaristaName.setText(currentBarista.getUserName());
+        rateBaristaName.setText(toTitleCase(currentBarista.getUserName()));
 
         rateBaristaSubmitBtn.setOnClickListener(new View.OnClickListener() {
             @Override

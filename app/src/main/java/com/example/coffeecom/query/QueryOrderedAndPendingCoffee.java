@@ -71,7 +71,7 @@ public class QueryOrderedAndPendingCoffee {
                                 Log.i("orderStatus", orderStatus);
                                 OrderedCoffeeModel order = new OrderedCoffeeModel(orderId, baristaId, baristaName, baristaTaman, baristaDesc, userId, orderStartTime, orderEndTime, orderDuration, orderTotalPrice, orderStatus);
 
-                                if(order.getOrderStatus().equals("P")){
+                                if(order.getOrderStatus().equals("P") || order.getOrderStatus().equals("A") || order.getOrderStatus().equals("B")){
                                     Provider.getUser().addPendingOrder(order);
                                     Log.i(TAG, "Successfully Added Pending Order " + order.getOrderId());
                                 }else if(order.getOrderStatus().equals("T")){

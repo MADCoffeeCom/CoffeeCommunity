@@ -94,9 +94,11 @@ public class  HomeActivityFragment extends Fragment {
                 if (!charSequence.equals("")){
                     filterBarista(String.valueOf(charSequence));
                     filterCoffee(String.valueOf(charSequence));
+                    filterOrder(String.valueOf(charSequence));
                 }else{
                     baristaAdapter.filterList(baristas);
                     coffeeTypeAdapter.filterList(coffees);
+                    coffeeOrderAdapter.filterList(pendingOrder);
                 }
 
             }
@@ -106,9 +108,11 @@ public class  HomeActivityFragment extends Fragment {
                 if (!editable.equals("")){
                     filterBarista(String.valueOf(editable));
                     filterCoffee(String.valueOf(editable));
+                    filterOrder(String.valueOf(editable));
                 }else{
                     baristaAdapter.filterList(baristas);
                     coffeeTypeAdapter.filterList(coffees);
+                    coffeeOrderAdapter.filterList(pendingOrder);
                 }
             }
 
@@ -153,6 +157,26 @@ public class  HomeActivityFragment extends Fragment {
             coffeeTypeAdapter.filterList(filteredlistCoffee);
         }else{
             coffeeTypeAdapter.filterList(coffees);
+        }
+    }
+
+    private void filterOrder(String text) {
+        ArrayList<OrderedCoffeeModel> filteredOrder = new ArrayList<>();
+        double sensitivity = 0.5;
+        for (int i = 0; i < pendingOrder.size(); i++) {
+            if (similarity(text,(Provider.getUser().getPendingOrder().get(i).getBaristaName())) > sensitivity || isSubString(text, Provider.getUser().getPendingOrder().get(i).getBaristaName())){
+                filteredOrder.add(pendingOrder.get(i));
+                Log.i(TAG, "filter c: " + text + "\n" + pendingOrder.get(i).getOrderId());
+            }
+//            if (Provider.getCoffees().get(i).getCoffeeTitle().contains(text.toLowerCase()) || Provider.getCoffees().get(i).getCoffeeType().contains(text.toLowerCase())) {
+
+
+        }
+
+        if (!text.isEmpty()) {
+            coffeeOrderAdapter.filterList(filteredOrder);
+        }else{
+            coffeeOrderAdapter.filterList(pendingOrder);
         }
     }
 
