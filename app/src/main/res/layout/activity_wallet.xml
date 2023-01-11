@@ -171,7 +171,7 @@
         android:background="@drawable/textbox"
         android:ems="10"
         android:hint="Enter the amount..."
-        android:inputType="textPersonName"
+        android:inputType="number"
         android:textColorHint="@color/white_60"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

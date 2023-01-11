@@ -1,6 +1,7 @@
 package com.example.coffeecom.fragment;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +19,9 @@ import com.example.coffeecom.query.QueryTopUp;
 
 
 public class WalletPinFragment extends Fragment {
+
+    private static final String TAG = "WalletPinFragment";
+
 
     TextView pinNumberTextBox, errorPinText;
     Button nextBtnPin;

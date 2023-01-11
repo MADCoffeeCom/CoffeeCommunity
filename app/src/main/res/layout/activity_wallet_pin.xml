@@ -50,11 +50,10 @@
         android:background="@drawable/textbox"
         android:ems="10"
         android:hint="Your pin..."
-        android:inputType="textPersonName"
+        android:inputType="number"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView24"
-        tools:inputType="number" />
+        app:layout_constraintTop_toBottomOf="@+id/textView24" />
 
     <Button
         android:id="@+id/nextBtnPin"

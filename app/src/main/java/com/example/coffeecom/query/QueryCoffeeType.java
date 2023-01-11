@@ -7,8 +7,12 @@ import android.util.Log;
 import com.example.coffeecom.Provider;
 import com.example.coffeecom.model.CoffeeModel;
 import com.vishnusivadas.advanced_httpurlconnection.FetchData;
+import com.vishnusivadas.advanced_httpurlconnection.PutData;
 
 public class QueryCoffeeType {
+
+    private static final String TAG = "QueryCoffeeType";
+
     public static void queryCoffeeType() {
         Handler handler = new Handler(Looper.getMainLooper());
         handler.post(new Runnable() {
@@ -54,6 +58,46 @@ public class QueryCoffeeType {
                         }
                     }
 
+                }
+            }
+        });
+    }
+
+    public static void addCoffee(String title, String pic, String desc, String type, String price, String ing){
+        Log.i(TAG, "updateFeedback: Run here once");
+
+        Handler handler = new Handler(Looper.getMainLooper());
+        handler.post(new Runnable() {
+            @Override
+            public void run() {
+                String[] field = new String[8];
+                field[0] = "coffeeId";
+                field[1] = "baristaId";
+                field[2] = "coffeeTitle";
+                field[3] = "coffeePicUrl";
+                field[4] = "coffeeDesc";
+                field[5] = "coffeeType";
+                field[6] = "coffeePrice";
+                field[7] = "ingredients";
+
+                String[] data = new String[8];
+                data[0] = "c" + (Provider.getCoffees().size() + 1);
+                data[1] = Provider.getUser().getBaristaId();
+                data[2] = title;
+                data[3] = pic;
+                data[4] = desc;
+                data[5] = type;
+                data[6] = price;
+                data[7] = ing;
+
+                PutData putData = new PutData("http://" + Provider.getIpAddress() + "/CoffeeCommunityPHP/addcoffee.php", "POST", field, data);
+                if (putData.startPut()) {
+                    if (putData.onComplete()) {
+                        String result = putData.getResult();
+                        if(result.equals("Update success")){
+                            Log.i(TAG, "run: " + result);
+                        }
+                    }
                 }
             }
         });

@@ -18,6 +18,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.coffeecom.Provider;
 import com.example.coffeecom.R;
+import com.example.coffeecom.activity.BottomNavigationActivity;
 import com.example.coffeecom.adapter.CoffeeTypeAdapter;
 import com.example.coffeecom.adapter.PendingOrderAdapter;
 import com.example.coffeecom.adapter.SellingCoffeeAdapter;
@@ -73,7 +74,7 @@ public class BaristaFragment extends Fragment {
         addSellingCoffeeBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                ((BottomNavigationActivity)getActivity()).replaceFragment(new AddCoffeeFragment());
             }
         });
 

@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -58,6 +59,7 @@ public class AddBankCardFragment extends Fragment {
 
         if(isEdit){
             addBankCardTitleText.setText("Edit Card");
+            addCardBtn.setText("Edit Card");
             String cardNo = bundle.getString("cardNo");
             for (int i = 0; i < Provider.getUser().getBankCard().size(); i++) {
                 if(Provider.getUser().getBankCard().get(i).getBankCardNo().equals(cardNo)){
@@ -87,6 +89,7 @@ public class AddBankCardFragment extends Fragment {
 
         }else{
             addBankCardTitleText.setText("Add Card");
+            addCardBtn.setText("Add Card");
 
             addCardBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -124,5 +127,7 @@ public class AddBankCardFragment extends Fragment {
     public void insertCard(BankCardModel card) {
         Provider.getUser().addBankCard(card);
         QueryBankCard.addBankCard(card);
+        Toast.makeText(getContext(), "Add Successfully!", Toast.LENGTH_SHORT).show();
+        getActivity().onBackPressed();
     }
 }

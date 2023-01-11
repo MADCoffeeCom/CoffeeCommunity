@@ -36,7 +36,7 @@ public class QueryWallet {
                             Provider.getUser().setWalletBalance(0);
                             insertWallet(ranWalletId);
                         }else if (result.equals("Error: Database connection")){
-
+                            Log.i(TAG, "run: " + result);
                         }
                         else{
                         String[] str = result.split(" - ");
@@ -52,7 +52,7 @@ public class QueryWallet {
 
                         Provider.getUser().setWalletId(walletId);
                         Provider.getUser().setWalletBalance(Double.parseDouble(walletBalance));
-                        Provider.getUser().setWalletPin(null);
+                        Provider.getUser().setWalletPin(walletpin);
                     }
                     }
                 }

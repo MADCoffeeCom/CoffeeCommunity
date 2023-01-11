@@ -6,11 +6,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 
 import com.example.coffeecom.Provider;
 import com.example.coffeecom.R;
+import com.example.coffeecom.query.QueryCoffeeType;
 
 
 public class AddCoffeeFragment extends Fragment {
@@ -47,21 +49,17 @@ public class AddCoffeeFragment extends Fragment {
     }
 
 
-        private void addNewCoffee() {
+    private void addNewCoffee() {
 
-        String coffeePicUrl = "";
-        String coffeeId = "";
+        String coffeePicUrl = "coffee" + 1;
         String coffeeTitle = String.valueOf(coffeeNameTextBox.getText());
         String coffeeDesc = String.valueOf(coffeeDescTextBox.getText());
         String coffeeType = String.valueOf(coffeeTypeTextBox.getText());
         double coffeePrice = Double.parseDouble(String.valueOf(coffeePriceTextBox.getText()));
         String coffeeIngredients = String.valueOf(coffeeIngredientsTextBox.getText());
-        String baristaId = Provider.getUser().getBaristaId();
-        String baristaName = Provider.getUser().getUserName();
-        String baristaTaman = Provider.getUser().getUserTaman();
-        String baristaLocation = Provider.getUser().getUserLocation();
-
-        //insert sql code to update and notify change
+        QueryCoffeeType.addCoffee(coffeeTitle, coffeePicUrl, coffeeDesc, coffeeType, String.valueOf(coffeePrice), coffeeIngredients);
+        Toast.makeText(getContext(), "Add Coffee success!", Toast.LENGTH_SHORT).show();
+        getActivity().onBackPressed();
     }
 
 }

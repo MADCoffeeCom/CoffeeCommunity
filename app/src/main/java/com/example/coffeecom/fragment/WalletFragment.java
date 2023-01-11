@@ -56,6 +56,8 @@ public class WalletFragment extends Fragment {
         bankCardRecyclerView = view.findViewById(R.id.bankCardRecyclerView);
 
 
+
+
         backBtn.setOnClickListener(view1 -> getActivity().onBackPressed());
         addBankCardBtn.setOnClickListener(new View.OnClickListener() {
             @Override
