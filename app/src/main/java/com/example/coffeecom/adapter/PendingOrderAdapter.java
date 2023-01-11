@@ -25,6 +25,9 @@ import com.example.coffeecom.R;
 import com.example.coffeecom.activity.BottomNavigationActivity;
 import com.example.coffeecom.fragment.PendingOrderFragment;
 import com.example.coffeecom.model.BrewedOrderModel;
+import com.example.coffeecom.model.CoffeeModel;
+import com.example.coffeecom.model.OrderedCoffeeModel;
+import com.example.coffeecom.query.QueryOrderedAndPendingCoffee;
 import com.vishnusivadas.advanced_httpurlconnection.PutData;
 
 import java.util.ArrayList;
@@ -93,11 +96,19 @@ public class PendingOrderAdapter extends RecyclerView.Adapter<PendingOrderAdapte
 
     @Override
     public void onBindViewHolder(@NonNull PendingOrderAdapter.ViewHolder holder, int position) {
+        Log.i("PedingOrderAdapter", ""+brewedOrder.get(position).getOrderedCoffee().size());
         if(getItemViewType(position) != 0){
             //Insert details
+            Log.i("postionSize", ""+brewedOrder.get(position).getOrderedCoffee().size());
+            Log.i("postionId", ""+brewedOrder.get(position).getOrderId());
+            Log.i("postionBName", ""+brewedOrder.get(position).getBaristaId());
+            for (CoffeeModel cm : brewedOrder.get(position).getOrderedCoffee()){
+                Log.i("cm", ""+cm.getCoffeeTitle());
+            }
+            Log.i("ciffee", ""+brewedOrder.get(position).getOrderedCoffee().get(0).getCoffeeTitle());
             holder.orderCoffeeName.setText(brewedOrder.get(position).getOrderedCoffee().get(0).getCoffeeTitle());
             holder.orderCustomerName.setText(brewedOrder.get(position).getCustomerName());
-            holder.orderCoffeeTime.setText(convertDatetoStringTime(brewedOrder.get(position).getOrderStartTime()));
+            holder.orderCoffeeTime.setText(convertDatetoStringTime(Provider.getOrder().get(position).getOrderStartTime()));
             //Insert pic
             String picUrl = brewedOrder.get(position).getOrderedCoffee().get(0).getCoffeePic();
             int drawableResourceId = holder.itemView.getContext().getResources().getIdentifier(picUrl, "drawable", holder.itemView.getContext().getPackageName());
@@ -105,19 +116,21 @@ public class PendingOrderAdapter extends RecyclerView.Adapter<PendingOrderAdapte
 
             if(brewedOrder.get(position).getOrderStatus().equals("P")){
                 holder.acceptOrderBtn.setOnClickListener(view -> {
-//                    Provider.getUser().getBrewedOrder().get(position).setOrderStatus("A");
-                    Provider.getOrder().get(position).setOrderStatus("A");
-                    updateOrderStatus(brewedOrder.get(position).getOrderStatus(), brewedOrder.get(position).getOrderId());
+                    Provider.getUser().getBrewedOrder().get(position).setOrderStatus("A");
+                    updateOrderStatus("A", brewedOrder.get(position).getOrderId());
+                    Provider.getOrder().remove(position);
                     Toast.makeText(view.getContext(), "Accepted", Toast.LENGTH_SHORT).show();
                     notifyDataSetChanged();
+                    QueryOrderedAndPendingCoffee.queryOrderedAndPendingCoffee();
                 });
 
                 holder.declineOrderBtn.setOnClickListener(view -> {
-//                    Provider.getUser().getBrewedOrder().get(position).setOrderStatus("D");
-                    Provider.getOrder().get(position).setOrderStatus("D");
-                    updateOrderStatus(brewedOrder.get(position).getOrderStatus(), brewedOrder.get(position).getOrderId());
+                    Provider.getUser().getBrewedOrder().get(position).setOrderStatus("D");
+                    updateOrderStatus("D", brewedOrder.get(position).getOrderId());
+                    Provider.getOrder().remove(position);
                     Toast.makeText(view.getContext(), "Declined", Toast.LENGTH_SHORT).show();
                     notifyDataSetChanged();
+                    QueryOrderedAndPendingCoffee.queryOrderedAndPendingCoffee();
                 });
             }
 
@@ -159,6 +172,9 @@ public class PendingOrderAdapter extends RecyclerView.Adapter<PendingOrderAdapte
                     String result = putData.getResult();
                     if(result.equals("Update success")){
                         Log.i(TAG, "Update Successful");
+                    }
+                    else{
+                        Log.i(TAG,result +" " + status + " " +orderId);
                     }
                     for (int i = 0; i < Provider.getUser().getBrewedOrder().size(); i++) {
                         if (Provider.getUser().getBrewedOrder().get(i).getOrderId().equals(orderId)){

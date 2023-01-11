@@ -92,8 +92,8 @@ public class ForgotPasswordActivity extends AppCompatActivity {
 //        }
 
         BackgroundMail.newBuilder(this)
-                .withUsername(Provider.SENDER)
-                .withPassword(Provider.SENDERPASSWORD)
+//                .withUsername(Provider.SENDER)
+//                .withPassword(Provider.SENDERPASSWORD)
                 .withMailto(receiver)
                 .withType(BackgroundMail.TYPE_PLAIN)
                 .withSubject(subject)
