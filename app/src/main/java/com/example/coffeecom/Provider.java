@@ -14,6 +14,7 @@ import com.example.coffeecom.model.BrewedOrderModel;
 import com.example.coffeecom.model.CartCardModel;
 import com.example.coffeecom.model.CartModel;
 import com.example.coffeecom.model.CoffeeModel;
+import com.example.coffeecom.model.FeedbackModel;
 import com.example.coffeecom.model.HelpdeskModel;
 import com.example.coffeecom.model.PostModel;
 import com.example.coffeecom.model.ProfileModel;
@@ -44,6 +45,7 @@ public class Provider{
     private static ArrayList<BrewedOrderModel> order = new ArrayList<>();
     private static ArrayList<ApplicationModel> application = new ArrayList<>();
     private static ArrayList<ReportedPostModel> reportedPosts = new ArrayList<>();
+    private static ArrayList<FeedbackModel> feedbacks = new ArrayList<>();
 
     private static String currentCoffeeType;
     private static String currentBaristaId;
@@ -240,5 +242,13 @@ public class Provider{
 
     public static void addReportedPosts(ReportedPostModel reportedPost) {
         Provider.reportedPosts.add(reportedPost);
+    }
+
+    public static ArrayList<FeedbackModel> getFeedbacks() {
+        return feedbacks;
+    }
+
+    public static void addFeedbacks(FeedbackModel feedback) {
+        Provider.feedbacks.add(feedback);
     }
 }

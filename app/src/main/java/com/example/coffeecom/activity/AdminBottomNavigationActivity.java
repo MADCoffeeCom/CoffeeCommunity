@@ -14,6 +14,8 @@ import android.view.View;
 
 import com.example.coffeecom.R;
 import com.example.coffeecom.fragment.ApplicationFragment;
+import com.example.coffeecom.fragment.FeedbackListFragment;
+import com.example.coffeecom.fragment.HelpdeskEditFragment;
 import com.example.coffeecom.fragment.LearnActivityFragment;
 import com.example.coffeecom.fragment.ProfileMainFragment;
 import com.example.coffeecom.fragment.ReportedBaristaFragment;
@@ -38,8 +40,9 @@ public class AdminBottomNavigationActivity extends AppCompatActivity {
 
         ApplicationFragment application = new ApplicationFragment();
         LearnActivityFragment learn = new LearnActivityFragment();
-        ReportedBaristaFragment reportedBarista = new ReportedBaristaFragment();
         ReportedPostFragment reportedPost = new ReportedPostFragment();
+        FeedbackListFragment feedback = new FeedbackListFragment();
+        HelpdeskEditFragment helpdesk = new HelpdeskEditFragment();
 
 
         manager = getSupportFragmentManager();
@@ -56,9 +59,12 @@ public class AdminBottomNavigationActivity extends AppCompatActivity {
                     case R.id.nvLearnHome:
                         replaceMainFragment(learn, item);
                         break;
-//                    case R.id.nvReportedBarista:
-//                        replaceMainFragment(reportedBarista, item);
-//                        break;
+                    case R.id.nvFeedback:
+                        replaceMainFragment(feedback, item);
+                        break;
+                    case R.id.nvHelpdesk:
+                        replaceMainFragment(helpdesk, item);
+                        break;
                     case R.id.nvReportedPost:
                         replaceMainFragment(reportedPost, item);
                         break;

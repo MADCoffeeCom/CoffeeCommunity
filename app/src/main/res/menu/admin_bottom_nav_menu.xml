@@ -10,9 +10,14 @@
         android:icon="@drawable/nv_learn_home_black"/>
 
     <item
-        android:id="@+id/nvReportedBarista"
-        android:title="Reported Barista"
-        android:icon="@drawable/nv_profile_home_black"/>
+        android:id="@+id/nvFeedback"
+        android:title="Feedback"
+        android:icon="@drawable/ic_feedback"/>
+
+    <item
+        android:id="@+id/nvHelpdesk"
+        android:title="Edit HelpDesk"
+        android:icon="@drawable/ic_helpdesk"/>
 
     <item
         android:id="@+id/nvReportedPost"
