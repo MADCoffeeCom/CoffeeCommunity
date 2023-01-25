@@ -20,6 +20,29 @@
         app:srcCompat="@drawable/coffee1" />
 
     <ImageButton
+        android:id="@+id/editLearnBtn"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="24dp"
+        android:background="@color/transparent"
+        android:src="@drawable/ic_edit"
+        android:tint="@color/orange"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
+        android:id="@+id/deleteLearnBtn"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:background="@color/transparent"
+        android:src="@drawable/ic_delete"
+        app:layout_constraintBottom_toBottomOf="@+id/editLearnBtn"
+        app:layout_constraintEnd_toStartOf="@+id/editLearnBtn"
+        app:layout_constraintTop_toTopOf="@+id/editLearnBtn"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <ImageButton
         android:id="@+id/learnDetailsBckBtn"
         android:contentDescription="@string/back"
         android:elevation="8dp"
@@ -91,6 +114,18 @@
         app:layout_constraintStart_toStartOf="@+id/learnDetailsTypeText"
         app:layout_constraintTop_toBottomOf="@+id/learnDetailsImage"
         app:srcCompat="@drawable/ic_like" />
+
+    <ImageButton
+        android:id="@+id/editCoffeeBtn"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="24dp"
+        android:background="@color/transparent"
+        android:src="@drawable/ic_edit"
+        android:tint="@color/pure_white"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ScrollView
         android:layout_width="match_parent"

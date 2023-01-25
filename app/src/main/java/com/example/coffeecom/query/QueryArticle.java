@@ -81,4 +81,62 @@ public class QueryArticle {
             }
         });
     }
+
+    public static void editArticle(String articleId, String title, String type, String content, String pic){
+        Log.i(TAG, "editArticle: Run here once");
+
+        Handler handler = new Handler(Looper.getMainLooper());
+        handler.post(new Runnable() {
+            @Override
+            public void run() {
+                String[] field = new String[5];
+                field[0] = "articleId";
+                field[1] = "articleTitle";
+                field[2] = "articleType";
+                field[3] = "articleContent";
+                field[4] = "articlePic";
+
+                //Creating array for data
+                String[] data = new String[5];
+                data[0] = articleId;
+                data[1] = title;
+                data[2] = type;
+                data[3] = content;
+                data[4] = pic;
+
+                PutData putData = new PutData("http://" + Provider.getIpAddress() + "/CoffeeCommunityPHP/updatearticle.php", "POST", field, data);
+                if (putData.startPut()) {
+                    if (putData.onComplete()) {
+                        String result = putData.getResult();
+                        Log.i(TAG, "editArticle: " + result);
+                    }
+                }
+            }
+        });
+    }
+
+    public static void deleteArticle(String articleId){
+        Log.i(TAG, "deleteArticle: Run here once");
+
+        Handler handler = new Handler(Looper.getMainLooper());
+        handler.post(new Runnable() {
+            @Override
+            public void run() {
+                String[] field = new String[1];
+                field[0] = "articleId";
+
+                String[] data = new String[1];
+                data[0] = articleId;
+
+                PutData putData = new PutData("http://" + Provider.getIpAddress() + "/CoffeeCommunityPHP/deletearticle.php", "POST", field, data);
+                if (putData.startPut()) {
+                    if (putData.onComplete()) {
+                        String result = putData.getResult();
+                        Log.i(TAG, "deletearticle: " + result);
+                    }
+                }
+            }
+        });
+    }
+
 }

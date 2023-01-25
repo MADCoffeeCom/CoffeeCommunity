@@ -8,11 +8,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.example.coffeecom.Provider;
 import com.example.coffeecom.R;
@@ -21,6 +25,7 @@ import com.example.coffeecom.adapter.BaristaCardAdapter;
 import com.example.coffeecom.adapter.CoffeeOrderAdapter;
 import com.example.coffeecom.adapter.CoffeeTypeAdapter;
 import com.example.coffeecom.helper.QueryHomePage;
+import com.example.coffeecom.helper.SwipeRefreshLayoutCustom;
 import com.example.coffeecom.model.BaristaModel;
 import com.example.coffeecom.model.CoffeeModel;
 import com.example.coffeecom.model.OrderedCoffeeModel;
@@ -40,6 +45,8 @@ public class  HomeActivityFragment extends Fragment {
     private CoffeeOrderAdapter coffeeOrderAdapter;
     private ImageButton cartButton;
     private TextView TBSearch, noCoffeeOrderErrorText;
+    private SwipeRefreshLayout swipeRefreshLayout;
+    private ScrollView homeScroll;
     ArrayList<BaristaModel> baristas = new ArrayList<>();
     ArrayList<CoffeeModel> coffees = new ArrayList<>();
     ArrayList<OrderedCoffeeModel> pendingOrder = new ArrayList<>();
@@ -57,19 +64,17 @@ public class  HomeActivityFragment extends Fragment {
         noCoffeeOrderErrorText = view.findViewById(R.id.noCoffeeOrderErrorText);
         TBSearch = view.findViewById(R.id.TBSearch);
         cartButton = view.findViewById(R.id.BtnCart);
+        swipeRefreshLayout = view.findViewById(R.id.swipeRefreshLayout);
+        homeScroll = view.findViewById(R.id.homeScroll);
         cartButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
                 QueryCartItem.queryCartItem();
                 ((BottomNavigationActivity)getActivity()).replaceFragment(new CoffeeCartFragment());
-//                AppCompatActivity activity = (AppCompatActivity) HomeActivityFragment.this.getContext();
-//                CoffeeCartFragment baristaListFragment = new CoffeeCartFragment();
-//                activity.getSupportFragmentManager().beginTransaction().replace(R.id.containerMainPage,baristaListFragment).addToBackStack("HomeActivityFragment").commit();
-
-//                ((BottomNavigationActivity)getActivity()).replaceFragment(new CoffeeCartFragment());
             }
         });
         coffees = Provider.getCoffees();
+
         //Put here so that it pop the coffee after complete query
         recyclerViewCoffeeType();
         baristas = Provider.getBaristas();
@@ -78,7 +83,27 @@ public class  HomeActivityFragment extends Fragment {
         Log.i(TAG, "onCreateView: " + pendingOrder.size());
         recyclerViewCoffeeOrder();
 
+        swipeRefreshLayout.setOnChildScrollUpCallback(new SwipeRefreshLayout.OnChildScrollUpCallback() {
+            @Override
+            public boolean canChildScrollUp(@NonNull SwipeRefreshLayout parent, @Nullable View child) {
+                return homeScroll.getScrollY() != 0 ||
+                        homeScroll.getChildAt(0) == null ||
+                        homeScroll.getChildAt(0).getTop() < 0;
+            }
+        });
 
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                //query data
+                try {
+                    new QueryWaiterHomePage().call();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                swipeRefreshLayout.setRefreshing(false);
+            }
+        });
 
 
         TBSearch.setText("");
@@ -94,11 +119,11 @@ public class  HomeActivityFragment extends Fragment {
                 if (!charSequence.equals("")){
                     filterBarista(String.valueOf(charSequence));
                     filterCoffee(String.valueOf(charSequence));
-                    filterOrder(String.valueOf(charSequence));
+                    if(!pendingOrder.isEmpty()) filterOrder(String.valueOf(charSequence));
                 }else{
                     baristaAdapter.filterList(baristas);
                     coffeeTypeAdapter.filterList(coffees);
-                    coffeeOrderAdapter.filterList(pendingOrder);
+                    if(!pendingOrder.isEmpty()) coffeeOrderAdapter.filterList(pendingOrder);
                 }
 
             }
@@ -108,11 +133,11 @@ public class  HomeActivityFragment extends Fragment {
                 if (!editable.equals("")){
                     filterBarista(String.valueOf(editable));
                     filterCoffee(String.valueOf(editable));
-                    filterOrder(String.valueOf(editable));
+                    if(!pendingOrder.isEmpty()) filterOrder(String.valueOf(editable));
                 }else{
                     baristaAdapter.filterList(baristas);
                     coffeeTypeAdapter.filterList(coffees);
-                    coffeeOrderAdapter.filterList(pendingOrder);
+                    if(!pendingOrder.isEmpty()) coffeeOrderAdapter.filterList(pendingOrder);
                 }
             }
 
@@ -120,6 +145,8 @@ public class  HomeActivityFragment extends Fragment {
 
         return view;
     }
+
+
 
     private void filterBarista(String text) {
         ArrayList<BaristaModel> filteredlist = new ArrayList<>();

@@ -20,6 +20,18 @@
         app:srcCompat="@drawable/coffee1" />
 
     <ImageButton
+        android:id="@+id/editCoffeeBtn"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="24dp"
+        android:background="@color/transparent"
+        android:src="@drawable/ic_edit"
+        android:tint="@color/orange"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
         android:id="@+id/coffeeDetailsBackBtn"
         android:contentDescription="@string/back"
         android:layout_width="48dp"
@@ -224,5 +236,15 @@
             app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <ImageButton
+        android:id="@+id/deleteCoffeeBtn"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:background="@color/transparent"
+        android:src="@drawable/ic_delete"
+        app:layout_constraintBottom_toBottomOf="@+id/editCoffeeBtn"
+        app:layout_constraintEnd_toStartOf="@+id/editCoffeeBtn"
+        app:layout_constraintTop_toTopOf="@+id/editCoffeeBtn" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

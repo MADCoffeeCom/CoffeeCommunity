@@ -64,7 +64,7 @@ public class QueryCoffeeType {
     }
 
     public static void addCoffee(String title, String pic, String desc, String type, String price, String ing){
-        Log.i(TAG, "updateFeedback: Run here once");
+        Log.i(TAG, "addCoffee: Run here once");
 
         Handler handler = new Handler(Looper.getMainLooper());
         handler.post(new Runnable() {
@@ -97,6 +97,66 @@ public class QueryCoffeeType {
                         if(result.equals("Update success")){
                             Log.i(TAG, "run: " + result);
                         }
+                    }
+                }
+            }
+        });
+    }
+
+    public static void updateCoffee(String title, String pic, String desc, String type, String price, String ing, String coffeeId){
+        Log.i(TAG, "updateCoffee: Run here once");
+
+        Handler handler = new Handler(Looper.getMainLooper());
+        handler.post(new Runnable() {
+            @Override
+            public void run() {
+                String[] field = new String[7];
+                field[0] = "coffeeTitle";
+                field[1] = "coffeePicUrl";
+                field[2] = "coffeeDesc";
+                field[3] = "coffeeType";
+                field[4] = "coffeePrice";
+                field[5] = "ingredients";
+                field[6] = "coffeeId";
+
+                String[] data = new String[7];
+                data[0] = title;
+                data[1] = pic;
+                data[2] = desc;
+                data[3] = type;
+                data[4] = price;
+                data[5] = ing;
+                data[6] = coffeeId;
+
+                PutData putData = new PutData("http://" + Provider.getIpAddress() + "/CoffeeCommunityPHP/updatecoffee.php", "POST", field, data);
+                if (putData.startPut()) {
+                    if (putData.onComplete()) {
+                        String result = putData.getResult();
+                        Log.i(TAG, "updateCoffee: " + result);
+                    }
+                }
+            }
+        });
+    }
+
+    public static void deleteCoffee(String coffeeId){
+        Log.i(TAG, "deleteCoffee: Run here once");
+
+        Handler handler = new Handler(Looper.getMainLooper());
+        handler.post(new Runnable() {
+            @Override
+            public void run() {
+                String[] field = new String[1];
+                field[0] = "coffeeId";
+
+                String[] data = new String[1];
+                data[0] = coffeeId;
+
+                PutData putData = new PutData("http://" + Provider.getIpAddress() + "/CoffeeCommunityPHP/deletecoffee.php", "POST", field, data);
+                if (putData.startPut()) {
+                    if (putData.onComplete()) {
+                        String result = putData.getResult();
+                        Log.i(TAG, "deleteCoffee: " + result);
                     }
                 }
             }

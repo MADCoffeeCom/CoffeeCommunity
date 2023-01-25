@@ -3,6 +3,8 @@ package com.example.coffeecom.fragment;
 import static com.example.coffeecom.helper.FormatDateTime.convertStringtoDate;
 import static com.example.coffeecom.helper.ToTitleCase.toTitleCase;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -47,11 +49,12 @@ public class ProfileMainFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.activity_profile_main,container,false);
+        View view = inflater.inflate(R.layout.activity_profile_main, container, false);
         initialiseID(view);
-        brewRecycleView();
-        postRecycleView();
-        orderRecycleView();
+        Log.i(TAG, "getOrderedHistory: " + Provider.getUser().getOrderedHistory().size());
+        if (!Provider.getUser().getOrderedHistory().isEmpty()) orderRecycleView();
+        if (!Provider.getUser().getBrewedOrder().isEmpty()) brewRecycleView();
+        if (!Provider.getUser().getPostedPost().isEmpty()) postRecycleView();
 
         return view;
     }
@@ -75,7 +78,7 @@ public class ProfileMainFragment extends Fragment {
         postListRV.setAdapter(postAdapter);
     }
 
-    private void initialiseID(View view){
+    private void initialiseID(View view) {
         txtProfileName = view.findViewById(R.id.textViewProfileName);
         txtProfileType = view.findViewById(R.id.textViewProfileType);
         btnEditProfile = view.findViewById(R.id.imageButtonProfileEdit);
@@ -91,11 +94,11 @@ public class ProfileMainFragment extends Fragment {
         postListRV = view.findViewById(R.id.postListRV);
 
         txtProfileName.setText(toTitleCase(Provider.getUser().getUserName()));
-        if(!Provider.getUser().getAdminId().isEmpty()){
+        if (!Provider.getUser().getAdminId().isEmpty()) {
             txtProfileType.setText("Admin");
-        }else if(!Provider.getUser().getBaristaId().isEmpty()){
+        } else if (!Provider.getUser().getBaristaId().isEmpty()) {
             txtProfileType.setText("Barista");
-        }else{
+        } else {
             txtProfileType.setText("User");
         }
 
@@ -103,20 +106,32 @@ public class ProfileMainFragment extends Fragment {
     }
 
     public void initialiseBtn() {
-        btnEditProfile.setOnClickListener(view -> ((BottomNavigationActivity)getActivity()).replaceFragment(new ProfileEditUserFragment()));
-        btnTerms.setOnClickListener(view -> ((BottomNavigationActivity)getActivity()).replaceFragment(new TermsOfUseFragment()));
-        btnPrivacy.setOnClickListener(view -> ((BottomNavigationActivity)getActivity()).replaceFragment(new PrivacyPolicyFragment()));
-        btnBankCard.setOnClickListener(view -> ((BottomNavigationActivity)getActivity()).replaceFragment(new BankCardFragment()));
-        btnHelpDesk.setOnClickListener(view -> ((BottomNavigationActivity)getActivity()).replaceFragment(new HelpdeskFragment()));
-        btnFeedback.setOnClickListener(view -> ((BottomNavigationActivity)getActivity()).replaceFragment(new FeedbackFragment()));
+        btnEditProfile.setOnClickListener(view -> ((BottomNavigationActivity) getActivity()).replaceFragment(new ProfileEditUserFragment()));
+        btnTerms.setOnClickListener(view -> ((BottomNavigationActivity) getActivity()).replaceFragment(new TermsOfUseFragment()));
+        btnPrivacy.setOnClickListener(view -> ((BottomNavigationActivity) getActivity()).replaceFragment(new PrivacyPolicyFragment()));
+        btnBankCard.setOnClickListener(view -> ((BottomNavigationActivity) getActivity()).replaceFragment(new BankCardFragment()));
+        btnHelpDesk.setOnClickListener(view -> ((BottomNavigationActivity) getActivity()).replaceFragment(new HelpdeskFragment()));
+        btnFeedback.setOnClickListener(view -> ((BottomNavigationActivity) getActivity()).replaceFragment(new FeedbackFragment()));
 
         btnLogOut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent myIntent = new Intent(((BottomNavigationActivity)getContext()), LoginOrSignupActivity.class);
-                myIntent.putExtra("isLoggedOut", "true");
-                ((BottomNavigationActivity)getActivity()).startActivity(myIntent);
-                ((BottomNavigationActivity)getActivity()).finishAffinity();
+                AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                builder.setCancelable(true);
+                builder.setTitle("Log out");
+                builder.setMessage("Are you sure want to log out?");
+                builder.setPositiveButton("Log Out", (dialog, which) -> {
+                    Intent myIntent = new Intent((getContext()), LoginOrSignupActivity.class);
+                    myIntent.putExtra("isLoggedOut", "true");
+                    (getActivity()).startActivity(myIntent);
+                    (getActivity()).finishAffinity();
+                });
+                builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.cancel();
+                    }
+                });
+                builder.show();
             }
         });
     }

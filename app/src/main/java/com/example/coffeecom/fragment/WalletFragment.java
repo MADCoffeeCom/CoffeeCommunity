@@ -22,7 +22,7 @@ import com.example.coffeecom.adapter.BankCardAdapter;
 public class WalletFragment extends Fragment {
 
     TextView walletAmountText;
-    Button transactionBtn, topUpWalletBtn;
+    Button transactionBtn, topUpWalletBtn, withdrawBtn;
     Button topUp5Btn, topUp10Btn, topUp20Btn, topUp30Btn, topUp50Btn, topUp100Btn;
     TextView topUpAmountTextBox;
     TextView errorWalletText, noBankCardErrorText;
@@ -51,20 +51,13 @@ public class WalletFragment extends Fragment {
         topUp100Btn = view.findViewById(R.id.topUp100Btn);
         addBankCardBtn = view.findViewById(R.id.addBankCardBtn);
         topUpAmountTextBox = view.findViewById(R.id.topUpAmountTextBox);
+        withdrawBtn = view.findViewById(R.id.withdrawBtn);
         topUpAmountTextBox.setText("");
 
         bankCardRecyclerView = view.findViewById(R.id.bankCardRecyclerView);
 
-
-
-
         backBtn.setOnClickListener(view1 -> getActivity().onBackPressed());
-        addBankCardBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                ((BottomNavigationActivity)getActivity()).replaceFragment(new AddBankCardFragment());
-            }
-        });
+        addBankCardBtn.setOnClickListener(view13 -> ((BottomNavigationActivity)getActivity()).replaceFragment(new AddBankCardFragment()));
 
         try {
             walletAmountText.setText(String.format("%.2f", Provider.getUser().getWalletBalance()));
@@ -74,10 +67,13 @@ public class WalletFragment extends Fragment {
 
         topUpFillNumber();
 
-        transactionBtn.setOnClickListener(new View.OnClickListener() {
+        transactionBtn.setOnClickListener(view14 -> ((BottomNavigationActivity)getActivity()).replaceFragment(new TransactionFragment()));
+        withdrawBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ((BottomNavigationActivity)getActivity()).replaceFragment(new TransactionFragment());
+                Bundle bundle = new Bundle();
+                bundle.putString("amount", topUpAmountTextBox.getText().toString());
+                ((BottomNavigationActivity)getActivity()).replaceFragmentWithData(new WithdrawFragment(), bundle);
             }
         });
         recyclerViewBankCard();

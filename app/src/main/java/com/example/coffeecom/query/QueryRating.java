@@ -68,17 +68,17 @@ public class QueryRating {
             @Override
             public void run() {
 
-                String[] field = new String[1];
+                String[] field = new String[4];
                 field[0] = "baristaId";
-                field[0] = "userId";
-                field[0] = "rating";
-                field[0] = "ratingDesc";
+                field[1] = "userId";
+                field[2] = "rating";
+                field[3] = "ratingDesc";
 
-                String[] data = new String[1];
+                String[] data = new String[4];
                 data[0] = baristaId;
-                data[0] = userId;
-                data[0] = rating;
-                data[0] = ratingDesc;
+                data[1] = userId;
+                data[2] = rating;
+                data[3] = ratingDesc;
 
                 PutData putData = new PutData("http://" + Provider.getIpAddress() + "/CoffeeCommunityPHP/ratebarista.php", "POST", field, data);
                 if (putData.startPut()) {

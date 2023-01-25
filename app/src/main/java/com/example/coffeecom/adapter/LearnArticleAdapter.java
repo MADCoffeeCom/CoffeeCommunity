@@ -1,6 +1,7 @@
 package com.example.coffeecom.adapter;
 
 import android.annotation.SuppressLint;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +18,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.coffeecom.Provider;
 import com.example.coffeecom.R;
+import com.example.coffeecom.activity.AdminBottomNavigationActivity;
 import com.example.coffeecom.activity.BottomNavigationActivity;
 import com.example.coffeecom.fragment.CoffeeDetailsFragment;
 import com.example.coffeecom.fragment.LearnDetailsFragment;
@@ -26,6 +28,8 @@ import com.example.coffeecom.model.ArticleModel;
 import java.util.ArrayList;
 
 public class LearnArticleAdapter extends RecyclerView.Adapter<LearnArticleAdapter.ViewHolder> {
+
+    private static final String TAG = "LearnArticleAdapter";
 
     ArrayList<ArticleModel> articles;
     FragmentActivity activity;
@@ -76,7 +80,11 @@ public class LearnArticleAdapter extends RecyclerView.Adapter<LearnArticleAdapte
             public void onClick(View view) {
                 //input code here to open learn article details page
                 Provider.setCurrentArticleId(articles.get(position).getArticleId());
-                ((BottomNavigationActivity)activity).replaceFragment(new LearnDetailsFragment());
+                Log.i(TAG, "admin: " + Provider.getUser().getUserName());
+                if(Provider.getUser().getUserId().equals("UID_admin"))
+                    ((AdminBottomNavigationActivity)activity).replaceFragment(new LearnDetailsFragment());
+                else
+                    ((BottomNavigationActivity)activity).replaceFragment(new LearnDetailsFragment());
             }
         });
 

@@ -1,13 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.swiperefreshlayout.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/swipeRefreshLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".fragment.HomeActivityFragment"
+    tools:ignore="MergeRootFrame" >
+
+<androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/black"
-    tools:context=".fragment.HomeActivityFragment">
+    tools:context=".fragment.HomeActivityFragment"
+    >
 
     <ScrollView
+        android:id="@+id/homeScroll"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:paddingBottom="70dp"
@@ -19,7 +28,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical" >
+            android:orientation="vertical">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -38,24 +47,24 @@
 
                 <ImageButton
                     android:id="@+id/BtnCart"
-                    android:contentDescription="@string/view_cart"
                     android:layout_width="48dp"
                     android:layout_height="48dp"
                     android:layout_marginEnd="16dp"
                     android:background="@color/transparent"
+                    android:contentDescription="@string/view_cart"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="@+id/textView5"
-                    app:tint="@color/orange"
-                    app:srcCompat="@drawable/ic_cart" />
+                    app:srcCompat="@drawable/ic_cart"
+                    app:tint="@color/orange" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <androidx.fragment.app.FragmentContainerView
-                android:id="@+id/fragmentContainerView3"
-                android:name="com.example.coffeecom.fragment.LocationFragment"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp"
-                android:layout_marginTop="16dp"/>
+            <!--            <androidx.fragment.app.FragmentContainerView-->
+            <!--                android:id="@+id/fragmentContainerView3"-->
+            <!--                android:name="com.example.coffeecom.fragment.LocationFragment"-->
+            <!--                android:layout_width="match_parent"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:layout_marginBottom="16dp"-->
+            <!--                android:layout_marginTop="16dp"/>-->
 
             <EditText
                 android:id="@+id/TBSearch"
@@ -73,12 +82,12 @@
                 android:inputType="text"
                 android:textColorHint="@color/white_60" />
 
-            <androidx.fragment.app.FragmentContainerView
-                android:id="@+id/fragmentContainerView2"
-                android:name="com.example.coffeecom.fragment.CoffeeWalletFragment"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="40dp"/>
+            <!--            <androidx.fragment.app.FragmentContainerView-->
+            <!--                android:id="@+id/fragmentContainerView2"-->
+            <!--                android:name="com.example.coffeecom.fragment.CoffeeWalletFragment"-->
+            <!--                android:layout_width="match_parent"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:layout_marginTop="40dp"/>-->
 
 
             <TextView
@@ -95,8 +104,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingLeft="16dp"
-                android:paddingRight="16dp"
-                />
+                android:paddingRight="16dp" />
 
             <TextView
                 android:id="@+id/textView8"
@@ -111,10 +119,9 @@
                 android:id="@+id/baristaRecyclerView"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:paddingLeft="16dp"
-                android:paddingRight="16dp"
                 android:layout_marginBottom="40dp"
-                />
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp" />
 
             <TextView
                 android:id="@+id/textView55"
@@ -145,3 +152,4 @@
     </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>

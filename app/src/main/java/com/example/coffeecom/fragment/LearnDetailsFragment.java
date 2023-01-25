@@ -2,6 +2,7 @@ package com.example.coffeecom.fragment;
 
 import static com.example.coffeecom.helper.ToTitleCase.toTitleCase;
 
+import android.app.AlertDialog;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -9,8 +10,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
@@ -18,8 +21,11 @@ import androidx.fragment.app.Fragment;
 import com.bumptech.glide.Glide;
 import com.example.coffeecom.Provider;
 import com.example.coffeecom.R;
+import com.example.coffeecom.activity.AdminBottomNavigationActivity;
 import com.example.coffeecom.activity.BottomNavigationActivity;
 import com.example.coffeecom.model.ArticleModel;
+import com.example.coffeecom.query.QueryArticle;
+import com.example.coffeecom.query.QueryCoffeeType;
 import com.vishnusivadas.advanced_httpurlconnection.PutData;
 
 
@@ -38,6 +44,7 @@ public class LearnDetailsFragment extends Fragment {
     boolean isDownvoted = false;
     private int upvoteCount = 0;
     private int downvoteCount = 0;
+    private ImageButton deleteLearnBtn, editLearnBtn;
 
 
     @Override
@@ -66,6 +73,8 @@ public class LearnDetailsFragment extends Fragment {
         learnDetailsContentText = view.findViewById(R.id.learnDetailsContentText);
         learnDetailsImage = view.findViewById(R.id.learnDetailsImage);
         voteCountText = view.findViewById(R.id.voteCountText);
+        editLearnBtn = view.findViewById(R.id.editLearnBtn);
+        deleteLearnBtn = view.findViewById(R.id.deleteLearnBtn);
     }
 
     private void onBind() {
@@ -83,6 +92,40 @@ public class LearnDetailsFragment extends Fragment {
         downvoteCount = currentArticle.getArticleDownVote();
 
         voteCountText.setText(String.valueOf(upvoteCount - downvoteCount));
+
+        deleteLearnBtn.setVisibility(View.GONE);
+        editLearnBtn.setVisibility(View.GONE);
+
+        if(Provider.getUser().getUserId().equals("UID_admin")){
+            deleteLearnBtn.setVisibility(View.VISIBLE);
+            editLearnBtn.setVisibility(View.VISIBLE);
+
+            deleteLearnBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                    builder.setCancelable(true);
+                    builder.setTitle("Delete Article");
+                    builder.setMessage("Are you sure want to delete " + currentArticle.getArticleTitle() + "?");
+                    builder.setPositiveButton("Delete", (dialog, which) -> {
+                        QueryArticle.deleteArticle(currentArticle.getArticleId());
+                        Toast.makeText(getContext(), "Delete Article success!", Toast.LENGTH_SHORT).show();
+                        getActivity().onBackPressed();
+                    });
+                    builder.setNegativeButton("Cancel", (dialog, id) -> dialog.cancel());
+                    builder.show();
+                }
+            });
+
+            editLearnBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Bundle bundle = new Bundle();
+                    bundle.putString("articleId", currentArticle.getArticleId().toString());
+                    ((AdminBottomNavigationActivity)getActivity()).replaceFragmentWithData(new CreateArticleFragment(), bundle);
+                }
+            });
+        }
 
         upvoteBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -137,7 +180,10 @@ public class LearnDetailsFragment extends Fragment {
         learnDetailsBckBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ((BottomNavigationActivity)getActivity()).onBackPressed();
+                if(Provider.getUser().getUserId().equals("UID_admin"))
+                    ((AdminBottomNavigationActivity)getActivity()).onBackPressed();
+                else
+                    ((BottomNavigationActivity)getActivity()).onBackPressed();
             }
         });
     }
