@@ -15,7 +15,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import com.bumptech.glide.Glide;
@@ -25,7 +24,6 @@ import com.example.coffeecom.activity.AdminBottomNavigationActivity;
 import com.example.coffeecom.activity.BottomNavigationActivity;
 import com.example.coffeecom.model.ArticleModel;
 import com.example.coffeecom.query.QueryArticle;
-import com.example.coffeecom.query.QueryCoffeeType;
 import com.vishnusivadas.advanced_httpurlconnection.PutData;
 
 

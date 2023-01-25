@@ -14,7 +14,7 @@ import androidx.fragment.app.Fragment;
 import com.example.coffeecom.Provider;
 import com.example.coffeecom.R;
 import com.example.coffeecom.model.CoffeeModel;
-import com.example.coffeecom.query.QueryCoffeeType;
+import com.example.coffeecom.query.QueryCoffee;
 
 
 public class AddCoffeeFragment extends Fragment {
@@ -87,7 +87,7 @@ public class AddCoffeeFragment extends Fragment {
         String coffeeType = String.valueOf(coffeeTypeTextBox.getText());
         double coffeePrice = Double.parseDouble(String.valueOf(coffeePriceTextBox.getText()));
         String coffeeIngredients = String.valueOf(coffeeIngredientsTextBox.getText());
-        QueryCoffeeType.addCoffee(coffeeTitle, coffeePicUrl, coffeeDesc, coffeeType, String.valueOf(coffeePrice), coffeeIngredients);
+        QueryCoffee.addCoffee(coffeeTitle, coffeePicUrl, coffeeDesc, coffeeType, String.valueOf(coffeePrice), coffeeIngredients);
         Toast.makeText(getContext(), "Add Coffee success!", Toast.LENGTH_SHORT).show();
         getActivity().onBackPressed();
     }
@@ -99,7 +99,7 @@ public class AddCoffeeFragment extends Fragment {
         String coffeeType = String.valueOf(coffeeTypeTextBox.getText());
         double coffeePrice = Double.parseDouble(String.valueOf(coffeePriceTextBox.getText()));
         String coffeeIngredients = String.valueOf(coffeeIngredientsTextBox.getText());
-        QueryCoffeeType.updateCoffee(coffeeTitle, coffeePicUrl, coffeeDesc, coffeeType, String.valueOf(coffeePrice), coffeeIngredients, currentCoffee.getCoffeeId());
+        QueryCoffee.updateCoffee(coffeeTitle, coffeePicUrl, coffeeDesc, coffeeType, String.valueOf(coffeePrice), coffeeIngredients, currentCoffee.getCoffeeId());
         Toast.makeText(getContext(), "Edit Coffee success!", Toast.LENGTH_SHORT).show();
         getActivity().onBackPressed();
     }

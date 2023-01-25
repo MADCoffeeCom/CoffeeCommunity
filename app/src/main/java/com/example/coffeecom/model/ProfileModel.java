@@ -60,6 +60,19 @@ public class ProfileModel {
         this.userState = userState;
     }
 
+    public ProfileModel(String userPic, String userId, String baristaId, String adminId, String username, String email, String userStreetNo, String userTaman, String userPostalCode, String userState) {
+        this.userPic = userPic;
+        this.userId = userId;
+        this.baristaId = baristaId;
+        this.adminId = adminId;
+        this.userName = username;
+        this.email = email;
+        this.userStreetNo = userStreetNo;
+        this.userTaman = userTaman;
+        this.userPostalCode = userPostalCode;
+        this.userState = userState;
+    }
+
     //for barista use
     public ProfileModel(String baristaId, String userPic, String userName, String userTaman, String userLocation) {
         this.baristaId = baristaId;

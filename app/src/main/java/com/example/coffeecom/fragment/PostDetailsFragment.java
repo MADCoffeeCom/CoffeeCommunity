@@ -196,6 +196,15 @@ public class PostDetailsFragment extends Fragment {
                 updateDownVote(downvoteCount);
             }
         });
+
+        posterText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Bundle bundle = new Bundle();
+                bundle.putString("userId", currentPost.getPosterId());
+                ((BottomNavigationActivity)getActivity()).replaceFragmentWithData(new ProfileViewFragment(), bundle);
+            }
+        });
     }
 
     private void updateDownVote(int count) {

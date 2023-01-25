@@ -9,7 +9,7 @@ import com.example.coffeecom.model.CoffeeModel;
 import com.vishnusivadas.advanced_httpurlconnection.FetchData;
 import com.vishnusivadas.advanced_httpurlconnection.PutData;
 
-public class QueryCoffeeType {
+public class QueryCoffee {
 
     private static final String TAG = "QueryCoffeeType";
 

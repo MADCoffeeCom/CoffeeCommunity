@@ -19,6 +19,7 @@ import com.bumptech.glide.Glide;
 import com.example.coffeecom.R;
 import com.example.coffeecom.activity.BottomNavigationActivity;
 import com.example.coffeecom.fragment.PostDetailsFragment;
+import com.example.coffeecom.fragment.ProfileViewFragment;
 import com.example.coffeecom.model.CoffeeModel;
 import com.example.coffeecom.model.PostModel;
 
@@ -84,6 +85,14 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder>{
             }
         });
 
+        holder.posterNameText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Bundle bundle = new Bundle();
+                bundle.putString("userId", posts.get(position).getPosterId());
+                ((BottomNavigationActivity)activity).replaceFragmentWithData(new ProfileViewFragment(), bundle);
+            }
+        });
 
     }
 

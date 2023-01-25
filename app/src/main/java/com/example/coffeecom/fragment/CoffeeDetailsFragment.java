@@ -3,8 +3,6 @@ package com.example.coffeecom.fragment;
 import static com.example.coffeecom.helper.ToTitleCase.toTitleCase;
 
 import android.app.AlertDialog;
-import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -18,7 +16,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -27,13 +24,12 @@ import com.bumptech.glide.Glide;
 import com.example.coffeecom.Provider;
 import com.example.coffeecom.R;
 import com.example.coffeecom.activity.BottomNavigationActivity;
-import com.example.coffeecom.activity.LoginOrSignupActivity;
 import com.example.coffeecom.adapter.RatingBarAdapter;
 import com.example.coffeecom.model.BaristaModel;
 import com.example.coffeecom.model.CartCardModel;
 import com.example.coffeecom.model.CoffeeModel;
 import com.example.coffeecom.model.ProfileModel;
-import com.example.coffeecom.query.QueryCoffeeType;
+import com.example.coffeecom.query.QueryCoffee;
 import com.example.coffeecom.query.QueryRating;
 import com.vishnusivadas.advanced_httpurlconnection.PutData;
 
@@ -105,7 +101,7 @@ public class CoffeeDetailsFragment extends Fragment {
                     builder.setTitle("Delete Coffee");
                     builder.setMessage("Are you sure want to delete " + currentCoffee.getCoffeeTitle() + "?");
                     builder.setPositiveButton("Delete", (dialog, which) -> {
-                        QueryCoffeeType.deleteCoffee(currentCoffee.getCoffeeId());
+                        QueryCoffee.deleteCoffee(currentCoffee.getCoffeeId());
                         Toast.makeText(getContext(), "Delete Coffee success!", Toast.LENGTH_SHORT).show();
                         getActivity().onBackPressed();
                     });
