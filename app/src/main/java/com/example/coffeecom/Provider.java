@@ -46,6 +46,7 @@ public class Provider{
     private static ArrayList<ApplicationModel> application = new ArrayList<>();
     private static ArrayList<ReportedPostModel> reportedPosts = new ArrayList<>();
     private static ArrayList<FeedbackModel> feedbacks = new ArrayList<>();
+    private static ArrayList<HelpdeskModel> helpdesks = new ArrayList<>();
 
     private static String currentCoffeeType;
     private static String currentBaristaId;
@@ -250,5 +251,13 @@ public class Provider{
 
     public static void addFeedbacks(FeedbackModel feedback) {
         Provider.feedbacks.add(feedback);
+    }
+
+    public static ArrayList<HelpdeskModel> getHelpdesks() {
+        return helpdesks;
+    }
+
+    public static void addHelpdesks(HelpdeskModel helpdesk) {
+        Provider.helpdesks.add(helpdesk);
     }
 }

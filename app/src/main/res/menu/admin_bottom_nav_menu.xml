@@ -24,8 +24,4 @@
         android:title="Reported Post"
         android:icon="@drawable/nv_community_home_black"/>
 
-    <item
-        android:id="@+id/nvProfileHome"
-        android:title="Log Out"
-        android:icon="@drawable/ic_logout"/>
 </menu>

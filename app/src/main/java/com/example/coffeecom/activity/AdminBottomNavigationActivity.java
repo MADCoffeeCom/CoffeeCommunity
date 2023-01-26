@@ -15,12 +15,11 @@ import android.view.View;
 import com.example.coffeecom.R;
 import com.example.coffeecom.fragment.ApplicationFragment;
 import com.example.coffeecom.fragment.FeedbackListFragment;
-import com.example.coffeecom.fragment.HelpdeskEditFragment;
+import com.example.coffeecom.fragment.HelpdeskAdminFragment;
 import com.example.coffeecom.fragment.LearnActivityFragment;
-import com.example.coffeecom.fragment.ProfileMainFragment;
-import com.example.coffeecom.fragment.ReportedBaristaFragment;
 import com.example.coffeecom.fragment.ReportedPostFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationBarView;
 
 public class AdminBottomNavigationActivity extends AppCompatActivity {
@@ -30,19 +29,31 @@ public class AdminBottomNavigationActivity extends AppCompatActivity {
     int container = R.id.containerMainPage;
     FragmentManager manager;
 
+    FloatingActionButton adminLogoutBtn;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_bottom_navigation);
 
         btmNavBar = findViewById(R.id.bottomNavigationView);
+        adminLogoutBtn = findViewById(R.id.adminLogoutBtn);
+        adminLogoutBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent myIntent = new Intent(AdminBottomNavigationActivity.this, LoginOrSignupActivity.class);
+                myIntent.putExtra("isLoggedOut", "true");
+                startActivity(myIntent);
+                finishAffinity();
+            }
+        });
         btmNavBar.setSelectedItemId(R.id.nvApplication);
 
         ApplicationFragment application = new ApplicationFragment();
         LearnActivityFragment learn = new LearnActivityFragment();
         ReportedPostFragment reportedPost = new ReportedPostFragment();
         FeedbackListFragment feedback = new FeedbackListFragment();
-        HelpdeskEditFragment helpdesk = new HelpdeskEditFragment();
+        HelpdeskAdminFragment helpdesk = new HelpdeskAdminFragment();
 
 
         manager = getSupportFragmentManager();
@@ -67,12 +78,6 @@ public class AdminBottomNavigationActivity extends AppCompatActivity {
                         break;
                     case R.id.nvReportedPost:
                         replaceMainFragment(reportedPost, item);
-                        break;
-                    case R.id.nvProfileHome:
-                        Intent myIntent = new Intent(AdminBottomNavigationActivity.this, LoginOrSignupActivity.class);
-                        myIntent.putExtra("isLoggedOut", "true");
-                        startActivity(myIntent);
-                        finishAffinity();
                         break;
                 }
                 return false;

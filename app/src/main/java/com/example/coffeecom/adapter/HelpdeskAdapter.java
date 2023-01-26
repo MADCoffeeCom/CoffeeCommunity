@@ -5,6 +5,7 @@ import static android.content.Context.LAYOUT_INFLATER_SERVICE;
 
 
 import android.content.Context;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -21,19 +22,25 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.coffeecom.R;
+import com.example.coffeecom.activity.AdminBottomNavigationActivity;
+import com.example.coffeecom.fragment.HelpdeskEditFragment;
 import com.example.coffeecom.fragment.HelpdeskFragment;
 import com.example.coffeecom.model.HelpdeskModel;
+
+import java.util.ArrayList;
 
 public class HelpdeskAdapter extends RecyclerView.Adapter<HelpdeskAdapter.ViewHolder>{
 
     private static final String TAG = "HelpdeskAdapter";
 
-    HelpdeskModel helpdeskModel;
+    ArrayList<HelpdeskModel> helpdesk;
     Context activity;
+    String mode;
 
-    public HelpdeskAdapter(HelpdeskModel helpdeskModel, Context activity) {
-        this.helpdeskModel = helpdeskModel;
+    public HelpdeskAdapter(ArrayList<HelpdeskModel> helpdesk, Context activity, String mode) {
+        this.helpdesk = helpdesk;
         this.activity = activity;
+        this.mode = mode;
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
@@ -56,14 +63,27 @@ public class HelpdeskAdapter extends RecyclerView.Adapter<HelpdeskAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(@NonNull HelpdeskAdapter.ViewHolder holder, int position) {
-        Log.i(TAG, "onBindViewHolder: " + helpdeskModel.getAnswer().size());
-        holder.helpdeskQuestionText.setText(helpdeskModel.getQuestion().get(position));
-        holder.helpdeskQuestionCard.setOnClickListener(view -> showPopup(view, position));
+        holder.helpdeskQuestionText.setText(helpdesk.get(position).getQuestion());
+
+        holder.helpdeskQuestionCard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(mode.equals("edit")){
+                    Bundle bundle = new Bundle();
+                    bundle.putString("helpId", helpdesk.get(position).getHelpId());
+                    ((AdminBottomNavigationActivity)activity).replaceFragmentWithData(new HelpdeskEditFragment(), bundle);
+                }else {
+                    showPopup(view, position);
+                }
+            }
+        });
+
+//        holder.helpdeskQuestionCard.setOnClickListener(view -> showPopup(view, position));
     }
 
     @Override
     public int getItemCount() {
-        return helpdeskModel.getQuestion().size();
+        return helpdesk.size();
     }
 
     public void showPopup(View view, int position) {
@@ -74,9 +94,8 @@ public class HelpdeskAdapter extends RecyclerView.Adapter<HelpdeskAdapter.ViewHo
         final PopupWindow popupWindow = new PopupWindow(popupView, width, height, true);
 
         TextView helpDeskAnswer = (TextView) popupView.findViewById(R.id.helpDeskAnswer);
-        helpDeskAnswer.setText(helpdeskModel.getAnswer().get(position));
+        helpDeskAnswer.setText(helpdesk.get(position).getAnswer());
 
-//        popupWindow.showAsDropDown(popupView, 0, 0);
         popupWindow.showAtLocation(view, Gravity.CENTER, 0, 0);
 
         popupView.setOnTouchListener((v, event) -> {

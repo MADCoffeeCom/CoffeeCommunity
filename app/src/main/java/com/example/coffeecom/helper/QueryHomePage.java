@@ -6,6 +6,7 @@ import com.example.coffeecom.query.QueryBankCard;
 import com.example.coffeecom.query.QueryBarista;
 import com.example.coffeecom.query.QueryBrewedCoffee;
 import com.example.coffeecom.query.QueryCoffee;
+import com.example.coffeecom.query.QueryHelpdesk;
 import com.example.coffeecom.query.QueryOrderedAndPendingCoffee;
 import com.example.coffeecom.query.QueryPost;
 import com.example.coffeecom.query.QueryWallet;
@@ -23,5 +24,6 @@ public class QueryHomePage {
         QueryWallet.queryWallet();
         QueryBankCard.queryBankCard();
         QueryArticle.queryArticle();
+        QueryHelpdesk.queryHelpdesk();
     }
 }
