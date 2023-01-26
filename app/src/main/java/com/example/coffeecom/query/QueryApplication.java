@@ -49,6 +49,39 @@ public class QueryApplication {
         }
     }
 
+    public static void addApplication(String userId, String baristaDesc, String years){
+
+        String apId = "ap" + (countApplication() + 1);
+        Handler handler = new Handler(Looper.getMainLooper());
+        handler.post(new Runnable() {
+            @Override
+            public void run() {
+                String[] field = new String[5];
+                field[0] = "applicationId";
+                field[1] = "userId";
+                field[2] = "userBackground";
+                field[3] = "yearsOfExperience";
+                field[4] = "status";
+
+                //Creating array for data
+                String[] data = new String[5];
+                data[0] = apId;
+                data[1] = userId;
+                data[2] = baristaDesc;
+                data[3] = years;
+                data[4] = "P";
+
+                PutData putData = new PutData("http://" + Provider.getIpAddress() + "/CoffeeCommunityPHP/addapplication.php", "POST", field, data);
+                if (putData.startPut()) {
+                    if (putData.onComplete()) {
+                        String result = putData.getResult();
+                        Log.i(TAG, "addapplication: " + result);
+                    }
+                }
+            }
+        });
+    }
+
     public static void acceptApplication(String applicationId, String userId, String baristaDesc, String years){
         Handler handler = new Handler(Looper.getMainLooper());
         handler.post(new Runnable() {
@@ -74,6 +107,7 @@ public class QueryApplication {
             }
         });
     }
+
     public static Integer queryBaristaSize(){
         FetchData fetchData = new FetchData("http://" + Provider.getIpAddress() + "/CoffeeCommunityPHP/baristasize.php");
         if (fetchData.startFetch()) {
@@ -144,8 +178,6 @@ public class QueryApplication {
     }
 
     public static void declineApplication(String applicationId){
-        Provider.getPosts().clear();
-
         Handler handler = new Handler(Looper.getMainLooper());
         handler.post(new Runnable() {
             @Override
@@ -169,6 +201,18 @@ public class QueryApplication {
                 }
             }
         });
+    }
+
+    public static int countApplication(){
+        FetchData fetchData = new FetchData("http://" + Provider.getIpAddress() + "/CoffeeCommunityPHP/countapplication.php");
+        if (fetchData.startFetch()) {
+            if (fetchData.onComplete()) {
+                String result = fetchData.getResult();
+                Log.i(TAG, "countApplication: " + result);
+                return Integer.parseInt(result);
+            }
+        }
+        return 0;
     }
 }
 

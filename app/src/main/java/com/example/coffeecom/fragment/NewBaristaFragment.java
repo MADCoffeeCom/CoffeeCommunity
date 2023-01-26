@@ -11,8 +11,11 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
+import com.example.coffeecom.Provider;
 import com.example.coffeecom.R;
 import com.example.coffeecom.activity.BottomNavigationActivity;
+import com.example.coffeecom.query.QueryApplication;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 
 public class NewBaristaFragment extends Fragment {
@@ -40,9 +43,10 @@ public class NewBaristaFragment extends Fragment {
             public void onClick(View view) {
                 if(experiencesTextBox.getText().length() != 0 && yearsOfExperiencesTextBox.length() != 0){
                     //Write sql code here to directly update database
-                    ((BottomNavigationActivity)getActivity()).replaceFragment(new BaristaFragment());
+                    QueryApplication.addApplication(Provider.getUser().getUserId(), experiencesTextBox.getText().toString(), yearsOfExperiencesTextBox.getText().toString());
+                    Toast.makeText(getContext(), "Application submitted!", Toast.LENGTH_SHORT).show();
+                    ((BottomNavigationActivity)getActivity()).replaceMainFragment(new HomeActivityFragment(), ((BottomNavigationActivity) getActivity()).getBtmNavBar().getMenu().findItem(R.id.nvBuyCoffeeHome));
 
-                    Toast.makeText(getContext(), "Application submitted!", Toast.LENGTH_SHORT);
                 }else{
                     noInputErrorText.setVisibility(View.VISIBLE);
                 }

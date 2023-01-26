@@ -23,6 +23,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.example.coffeecom.Provider;
 import com.example.coffeecom.R;
 import com.example.coffeecom.activity.BottomNavigationActivity;
@@ -36,7 +37,7 @@ public class ProfileMainFragment extends Fragment {
     private static final String TAG = "ProfileMainFragment";
 
     private TextView txtProfileName, txtProfileType;
-    private ImageView imgBarista;
+    private ImageView imageViewProfileImage;
     private RecyclerView orderListRV, brewListRV, postListRV;
     private ImageButton btnEditProfile;
     private ConstraintLayout btnTerms, btnPrivacy, btnBankCard, btnHelpDesk, btnFeedback, btnLogOut;
@@ -88,7 +89,7 @@ public class ProfileMainFragment extends Fragment {
         btnHelpDesk = view.findViewById(R.id.btnProfile4);
         btnFeedback = view.findViewById(R.id.btnProfile5);
         btnLogOut = view.findViewById(R.id.btnProfile6);
-        imgBarista = view.findViewById(R.id.baristaPic);
+        imageViewProfileImage = view.findViewById(R.id.imageViewProfileImage);
         orderListRV = view.findViewById(R.id.orderListRV);
         brewListRV = view.findViewById(R.id.brewListRV);
         postListRV = view.findViewById(R.id.postListRV);
@@ -101,6 +102,12 @@ public class ProfileMainFragment extends Fragment {
         } else {
             txtProfileType.setText("User");
         }
+
+        //code to insert picture
+        String picUrl = Provider.getUser().getUserPic();
+        int drawableResourceId = getContext().getResources().getIdentifier(picUrl, "drawable", getContext().getPackageName());
+        Glide.with(getContext()).load(drawableResourceId).into(imageViewProfileImage);
+
 
         initialiseBtn();
     }

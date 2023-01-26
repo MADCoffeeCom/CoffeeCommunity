@@ -164,4 +164,12 @@ public class BottomNavigationActivity extends AppCompatActivity {
     public void setContainer(int container) {
         this.container = container;
     }
+
+    public BottomNavigationView getBtmNavBar() {
+        return btmNavBar;
+    }
+
+    public void setBtmNavBar(BottomNavigationView btmNavBar) {
+        this.btmNavBar = btmNavBar;
+    }
 }

@@ -131,7 +131,7 @@ public class LearnActivityFragment extends Fragment {
         beanArticleAdapter = new LearnArticleAdapter(filterArticleBasedOnType("beans", articles), getActivity());
         learnArticleAdapter = new LearnArticleAdapter(filterArticleBasedOnType("learn", articles), getActivity());
 
-        recyclerViewGeneralArticleList.setAdapter(learnArticleAdapter);
+        recyclerViewGeneralArticleList.setAdapter(generalArticleAdapter);
         recyclerViewCoffeeHistoryArticleList.setAdapter(historyArticleAdapter);
         recyclerViewCoffeeBeanArticleList.setAdapter(beanArticleAdapter);
         recyclerViewLearnArticleList.setAdapter(learnArticleAdapter);
