@@ -5,6 +5,7 @@ import android.os.Looper;
 import android.util.Log;
 
 import com.example.coffeecom.Provider;
+import com.example.coffeecom.model.BaristaModel;
 import com.vishnusivadas.advanced_httpurlconnection.PutData;
 
 import java.util.Random;
@@ -157,4 +158,37 @@ public class QueryWallet {
         });
     }
 
+    public static void updateBaristaWallet(String baristaUserId , double earnAmount) {
+        Log.i(TAG, "queryWallet: Bruh");
+
+        Handler handler = new Handler(Looper.getMainLooper());
+        handler.post(new Runnable() {
+            @Override
+            public void run() {
+                String[] field = new String[2];
+                field[0] = "walletBalance";
+                field[1] = "userId";
+
+                Log.i(TAG, "queryWallet: Bruh " + field.length);
+                String[] data = new String[2];
+                data[0] = Double.toString(earnAmount);
+                data[1] = baristaUserId;
+
+                Log.i(TAG, "queryWallet: Bruh " + data[0] + " " + data[1] +" " +baristaUserId);
+
+
+                PutData putData = new PutData("http://" + Provider.getIpAddress() + "/CoffeeCommunityPHP/updateBaristaWallet.php", "POST", field, data);
+                if (putData.startPut()) {
+                    if (putData.onComplete()) {
+                        String result = putData.getResult();
+                        if (result.equals("Update Success")){
+                            //if condition
+                        }else{
+
+                        };
+                    }
+                }
+            }
+        });
+    }
 }

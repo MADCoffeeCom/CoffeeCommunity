@@ -32,6 +32,7 @@ import com.example.coffeecom.model.CartCardModel;
 import com.example.coffeecom.model.CartModel;
 import com.example.coffeecom.query.DeleteFromCart;
 import com.example.coffeecom.query.QueryCartItem;
+import com.example.coffeecom.query.QueryTransaction;
 import com.example.coffeecom.query.QueryWallet;
 import com.vishnusivadas.advanced_httpurlconnection.PutData;
 
@@ -123,19 +124,22 @@ public class CoffeeCartFragment extends Fragment {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 try {
+                                    String paymentMethod = "Coffee Wallet";
                                     boolean wantPurchase = true;
                                     if (paymentBtn1.isChecked()){
                                         if (Provider.getUser().getWalletBalance() < Provider.getCartTotalPrice()){
                                             Toast.makeText(getContext(),"Not enough Money", Toast.LENGTH_SHORT).show();
                                             wantPurchase = false;
                                         }else{
+                                            paymentMethod = "Coffee Wallet";
                                             CompletableFuture.supplyAsync(() -> new initializeWalletAmount()).join().call();
                                         }
                                     }else if(paymentBtn2.isChecked()){
+                                        paymentMethod = "Credit Card";
                                         AlertDialog.Builder builder2 = new AlertDialog.Builder(getContext());
                                         builder2.setCancelable(false);
-                                        builder2.setTitle("Cash on Pick Up Order Submitted");
-                                        builder2.setMessage("Please kindly pay when you are picking up your coffee.");
+                                        builder2.setTitle("Credit Card Order submitted");
+                                        builder2.setMessage("Please kindly note that your credit has been subtracted with the total amount.");
                                         builder2.setPositiveButton("Confirm",new DialogInterface.OnClickListener() {
                                             @Override
                                             public void onClick(DialogInterface dialogInterface, int i) {
@@ -147,6 +151,7 @@ public class CoffeeCartFragment extends Fragment {
                                     }
 
                                     if (wantPurchase == true){
+
                                         for (CartModel cm: Provider.getCartModelList()){
                                             String orderId = "o" + new Random().nextInt(9999);
                                             Handler handler = new Handler(Looper.getMainLooper());
@@ -210,6 +215,8 @@ public class CoffeeCartFragment extends Fragment {
                                                     }
                                                 });
                                             }
+                                            Log.i("Coffee Cart testt", "" + cm.getBarista().getUserId() +" " + orderId+ " " + cm.getTotalPrice() + " " + paymentMethod);
+                                            QueryTransaction.insertTransaction(cm.getBarista().getUserId(),orderId,cm.getTotalPrice(),paymentMethod);
                                         }
                                     }
                                     Provider.getCartModelList().clear();
@@ -230,7 +237,9 @@ public class CoffeeCartFragment extends Fragment {
 
                 AlertDialog dialog = builder.create();
                 if (Provider.getCartModelList().size()==0){
+                    Log.i("Coffee Cart Debug", "Bruh you have no coffee in the cart.");
                     Toast.makeText(getContext(),"Please add some coffee into the cart", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(),"Please add some coffee into the cart", Toast.LENGTH_LONG).show();
                 }
                 else if (!paymentBtn1.isChecked() && !paymentBtn2.isChecked()){
                     Toast.makeText(getContext(),"Please select payment method", Toast.LENGTH_SHORT).show();
@@ -256,7 +265,7 @@ public class CoffeeCartFragment extends Fragment {
                     ArrayList<CartCardModel> tempCartCardModelList = new ArrayList<>();
                     Log.i(TAG, "baristaId is equal to baristaId in list " + baristaId + " " + Provider.getBaristas().get(i).getBaristaId());
                     for (CartCardModel ca: Provider.getUser().getCartCard()) {
-                        Log.i(TAG, "card card model found " + ca.getBaristaId() + " Current baristaId " + baristaId + Provider.getBaristas().get(i).getUserStreetNo());
+                        Log.i(TAG, "card card model found " + ca.getBaristaId() + " Current baristaId " + baristaId + " " + Provider.getBaristas().get(i).getUserStreetNo());
                         if (ca.getBaristaId().equals(baristaId)){
 
                             tempCartCardModelList.add(ca);
@@ -306,10 +315,10 @@ public class CoffeeCartFragment extends Fragment {
             QueryCartItem.queryCartItem();
             for (CartModel cm : Provider.getCartModelList()){
                 for (CartCardModel ccm : cm.getCartCardModelsList()){
-                    Log.i("Home", "before "+Provider.getCartTotalPrice());
+                    Log.i("Coffee Cart", "before "+Provider.getCartTotalPrice());
                     cm.setTotalPrice(cm.getTotalPrice() + (ccm.getCoffeePrice()*ccm.getCoffeeQuantity()));
                     Provider.setCartTotalPrice(Provider.getCartTotalPrice() + (ccm.getCoffeePrice()*ccm.getCoffeeQuantity()));
-                    Log.i("Home", "after "+Provider.getCartTotalPrice());
+                    Log.i("Coffee Cart", "after "+Provider.getCartTotalPrice());
                 }
             }
             coffeeCartTotalPriceText.setText(String.format("%.2f", Provider.getCartTotalPrice()));
@@ -321,9 +330,19 @@ public class CoffeeCartFragment extends Fragment {
         @Override
         public Void call() throws Exception {
             Provider.getUser().setWalletBalance(Provider.getUser().getWalletBalance() - Provider.getCartTotalPrice());
+            for (CartModel cm : Provider.getCartModelList()){
+                Log.i("Coffee Cart Debug","Barista: " + cm.getBarista() + " Price:" + cm.getTotalPrice());
+                QueryWallet.updateBaristaWallet(cm.getBarista().getUserId(),cm.getTotalPrice());
+
+            }
             coffeeWalletAmountText.setText(String.format("%.2f", Provider.getUser().getWalletBalance()));
             QueryWallet.updateWallet();
+
+
+
             return null;
         }
     }
+
+
 }

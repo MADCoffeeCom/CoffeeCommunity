@@ -126,7 +126,7 @@ public class  HomeActivityFragment extends Fragment {
         double sensitivity = 0.5;
         for (BaristaModel barista : baristas) {
                 if (similarity(text, barista.getUserName()) > sensitivity || isSubString(text,barista.getUserName() )) {
-                    Log.i(TAG, "filter b: " + text + "\n" + barista.getUserName());
+//                    Log.i(TAG, "filter b: " + text + "\n" + barista.getUserName());
                     filteredlist.add(barista);
 //            if (barista.getUserName().toLowerCase().contains(text.toLowerCase())) {
 
@@ -146,7 +146,7 @@ public class  HomeActivityFragment extends Fragment {
         for (int i = 0; i < coffees.size(); i++) {
             if (similarity(text,(Provider.getCoffees().get(i).getCoffeeTitle())) > sensitivity|| similarity(text,Provider.getCoffees().get(i).getCoffeeType())>sensitivity || isSubString(text, Provider.getCoffees().get(i).getCoffeeTitle()) || isSubString(text, Provider.getCoffees().get(i).getCoffeeType())){
                 filteredlistCoffee.add(coffees.get(i));
-                Log.i(TAG, "filter c: " + text + "\n" + coffees.get(i).getCoffeeTitle());
+//                Log.i(TAG, "filter c: " + text + "\n" + coffees.get(i).getCoffeeTitle());
             }
 //            if (Provider.getCoffees().get(i).getCoffeeTitle().contains(text.toLowerCase()) || Provider.getCoffees().get(i).getCoffeeType().contains(text.toLowerCase())) {
 
@@ -166,7 +166,7 @@ public class  HomeActivityFragment extends Fragment {
         for (int i = 0; i < pendingOrder.size(); i++) {
             if (similarity(text,(Provider.getUser().getPendingOrder().get(i).getBaristaName())) > sensitivity || isSubString(text, Provider.getUser().getPendingOrder().get(i).getBaristaName())){
                 filteredOrder.add(pendingOrder.get(i));
-                Log.i(TAG, "filter c: " + text + "\n" + pendingOrder.get(i).getOrderId());
+//                Log.i(TAG, "filter c: " + text + "\n" + pendingOrder.get(i).getOrderId());
             }
 //            if (Provider.getCoffees().get(i).getCoffeeTitle().contains(text.toLowerCase()) || Provider.getCoffees().get(i).getCoffeeType().contains(text.toLowerCase())) {
 

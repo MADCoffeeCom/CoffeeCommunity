@@ -32,8 +32,9 @@ public class QueryBarista {
                             String userState = baristaDetails[6];
                             String userTaman = baristaDetails[7];
                             String userLocation = baristaDetails[8];
+                            String userId = baristaDetails[9];
 
-                            BaristaModel barista = new BaristaModel(baristaId, baristaPic, username, baristaDesc, userStreetNo, userPostalCode, userState, userTaman, userLocation);
+                            BaristaModel barista = new BaristaModel(baristaId, baristaPic, username, baristaDesc, userStreetNo, userPostalCode, userState, userTaman, userLocation, userId);
 
                             if (!Provider.getBaristas().contains(barista)){
                                 Provider.addBarista(barista);

@@ -16,12 +16,13 @@ public class BaristaModel extends ProfileModel{
         this.ratings = ratings;
     }
 
-    public BaristaModel(String baristaId, String pic, String userName, String baristaDesc, String userStreetNo, String userPostalCode, String userState, String userTaman, String userLocation) {
+    public BaristaModel(String baristaId, String pic, String userName, String baristaDesc, String userStreetNo, String userPostalCode, String userState, String userTaman, String userLocation, String userId) {
         super(baristaId, pic, userName, userTaman, userLocation);
         this.baristaDesc = baristaDesc;
         this.setUserStreetNo(userStreetNo);
         this.setUserPostalCode(userPostalCode);
         this.setUserState(userState);
+        this.setUserId(userId);
 
     }
 

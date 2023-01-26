@@ -55,7 +55,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp"
-                android:layout_marginTop="16dp"/>
+                android:layout_marginTop="16dp"
+                tools:layout="@layout/fragment_location" />
 
             <EditText
                 android:id="@+id/TBSearch"
@@ -78,7 +79,8 @@
                 android:name="com.example.coffeecom.fragment.CoffeeWalletFragment"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="40dp"/>
+                android:layout_marginTop="40dp"
+                tools:layout="@layout/fragment_coffee_wallet" />
 
 
             <TextView
