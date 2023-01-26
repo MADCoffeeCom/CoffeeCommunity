@@ -3,6 +3,7 @@ package com.example.coffeecom.fragment;
 import static com.example.coffeecom.helper.FormatDateTime.convertDatetoStringDate;
 import static com.example.coffeecom.helper.ToTitleCase.toTitleCase;
 
+import android.app.AlertDialog;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -16,12 +17,15 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.coffeecom.Provider;
 import com.example.coffeecom.R;
+import com.example.coffeecom.activity.AdminBottomNavigationActivity;
 import com.example.coffeecom.activity.BottomNavigationActivity;
 import com.example.coffeecom.model.PostModel;
+import com.example.coffeecom.query.QueryArticle;
 import com.example.coffeecom.query.QueryPost;
 import com.vishnusivadas.advanced_httpurlconnection.PutData;
 
@@ -33,12 +37,14 @@ public class PostDetailsFragment extends Fragment {
     ImageView postPic;
     TextView posterText, postDateText, postDescText, postVoteCountText;
     ImageButton backBtn, postUpVoteBtn, postDownVoteBtn, reportBtn;
+    ImageButton editPostBtn, deletePostBtn;
 
     int currentPostIndex = 0;
     boolean isUpvoted = false;
     boolean isDownvoted = false;
     private int upvoteCount = 0;
     private int downvoteCount = 0;
+    boolean isUserPost = false;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -51,8 +57,18 @@ public class PostDetailsFragment extends Fragment {
             if(Provider.getPosts().get(i).getPostId().equals(bundle.getString("postId"))){
                 currentPost = Provider.getPosts().get(i);
                 currentPostIndex = i;
+
             }
         }
+
+        for (PostModel article: Provider.getUser().getPostedPost()) {
+            if(article.getPostId().equals(currentPost.getPostId())){
+                isUserPost = true;
+                Log.i(TAG, "isUserPost: " + isUserPost);
+            }
+        }
+
+
 
         onBind(view);
 
@@ -69,6 +85,8 @@ public class PostDetailsFragment extends Fragment {
         postUpVoteBtn = view.findViewById(R.id.postUpVoteBtn);
         postDownVoteBtn = view.findViewById(R.id.postDownVoteBtn);
         reportBtn = view.findViewById(R.id.reportBtn);
+        deletePostBtn = view.findViewById(R.id.deletePostBtn);
+        editPostBtn = view.findViewById(R.id.editPostBtn);
     }
 
     private void onBind(View view) {
@@ -85,6 +103,41 @@ public class PostDetailsFragment extends Fragment {
         String picUrl = currentPost.getPostPic();
         int drawableResourceId = view.getContext().getResources().getIdentifier(picUrl, "drawable", view.getContext().getPackageName());
         Glide.with(view.getContext()).load(drawableResourceId).into(postPic);
+
+        editPostBtn.setVisibility(View.GONE);
+        deletePostBtn.setVisibility(View.GONE);
+
+        if(isUserPost){
+            reportBtn.setVisibility(View.GONE);
+            editPostBtn.setVisibility(View.VISIBLE);
+            deletePostBtn.setVisibility(View.VISIBLE);
+
+            deletePostBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                    builder.setCancelable(true);
+                    builder.setTitle("Delete Post");
+                    builder.setMessage("Are you sure want to delete " + currentPost.getPostId() + "?");
+                    builder.setPositiveButton("Delete", (dialog, which) -> {
+                        QueryPost.deletePost(currentPost.getPostId());
+                        Toast.makeText(getContext(), "Delete Post success!", Toast.LENGTH_SHORT).show();
+                        getActivity().onBackPressed();
+                    });
+                    builder.setNegativeButton("Cancel", (dialog, id) -> dialog.cancel());
+                    builder.show();
+                }
+            });
+
+            editPostBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Bundle bundle = new Bundle();
+                    bundle.putString("postId", currentPost.getPostId().toString());
+                    ((BottomNavigationActivity)getActivity()).replaceFragmentWithData(new AddPostFragment(), bundle);
+                }
+            });
+        }
 
         reportBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -141,6 +194,15 @@ public class PostDetailsFragment extends Fragment {
                     downvoteCount -= 1;
                 }
                 updateDownVote(downvoteCount);
+            }
+        });
+
+        posterText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Bundle bundle = new Bundle();
+                bundle.putString("userId", currentPost.getPosterId());
+                ((BottomNavigationActivity)getActivity()).replaceFragmentWithData(new ProfileViewFragment(), bundle);
             }
         });
     }

@@ -77,6 +77,11 @@ public class CoffeeCartFragment extends Fragment {
         cl1 = rootView.findViewById(R.id.cl1);
         cl2 = rootView.findViewById(R.id.cl2);
 
+        TextView emptyCartText = rootView.findViewById(R.id.emptyCartText);
+        if(cartModelList.size() == 0) emptyCartText.setVisibility(View.VISIBLE);
+        else emptyCartText.setVisibility(View.VISIBLE);
+
+
         paymentBtn1.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
@@ -250,12 +255,7 @@ public class CoffeeCartFragment extends Fragment {
             }
         });
 
-        coffeeCartBckBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                getActivity().onBackPressed();
-            }
-        });
+        coffeeCartBckBtn.setOnClickListener(view -> getActivity().onBackPressed());
 
 
 
@@ -278,7 +278,9 @@ public class CoffeeCartFragment extends Fragment {
 //            tempCartCardModelList.clear();
         }
 
-        Log.i(TAG, ""+cartModelList.size());
+
+
+        Log.i(TAG, "" +cartModelList.size());
         cartAdapter = new CartAdapter(getContext(), cartModelList);
         coffeeCartCardRecyclerView.setAdapter(cartAdapter);
         cartModelList = createCartModelList();
@@ -301,11 +303,6 @@ public class CoffeeCartFragment extends Fragment {
 
         // Code to create a list of CartModel objects goes here
         return cartModelList;
-    }
-
-    private void recyclerViewCartModel(){
-
-
     }
 
     public static class initializeCartTotalPrice implements Callable<Void> {

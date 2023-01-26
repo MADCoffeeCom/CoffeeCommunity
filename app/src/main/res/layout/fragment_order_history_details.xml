@@ -7,6 +7,28 @@
     tools:context=".fragment.OrderHistoryDetailsFragment">
 
     <TextView
+        android:id="@+id/orderStartTimeText"
+        style="@style/c1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="startTime"
+        app:layout_constraintBottom_toBottomOf="@+id/textView61"
+        app:layout_constraintStart_toEndOf="@+id/textView61"
+        app:layout_constraintTop_toTopOf="@+id/textView61"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <TextView
+        android:id="@+id/textView63"
+        style="@style/c1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="8dp"
+        android:text="Order End Time: "
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView61" />
+
+    <TextView
         android:id="@+id/noOrderHistoryText"
         style="@style/c1"
         android:layout_width="wrap_content"
@@ -19,7 +41,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageButton
-        android:id="@+id/orderHistoryDetailsBckBtn"
+        android:id="@+id/backBtn"
         android:tint="@color/white"
         android:contentDescription="@string/back"
         android:layout_width="48dp"
@@ -37,33 +59,91 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         android:text="Order History"
-        app:layout_constraintStart_toEndOf="@+id/orderHistoryDetailsBckBtn"
+        app:layout_constraintStart_toEndOf="@+id/backBtn"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
-        android:id="@+id/tbSearch"
-        style="@style/defaultTextBox"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
+    <TextView
+        android:id="@+id/orderId"
+        style="@style/h2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="o0001"
+        app:layout_constraintBottom_toBottomOf="@+id/textView60"
+        app:layout_constraintStart_toEndOf="@+id/textView60"
+        app:layout_constraintTop_toTopOf="@+id/textView60" />
+
+    <TextView
+        android:id="@+id/textView60"
+        style="@style/h2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="12dp"
-        android:layout_marginEnd="24dp"
-        android:background="@drawable/textbox"
-        android:drawableLeft="@drawable/ic_search"
-        android:ems="10"
-        android:hint="Search for coffee/barista..."
-        android:inputType="text"
-        android:textColorHint="@color/disable_grey"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="8dp"
+        android:text="Order ID: "
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/orderHistoryDetailsText" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/orderHistoryDetailsRecyclerView"
-        android:layout_width="match_parent"
+    <TextView
+        android:id="@+id/textView61"
+        style="@style/c1"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="8dp"
+        android:text="Order Start Time: "
+        app:layout_constraintStart_toStartOf="@+id/textView60"
+        app:layout_constraintTop_toBottomOf="@+id/textView60" />
+
+    <TextView
+        android:id="@+id/orderEndTimeText"
+        style="@style/c1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="endTime"
+        app:layout_constraintBottom_toBottomOf="@+id/textView63"
+        app:layout_constraintStart_toEndOf="@+id/textView63"
+        app:layout_constraintTop_toTopOf="@+id/textView63"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/orderCoffeeRV"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tbSearch" />
+        app:layout_constraintTop_toBottomOf="@+id/textView65" />
+
+    <TextView
+        android:id="@+id/textView65"
+        style="@style/h2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="Coffee"
+        app:layout_constraintStart_toStartOf="@+id/textView63"
+        app:layout_constraintTop_toBottomOf="@+id/textView63" />
+
+    <TextView
+        android:id="@+id/textView66"
+        style="@style/h2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="40dp"
+        android:text="Total Price: RM"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/orderCoffeeRV" />
+
+    <TextView
+        android:id="@+id/totalPriceText"
+        style="@style/h2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        app:layout_constraintBottom_toBottomOf="@+id/textView66"
+        app:layout_constraintStart_toEndOf="@+id/textView66"
+        app:layout_constraintTop_toTopOf="@+id/textView66" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

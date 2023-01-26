@@ -266,4 +266,30 @@ public class QueryPost {
             }
         });
     }
+
+    public static void editPost(String postId, String postDesc, String postPic) {
+        Handler handler = new Handler(Looper.getMainLooper());
+        handler.post(new Runnable() {
+            @Override
+            public void run() {
+                String[] field = new String[3];
+                field[0] = "postId";
+                field[1] = "postDesc";
+                field[2] = "postPic";
+
+                String[] data = new String[3];
+                data[0] = postId;
+                data[1] = postDesc;
+                data[2] = postPic;
+
+                PutData putData = new PutData("http://" + Provider.getIpAddress() + "/CoffeeCommunityPHP/updatepost.php", "POST", field, data);
+                if (putData.startPut()) {
+                    if (putData.onComplete()) {
+                        String result = putData.getResult();
+                        Log.i(TAG, "run: " + result);
+                    }
+                }
+            }
+        });
+    }
 }

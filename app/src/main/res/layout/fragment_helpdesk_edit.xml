@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/frameLayout11"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".fragment.HelpdeskEditFragment" >
+
+    <TextView
+        android:id="@+id/editHelpdeskText"
+        style="@style/h1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="Edit "
+        app:layout_constraintStart_toEndOf="@+id/backBtn"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/helpIdText"
+        style="@style/h1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="h1"
+        app:layout_constraintStart_toEndOf="@+id/editHelpdeskText"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
+        android:id="@+id/backBtn"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="24dp"
+        android:background="@color/transparent"
+        android:contentDescription="@string/back"
+        android:tint="@color/white"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_back" />
+
+    <EditText
+        android:id="@+id/quesText"
+        style="@style/defaultTextBox"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="24dp"
+        android:background="@drawable/textbox"
+        android:ems="10"
+        android:gravity="start"
+        android:hint="Question"
+        android:inputType="textMultiLine"
+        android:minHeight="50dp"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editHelpdeskText" />
+
+    <EditText
+        android:id="@+id/ansText"
+        style="@style/defaultTextBox"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="24dp"
+        android:background="@drawable/textbox"
+        android:ems="10"
+        android:gravity="start"
+        android:hint="Answer"
+        android:inputType="textMultiLine"
+        android:minHeight="50dp"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/quesText" />
+
+    <Button
+        android:id="@+id/editHelpdeskBtn"
+        style="@style/primaryBtn"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="600dp"
+        android:text="Edit"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
+        android:id="@+id/deleteHelpdeskBtn"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginEnd="24dp"
+        android:background="@color/transparent"
+        android:src="@drawable/ic_delete"
+        app:layout_constraintBottom_toBottomOf="@+id/backBtn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/editHelpdeskText" />
+</androidx.constraintlayout.widget.ConstraintLayout>

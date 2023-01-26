@@ -60,6 +60,7 @@ public class AddBankCardFragment extends Fragment {
         if(isEdit){
             addBankCardTitleText.setText("Edit Card");
             addCardBtn.setText("Edit Card");
+            cardNumberTextBox.setEnabled(false);
             String cardNo = bundle.getString("cardNo");
             for (int i = 0; i < Provider.getUser().getBankCard().size(); i++) {
                 if(Provider.getUser().getBankCard().get(i).getBankCardNo().equals(cardNo)){
@@ -122,6 +123,8 @@ public class AddBankCardFragment extends Fragment {
             }
         }
         QueryBankCard.updateBankCard(card);
+        Toast.makeText(getContext(), "Update Successfully!", Toast.LENGTH_SHORT).show();
+        getActivity().onBackPressed();
     }
 
     public void insertCard(BankCardModel card) {

@@ -19,6 +19,8 @@ import com.example.coffeecom.adapter.RatingBarAdapter;
 import com.example.coffeecom.model.ApplicationModel;
 import com.example.coffeecom.query.QueryApplication;
 import com.example.coffeecom.query.QueryArticle;
+import com.example.coffeecom.query.QueryFeedback;
+import com.example.coffeecom.query.QueryHelpdesk;
 import com.example.coffeecom.query.QueryPost;
 
 import java.util.ArrayList;
@@ -42,6 +44,8 @@ public class ApplicationFragment extends Fragment {
         QueryApplication.queryApplication();
         QueryArticle.queryArticle();
         QueryPost.queryReportedPost();
+        QueryFeedback.getFeedback();
+        QueryHelpdesk.queryHelpdesk();
         application = Provider.getApplication();
         recyclerViewApplication();
 

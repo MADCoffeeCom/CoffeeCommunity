@@ -5,6 +5,8 @@ import android.os.Looper;
 import android.util.Log;
 
 import com.example.coffeecom.Provider;
+import com.example.coffeecom.model.CoffeeModel;
+import com.example.coffeecom.model.FeedbackModel;
 import com.vishnusivadas.advanced_httpurlconnection.FetchData;
 import com.vishnusivadas.advanced_httpurlconnection.PutData;
 
@@ -57,6 +59,37 @@ public class QueryFeedback {
                         String result = putData.getResult();
                         if(result.equals("Update success")){
                             Log.i(TAG, "run: " + result);
+                        }
+                    }
+                }
+            }
+        });
+    }
+
+    public static void getFeedback() {
+        Handler handler = new Handler(Looper.getMainLooper());
+        handler.post(new Runnable() {
+            @Override
+            public void run() {
+                FetchData fetchData = new FetchData("http://" + Provider.getIpAddress() + "/CoffeeCommunityPHP/getfeedback.php");
+
+                if (fetchData.startFetch()) {
+                    if (fetchData.onComplete()) {
+                        String result = fetchData.getResult();
+                        String[] resultSplitted = result.split("split");
+                        for (String str: resultSplitted) {
+                            String[] strDetails = str.split(" - ");
+
+                            String feedbackId = strDetails[0];
+                            String ratings = strDetails[1];
+                            String feedbackDesc = strDetails[2];
+                            String userId = strDetails[3];
+                            String username = strDetails[4];
+
+                            FeedbackModel feedback = new FeedbackModel(feedbackId, userId, username, Integer.parseInt(ratings), feedbackDesc);
+
+                            Provider.addFeedbacks(feedback);
+                            Log.i("Home Add new feedback", feedback.getFeedbackId() + " added!");
                         }
                     }
                 }

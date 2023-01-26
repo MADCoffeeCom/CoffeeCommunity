@@ -52,7 +52,7 @@ public class BaristaListFragment extends Fragment {
         View view = inflater.inflate(R.layout.activity_barista_list,container,false);
         baristaListName = view.findViewById(R.id.baristaListName);
         baristaListLocation = view.findViewById(R.id.baristaListLocation);
-        baristaListDesc = view.findViewById(R.id.baristaListDesc);
+        baristaListDesc = view.findViewById(R.id.userDesc);
         baristaListPic = view.findViewById(R.id.baristaListPic);
         tbSearch = view.findViewById(R.id.tbSearch);
         backBtn = view.findViewById(R.id.backBtn);

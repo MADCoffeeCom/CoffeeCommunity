@@ -12,14 +12,19 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.coffeecom.Provider;
 import com.example.coffeecom.R;
+import com.example.coffeecom.model.ArticleModel;
 import com.example.coffeecom.query.QueryArticle;
 
 public class CreateArticleFragment extends Fragment {
 
     ImageButton backBtn;
-    TextView articleTitleTextBox, articleTypeTextBox, articlePicTextBox, articleContentTextBox;
+    TextView articleTitleTextBox, articleTypeTextBox, articlePicTextBox, articleContentTextBox, createArticleTitleText;
     Button articleCreateBtn;
+
+    ArticleModel currentArticle;
+    int currentArticleIndex;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -33,6 +38,24 @@ public class CreateArticleFragment extends Fragment {
         articlePicTextBox = view.findViewById(R.id.articlePicTextBox);
         articleContentTextBox = view.findViewById(R.id.articleContentTextBox);
         articleCreateBtn = view.findViewById(R.id.articleCreateBtn);
+        createArticleTitleText = view.findViewById(R.id.createArticleTitleText);
+
+        Bundle bundle = this.getArguments();
+        if(bundle != null){
+            for (int i = 0; i < Provider.getArticles().size(); i++) {
+                if(Provider.getArticles().get(i).getArticleId().equals(bundle.getString("articleId"))){
+                    currentArticle = Provider.getArticles().get(i);
+                    currentArticleIndex = i;
+                }
+            }
+            createArticleTitleText.setText("Edit Article");
+            articleCreateBtn.setText("Update");
+        }
+
+        articleTitleTextBox.setText(currentArticle.getArticleTitle());
+        articleTypeTextBox.setText(currentArticle.getArticleType());
+        articlePicTextBox.setText(currentArticle.getArticlePic());
+        articleContentTextBox.setText(currentArticle.getArticleContent());
 
         articleCreateBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -43,8 +66,18 @@ public class CreateArticleFragment extends Fragment {
                 String content = "" + articleContentTextBox.getText();
 
                 if(!title.equals("") && !type.equals("") && !pic.equals("") && !content.equals("")){
-                    QueryArticle.addArticle(title, type, content, pic);
-                    Toast.makeText(getContext(), "Create successful!", Toast.LENGTH_SHORT).show();
+                    if(bundle == null) {
+                        QueryArticle.addArticle(title, type, content, pic);
+                        Toast.makeText(getContext(), "Create successful!", Toast.LENGTH_SHORT).show();
+                    }
+                    else {
+                        QueryArticle.editArticle(currentArticle.getArticleId(), title, type, content, pic);
+                        Provider.getArticles().get(currentArticleIndex).setArticleTitle(title);
+                        Provider.getArticles().get(currentArticleIndex).setArticleType(type);
+                        Provider.getArticles().get(currentArticleIndex).setArticlePic(pic);
+                        Provider.getArticles().get(currentArticleIndex).setArticleContent(content);
+                        Toast.makeText(getContext(), "Update successful!", Toast.LENGTH_SHORT).show();
+                    }
                     getActivity().onBackPressed();
                 }
             }

@@ -3,6 +3,7 @@ package com.example.coffeecom.adapter;
 import static com.example.coffeecom.helper.FormatDateTime.convertDatetoStringDate;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +19,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.coffeecom.activity.BottomNavigationActivity;
 import com.example.coffeecom.fragment.LearnDetailsFragment;
+import com.example.coffeecom.fragment.OrderHistoryDetailsFragment;
 import com.example.coffeecom.model.BrewedOrderModel;
 import com.example.coffeecom.R;
 
@@ -70,7 +72,10 @@ public class ProfileBrewHistoryAdapter extends RecyclerView.Adapter<ProfileBrewH
         holder.coffeeTypeCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                ((BottomNavigationActivity)activity).replaceFragment(new LearnDetailsFragment());
+                Bundle bundle = new Bundle();
+                bundle.putString("orderId", brewedHistory.get(position).getOrderId());
+                bundle.putString("type", "brew");
+                ((BottomNavigationActivity)activity).replaceFragmentWithData(new OrderHistoryDetailsFragment(), bundle);
             }
         });
     }

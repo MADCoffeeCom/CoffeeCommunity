@@ -19,7 +19,7 @@
         app:srcCompat="@drawable/ic_back" />
 
     <TextView
-        android:id="@+id/titleLocationText"
+        android:id="@+id/titleCoffeeText"
         style="@style/h1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -42,7 +42,7 @@
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/titleLocationText" />
+        app:layout_constraintTop_toBottomOf="@+id/titleCoffeeText" />
 
     <EditText
         android:id="@+id/coffeeDescTextBox"

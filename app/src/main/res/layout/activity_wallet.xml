@@ -191,11 +191,13 @@
     <Button
         android:id="@+id/topUpWalletBtn"
         style="@style/primaryBtn"
-        android:layout_width="200dp"
+        android:layout_width="160dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="600dp"
+        android:layout_marginEnd="24dp"
         android:text="Top Up"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -234,5 +236,16 @@
         app:layout_constraintBottom_toBottomOf="@+id/textView19"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/textView19" />
+
+    <Button
+        android:id="@+id/withdrawBtn"
+        style="@style/secondaryBtn"
+        android:layout_width="160dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="600dp"
+        android:text="Withdraw"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

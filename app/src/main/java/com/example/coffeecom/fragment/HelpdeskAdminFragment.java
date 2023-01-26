@@ -13,36 +13,42 @@ import android.widget.ImageButton;
 
 import com.example.coffeecom.Provider;
 import com.example.coffeecom.R;
-import com.example.coffeecom.activity.BottomNavigationActivity;
+import com.example.coffeecom.activity.AdminBottomNavigationActivity;
 import com.example.coffeecom.adapter.HelpdeskAdapter;
 import com.example.coffeecom.model.HelpdeskModel;
-import com.example.coffeecom.query.QueryHelpdesk;
 
 import java.util.ArrayList;
 
-public class HelpdeskFragment extends Fragment {
 
-    ImageButton backBtn;
+public class HelpdeskAdminFragment extends Fragment {
+
+
     ArrayList<HelpdeskModel> helpdesk = new ArrayList<>();
-
+    ImageButton addHelpBtn;
     HelpdeskAdapter helpAdapter;
-    RecyclerView helpdeskQuestionRecycleView;
+    RecyclerView editHelpdeskRV;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_helpdesk,container,false);
-        helpdeskQuestionRecycleView = view.findViewById(R.id.helpdeskQuestionRecycleView);
-        backBtn = view.findViewById(R.id.backBtn);
-        backBtn.setOnClickListener(view1 -> ((BottomNavigationActivity)getActivity()).onBackPressed());
-        helpdesk = Provider.getHelpdesks();
-        helpdeskRecycleView();
+        // Inflate the layout for this fragment
+        View view = inflater.inflate(R.layout.fragment_helpdesk_admin, container, false);
+        editHelpdeskRV = view.findViewById(R.id.editHelpdeskRV);
+        addHelpBtn = view.findViewById(R.id.addHelpBtn);
+        addHelpBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ((AdminBottomNavigationActivity)getActivity()).replaceFragment(new HelpdeskEditFragment());
+            }
+        });
 
+        helpdeskRecycleView();
+        helpdesk = Provider.getHelpdesks();
         return view;
     }
 
     public void helpdeskRecycleView() {
-        helpAdapter = new HelpdeskAdapter(helpdesk, getActivity(), "");
+        helpAdapter = new HelpdeskAdapter(helpdesk, getActivity(), "edit");
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false) {
             @Override
             public boolean canScrollVertically() {
@@ -50,9 +56,7 @@ public class HelpdeskFragment extends Fragment {
             }
         };
 
-        helpdeskQuestionRecycleView.setLayoutManager(linearLayoutManager);
-        helpdeskQuestionRecycleView.setAdapter(helpAdapter);
+        editHelpdeskRV.setLayoutManager(linearLayoutManager);
+        editHelpdeskRV.setAdapter(helpAdapter);
     }
-
-
 }

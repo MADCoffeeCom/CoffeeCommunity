@@ -20,7 +20,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textView49"
+        android:id="@+id/createPostTitle"
         style="@style/h1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -43,7 +43,7 @@
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView49" />
+        app:layout_constraintTop_toBottomOf="@+id/createPostTitle" />
 
     <EditText
         android:id="@+id/pictureTextBox"

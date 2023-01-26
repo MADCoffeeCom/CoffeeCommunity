@@ -2,6 +2,7 @@ package com.example.coffeecom.fragment;
 
 import static com.example.coffeecom.helper.ToTitleCase.toTitleCase;
 
+import android.app.AlertDialog;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -10,11 +11,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -28,6 +29,7 @@ import com.example.coffeecom.model.BaristaModel;
 import com.example.coffeecom.model.CartCardModel;
 import com.example.coffeecom.model.CoffeeModel;
 import com.example.coffeecom.model.ProfileModel;
+import com.example.coffeecom.query.QueryCoffee;
 import com.example.coffeecom.query.QueryRating;
 import com.vishnusivadas.advanced_httpurlconnection.PutData;
 
@@ -39,6 +41,7 @@ public class CoffeeDetailsFragment extends Fragment {
     private TextView coffeeDetailsNameText, baristaNameCoffeeDetailsText, baristaLocationCoffeeDetailsText, ingredientText;
     private TextView coffeeDescCoffeeDetailsText;
     private TextView noRatingText;
+    private ImageButton editCoffeeBtn, deleteCoffeeBtn;
 
     RecyclerView ratingRecyclerView;
     RecyclerView.Adapter ratingAdapter;
@@ -75,6 +78,37 @@ public class CoffeeDetailsFragment extends Fragment {
                 currentBaristaIndex = i;
                 break;
             }
+        }
+        editCoffeeBtn.setVisibility(View.GONE);
+        deleteCoffeeBtn.setVisibility(View.GONE);
+        if (Provider.getUser().getSellingCoffeeId().contains(currentCoffee.getCoffeeId())) {
+            editCoffeeBtn.setVisibility(View.VISIBLE);
+            deleteCoffeeBtn.setVisibility(View.VISIBLE);
+            editCoffeeBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Bundle bundle = new Bundle();
+                    bundle.putString("coffeeId", currentCoffee.getCoffeeId().toString());
+                    ((BottomNavigationActivity)getActivity()).replaceFragmentWithData(new AddCoffeeFragment(), bundle);
+
+                }
+            });
+            deleteCoffeeBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                    builder.setCancelable(true);
+                    builder.setTitle("Delete Coffee");
+                    builder.setMessage("Are you sure want to delete " + currentCoffee.getCoffeeTitle() + "?");
+                    builder.setPositiveButton("Delete", (dialog, which) -> {
+                        QueryCoffee.deleteCoffee(currentCoffee.getCoffeeId());
+                        Toast.makeText(getContext(), "Delete Coffee success!", Toast.LENGTH_SHORT).show();
+                        getActivity().onBackPressed();
+                    });
+                    builder.setNegativeButton("Cancel", (dialog, id) -> dialog.cancel());
+                    builder.show();
+                }
+            });
         }
 
 
@@ -183,6 +217,8 @@ public class CoffeeDetailsFragment extends Fragment {
 
         ratingRecyclerView = view.findViewById(R.id.ratingRecyclerView);
         coffeeImage = view.findViewById(R.id.coffeeDetailsPic);
+        editCoffeeBtn = view.findViewById(R.id.editCoffeeBtn);
+        deleteCoffeeBtn = view.findViewById(R.id.deleteCoffeeBtn);
 
     }
 

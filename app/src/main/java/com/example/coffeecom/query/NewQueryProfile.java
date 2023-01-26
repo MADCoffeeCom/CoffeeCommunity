@@ -15,7 +15,7 @@ public class NewQueryProfile {
             @Override
             public void run() {
                 String[] field = new String[1];
-                field[0] = "username";
+                field[0] = "userId";
 
                 //Creating array for data
                 String[] data = new String[1];
