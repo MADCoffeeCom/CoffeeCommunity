@@ -58,13 +58,13 @@
                     app:tint="@color/orange" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <!--            <androidx.fragment.app.FragmentContainerView-->
-            <!--                android:id="@+id/fragmentContainerView3"-->
-            <!--                android:name="com.example.coffeecom.fragment.LocationFragment"-->
-            <!--                android:layout_width="match_parent"-->
-            <!--                android:layout_height="wrap_content"-->
-            <!--                android:layout_marginBottom="16dp"-->
-            <!--                android:layout_marginTop="16dp"/>-->
+                        <androidx.fragment.app.FragmentContainerView
+                            android:id="@+id/fragmentContainerView3"
+                            android:name="com.example.coffeecom.fragment.LocationFragment"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="16dp"
+                            android:layout_marginTop="16dp"/>
 
             <EditText
                 android:id="@+id/TBSearch"
@@ -82,12 +82,12 @@
                 android:inputType="text"
                 android:textColorHint="@color/white_60" />
 
-            <!--            <androidx.fragment.app.FragmentContainerView-->
-            <!--                android:id="@+id/fragmentContainerView2"-->
-            <!--                android:name="com.example.coffeecom.fragment.CoffeeWalletFragment"-->
-            <!--                android:layout_width="match_parent"-->
-            <!--                android:layout_height="wrap_content"-->
-            <!--                android:layout_marginTop="40dp"/>-->
+                        <androidx.fragment.app.FragmentContainerView
+                            android:id="@+id/fragmentContainerView2"
+                            android:name="com.example.coffeecom.fragment.CoffeeWalletFragment"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="40dp"/>
 
 
             <TextView
