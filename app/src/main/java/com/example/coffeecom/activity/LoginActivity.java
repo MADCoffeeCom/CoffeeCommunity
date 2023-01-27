@@ -134,10 +134,13 @@ public class LoginActivity extends AppCompatActivity {
                             loginPrefsEditor.commit();
                         }
 
+
+                        Log.i(TAG, "start putting data ");
                         PutData putData = new PutData("http://" + Provider.getIpAddress() + "/CoffeeCommunityPHP/login.php", "POST", field, data);
                         if (putData.startPut()) {
 
                             if (putData.onComplete()) {
+                        Log.i(TAG, "after putting data ");
                                 String result = putData.getResult();
                                 String[] splittedresult = result.split(" - ");
 

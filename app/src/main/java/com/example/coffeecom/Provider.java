@@ -45,14 +45,16 @@ public class Provider{
     private static ArrayList<BrewedOrderModel> order = new ArrayList<>();
     private static ArrayList<ApplicationModel> application = new ArrayList<>();
     private static ArrayList<ReportedPostModel> reportedPosts = new ArrayList<>();
+    private static ArrayList<FeedbackModel> feedbacks = new ArrayList<>();
+    private static ArrayList<HelpdeskModel> helpdesks = new ArrayList<>();
 
     private static String currentCoffeeType;
     private static String currentBaristaId;
     private static String currentCoffeeId;
     private static String currentArticleId;
     private static ProfileModel user;
-    private static String ipAddress = "192.168.0.160";
-//    private static String ipAddress = "coffeecommunityapp.000webhostapp.com";
+//    private static String ipAddress = "192.168.0.105";
+    private static String ipAddress = "coffeecommunityapp.000webhostapp.com";
     private static double cartTotalPrice =0;
     private static boolean waitingState = false;
 

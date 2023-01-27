@@ -50,12 +50,12 @@ public class CreateArticleFragment extends Fragment {
             }
             createArticleTitleText.setText("Edit Article");
             articleCreateBtn.setText("Update");
+            articleTitleTextBox.setText(currentArticle.getArticleTitle());
+            articleTypeTextBox.setText(currentArticle.getArticleType());
+            articlePicTextBox.setText(currentArticle.getArticlePic());
+            articleContentTextBox.setText(currentArticle.getArticleContent());
         }
 
-        articleTitleTextBox.setText(currentArticle.getArticleTitle());
-        articleTypeTextBox.setText(currentArticle.getArticleType());
-        articlePicTextBox.setText(currentArticle.getArticlePic());
-        articleContentTextBox.setText(currentArticle.getArticleContent());
 
         articleCreateBtn.setOnClickListener(new View.OnClickListener() {
             @Override
