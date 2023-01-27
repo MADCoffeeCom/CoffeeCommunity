@@ -26,6 +26,8 @@ import com.example.coffeecom.model.ReportedPostModel;
 import com.example.coffeecom.query.QueryPost;
 import com.vishnusivadas.advanced_httpurlconnection.PutData;
 
+import java.text.SimpleDateFormat;
+
 public class ReportedPostDetailsFragment extends Fragment {
 
     private static final String TAG = "PostDetailsFragment";
@@ -72,7 +74,7 @@ public class ReportedPostDetailsFragment extends Fragment {
         backBtn.setOnClickListener(view1 -> getActivity().onBackPressed());
 
         posterText.setText(toTitleCase(currentPost.getSenderName()));
-        postDateText.setText(convertDatetoStringDate(currentPost.getPostDateTime()));
+        postDateText.setText(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format((currentPost.getPostDateTime())));
         postDescText.setText(currentPost.getPostDesc());
 
         String picUrl = currentPost.getPostPic();

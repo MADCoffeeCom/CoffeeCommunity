@@ -67,6 +67,7 @@ public class QueryFeedback {
     }
 
     public static void getFeedback() {
+        Provider.getFeedbacks().clear();
         Handler handler = new Handler(Looper.getMainLooper());
         handler.post(new Runnable() {
             @Override

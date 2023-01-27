@@ -49,7 +49,8 @@ public class QueryArticle {
     }
 
     public static void addArticle(String title, String type, String content, String pic){
-        String articleId = "ar" + (Provider.getArticles().size()+1);
+        Log.i(TAG, "addArticle: ");
+        String articleId = "ar" + (Provider.getArticles().size()+2);
         Handler handler = new Handler(Looper.getMainLooper());
         handler.post(new Runnable() {
             @Override
@@ -75,7 +76,7 @@ public class QueryArticle {
                 if (putData.startPut()) {
                     if (putData.onComplete()) {
                         String result = putData.getResult();
-                        Log.i(TAG, "addBarista: " + result);
+                        Log.i(TAG, "addArticle: " + result);
                     }
                 }
             }
