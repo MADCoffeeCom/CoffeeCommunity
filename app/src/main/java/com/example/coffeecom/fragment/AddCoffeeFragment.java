@@ -81,7 +81,11 @@ public class AddCoffeeFragment extends Fragment {
     }
 
     private void addNewCoffee() {
-        String coffeePicUrl = "coffee" + 1;
+        int min = 1; // Minimum value of range
+        int max = 12; // Maximum value of range
+        int random_int = (int)Math.floor(Math.random() * (max - min + 1) + min);
+
+        String coffeePicUrl = "coffee" + random_int;
         String coffeeTitle = String.valueOf(coffeeNameTextBox.getText());
         String coffeeDesc = String.valueOf(coffeeDescTextBox.getText());
         String coffeeType = String.valueOf(coffeeTypeTextBox.getText());
