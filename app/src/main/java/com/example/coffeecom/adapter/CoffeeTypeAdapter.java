@@ -83,11 +83,11 @@ public class CoffeeTypeAdapter extends RecyclerView.Adapter<CoffeeTypeAdapter.Vi
         String picUrl = coffees.get(position).getCoffeePic();
 //        String picUrl = "http://" + Provider.getIpAddress() + "/images/" + coffees.get(position).getCoffeePic();
 //        Log.i("picture",""+picUrl);
-        CompletableFuture cf = null;
-        CompletableFuture cf2 = null;
-        try {
-            Provider.getBaristas().clear();
-            Provider.getCoffees().clear();
+//        CompletableFuture cf = null;
+//        CompletableFuture cf2 = null;
+//        try {
+//            Provider.getBaristas().clear();
+//            Provider.getCoffees().clear();
 //            DownloadImageTask dit = new DownloadImageTask(holder.coffeePic);
 //            String picUrl2 = "https://i.imgur.com/bhOjb3v.jpeg";
 //            Thread thread = new Thread(new Runnable() {
@@ -109,9 +109,9 @@ public class CoffeeTypeAdapter extends RecyclerView.Adapter<CoffeeTypeAdapter.Vi
 //            dit.onPostExecute(image);
 //
 //            holder.coffeePic.setImageBitmap(image);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
 
 
         int drawableResourceId = holder.itemView.getContext().getResources().getIdentifier(picUrl, "drawable", holder.itemView.getContext().getPackageName());
