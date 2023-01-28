@@ -14,6 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.coffeecom.R;
+import com.example.coffeecom.activity.BottomNavigationActivity;
 import com.example.coffeecom.query.QueryTopUp;
 
 public class WithdrawFragment extends Fragment {
@@ -51,7 +52,7 @@ public class WithdrawFragment extends Fragment {
 
                     QueryTopUp.withdraw(Integer.parseInt(amount));
                     Toast.makeText(getContext(), "Withdraw success!", Toast.LENGTH_SHORT).show();
-                    getActivity().onBackPressed();
+                    ((BottomNavigationActivity)getActivity()).replaceFragment(new WalletFragment());
                 }
             }
         });
