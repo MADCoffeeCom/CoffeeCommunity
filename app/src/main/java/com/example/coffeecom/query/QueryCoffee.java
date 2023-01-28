@@ -13,7 +13,8 @@ public class QueryCoffee {
 
     private static final String TAG = "QueryCoffeeType";
 
-    public static void queryCoffeeType() {
+    public static void queryCoffee() {
+        Provider.getCoffees().clear();
         Handler handler = new Handler(Looper.getMainLooper());
         handler.post(new Runnable() {
             @Override
@@ -66,6 +67,11 @@ public class QueryCoffee {
     public static void addCoffee(String title, String pic, String desc, String type, String price, String ing){
         Log.i(TAG, "addCoffee: Run here once");
 
+        String lastId = Provider.getCoffees().get(0).getCoffeeId();
+        int id = Integer.parseInt(lastId.substring(1)) + 1;
+        String newId = "c" + id;
+        Log.i(TAG, "addCoffee: " + newId);
+
         Handler handler = new Handler(Looper.getMainLooper());
         handler.post(new Runnable() {
             @Override
@@ -81,7 +87,7 @@ public class QueryCoffee {
                 field[7] = "ingredients";
 
                 String[] data = new String[8];
-                data[0] = "c" + (Provider.getCoffees().size() + 1);
+                data[0] = newId;
                 data[1] = Provider.getUser().getBaristaId();
                 data[2] = title;
                 data[3] = pic;
@@ -94,9 +100,9 @@ public class QueryCoffee {
                 if (putData.startPut()) {
                     if (putData.onComplete()) {
                         String result = putData.getResult();
-                        if(result.equals("Update success")){
-                            Log.i(TAG, "run: " + result);
-                        }
+                        Log.i(TAG, "run: " + result);
+                        CoffeeModel newCoffee = new CoffeeModel(newId, title, pic, desc, type, Double.parseDouble(price), ing, Provider.getUser().getBaristaId());
+                        Provider.getCoffees().add(newCoffee);
                     }
                 }
             }
@@ -133,6 +139,16 @@ public class QueryCoffee {
                     if (putData.onComplete()) {
                         String result = putData.getResult();
                         Log.i(TAG, "updateCoffee: " + result);
+                        for (int i = 0; i < Provider.getCoffees().size(); i++) {
+                            if(Provider.getCoffees().get(i).getCoffeeId().equals(coffeeId)){
+                                Provider.getCoffees().get(i).setCoffeeTitle(title);
+                                Provider.getCoffees().get(i).setCoffeePic(pic);
+                                Provider.getCoffees().get(i).setCoffeeDesc(desc);
+                                Provider.getCoffees().get(i).setCoffeeType(type);
+                                Provider.getCoffees().get(i).setCoffeePrice(Double.parseDouble(price));
+                                Provider.getCoffees().get(i).setIngredients(ing);
+                            }
+                        }
                     }
                 }
             }
@@ -157,6 +173,11 @@ public class QueryCoffee {
                     if (putData.onComplete()) {
                         String result = putData.getResult();
                         Log.i(TAG, "deleteCoffee: " + result);
+                        for (int i = 0; i < Provider.getCoffees().size(); i++) {
+                            if(Provider.getCoffees().get(i).getCoffeeId().equals(coffeeId)){
+                                Provider.getCoffees().remove(i);
+                            }
+                        }
                     }
                 }
             }

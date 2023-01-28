@@ -46,9 +46,6 @@ public class BaristaFragment extends Fragment {
 
     ArrayList<CoffeeModel> sellingCoffee = new ArrayList<>();
 
-    ArrayList<CoffeeModel> coffeesInOrder = new ArrayList<>();
-
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {

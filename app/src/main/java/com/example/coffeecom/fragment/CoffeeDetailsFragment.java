@@ -102,6 +102,7 @@ public class CoffeeDetailsFragment extends Fragment {
                     builder.setMessage("Are you sure want to delete " + currentCoffee.getCoffeeTitle() + "?");
                     builder.setPositiveButton("Delete", (dialog, which) -> {
                         QueryCoffee.deleteCoffee(currentCoffee.getCoffeeId());
+                        QueryCoffee.queryCoffee();
                         Toast.makeText(getContext(), "Delete Coffee success!", Toast.LENGTH_SHORT).show();
                         getActivity().onBackPressed();
                     });

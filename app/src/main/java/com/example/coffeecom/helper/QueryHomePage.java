@@ -16,7 +16,7 @@ public class QueryHomePage {
 
     public static void queryHomepage(){
         NewQueryProfile.queryProfile();
-        QueryCoffee.queryCoffeeType();
+        QueryCoffee.queryCoffee();
         QueryBarista.queryBarista();
         QueryPost.queryPost();
         QueryOrderedAndPendingCoffee.queryOrderedAndPendingCoffee();
