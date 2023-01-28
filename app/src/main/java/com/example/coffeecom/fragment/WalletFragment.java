@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
@@ -61,6 +62,7 @@ public class WalletFragment extends Fragment {
 
         try {
             walletAmountText.setText(String.format("%.2f", Provider.getUser().getWalletBalance()));
+
         }catch (NullPointerException e){
             walletAmountText.setText(String.valueOf(0.00));
         }
@@ -73,7 +75,13 @@ public class WalletFragment extends Fragment {
             public void onClick(View view) {
                 Bundle bundle = new Bundle();
                 bundle.putString("amount", topUpAmountTextBox.getText().toString());
-                ((BottomNavigationActivity)getActivity()).replaceFragmentWithData(new WithdrawFragment(), bundle);
+                if (!topUpAmountTextBox.getText().toString().isEmpty()){
+                    ((BottomNavigationActivity)getActivity()).replaceFragmentWithData(new WithdrawFragment(), bundle);
+                }
+                else{
+                    Toast.makeText(getContext(), "Please enter an amount!", Toast.LENGTH_SHORT).show();
+                }
+
             }
         });
         recyclerViewBankCard();

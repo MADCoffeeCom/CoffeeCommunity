@@ -25,7 +25,7 @@ public class NewQueryProfile {
                 if (putData.startPut()) {
                     if (putData.onComplete()) {
                         String result = putData.getResult();
-
+                        Log.i("NewQueryProfile", "" + result);
                         String[] profileDetails = result.split(" - ");
                         String userId = profileDetails[0];
                         String picUrl = profileDetails[1];
