@@ -2,6 +2,10 @@ package com.example.coffeecom.adapter;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
+import android.os.Handler;
+import android.os.Looper;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,10 +24,17 @@ import com.example.coffeecom.R;
 import com.example.coffeecom.activity.BottomNavigationActivity;
 import com.example.coffeecom.fragment.CoffeeDetailsFragment;
 import com.example.coffeecom.fragment.CoffeeListFragment;
+import com.example.coffeecom.fragment.HomeActivityFragment;
+import com.example.coffeecom.helper.DownloadImageTask;
 import com.example.coffeecom.model.BaristaModel;
 import com.example.coffeecom.model.CoffeeModel;
 
+import java.io.InputStream;
+import java.net.URL;
 import java.util.ArrayList;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class CoffeeTypeAdapter extends RecyclerView.Adapter<CoffeeTypeAdapter.ViewHolder> {
 
@@ -69,6 +80,18 @@ public class CoffeeTypeAdapter extends RecyclerView.Adapter<CoffeeTypeAdapter.Vi
 
         //code to insert picture
         String picUrl = coffees.get(position).getCoffeePic();
+
+//        CompletableFuture cf = null;
+//
+//        try {
+//            Provider.getBaristas().clear();
+//            Provider.getCoffees().clear();
+//            holder.coffeePic.setImageBitmap(cf.supplyAsync(() -> new DownloadImageTask(holder.coffeePic).doInBackground(picUrl)).join());
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+
+
         int drawableResourceId = holder.itemView.getContext().getResources().getIdentifier(picUrl, "drawable", holder.itemView.getContext().getPackageName());
         Glide.with(holder.itemView.getContext()).load(drawableResourceId).into(holder.coffeePic);
 
@@ -88,7 +111,5 @@ public class CoffeeTypeAdapter extends RecyclerView.Adapter<CoffeeTypeAdapter.Vi
     public int getItemCount() {
         return coffees.size();
     }
-
-
 
 }
