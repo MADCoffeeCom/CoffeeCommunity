@@ -45,6 +45,11 @@ public class PendingOrderAdapter extends RecyclerView.Adapter<PendingOrderAdapte
         this.activity = activity;
     }
 
+    public void setNewOrder(ArrayList<BrewedOrderModel> brewedOrder) {
+        this.brewedOrder = brewedOrder;
+        notifyDataSetChanged();
+    }
+
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         private ImageView orderCoffeePic;
@@ -118,19 +123,23 @@ public class PendingOrderAdapter extends RecyclerView.Adapter<PendingOrderAdapte
                 holder.acceptOrderBtn.setOnClickListener(view -> {
                     Provider.getUser().getBrewedOrder().get(position).setOrderStatus("A");
                     updateOrderStatus("A", brewedOrder.get(position).getOrderId());
-                    Provider.getOrder().remove(position);
                     Toast.makeText(view.getContext(), "Accepted", Toast.LENGTH_SHORT).show();
+                    Provider.getOrder().get(position).setOrderStatus("A");
+
+//                    Provider.getOrder().remove(position);
+//                    QueryOrderedAndPendingCoffee.queryOrderedAndPendingCoffee();
                     notifyDataSetChanged();
-                    QueryOrderedAndPendingCoffee.queryOrderedAndPendingCoffee();
                 });
 
                 holder.declineOrderBtn.setOnClickListener(view -> {
                     Provider.getUser().getBrewedOrder().get(position).setOrderStatus("D");
                     updateOrderStatus("D", brewedOrder.get(position).getOrderId());
-                    Provider.getOrder().remove(position);
                     Toast.makeText(view.getContext(), "Declined", Toast.LENGTH_SHORT).show();
+                    Provider.getOrder().get(position).setOrderStatus("D");
+
+//                    Provider.getOrder().remove(position);
+//                    QueryOrderedAndPendingCoffee.queryOrderedAndPendingCoffee();
                     notifyDataSetChanged();
-                    QueryOrderedAndPendingCoffee.queryOrderedAndPendingCoffee();
                 });
             }
 
