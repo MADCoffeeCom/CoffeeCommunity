@@ -58,6 +58,12 @@ public class CoffeeDetailsFragment extends Fragment {
     BaristaModel currentBarista;
     CoffeeModel currentCoffee;
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        initialiseCurrentBaristaAndCoffee();
+        onBindCoffeeDetails();
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -66,19 +72,9 @@ public class CoffeeDetailsFragment extends Fragment {
         View view = inflater.inflate(R.layout.activity_coffee_details,container,false);
 
         initialiseId(view);
-        for (int j = 0; j < Provider.getCoffees().size(); j++) {
-            if(Provider.getCoffees().get(j).getCoffeeId().equals(Provider.getCurrentCoffeeId())){
-                currentCoffeeIndex = j;
-                break;
-            }
-        }
-        currentCoffee = Provider.getCoffees().get(currentCoffeeIndex);
-        for (int i = 0; i < Provider.getBaristas().size(); i++) {
-            if (Provider.getBaristas().get(i).getBaristaId().equals(currentCoffee.getBaristaId())){
-                currentBaristaIndex = i;
-                break;
-            }
-        }
+        initialiseCurrentBaristaAndCoffee();
+        onBindCoffeeDetails();
+
         editCoffeeBtn.setVisibility(View.GONE);
         deleteCoffeeBtn.setVisibility(View.GONE);
         if (Provider.getUser().getSellingCoffeeId().contains(currentCoffee.getCoffeeId())) {
@@ -112,23 +108,6 @@ public class CoffeeDetailsFragment extends Fragment {
             });
         }
 
-
-        currentBarista = Provider.getBaristas().get(currentBaristaIndex);
-
-        QueryRating.queryRating(currentBarista.getBaristaId());
-
-
-        coffeeDetailsNameText.setText(currentCoffee.getCoffeeTitle());
-        baristaNameCoffeeDetailsText.setText(toTitleCase(currentBarista.getUserName()));
-        baristaLocationCoffeeDetailsText.setText(currentBarista.getUserTaman());
-        coffeeDescCoffeeDetailsText.setText(currentCoffee.getCoffeeDesc());
-
-        Log.i("Coffee Details - Ingredients", currentCoffee.getIngredients());
-        ingredientText.setText(currentCoffee.getIngredients());
-
-        totalPriceCoffeeDetailsText.setText(String.format("%.2f", (currentCoffee.getCoffeePrice() * noOfOrder )));
-        noOfCoffeeOrderedText.setText(String.valueOf(noOfOrder));
-
         plusBtnCoffeeDetails.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -152,9 +131,6 @@ public class CoffeeDetailsFragment extends Fragment {
                 }
             }
         });
-
-        int drawableResourceId = getContext().getResources().getIdentifier(currentCoffee.getCoffeePic(), "drawable", getContext().getPackageName());
-        Glide.with(getContext()).load(drawableResourceId).into(coffeeImage);
 
         addToCartBtnCoffeeDetails.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -182,17 +158,9 @@ public class CoffeeDetailsFragment extends Fragment {
             }
         });
 
-        coffeeDetailsBackBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //set the previous button fragment
-                ((BottomNavigationActivity)getActivity()).onBackPressed();
-            }
-        });
+        coffeeDetailsBackBtn.setOnClickListener(view1 -> getActivity().onBackPressed());
 
         recyclerViewRating();
-
-
 
         // Inflate the layout for this fragment
         return view;
@@ -221,6 +189,37 @@ public class CoffeeDetailsFragment extends Fragment {
         editCoffeeBtn = view.findViewById(R.id.editCoffeeBtn);
         deleteCoffeeBtn = view.findViewById(R.id.deleteCoffeeBtn);
 
+    }
+
+    public void initialiseCurrentBaristaAndCoffee(){
+        for (int j = 0; j < Provider.getCoffees().size(); j++) {
+            if(Provider.getCoffees().get(j).getCoffeeId().equals(Provider.getCurrentCoffeeId())){
+                currentCoffeeIndex = j;
+                currentCoffee = Provider.getCoffees().get(j);
+                break;
+            }
+        }
+
+        for (int i = 0; i < Provider.getBaristas().size(); i++) {
+            if (Provider.getBaristas().get(i).getBaristaId().equals(currentCoffee.getBaristaId())){
+                currentBaristaIndex = i;
+                currentBarista = Provider.getBaristas().get(i);
+                break;
+            }
+        }
+    }
+
+    public void onBindCoffeeDetails(){
+        QueryRating.queryRating(currentBarista.getBaristaId());
+        coffeeDetailsNameText.setText(currentCoffee.getCoffeeTitle());
+        baristaNameCoffeeDetailsText.setText(toTitleCase(currentBarista.getUserName()));
+        baristaLocationCoffeeDetailsText.setText(currentBarista.getUserTaman());
+        coffeeDescCoffeeDetailsText.setText(currentCoffee.getCoffeeDesc());
+        ingredientText.setText(currentCoffee.getIngredients());
+        totalPriceCoffeeDetailsText.setText(String.format("%.2f", (currentCoffee.getCoffeePrice() * noOfOrder )));
+        noOfCoffeeOrderedText.setText(String.valueOf(noOfOrder));
+        int drawableResourceId = getContext().getResources().getIdentifier(currentCoffee.getCoffeePic(), "drawable", getContext().getPackageName());
+        Glide.with(getContext()).load(drawableResourceId).into(coffeeImage);
     }
 
 

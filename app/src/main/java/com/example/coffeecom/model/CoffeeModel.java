@@ -1,7 +1,5 @@
 package com.example.coffeecom.model;
 
-import java.util.ArrayList;
-
 public class CoffeeModel {
     private String coffeeId;
     private String coffeePic;
@@ -9,8 +7,6 @@ public class CoffeeModel {
     private double coffeePrice;
     private String ingredients;
     private String baristaId;
-
-
 
     public CoffeeModel(String coffeeId) {
         this.coffeeId = coffeeId;
@@ -98,4 +94,5 @@ public class CoffeeModel {
     public void setCoffeeId(String coffeeId) {
         this.coffeeId = coffeeId;
     }
+
 }
