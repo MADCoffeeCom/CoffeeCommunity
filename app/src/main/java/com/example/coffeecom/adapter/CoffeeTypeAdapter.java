@@ -3,7 +3,9 @@ package com.example.coffeecom.adapter;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
+import android.os.AsyncTask;
 import android.os.Handler;
 import android.os.Looper;
 import android.util.Log;
@@ -25,7 +27,6 @@ import com.example.coffeecom.activity.BottomNavigationActivity;
 import com.example.coffeecom.fragment.CoffeeDetailsFragment;
 import com.example.coffeecom.fragment.CoffeeListFragment;
 import com.example.coffeecom.fragment.HomeActivityFragment;
-import com.example.coffeecom.helper.DownloadImageTask;
 import com.example.coffeecom.model.BaristaModel;
 import com.example.coffeecom.model.CoffeeModel;
 
@@ -80,16 +81,37 @@ public class CoffeeTypeAdapter extends RecyclerView.Adapter<CoffeeTypeAdapter.Vi
 
         //code to insert picture
         String picUrl = coffees.get(position).getCoffeePic();
+//        String picUrl = "http://" + Provider.getIpAddress() + "/images/" + coffees.get(position).getCoffeePic();
+//        Log.i("picture",""+picUrl);
+        CompletableFuture cf = null;
+        CompletableFuture cf2 = null;
+        try {
+            Provider.getBaristas().clear();
+            Provider.getCoffees().clear();
+//            DownloadImageTask dit = new DownloadImageTask(holder.coffeePic);
+//            String picUrl2 = "https://i.imgur.com/bhOjb3v.jpeg";
+//            Thread thread = new Thread(new Runnable() {
+//                @Override
+//                public void run() {
+//                    dit.execute(picUrl);
+//                }
+//            });
+//            thread.join();
+//            thread.start();
+//            cf.supplyAsync(() -> dit.execute(picUrl2)).join();
 
-//        CompletableFuture cf = null;
+//            Log.i("picture", image.toString());
+//            Bitmap emptyBitmap = Bitmap.createBitmap(image.getWidth(), image.getHeight(), image.getConfig());
+//            if (image.sameAs(emptyBitmap)) {
+//                Log.i("picture", "it is empty");
+//                // myBitmap is empty/blank
+//            }
+//            dit.onPostExecute(image);
 //
-//        try {
-//            Provider.getBaristas().clear();
-//            Provider.getCoffees().clear();
-//            holder.coffeePic.setImageBitmap(cf.supplyAsync(() -> new DownloadImageTask(holder.coffeePic).doInBackground(picUrl)).join());
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
+//            holder.coffeePic.setImageBitmap(image);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
 
         int drawableResourceId = holder.itemView.getContext().getResources().getIdentifier(picUrl, "drawable", holder.itemView.getContext().getPackageName());
@@ -111,5 +133,39 @@ public class CoffeeTypeAdapter extends RecyclerView.Adapter<CoffeeTypeAdapter.Vi
     public int getItemCount() {
         return coffees.size();
     }
+//    public void loadGlideImage(Context context, ImageView imageView, String url) {
+//        GlideApp.with(context.getApplicationContext())
+//                .load(url)
+//                .signature(new ObjectKey(url))
+//                .dontAnimate()
+//                .into(imageView);
+//    }
+    private class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
+        ImageView bmImage;
+
+        public DownloadImageTask(ImageView bmImage) {
+            this.bmImage = bmImage;
+        }
+
+        protected Bitmap doInBackground(String... urls) {
+            String urldisplay = urls[0];
+            Log.i("bruhImage",urldisplay);
+            Bitmap mIcon11 = null;
+            try {
+                InputStream in = new java.net.URL(urldisplay).openStream();
+                mIcon11 = BitmapFactory.decodeStream(in);
+            } catch (Exception e) {
+                Log.e("Error", e.getMessage());
+                e.printStackTrace();
+            }
+            return mIcon11;
+        }
+
+        protected void onPostExecute(Bitmap result) {
+            bmImage.setImageBitmap(result);
+        }
+    }
 
 }
+
+

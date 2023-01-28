@@ -4,6 +4,7 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,7 +16,12 @@ import android.widget.Toast;
 
 import com.example.coffeecom.R;
 import com.example.coffeecom.activity.BottomNavigationActivity;
+import com.example.coffeecom.helper.QueryHomePage;
 import com.example.coffeecom.query.QueryTopUp;
+import com.example.coffeecom.query.QueryWallet;
+
+import java.util.concurrent.Callable;
+import java.util.concurrent.CompletableFuture;
 
 public class WithdrawFragment extends Fragment {
 
@@ -51,12 +57,26 @@ public class WithdrawFragment extends Fragment {
                     String amount = bundle.getString("amount");
 
                     QueryTopUp.withdraw(Integer.parseInt(amount));
+                    Log.i("withdraw","amount"+amount);
                     Toast.makeText(getContext(), "Withdraw success!", Toast.LENGTH_SHORT).show();
+                    try {
+                        new HomeActivityFragment.QueryWaiterHomePage().call();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                    ((BottomNavigationActivity)getActivity()).clearBackStack();
                     ((BottomNavigationActivity)getActivity()).replaceFragment(new WalletFragment());
                 }
             }
         });
 
         return view;
+    }
+    public static class QueryWaiterHomePage implements Callable<Void> {
+        @Override
+        public Void call() throws Exception {
+            QueryHomePage.queryHomepage();
+            return null;
+        }
     }
 }

@@ -98,38 +98,41 @@ public class QueryOrderedAndPendingCoffee {
                     if (fetchData.onComplete()) {
                         String result = fetchData.getResult();
                         Log.i(TAG, "Result: " + result);
-                        String[] resultSplitted = result.split("split");
-                        for (String str: resultSplitted) {
-                            String[] orderDetails = str.split(" - ");
-                            String orderId = orderDetails[0];
-                            String coffeeId = orderDetails[1];
-                            int amount = Integer.parseInt(orderDetails[2]);
+                        if (!result.equals("No results") && !result.equals("Error: Database connection")){
+                            String[] resultSplitted = result.split("split");
+                            for (String str: resultSplitted) {
+                                String[] orderDetails = str.split(" - ");
+                                String orderId = orderDetails[0];
+                                String coffeeId = orderDetails[1];
+                                int amount = Integer.parseInt(orderDetails[2]);
 
-                            CoffeeModel coffee = null;
-                            for (int i = 0; i < Provider.getCoffees().size(); i++) {
-                                if(Provider.getCoffees().get(i).getCoffeeId().equals(coffeeId)){
-                                    coffee = Provider.getCoffees().get(i);
-                                    break;
-                                }
-                            }
-
-                            for (int i = 0; i < Provider.getUser().getOrderedHistory().size(); i++) {
-                                for (int j = 0; j < amount; j++) {
-                                    if (Provider.getUser().getOrderedHistory().get(i).getOrderId().equals(orderId)) {
-                                        Provider.getUser().getOrderedHistory().get(i).addOrderedCoffee(coffee);
-                                        Log.i(TAG, "Successfully added OrderHistory in Order " + coffee.getCoffeeId());
+                                CoffeeModel coffee = null;
+                                for (int i = 0; i < Provider.getCoffees().size(); i++) {
+                                    if(Provider.getCoffees().get(i).getCoffeeId().equals(coffeeId)){
+                                        coffee = Provider.getCoffees().get(i);
+                                        break;
                                     }
                                 }
-                            }
 
-                            for (int i = 0; i < Provider.getUser().getPendingOrder().size(); i++) {
-                                for (int j = 0; j < amount; j++) {
-                                    if (Provider.getUser().getPendingOrder().get(i).getOrderId().equals(orderId)) {
-                                        Provider.getUser().getPendingOrder().get(i).addOrderedCoffee(coffee);
-                                        Log.i(TAG, "Successfully added PendingOrder in Order " + coffee.getCoffeeId());
+                                for (int i = 0; i < Provider.getUser().getOrderedHistory().size(); i++) {
+                                    for (int j = 0; j < amount; j++) {
+                                        if (Provider.getUser().getOrderedHistory().get(i).getOrderId().equals(orderId)) {
+                                            Provider.getUser().getOrderedHistory().get(i).addOrderedCoffee(coffee);
+                                            Log.i(TAG, "Successfully added OrderHistory in Order " + coffee.getCoffeeId());
+                                        }
                                     }
                                 }
-                            }
+
+                                for (int i = 0; i < Provider.getUser().getPendingOrder().size(); i++) {
+                                    for (int j = 0; j < amount; j++) {
+                                        if (Provider.getUser().getPendingOrder().get(i).getOrderId().equals(orderId)) {
+                                            Provider.getUser().getPendingOrder().get(i).addOrderedCoffee(coffee);
+                                            Log.i(TAG, "Successfully added PendingOrder in Order " + coffee.getCoffeeId());
+                                        }
+                                    }
+                                }
+                        }
+
                         }
                     }
                 }
