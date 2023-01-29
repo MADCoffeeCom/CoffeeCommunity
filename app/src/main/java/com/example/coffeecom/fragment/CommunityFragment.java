@@ -23,6 +23,7 @@ import com.example.coffeecom.model.ArticleModel;
 import com.example.coffeecom.model.PostModel;
 
 import java.util.ArrayList;
+import java.util.Locale;
 
 public class CommunityFragment extends Fragment {
 
@@ -80,7 +81,7 @@ public class CommunityFragment extends Fragment {
         ArrayList<PostModel> filteredlist = new ArrayList<>();
 
         for (PostModel item : posts) {
-            if (item.getPostDesc().toLowerCase().contains(text.toLowerCase())) {
+            if (item.getPostDesc().toLowerCase().contains(text.toLowerCase()) || item.getSenderName().toLowerCase().contains(text.toLowerCase())) {
                 Log.i(TAG, "filter: " + item.getPostDesc());
                 filteredlist.add(item);
             }
