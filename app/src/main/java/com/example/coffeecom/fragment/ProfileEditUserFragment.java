@@ -24,7 +24,7 @@ import com.vishnusivadas.advanced_httpurlconnection.PutData;
 public class ProfileEditUserFragment extends Fragment {
 
     private static final String TAG = "ProfileEditUserFragment";
-    private EditText userName, userEmail, userPassword, confirmPasswordTextBox;
+    private EditText userName, userEmail, oldPasswordTB, userPassword, confirmPasswordTextBox;
     private ImageButton btnBack;
     private Button btnUpdate;
     private String password;
@@ -40,12 +40,14 @@ public class ProfileEditUserFragment extends Fragment {
         confirmPasswordTextBox = view.findViewById(R.id.confirmPasswordTextBox);
         btnBack = view.findViewById(R.id.imgEditPostBack);
         btnUpdate = view.findViewById(R.id.btnProfileUpdate);
+        oldPasswordTB = view.findViewById(R.id.oldPasswordTB);
 
         initialiseData();
-        queryUserPassword();
+//        queryUserPassword();
 
         btnUpdate.setOnClickListener(view13 -> {
             updateUserDetails();
+            getActivity().onBackPressed();
         });
 
         userName.setEnabled(false);
@@ -64,36 +66,37 @@ public class ProfileEditUserFragment extends Fragment {
         confirmPasswordTextBox.setText(password);
     }
 
-    private void queryUserPassword() {
-        Handler handler = new Handler(Looper.getMainLooper());
-        handler.post(() -> {
-            String[] field = new String[1];
-            field[0] = "userId";
-            String[] data = new String[1];
-            data[0] = Provider.getUser().getUserId();
-
-            PutData putData = new PutData("http://" + Provider.getIpAddress() + "/CoffeeCommunityPHP/userpassword.php", "POST", field, data);
-            if (putData.startPut() && putData.onComplete()) {
-                String result = putData.getResult();
-                Log.i(TAG, "queryUserPassword: " + result);
-                password = result;
-                userPassword.setText(password);
-                confirmPasswordTextBox.setText(password);
-            }
-        });
-    }
+//    private void queryUserPassword() {
+//        String[] field = new String[1];
+//        field[0] = "userId";
+//        String[] data = new String[1];
+//        data[0] = Provider.getUser().getUserId();
+//
+//        PutData putData = new PutData("http://" + Provider.getIpAddress() + "/CoffeeCommunityPHP/userpassword.php", "POST", field, data);
+//        if (putData.startPut() && putData.onComplete()) {
+//            String result = putData.getResult();
+//            Log.i(TAG, "queryUserPassword: " + result);
+//            password = result;
+////            userPassword.setText(password);
+////            confirmPasswordTextBox.setText(password);
+//        }
+//    }
 
     private void updateUserDetails() {
         Handler handler = new Handler(Looper.getMainLooper());
         handler.post(() -> {
-            String[] field = new String[2];
+            String[] field = new String[4];
             field[0] = "email";
             field[1] = "password";
+            field[2] = "oldpassword";
+            field[3] = "userId";
 
             //Creating array for data
-            String[] data = new String[2];
+            String[] data = new String[4];
             data[0] = String.valueOf(userEmail.getText());
             data[1] = String.valueOf(userPassword.getText());
+            data[2] = String.valueOf(oldPasswordTB.getText());
+            data[3] = Provider.getUser().getUserId();
 
             PutData putData = new PutData("http://" + Provider.getIpAddress() + "/CoffeeCommunityPHP/updateuserdetails.php", "POST", field, data);
             if (putData.startPut() && putData.onComplete()) {
