@@ -5,6 +5,7 @@ import static com.example.coffeecom.helper.ToTitleCase.toTitleCase;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +17,7 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.coffeecom.Provider;
 import com.example.coffeecom.R;
 import com.example.coffeecom.activity.BottomNavigationActivity;
 import com.example.coffeecom.fragment.PostDetailsFragment;
@@ -29,6 +31,7 @@ import java.util.Date;
 
 public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder>{
 
+    private static final String TAG = "PostAdapter";
     ArrayList<PostModel> posts;
     Context activity;
 
@@ -68,6 +71,8 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder>{
 
     @Override
     public void onBindViewHolder(@NonNull PostAdapter.ViewHolder holder, int position) {
+//        Log.i(TAG, "post size: " + posts.size());
+//        Log.i(TAG, "Provider size: " + Provider.getPosts().size());
         holder.posterNameText.setText(toTitleCase(posts.get(position).getSenderName()));
         holder.postDateText.setText(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(posts.get(position).getPostDateTime()));
         holder.postDescText.setText(posts.get(position).getPostDesc());
@@ -80,7 +85,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder>{
             @Override
             public void onClick(View view) {
                 Bundle bundle = new Bundle();
-                bundle.putString("postId", posts.get(position).getPostId());
+                bundle.putString("postId", posts.get(holder.getAdapterPosition()).getPostId());
                 ((BottomNavigationActivity)activity).replaceFragmentWithData(new PostDetailsFragment(), bundle);
             }
         });
@@ -89,7 +94,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder>{
             @Override
             public void onClick(View view) {
                 Bundle bundle = new Bundle();
-                bundle.putString("userId", posts.get(position).getPosterId());
+                bundle.putString("userId", posts.get(holder.getAdapterPosition()).getPosterId());
                 ((BottomNavigationActivity)activity).replaceFragmentWithData(new ProfileViewFragment(), bundle);
             }
         });

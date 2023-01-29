@@ -52,13 +52,13 @@
         android:layout_height="50dp"
         android:layout_marginStart="24dp"
         android:layout_marginTop="16dp"
-        android:layout_marginEnd="24dp"
+        android:layout_marginEnd="80dp"
         android:background="@drawable/textbox"
         android:ems="10"
         android:hint="Picture"
         android:inputType="textPersonName"
+        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/captionTextBox" />
 
@@ -72,4 +72,41 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
+        android:id="@+id/uploadPostPicBtn"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="16dp"
+        android:background="@color/transparent"
+        android:src="@drawable/ic_plus"
+        app:layout_constraintStart_toEndOf="@+id/textView64"
+        app:layout_constraintTop_toBottomOf="@+id/captionTextBox" />
+
+    <TextView
+        android:id="@+id/textView64"
+        style="@style/h2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Picture"
+        app:layout_constraintBottom_toBottomOf="@+id/uploadPostPicBtn"
+        app:layout_constraintStart_toStartOf="@+id/captionTextBox"
+        app:layout_constraintTop_toTopOf="@+id/uploadPostPicBtn" />
+
+    <ImageView
+        android:id="@+id/postImage"
+        android:layout_width="0dp"
+        android:layout_height="300dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="24dp"
+        android:background="@drawable/round_outline"
+        android:clipToOutline="true"
+        android:scaleType="centerCrop"
+        android:src="@drawable/article10"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView64" />
 </androidx.constraintlayout.widget.ConstraintLayout>

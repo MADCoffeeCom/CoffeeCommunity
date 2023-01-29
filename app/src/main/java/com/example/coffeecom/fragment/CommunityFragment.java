@@ -41,6 +41,9 @@ public class CommunityFragment extends Fragment {
 
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_community,container,false);
+        Log.i(TAG, "aft in community: " + Provider.getPosts().size());
+
+
         postRecyclerView = view.findViewById(R.id.postRecyclerView);
         addPost = view.findViewById(R.id.addPost);
         tbSearch = view.findViewById(R.id.tbSearch);

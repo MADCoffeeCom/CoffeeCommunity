@@ -90,7 +90,10 @@ public class QueryPost {
 
     public static void addPost(String postDesc, String postPic) {
 
-        String postId = "p" + (Provider.getPosts().size() + 1);
+        String lastId = Provider.getPosts().get(0).getPostId();
+        int id = Integer.parseInt(lastId.substring(1)) + 1;
+        String postId = "p" + id;
+        Log.i(TAG, "addPost: " + postId);
         Log.i(TAG, "addPost: Run here once");
 
         Handler handler = new Handler(Looper.getMainLooper());
@@ -115,14 +118,17 @@ public class QueryPost {
                 data[5] = postPic;
 //                data[6] = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").format(new Date());
 
-                PostModel post = new PostModel(postId, 0, 0, data[3], Provider.getUser().getUserName(), data[4], data[5], new Date());
-                Provider.addPosts(post);
-
                 PutData putData = new PutData("http://" + Provider.getIpAddress() + "/CoffeeCommunityPHP/addpost.php", "POST", field, data);
                 if (putData.startPut()) {
                     if (putData.onComplete()) {
                         String result = putData.getResult();
                         Log.i(TAG, "run: " + result);
+                        Log.i(TAG, "bfr: " + Provider.getPosts().size());
+                        PostModel newpost = new PostModel(postId, 0, 0, Provider.getUser().getUserId(), Provider.getUser().getUserName(), postDesc, postPic, new Date());
+                        Provider.getPosts().add(0, newpost);
+
+                        Log.i(TAG, "aft: " + Provider.getPosts().size());
+
                     }
                 }
             }
@@ -237,6 +243,10 @@ public class QueryPost {
                     if (putData.onComplete()) {
                         String result = putData.getResult();
                         Log.i(TAG, "run: " + result);
+
+                        for (int i = 0; i < Provider.getPosts().size(); i++) {
+                            Provider.getPosts().remove(i);
+                        }
                     }
                 }
             }
@@ -287,6 +297,11 @@ public class QueryPost {
                     if (putData.onComplete()) {
                         String result = putData.getResult();
                         Log.i(TAG, "run: " + result);
+
+                        for (int i = 0; i < Provider.getPosts().size(); i++) {
+                            Provider.getPosts().get(i).setPostPic(postPic);
+                            Provider.getPosts().get(i).setPostDesc(postDesc);
+                        }
                     }
                 }
             }

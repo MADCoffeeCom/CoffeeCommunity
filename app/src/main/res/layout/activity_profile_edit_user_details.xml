@@ -107,6 +107,32 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textViewProfile8" />
 
+                <EditText
+                    android:id="@+id/oldPasswordTB"
+                    style="@style/defaultTextBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/textbox"
+                    android:hint="Password"
+                    android:inputType="textPassword"
+                    android:textColor="@color/white_60"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textViewProfile" />
+
+                <TextView
+                    android:id="@+id/textViewProfile"
+                    style="@style/c1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:layout_marginTop="8dp"
+                    android:text="Old Password"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/editTextProfileEmail" />
+
                 <TextView
                     android:id="@+id/textViewProfile9"
                     style="@style/c1"
@@ -117,7 +143,7 @@
                     android:text="New Password"
                     android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/editTextProfileEmail" />
+                    app:layout_constraintTop_toBottomOf="@+id/oldPasswordTB" />
 
                 <EditText
                     android:id="@+id/editTextProfilePassword"
@@ -128,9 +154,9 @@
                     android:background="@drawable/textbox"
                     android:hint="Password"
                     android:inputType="textPassword"
-                    android:text="   Password"
                     android:textColor="@color/white_60"
                     app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textViewProfile9" />
 
@@ -141,6 +167,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
                     android:text="Confirm Password"
+                    android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/editTextProfilePassword" />
 
@@ -154,7 +181,6 @@
                     android:ems="10"
                     android:hint="Confirm Password"
                     android:inputType="none|textPassword"
-                    android:text="Name"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textView42" />
