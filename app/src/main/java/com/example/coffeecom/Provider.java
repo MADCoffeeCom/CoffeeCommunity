@@ -53,7 +53,7 @@ public class Provider{
     private static String currentCoffeeId;
     private static String currentArticleId;
     private static ProfileModel user;
-    private static String ipAddress = "192.168.0.109";
+    private static String ipAddress = "192.168.0.161";
 //    private static String ipAddress = "coffeecommunityapp.000webhostapp.com";
     private static double cartTotalPrice =0;
     private static boolean waitingState = false;
