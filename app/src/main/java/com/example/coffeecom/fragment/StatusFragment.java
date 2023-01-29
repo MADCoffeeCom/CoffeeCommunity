@@ -64,7 +64,7 @@ public class StatusFragment extends Fragment {
             public void onClick(View view) {
                 if(bundle.getString("Relocate").equals("home")){
 
-//======================================BRUHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH=====================================
+//======================================TAKEN=====================================
                     Provider.getUser().getPendingOrder().get(currentOrderIndex).setOrderStatus("T");
                     updateOrderStatus("T", currentOrder.getOrderId());
                     Provider.getUser().getPendingOrder().remove(currentOrderIndex);
@@ -78,6 +78,7 @@ public class StatusFragment extends Fragment {
 //                    ((BottomNavigationActivity)getActivity()).clearBackStack();
 
                 }else{
+                    getActivity().onBackPressed();
                     getActivity().onBackPressed();
                 }
             }
