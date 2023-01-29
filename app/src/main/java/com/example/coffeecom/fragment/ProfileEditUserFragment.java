@@ -10,7 +10,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
@@ -20,6 +19,8 @@ import com.example.coffeecom.R;
 import com.example.coffeecom.activity.BottomNavigationActivity;
 import com.vishnusivadas.advanced_httpurlconnection.PutData;
 
+import java.util.concurrent.atomic.AtomicReference;
+
 
 public class ProfileEditUserFragment extends Fragment {
 
@@ -28,6 +29,8 @@ public class ProfileEditUserFragment extends Fragment {
     private ImageButton btnBack;
     private Button btnUpdate;
     private String password;
+
+    String result = "";
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -46,8 +49,16 @@ public class ProfileEditUserFragment extends Fragment {
 //        queryUserPassword();
 
         btnUpdate.setOnClickListener(view13 -> {
-            updateUserDetails();
-            getActivity().onBackPressed();
+            if(userPassword.getText().toString().equals(confirmPasswordTextBox.getText().toString())){
+                updateUserDetails();
+                if(result.equals("Update Success")){
+                    getActivity().onBackPressed();
+                }else{
+                    Toast.makeText(getContext(), result, Toast.LENGTH_SHORT).show();
+                }
+            }else{
+                Toast.makeText(getContext(), "Password not same", Toast.LENGTH_SHORT).show();
+            }
         });
 
         userName.setEnabled(false);
@@ -83,28 +94,26 @@ public class ProfileEditUserFragment extends Fragment {
 //    }
 
     private void updateUserDetails() {
-        Handler handler = new Handler(Looper.getMainLooper());
-        handler.post(() -> {
-            String[] field = new String[4];
-            field[0] = "email";
-            field[1] = "password";
-            field[2] = "oldpassword";
-            field[3] = "userId";
+        String[] field = new String[4];
+        field[0] = "email";
+        field[1] = "password";
+        field[2] = "oldpassword";
+        field[3] = "userId";
 
-            //Creating array for data
-            String[] data = new String[4];
-            data[0] = String.valueOf(userEmail.getText());
-            data[1] = String.valueOf(userPassword.getText());
-            data[2] = String.valueOf(oldPasswordTB.getText());
-            data[3] = Provider.getUser().getUserId();
+        //Creating array for data
+        String[] data = new String[4];
+        data[0] = String.valueOf(userEmail.getText());
+        data[1] = String.valueOf(userPassword.getText());
+        data[2] = String.valueOf(oldPasswordTB.getText());
+        data[3] = Provider.getUser().getUserId();
+        PutData putData = new PutData("http://" + Provider.getIpAddress() + "/CoffeeCommunityPHP/updateuserdetails.php", "POST", field, data);
+        if (putData.startPut() && putData.onComplete()) {
+            result = putData.getResult();
+            Log.i(TAG, "updateUserDetails: " + result);
+            Toast.makeText(getContext(), result, Toast.LENGTH_SHORT);
+            initialiseData();
 
-            PutData putData = new PutData("http://" + Provider.getIpAddress() + "/CoffeeCommunityPHP/updateuserdetails.php", "POST", field, data);
-            if (putData.startPut() && putData.onComplete()) {
-                String result = putData.getResult();
-                Log.i(TAG, "updateUserDetails: " + result);
-                Toast.makeText(getContext(), result, Toast.LENGTH_SHORT);
-                initialiseData();
-            }
-        });
+        }
     }
+
 }
