@@ -222,6 +222,7 @@ public class CoffeeCartFragment extends Fragment {
                                             QueryTransaction.insertTransaction(cm.getBarista().getUserId(),orderId,cm.getTotalPrice(),paymentMethod);
                                         }
                                     }
+                                    Provider.getBaristaIdInCart().clear();
                                     Provider.getCartModelList().clear();
                                     DeleteFromCart.deleteFromCart();
                                     Toast.makeText(getContext(), "Successfully ordered!", Toast.LENGTH_SHORT).show();

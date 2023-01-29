@@ -50,7 +50,7 @@ public class WithdrawFragment extends Fragment {
         withdrawBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(bankTextBox.getText() != null || bankNoTextBox.getText() != null || nameTextBox.getText() != null){
+                if(!bankTextBox.getText().toString().isEmpty() && !bankNoTextBox.getText().toString().isEmpty() && !nameTextBox.getText().toString().isEmpty()){
                     String bankName = bankTextBox.getText().toString();
                     String bankNo = bankNoTextBox.getText().toString();
                     String holderName = nameTextBox.getText().toString();
@@ -66,6 +66,9 @@ public class WithdrawFragment extends Fragment {
                     }
                     ((BottomNavigationActivity)getActivity()).clearBackStack();
                     ((BottomNavigationActivity)getActivity()).replaceFragment(new WalletFragment());
+                }
+                else{
+                    Toast.makeText(getContext(), "Please fill in all the details", Toast.LENGTH_SHORT).show();
                 }
             }
         });

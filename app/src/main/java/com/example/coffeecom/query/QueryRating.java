@@ -39,19 +39,22 @@ public class QueryRating {
                 if (putData.startPut()) {
                     if (putData.onComplete()) {
                         String result = putData.getResult();
-                        String[] ratings = result.split("split");
-                        for (String rating : ratings){
-                            String[] ratingDetails = rating.split(" - ");
-                            String username = ratingDetails[0];
-                            int ratingNum = Integer.parseInt(ratingDetails[1]);
-                            String ratingDesc = ratingDetails[2];
+                        Log.i("QueryRating",result);
+                        if (!result.equals("No results") && !result.equals("Error: Database connection")){
+                            String[] ratings = result.split("split");
+                            for (String rating : ratings){
+                                String[] ratingDetails = rating.split(" - ");
+                                String username = ratingDetails[0];
+                                int ratingNum = Integer.parseInt(ratingDetails[1]);
+                                String ratingDesc = ratingDetails[2];
 
-                            BaristaRatingModel ratingModel = new BaristaRatingModel(ratingNum, ratingDesc, username);
-                            Log.i(TAG, "run: " + ratingModel.getRating());
-                            Log.i(TAG, "run: " + ratingModel.getRatingDesc());
-                            Provider.getBaristas().get(baristaIndex).addRatings(ratingModel);
-                            Log.i(TAG, "Added rating: " + ratingModel.getRaterName());
+                                BaristaRatingModel ratingModel = new BaristaRatingModel(ratingNum, ratingDesc, username);
+                                Log.i(TAG, "run: " + ratingModel.getRating());
+                                Log.i(TAG, "run: " + ratingModel.getRatingDesc());
+                                Provider.getBaristas().get(baristaIndex).addRatings(ratingModel);
+                                Log.i(TAG, "Added rating: " + ratingModel.getRaterName());
 
+                            }
                         }
                     }
                 }
