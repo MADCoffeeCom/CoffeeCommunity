@@ -1,9 +1,12 @@
 package com.example.coffeecom.adapter;
 
 import android.annotation.SuppressLint;
+import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Handler;
@@ -30,7 +33,9 @@ import com.example.coffeecom.fragment.HomeActivityFragment;
 import com.example.coffeecom.model.BaristaModel;
 import com.example.coffeecom.model.CoffeeModel;
 
+import java.io.IOException;
 import java.io.InputStream;
+import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.concurrent.CompletableFuture;
@@ -80,42 +85,30 @@ public class CoffeeTypeAdapter extends RecyclerView.Adapter<CoffeeTypeAdapter.Vi
         holder.coffeeTitle.setText(coffees.get(position).getCoffeeTitle());
 
         //code to insert picture
-        String picUrl = coffees.get(position).getCoffeePic();
-//        String picUrl = "http://" + Provider.getIpAddress() + "/images/" + coffees.get(position).getCoffeePic();
-//        Log.i("picture",""+picUrl);
-//        CompletableFuture cf = null;
-//        CompletableFuture cf2 = null;
-//        try {
-//            Provider.getBaristas().clear();
-//            Provider.getCoffees().clear();
-//            DownloadImageTask dit = new DownloadImageTask(holder.coffeePic);
-//            String picUrl2 = "https://i.imgur.com/bhOjb3v.jpeg";
-//            Thread thread = new Thread(new Runnable() {
-//                @Override
-//                public void run() {
-//                    dit.execute(picUrl);
-//                }
-//            });
-//            thread.join();
-//            thread.start();
-//            cf.supplyAsync(() -> dit.execute(picUrl2)).join();
-
-//            Log.i("picture", image.toString());
-//            Bitmap emptyBitmap = Bitmap.createBitmap(image.getWidth(), image.getHeight(), image.getConfig());
-//            if (image.sameAs(emptyBitmap)) {
-//                Log.i("picture", "it is empty");
-//                // myBitmap is empty/blank
-//            }
-//            dit.onPostExecute(image);
-//
-//            holder.coffeePic.setImageBitmap(image);
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
+//        String picUrl = coffees.get(position).getCoffeePic();
+        String picUrl = "http://" + Provider.getIpAddress() + "/images/" + coffees.get(position).getCoffeePic()+".png";
+        CompletableFuture cf = null;
+        CompletableFuture cf2 = null;
+        try {
+            DownloadImageTask dit = new DownloadImageTask(holder.coffeePic);
+//            String picUrl2 = "https://i.imgur.com/GmdNUpB.png";
 
 
-        int drawableResourceId = holder.itemView.getContext().getResources().getIdentifier(picUrl, "drawable", holder.itemView.getContext().getPackageName());
-        Glide.with(holder.itemView.getContext()).load(drawableResourceId).into(holder.coffeePic);
+
+            Bitmap bitmap = cf.supplyAsync(() -> dit.execute(picUrl)).join().get();
+
+//            Log.i("BruhImage" , bitmap.toString() + " "  + holder.coffeePic.getDrawable().toString());
+
+
+//            int drawableResourceId = holder.itemView.getContext().getResources().getIdentifier(drawableFromUrl(picUrl2), "drawable", holder.itemView.getContext().getPackageName());
+//        Glide.with(holder.itemView.getContext()).load(drawableFromUrl(picUrl2)).into(holder.coffeePic);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        //Setting from drawable
+//        int drawableResourceId = holder.itemView.getContext().getResources().getIdentifier(picUrl, "drawable", holder.itemView.getContext().getPackageName());
+//        Glide.with(holder.itemView.getContext()).load(drawableResourceId).into(holder.coffeePic);
 
         holder.coffeeCard.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -123,7 +116,6 @@ public class CoffeeTypeAdapter extends RecyclerView.Adapter<CoffeeTypeAdapter.Vi
                 Log.i("Coffeetype in adapter", coffees.get(position).getCoffeeType());
                 Provider.setCurrentCoffeeId(coffees.get(position).getCoffeeId());
                 ((BottomNavigationActivity)activity).replaceFragment(new CoffeeDetailsFragment());
-
             }
         });
     }
@@ -166,6 +158,8 @@ public class CoffeeTypeAdapter extends RecyclerView.Adapter<CoffeeTypeAdapter.Vi
         }
     }
 
+
 }
+
 
 
