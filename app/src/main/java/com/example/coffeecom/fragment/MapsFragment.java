@@ -112,7 +112,7 @@ public class MapsFragment extends Fragment {
             googleMap.getUiSettings().setMyLocationButtonEnabled(true);
 
             fusedLocationProviderClient.requestLocationUpdates(locationRequest, locationCallback, null);
-            Log.i("Maps Fragment","Debugging Maps Fragment 9" + coffeeShopLocation.get(0));
+//            Log.i("Maps Fragment","Debugging Maps Fragment 9" + coffeeShopLocation.get(0));
 //            for (int i =0; i<coffeeShopLocation.size();i++){
 //                Log.i("Maps Fragment","Debugging Maps Fragment 8" + coffeeShopLocation.get(i));
 //                for (int j=0; j<title.size();j++){

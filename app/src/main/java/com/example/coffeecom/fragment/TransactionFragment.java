@@ -40,7 +40,7 @@ public class TransactionFragment extends Fragment {
 
         transactionRecyclerView = view.findViewById(R.id.transactionRecyclerView);
 
-        walletAmountText2 = view.findViewById(R.id.walletAmountText2);
+    //    walletAmountText2 = view.findViewById(R.id.walletAmountText2);
         noTransactionErrorText = view.findViewById(R.id.noTransactionErrorText);
 
         backBtn = view.findViewById(R.id.backBtn);
