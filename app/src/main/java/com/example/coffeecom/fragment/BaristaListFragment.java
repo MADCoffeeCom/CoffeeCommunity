@@ -2,6 +2,7 @@ package com.example.coffeecom.fragment;
 
 import static com.example.coffeecom.helper.ToTitleCase.toTitleCase;
 
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -23,11 +24,13 @@ import com.bumptech.glide.Glide;
 import com.example.coffeecom.Provider;
 import com.example.coffeecom.R;
 import com.example.coffeecom.adapter.CoffeeBaristaListAdapter;
+import com.example.coffeecom.helper.DownloadImageHelper;
 import com.example.coffeecom.model.BaristaModel;
 import com.example.coffeecom.model.CoffeeModel;
 import com.vishnusivadas.advanced_httpurlconnection.PutData;
 
 import java.util.ArrayList;
+import java.util.concurrent.CompletableFuture;
 
 
 public class BaristaListFragment extends Fragment {
@@ -70,8 +73,19 @@ public class BaristaListFragment extends Fragment {
         baristaListName.setText(toTitleCase(Provider.getBaristas().get(currentBaristaIndex).getUserName()));
         baristaListLocation.setText(Provider.getBaristas().get(currentBaristaIndex).getUserTaman());
         baristaListDesc.setText(Provider.getBaristas().get(currentBaristaIndex).getBaristaDesc());
-        int drawableResourceId = this.getResources().getIdentifier(Provider.getBaristas().get(currentBaristaIndex).getUserPic(), "drawable", getActivity().getPackageName());
-        Glide.with(this).load(drawableResourceId).into(baristaListPic);
+//        Code insert pic with URL
+        String picUrl = "http://" + Provider.getIpAddress() + "/images/" + Provider.getBaristas().get(currentBaristaIndex).getUserPic()+".jpg";
+        CompletableFuture cf = null;
+        try {
+            DownloadImageHelper dit = new DownloadImageHelper(baristaListPic);
+            Bitmap bitmap = cf.supplyAsync(() -> dit.execute(picUrl)).join().get();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+//        Code to insert pic with Drawable
+//        int drawableResourceId = this.getResources().getIdentifier(Provider.getBaristas().get(currentBaristaIndex).getUserPic(), "drawable", getActivity().getPackageName());
+//        Glide.with(this).load(drawableResourceId).into(baristaListPic);
         backBtn.setOnClickListener(view1 -> getActivity().onBackPressed());
 
         querySellingCoffee();

@@ -1,6 +1,7 @@
 package com.example.coffeecom.adapter;
 
 import android.annotation.SuppressLint;
+import android.graphics.Bitmap;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,9 +24,11 @@ import com.example.coffeecom.activity.BottomNavigationActivity;
 import com.example.coffeecom.fragment.CoffeeDetailsFragment;
 import com.example.coffeecom.fragment.LearnDetailsFragment;
 import com.example.coffeecom.fragment.TransactionFragment;
+import com.example.coffeecom.helper.DownloadImageHelper;
 import com.example.coffeecom.model.ArticleModel;
 
 import java.util.ArrayList;
+import java.util.concurrent.CompletableFuture;
 
 public class LearnArticleAdapter extends RecyclerView.Adapter<LearnArticleAdapter.ViewHolder> {
 
@@ -70,10 +73,21 @@ public class LearnArticleAdapter extends RecyclerView.Adapter<LearnArticleAdapte
     public void onBindViewHolder(@NonNull LearnArticleAdapter.ViewHolder holder, @SuppressLint("RecyclerView") int position) {
         holder.articleTitle.setText(articles.get(position).getArticleTitle());
 
-        //code to insert picture
-        String picUrl = articles.get(position).getArticlePic();
-        int drawableResourceId = holder.itemView.getContext().getResources().getIdentifier(picUrl, "drawable", holder.itemView.getContext().getPackageName());
-        Glide.with(holder.itemView.getContext()).load(drawableResourceId).into(holder.articlePic);
+        //code to insert picture with URL
+        String picUrl = "http://" + Provider.getIpAddress() + "/images/" + articles.get(position).getArticlePic()+".jpg";
+        CompletableFuture cf = null;
+        try {
+            DownloadImageHelper dit = new DownloadImageHelper(holder.articlePic);
+            Bitmap bitmap = cf.supplyAsync(() -> dit.execute(picUrl)).join().get();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
+        //code to insert picture with drawable
+//        String picUrl = articles.get(position).getArticlePic();
+//        int drawableResourceId = holder.itemView.getContext().getResources().getIdentifier(picUrl, "drawable", holder.itemView.getContext().getPackageName());
+//        Glide.with(holder.itemView.getContext()).load(drawableResourceId).into(holder.articlePic);
 
         holder.articleCard.setOnClickListener(new View.OnClickListener() {
             @Override

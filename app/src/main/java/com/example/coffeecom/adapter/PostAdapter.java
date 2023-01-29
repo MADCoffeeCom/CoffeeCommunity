@@ -4,6 +4,7 @@ import static com.example.coffeecom.helper.FormatDateTime.convertDatetoStringDat
 import static com.example.coffeecom.helper.ToTitleCase.toTitleCase;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,16 +17,19 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.coffeecom.Provider;
 import com.example.coffeecom.R;
 import com.example.coffeecom.activity.BottomNavigationActivity;
 import com.example.coffeecom.fragment.PostDetailsFragment;
 import com.example.coffeecom.fragment.ProfileViewFragment;
+import com.example.coffeecom.helper.DownloadImageHelper;
 import com.example.coffeecom.model.CoffeeModel;
 import com.example.coffeecom.model.PostModel;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.concurrent.CompletableFuture;
 
 public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder>{
 
@@ -72,9 +76,21 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder>{
         holder.postDateText.setText(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(posts.get(position).getPostDateTime()));
         holder.postDescText.setText(posts.get(position).getPostDesc());
 
-        String picUrl = posts.get(position).getPostPic();
-        int drawableResourceId = holder.itemView.getContext().getResources().getIdentifier(picUrl, "drawable", holder.itemView.getContext().getPackageName());
-        Glide.with(holder.itemView.getContext()).load(drawableResourceId).into(holder.postPic);
+        //code to insert pic with URL
+        String picUrl = "http://" + Provider.getIpAddress() + "/images/" + posts.get(position).getPostPic()+".jpg";
+        CompletableFuture cf = null;
+        try {
+            DownloadImageHelper dit = new DownloadImageHelper(holder.postPic);
+            Bitmap bitmap = cf.supplyAsync(() -> dit.execute(picUrl)).join().get();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
+        //code to insert pic with drawable
+//        String picUrl = posts.get(position).getPostPic();
+//        int drawableResourceId = holder.itemView.getContext().getResources().getIdentifier(picUrl, "drawable", holder.itemView.getContext().getPackageName());
+//        Glide.with(holder.itemView.getContext()).load(drawableResourceId).into(holder.postPic);
 
         holder.postCard.setOnClickListener(new View.OnClickListener() {
             @Override

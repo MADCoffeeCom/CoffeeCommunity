@@ -1,6 +1,7 @@
 package com.example.coffeecom.adapter;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,13 +16,16 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.coffeecom.Provider;
 import com.example.coffeecom.activity.BottomNavigationActivity;
 import com.example.coffeecom.fragment.PostDetailsFragment;
+import com.example.coffeecom.helper.DownloadImageHelper;
 import com.example.coffeecom.model.PostModel;
 import com.example.coffeecom.R;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.concurrent.CompletableFuture;
 
 public class ProfilePostHistoryAdapter extends RecyclerView.Adapter<ProfilePostHistoryAdapter.ViewHolder> {
 
@@ -60,9 +64,20 @@ public class ProfilePostHistoryAdapter extends RecyclerView.Adapter<ProfilePostH
 
     @Override
     public void onBindViewHolder(@NonNull ProfilePostHistoryAdapter.ViewHolder holder, int position) {
-        String picUrl = myPostList.get(position).getPostPic();
-        int drawableResourceId = holder.itemView.getContext().getResources().getIdentifier(picUrl, "drawable", holder.itemView.getContext().getPackageName());
-        Glide.with(holder.itemView.getContext()).load(drawableResourceId).into(holder.postImage);
+//        Code to insert pic with URL
+        String picUrl = "http://" + Provider.getIpAddress() + "/images/" + myPostList.get(position).getPostPic()+".jpg";
+        CompletableFuture cf = null;
+        try {
+            DownloadImageHelper dit = new DownloadImageHelper(holder.postImage);
+            Bitmap bitmap = cf.supplyAsync(() -> dit.execute(picUrl)).join().get();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+//        Code to insert pic with Drawable
+//        String picUrl = myPostList.get(position).getPostPic();
+//        int drawableResourceId = holder.itemView.getContext().getResources().getIdentifier(picUrl, "drawable", holder.itemView.getContext().getPackageName());
+//        Glide.with(holder.itemView.getContext()).load(drawableResourceId).into(holder.postImage);
         holder.postTitle.setText(myPostList.get(position).getPostDesc());
         int vote = myPostList.get(position).getUpVote() - myPostList.get(position).getDownVote();
         holder.postLikes.setText("" + vote);

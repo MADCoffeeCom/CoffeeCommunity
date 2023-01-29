@@ -4,6 +4,7 @@ import static com.example.coffeecom.helper.CoordinateToDistance.coordinateToDist
 import static com.example.coffeecom.helper.ToTitleCase.toTitleCase;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,10 +21,12 @@ import com.example.coffeecom.Provider;
 import com.example.coffeecom.R;
 import com.example.coffeecom.activity.BottomNavigationActivity;
 import com.example.coffeecom.fragment.BaristaListFragment;
+import com.example.coffeecom.helper.DownloadImageHelper;
 import com.example.coffeecom.model.ArticleModel;
 import com.example.coffeecom.model.BaristaModel;
 
 import java.util.ArrayList;
+import java.util.concurrent.CompletableFuture;
 
 public class BaristaCardAdapter extends RecyclerView.Adapter<BaristaCardAdapter.ViewHolder>{
 
@@ -65,9 +68,18 @@ public class BaristaCardAdapter extends RecyclerView.Adapter<BaristaCardAdapter.
     @Override
     public void onBindViewHolder(@NonNull BaristaCardAdapter.ViewHolder holder, int position) {
 
+        String picUrl = "http://" + Provider.getIpAddress() + "/images/" + baristas.get(position).getUserPic()+".jpg";
+        CompletableFuture cf = null;
+        try {
+            DownloadImageHelper dit = new DownloadImageHelper(holder.baristaPic);
+            Bitmap bitmap = cf.supplyAsync(() -> dit.execute(picUrl)).join().get();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
         //barista pic but nid to update to sql code
-        int drawableResourceId = holder.itemView.getContext().getResources().getIdentifier(baristas.get(position).getUserPic(), "drawable", holder.itemView.getContext().getPackageName());
-        Glide.with(holder.itemView.getContext()).load(drawableResourceId).into(holder.baristaPic);
+//        int drawableResourceId = holder.itemView.getContext().getResources().getIdentifier(baristas.get(position).getUserPic(), "drawable", holder.itemView.getContext().getPackageName());
+//        Glide.with(holder.itemView.getContext()).load(drawableResourceId).into(holder.baristaPic);
 
         holder.baristaCardName.setText(toTitleCase(baristas.get(position).getUserName()));
         holder.baristaLocation.setText(toTitleCase(baristas.get(position).getUserTaman()));

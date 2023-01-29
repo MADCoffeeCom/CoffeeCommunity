@@ -1,6 +1,7 @@
 package com.example.coffeecom.adapter;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -14,12 +15,15 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.coffeecom.Provider;
 import com.example.coffeecom.R;
 import com.example.coffeecom.activity.BottomNavigationActivity;
 import com.example.coffeecom.fragment.OrderHistoryDetailsFragment;
+import com.example.coffeecom.helper.DownloadImageHelper;
 import com.example.coffeecom.model.OrderedCoffeeModel;
 
 import java.util.ArrayList;
+import java.util.concurrent.CompletableFuture;
 
 public class ProfileOrderHistoryAdapter extends RecyclerView.Adapter<ProfileOrderHistoryAdapter.ViewHolder> {
 
@@ -62,9 +66,21 @@ public class ProfileOrderHistoryAdapter extends RecyclerView.Adapter<ProfileOrde
 
         try {
             holder.coffeeCardTitle.setText("" + orderedHistory.get(position).getOrderedCoffee().get(0).getCoffeeTitle());
-            String picUrl = orderedHistory.get(position).getOrderedCoffee().get(0).getCoffeePic();
-            int drawableResourceId = holder.itemView.getContext().getResources().getIdentifier(picUrl, "drawable", holder.itemView.getContext().getPackageName());
-            Glide.with(holder.itemView.getContext()).load(drawableResourceId).into(holder.coffeeCardImage);
+            //Code to insert pic with URL
+            String picUrl = "http://" + Provider.getIpAddress() + "/images/" + orderedHistory.get(position).getOrderedCoffee().get(0).getCoffeePic()+".jpg";
+            CompletableFuture cf = null;
+            try {
+                DownloadImageHelper dit = new DownloadImageHelper(holder.coffeeCardImage);
+                Bitmap bitmap = cf.supplyAsync(() -> dit.execute(picUrl)).join().get();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+
+            //Code to insert pic with drawable
+//            String picUrl = orderedHistory.get(position).getOrderedCoffee().get(0).getCoffeePic();
+//            int drawableResourceId = holder.itemView.getContext().getResources().getIdentifier(picUrl, "drawable", holder.itemView.getContext().getPackageName());
+//            Glide.with(holder.itemView.getContext()).load(drawableResourceId).into(holder.coffeeCardImage);
         }catch (IndexOutOfBoundsException e){
             Log.i(TAG, "currentposition: " + position);
             Log.i(TAG, "onBindViewHolder: " + orderedHistory.get(position).getOrderId());

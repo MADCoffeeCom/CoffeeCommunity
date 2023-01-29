@@ -3,6 +3,7 @@ package com.example.coffeecom.adapter;
 import static com.example.coffeecom.helper.FormatDateTime.convertDatetoStringTime;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -24,6 +25,7 @@ import com.example.coffeecom.Provider;
 import com.example.coffeecom.R;
 import com.example.coffeecom.activity.BottomNavigationActivity;
 import com.example.coffeecom.fragment.PendingOrderFragment;
+import com.example.coffeecom.helper.DownloadImageHelper;
 import com.example.coffeecom.model.BrewedOrderModel;
 import com.example.coffeecom.model.CoffeeModel;
 import com.example.coffeecom.model.OrderedCoffeeModel;
@@ -31,6 +33,7 @@ import com.example.coffeecom.query.QueryOrderedAndPendingCoffee;
 import com.vishnusivadas.advanced_httpurlconnection.PutData;
 
 import java.util.ArrayList;
+import java.util.concurrent.CompletableFuture;
 
 public class PendingOrderAdapter extends RecyclerView.Adapter<PendingOrderAdapter.ViewHolder>{
 
@@ -114,10 +117,21 @@ public class PendingOrderAdapter extends RecyclerView.Adapter<PendingOrderAdapte
             holder.orderCoffeeName.setText(brewedOrder.get(position).getOrderedCoffee().get(0).getCoffeeTitle());
             holder.orderCustomerName.setText(brewedOrder.get(position).getCustomerName());
             holder.orderCoffeeTime.setText(convertDatetoStringTime(Provider.getOrder().get(position).getOrderStartTime()));
-            //Insert pic
-            String picUrl = brewedOrder.get(position).getOrderedCoffee().get(0).getCoffeePic();
-            int drawableResourceId = holder.itemView.getContext().getResources().getIdentifier(picUrl, "drawable", holder.itemView.getContext().getPackageName());
-            Glide.with(holder.itemView.getContext()).load(drawableResourceId).into(holder.orderCoffeePic);
+
+            //Insert pic from URL
+            String picUrl = "http://" + Provider.getIpAddress() + "/images/" +  brewedOrder.get(position).getOrderedCoffee().get(0).getCoffeePic()+".jpg";
+            CompletableFuture cf = null;
+            try {
+                DownloadImageHelper dit = new DownloadImageHelper(holder.orderCoffeePic);
+                Bitmap bitmap = cf.supplyAsync(() -> dit.execute(picUrl)).join().get();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            //Insert pic from drawable
+//            String picUrl = brewedOrder.get(position).getOrderedCoffee().get(0).getCoffeePic();
+//            int drawableResourceId = holder.itemView.getContext().getResources().getIdentifier(picUrl, "drawable", holder.itemView.getContext().getPackageName());
+//            Glide.with(holder.itemView.getContext()).load(drawableResourceId).into(holder.orderCoffeePic);
 
             if(brewedOrder.get(position).getOrderStatus().equals("P")){
                 holder.acceptOrderBtn.setOnClickListener(view -> {

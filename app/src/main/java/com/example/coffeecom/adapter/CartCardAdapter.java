@@ -2,6 +2,7 @@ package com.example.coffeecom.adapter;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.os.Handler;
 import android.os.Looper;
 import android.util.Log;
@@ -19,10 +20,12 @@ import com.bumptech.glide.Glide;
 import com.example.coffeecom.Provider;
 import com.example.coffeecom.R;
 import com.example.coffeecom.activity.BottomNavigationActivity;
+import com.example.coffeecom.fragment.ActivateWalletFragment;
 import com.example.coffeecom.fragment.BaristaListFragment;
 import com.example.coffeecom.fragment.CoffeeCartFragment;
 import com.example.coffeecom.fragment.CoffeeDetailsFragment;
 import com.example.coffeecom.fragment.MapsFragment;
+import com.example.coffeecom.helper.DownloadImageHelper;
 import com.example.coffeecom.model.CartCardModel;
 import com.example.coffeecom.model.CartModel;
 import com.example.coffeecom.model.CoffeeModel;
@@ -62,9 +65,22 @@ public class CartCardAdapter extends RecyclerView.Adapter<CartCardAdapter.ViewHo
     public void onBindViewHolder(ViewHolder holder, @SuppressLint("RecyclerView") int position) {
 
 //        coffeePic.add("coffee1");
-        String picUrl = cartCardModelList.get(position).getCoffeePic();
-        int drawableResourceId = holder.itemView.getContext().getResources().getIdentifier(picUrl, "drawable", holder.itemView.getContext().getPackageName());
-        Glide.with(holder.itemView.getContext()).load(drawableResourceId).into(holder.coffeePic);
+
+        //Insert coffee pic with URL
+        String picUrl = "http://" + Provider.getIpAddress() + "/images/" + cartCardModelList.get(position).getCoffeePic()+".jpg";
+        CompletableFuture cf = null;
+        try {
+            DownloadImageHelper dit = new DownloadImageHelper(holder.coffeePic);
+            Bitmap bitmap = cf.supplyAsync(() -> dit.execute(picUrl)).join().get();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
+        //Insert coffee pic with Drawable
+//        String picUrl = cartCardModelList.get(position).getCoffeePic();
+//        int drawableResourceId = holder.itemView.getContext().getResources().getIdentifier(picUrl, "drawable", holder.itemView.getContext().getPackageName());
+//        Glide.with(holder.itemView.getContext()).load(drawableResourceId).into(holder.coffeePic);
         CartCardModel cartCardModel = cartCardModelList.get(position);
         holder.bindData(cartCardModel);
         holder.itemView.setOnClickListener(new View.OnClickListener() {
@@ -85,6 +101,9 @@ public class CartCardAdapter extends RecyclerView.Adapter<CartCardAdapter.ViewHo
                     public void run() {
                         deleteCardBtn.setEnabled(false);
                         deleteCoffeeInCart(Provider.getUser(),cartCardModelList.get(position).getCoffeeId(),cartCardModelList.get(position).getCoffeeQuantity(), position);
+                        if (Provider.getCartModelList().size() ==0){
+                            ((BottomNavigationActivity)context).replaceFragment(new CoffeeCartFragment());
+                        }
                     }
                 });
                 thread.start();
@@ -166,10 +185,18 @@ public class CartCardAdapter extends RecyclerView.Adapter<CartCardAdapter.ViewHo
                                     cm.replaceSecondToFirst();
                                     notifyDataSetChanged();
                                 }
-                                cm.removeCartCard(cc);
+                                if (cm.getCartCardModelsList().size()!=0){
+                                    cm.removeCartCard(cc);
+                                    notifyDataSetChanged();
+                                    break;
+                                }
+
                                 if (cm.getCartCardModelsList().size()==0){
+                                    cm.removeCartCard(cc);
                                     Provider.getBaristaIdInCart().remove(cm.getBarista().getBaristaId());
                                     Provider.removeCartModel(cm);
+                                    notifyDataSetChanged();
+                                    break;
                                 }
                             }
                         }

@@ -3,6 +3,7 @@ package com.example.coffeecom.fragment;
 import static com.example.coffeecom.helper.ToTitleCase.toTitleCase;
 
 import android.app.AlertDialog;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -25,6 +26,7 @@ import com.example.coffeecom.Provider;
 import com.example.coffeecom.R;
 import com.example.coffeecom.activity.BottomNavigationActivity;
 import com.example.coffeecom.adapter.RatingBarAdapter;
+import com.example.coffeecom.helper.DownloadImageHelper;
 import com.example.coffeecom.model.BaristaModel;
 import com.example.coffeecom.model.CartCardModel;
 import com.example.coffeecom.model.CoffeeModel;
@@ -32,6 +34,8 @@ import com.example.coffeecom.model.ProfileModel;
 import com.example.coffeecom.query.QueryCoffee;
 import com.example.coffeecom.query.QueryRating;
 import com.vishnusivadas.advanced_httpurlconnection.PutData;
+
+import java.util.concurrent.CompletableFuture;
 
 
 public class CoffeeDetailsFragment extends Fragment {
@@ -218,8 +222,20 @@ public class CoffeeDetailsFragment extends Fragment {
         ingredientText.setText(currentCoffee.getIngredients());
         totalPriceCoffeeDetailsText.setText(String.format("%.2f", (currentCoffee.getCoffeePrice() * noOfOrder )));
         noOfCoffeeOrderedText.setText(String.valueOf(noOfOrder));
-        int drawableResourceId = getContext().getResources().getIdentifier(currentCoffee.getCoffeePic(), "drawable", getContext().getPackageName());
-        Glide.with(getContext()).load(drawableResourceId).into(coffeeImage);
+        //Insert coffee pic with URL
+        String picUrl = "http://" + Provider.getIpAddress() + "/images/" + currentCoffee.getCoffeePic()+".jpg";
+        CompletableFuture cf = null;
+        try {
+            DownloadImageHelper dit = new DownloadImageHelper(coffeeImage);
+            Bitmap bitmap = cf.supplyAsync(() -> dit.execute(picUrl)).join().get();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
+//        Insert coffee pic with Drawable
+//        int drawableResourceId = getContext().getResources().getIdentifier(currentCoffee.getCoffeePic(), "drawable", getContext().getPackageName());
+//        Glide.with(getContext()).load(drawableResourceId).into(coffeeImage);
     }
 
 

@@ -3,6 +3,7 @@ package com.example.coffeecom.adapter;
 import static com.example.coffeecom.helper.ToTitleCase.toTitleCase;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.os.Handler;
 import android.os.Looper;
 import android.util.Log;
@@ -22,6 +23,7 @@ import com.example.coffeecom.Provider;
 import com.example.coffeecom.R;
 import com.example.coffeecom.activity.BottomNavigationActivity;
 import com.example.coffeecom.fragment.CoffeeDetailsFragment;
+import com.example.coffeecom.helper.DownloadImageHelper;
 import com.example.coffeecom.model.BaristaModel;
 import com.example.coffeecom.model.CartCardModel;
 import com.example.coffeecom.model.CoffeeModel;
@@ -30,6 +32,7 @@ import com.example.coffeecom.query.QueryCartItem;
 import com.vishnusivadas.advanced_httpurlconnection.PutData;
 
 import java.util.ArrayList;
+import java.util.concurrent.CompletableFuture;
 
 public class CoffeeBaristaListAdapter extends RecyclerView.Adapter<CoffeeBaristaListAdapter.ViewHolder> {
 
@@ -95,9 +98,19 @@ public class CoffeeBaristaListAdapter extends RecyclerView.Adapter<CoffeeBarista
             onBindWhenCoffeeView(holder, position);
         }
 
-        //coffee pic
-        int drawableResourceId = holder.itemView.getContext().getResources().getIdentifier(coffees.get(position).getCoffeePic(), "drawable", holder.itemView.getContext().getPackageName());
-        Glide.with(holder.itemView.getContext()).load(drawableResourceId).into(holder.coffeeListPic);
+        //insert coffee pic with url
+        String picUrl = "http://" + Provider.getIpAddress() + "/images/" + coffees.get(position).getCoffeePic()+".jpg";
+        CompletableFuture cf = null;
+        try {
+            DownloadImageHelper dit = new DownloadImageHelper(holder.coffeeListPic);
+            Bitmap bitmap = cf.supplyAsync(() -> dit.execute(picUrl)).join().get();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        //insert coffee pic wtih drawable
+//        int drawableResourceId = holder.itemView.getContext().getResources().getIdentifier(coffees.get(position).getCoffeePic(), "drawable", holder.itemView.getContext().getPackageName());
+//        Glide.with(holder.itemView.getContext()).load(drawableResourceId).into(holder.coffeeListPic);
     }
 
     private void onBindWhenCoffeeView(ViewHolder holder, int position) {

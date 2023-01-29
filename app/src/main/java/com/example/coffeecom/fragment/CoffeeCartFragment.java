@@ -78,8 +78,6 @@ public class CoffeeCartFragment extends Fragment {
         cl2 = rootView.findViewById(R.id.cl2);
 
         TextView emptyCartText = rootView.findViewById(R.id.emptyCartText);
-        if(cartModelList.size() == 0) emptyCartText.setVisibility(View.VISIBLE);
-        else emptyCartText.setVisibility(View.VISIBLE);
 
 
         paymentBtn1.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -277,7 +275,8 @@ public class CoffeeCartFragment extends Fragment {
             }
 //            tempCartCardModelList.clear();
         }
-
+        if(cartModelList.size() == 0) emptyCartText.setVisibility(View.VISIBLE);
+        else emptyCartText.setVisibility(View.GONE);
 
 
         Log.i(TAG, "" +cartModelList.size());

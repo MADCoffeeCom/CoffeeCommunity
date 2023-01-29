@@ -30,6 +30,7 @@ import com.example.coffeecom.activity.BottomNavigationActivity;
 import com.example.coffeecom.fragment.CoffeeDetailsFragment;
 import com.example.coffeecom.fragment.CoffeeListFragment;
 import com.example.coffeecom.fragment.HomeActivityFragment;
+import com.example.coffeecom.helper.DownloadImageHelper;
 import com.example.coffeecom.model.BaristaModel;
 import com.example.coffeecom.model.CoffeeModel;
 
@@ -86,22 +87,11 @@ public class CoffeeTypeAdapter extends RecyclerView.Adapter<CoffeeTypeAdapter.Vi
 
         //code to insert picture
 //        String picUrl = coffees.get(position).getCoffeePic();
-        String picUrl = "http://" + Provider.getIpAddress() + "/images/" + coffees.get(position).getCoffeePic()+".png";
+        String picUrl = "http://" + Provider.getIpAddress() + "/images/" + coffees.get(position).getCoffeePic()+".jpg";
         CompletableFuture cf = null;
-        CompletableFuture cf2 = null;
         try {
-            DownloadImageTask dit = new DownloadImageTask(holder.coffeePic);
-//            String picUrl2 = "https://i.imgur.com/GmdNUpB.png";
-
-
-
+            DownloadImageHelper dit = new DownloadImageHelper(holder.coffeePic);
             Bitmap bitmap = cf.supplyAsync(() -> dit.execute(picUrl)).join().get();
-
-//            Log.i("BruhImage" , bitmap.toString() + " "  + holder.coffeePic.getDrawable().toString());
-
-
-//            int drawableResourceId = holder.itemView.getContext().getResources().getIdentifier(drawableFromUrl(picUrl2), "drawable", holder.itemView.getContext().getPackageName());
-//        Glide.with(holder.itemView.getContext()).load(drawableFromUrl(picUrl2)).into(holder.coffeePic);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -132,32 +122,6 @@ public class CoffeeTypeAdapter extends RecyclerView.Adapter<CoffeeTypeAdapter.Vi
 //                .dontAnimate()
 //                .into(imageView);
 //    }
-    private class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
-        ImageView bmImage;
-
-        public DownloadImageTask(ImageView bmImage) {
-            this.bmImage = bmImage;
-        }
-
-        protected Bitmap doInBackground(String... urls) {
-            String urldisplay = urls[0];
-            Log.i("bruhImage",urldisplay);
-            Bitmap mIcon11 = null;
-            try {
-                InputStream in = new java.net.URL(urldisplay).openStream();
-                mIcon11 = BitmapFactory.decodeStream(in);
-            } catch (Exception e) {
-                Log.e("Error", e.getMessage());
-                e.printStackTrace();
-            }
-            return mIcon11;
-        }
-
-        protected void onPostExecute(Bitmap result) {
-            bmImage.setImageBitmap(result);
-        }
-    }
-
 
 }
 

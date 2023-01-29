@@ -13,6 +13,7 @@ import com.vishnusivadas.advanced_httpurlconnection.FetchData;
 import com.vishnusivadas.advanced_httpurlconnection.PutData;
 
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class QueryOrderedAndPendingCoffee {
@@ -62,9 +63,9 @@ public class QueryOrderedAndPendingCoffee {
                                 Date orderEndTime = null;
                                 Date orderDuration = null;
                                 try {
-                                    orderStartTime = convertStringtoDate(orderDetails[6]);
-                                    orderEndTime = convertStringtoDate(orderDetails[7]);
-                                    orderDuration = convertStringtoDate(orderDetails[8]);
+                                    orderStartTime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(orderDetails[6]);
+                                    orderEndTime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(orderDetails[7]);
+                                    orderDuration = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(orderDetails[8]);
                                 } catch (ParseException e) { e.printStackTrace(); }
                                 double orderTotalPrice = Double.valueOf(orderDetails[9]);
                                 String orderStatus = orderDetails[10];
