@@ -23,7 +23,7 @@ import com.example.coffeecom.model.OrderedCoffeeModel;
 public class OrderHistoryDetailsFragment extends Fragment {
 
     ImageButton backBtn;
-    TextView orderId, orderStartTimeText, orderEndTimeText, totalPriceText;
+    TextView orderId, orderStartTimeText, orderEndTimeText, totalPriceText, orderHistoryDetailsText;
     RecyclerView orderCoffeeRV;
 
     char orderType; // b for brew, o for order
@@ -67,11 +67,13 @@ public class OrderHistoryDetailsFragment extends Fragment {
         orderEndTimeText = view.findViewById(R.id.orderEndTimeText);
         totalPriceText = view.findViewById(R.id.totalPriceText);
         orderCoffeeRV = view.findViewById(R.id.orderCoffeeRV);
+        orderHistoryDetailsText = view.findViewById(R.id.orderHistoryDetailsText);
     }
 
     public void loadBrew(View view){
         orderType = 'b';
         orderId.setText(currentBrew.getOrderId());
+        orderHistoryDetailsText.setText("Brew History");
         orderStartTimeText.setText(convertDatetoStringDate(currentBrew.getOrderStartTime()));
         orderEndTimeText.setText(convertDatetoStringDate(currentBrew.getOrderFulfillTime()));
         totalPriceText.setText("" + currentBrew.getOrderTotalPrice());

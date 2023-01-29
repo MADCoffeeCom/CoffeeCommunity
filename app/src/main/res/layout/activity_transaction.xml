@@ -6,27 +6,27 @@
     android:layout_height="match_parent"
     tools:context=".fragment.TransactionFragment">
 
-    <TextView
-        android:id="@+id/textView21"
-        style="@style/c1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="4dp"
-        android:text="RM"
-        app:layout_constraintBottom_toBottomOf="@+id/walletAmountText2"
-        app:layout_constraintEnd_toStartOf="@+id/walletAmountText2"
-        app:layout_constraintTop_toTopOf="@+id/walletAmountText2" />
+<!--    <TextView-->
+<!--        android:id="@+id/textView21"-->
+<!--        style="@style/c1"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginEnd="4dp"-->
+<!--        android:text="RM"-->
+<!--        app:layout_constraintBottom_toBottomOf="@+id/walletAmountText2"-->
+<!--        app:layout_constraintEnd_toStartOf="@+id/walletAmountText2"-->
+<!--        app:layout_constraintTop_toTopOf="@+id/walletAmountText2" />-->
 
-    <TextView
-        android:id="@+id/walletAmountText2"
-        style="@style/h1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:text="0.00"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView20" />
+<!--    <TextView-->
+<!--        android:id="@+id/walletAmountText2"-->
+<!--        style="@style/h1"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginTop="24dp"-->
+<!--        android:text="0.00"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/textView20" />-->
 
     <ImageButton
         android:id="@+id/backBtn"
@@ -59,7 +59,7 @@
         android:layout_marginTop="24dp"
         android:text="Transaction Details"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/walletAmountText2" />
+        app:layout_constraintTop_toBottomOf="@+id/textView20" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/transactionRecyclerView"
